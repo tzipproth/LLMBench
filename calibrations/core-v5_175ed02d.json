@@ -1,0 +1,5393 @@
+{
+  "schemaVersion": 1,
+  "questionSetHash": "175ed02d5586220f",
+  "catalogFile": "catalogs/core-v5.json",
+  "createdAt": "2026-11-14T17:47:43.3514726+01:00",
+  "scale": "score = 1000 + 173.7 * theta; P(correct) = guess + (1 - guess) / (1 + exp(difficulty - theta))",
+  "referenceRun": "v5-llama3.1-8b",
+  "referenceTheta": -0.8122,
+  "runs": [
+    {
+      "run": "v5-gemma4-12b",
+      "model": "gemma4-12b",
+      "theta": 2.6711,
+      "standardError": 0.1414,
+      "score": 1464
+    },
+    {
+      "run": "v5-gemma4-26b-a4b",
+      "model": "gemma4-26b-a4b",
+      "theta": 3.0535,
+      "standardError": 0.1553,
+      "score": 1530.4
+    },
+    {
+      "run": "v5-gemma4-e4b",
+      "model": "gemma4-e4b",
+      "theta": 1.5021,
+      "standardError": 0.113,
+      "score": 1260.9
+    },
+    {
+      "run": "v5-gpt-oss-20b",
+      "model": "gpt-oss-20b",
+      "theta": 1.8197,
+      "standardError": 0.1189,
+      "score": 1316.1
+    },
+    {
+      "run": "v5-granite-4.2-8b",
+      "model": "granite-4.2-8b",
+      "theta": 0.776,
+      "standardError": 0.1038,
+      "score": 1134.8
+    },
+    {
+      "run": "v5-llama3.1-8b",
+      "model": "llama3.1-8b",
+      "theta": -0.8122,
+      "standardError": 0.1031,
+      "score": 858.9
+    },
+    {
+      "run": "v5-ministral3-14b",
+      "model": "ministral3-14b",
+      "theta": 1.2075,
+      "standardError": 0.1086,
+      "score": 1209.8
+    },
+    {
+      "run": "v5-mistral-7b-v0.3",
+      "model": "mistral-7b-v0.3",
+      "theta": -1.767,
+      "standardError": 0.1176,
+      "score": 693
+    },
+    {
+      "run": "v5-muse-glimmer-30b",
+      "model": "muse-glimmer-30b",
+      "theta": 1.9135,
+      "standardError": 0.1208,
+      "score": 1332.4
+    },
+    {
+      "run": "v5-phi-4-14b",
+      "model": "phi-4-14b",
+      "theta": 1.1875,
+      "standardError": 0.1083,
+      "score": 1206.3
+    },
+    {
+      "run": "v5-qwen3.5-9b",
+      "model": "qwen3.5-9b",
+      "theta": 2.1823,
+      "standardError": 0.1272,
+      "score": 1379.1
+    },
+    {
+      "run": "v5-qwen3.8-27b",
+      "model": "qwen3.8-27b",
+      "theta": 3.3439,
+      "standardError": 0.1679,
+      "score": 1580.9
+    }
+  ],
+  "items": [
+    {
+      "key": "CS-001/mcq",
+      "tier": 2,
+      "difficulty": 0.7014,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-001/free",
+      "tier": 2,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "CS-002/mcq",
+      "tier": 2,
+      "difficulty": 1.7862,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "CS-003/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-003/altered-mcq",
+      "tier": 2,
+      "difficulty": 1.0658,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-003/altered-free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-004/mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-005/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-101/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-101/altered-free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-102/free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "CS-102/altered-free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-103/mcq",
+      "tier": 1,
+      "difficulty": -0.2213,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-103/altered-mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-104/mcq",
+      "tier": 2,
+      "difficulty": 0.2164,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-104/altered-mcq",
+      "tier": 2,
+      "difficulty": 2.0386,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "CS-105/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-105/altered-free",
+      "tier": 2,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-106/free",
+      "tier": 2,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "CS-106/altered-free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-107/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-107/altered-mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-108/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-108/altered-free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-110/mcq",
+      "tier": 3,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-110/altered-mcq",
+      "tier": 3,
+      "difficulty": -1.0732,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-111/free",
+      "tier": 3,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-111/altered-free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-112/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-112/altered-free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-113/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-113/altered-free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-212/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-701/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-703/free",
+      "tier": 1,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-704/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-705/mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-705/free",
+      "tier": 1,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-706/free",
+      "tier": 1,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-707/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-707/distractor",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-708/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-709/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-710/free",
+      "tier": 3,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-711/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-712/mcq",
+      "tier": 2,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-713/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-050/free",
+      "tier": 1,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "CS-051/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-052/mcq",
+      "tier": 1,
+      "difficulty": -0.8509,
+      "guess": 0.5,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-053/free",
+      "tier": 1,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-030/mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-031/mcq",
+      "tier": 2,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-031/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-032/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-032/free",
+      "tier": 1,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-401/mcq",
+      "tier": 1,
+      "difficulty": -2.0538,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-402/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-402/free",
+      "tier": 1,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-403/mcq",
+      "tier": 1,
+      "difficulty": -0.3654,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-404/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-405/mcq",
+      "tier": 3,
+      "difficulty": 0.6087,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-406/mcq",
+      "tier": 2,
+      "difficulty": -1.2262,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-406/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-407/mcq",
+      "tier": 2,
+      "difficulty": 0.4882,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-408/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-409/mcq",
+      "tier": 3,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-010/mcq",
+      "tier": 2,
+      "difficulty": 0.9711,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-011/mcq",
+      "tier": 3,
+      "difficulty": -1.2262,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-012/mcq",
+      "tier": 2,
+      "difficulty": 0.2164,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-012/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-201/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-202/mcq",
+      "tier": 1,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-203/mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-204/mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-205/mcq",
+      "tier": 2,
+      "difficulty": 0.3039,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-206/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-207/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-208/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-209/mcq",
+      "tier": 2,
+      "difficulty": 0.2697,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-210/mcq",
+      "tier": 2,
+      "difficulty": 0.843,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-211/mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-801/mcq",
+      "tier": 3,
+      "difficulty": 0.1989,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-801/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-802/mcq",
+      "tier": 3,
+      "difficulty": 0.1989,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-802/free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "CS-803/mcq",
+      "tier": 2,
+      "difficulty": -2.256,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-804/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-805/mcq",
+      "tier": 3,
+      "difficulty": -0.9251,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-805/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-806/mcq",
+      "tier": 3,
+      "difficulty": 1.2568,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-806/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-807/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-808/mcq",
+      "tier": 2,
+      "difficulty": -0.9851,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-809/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-810/mcq",
+      "tier": 2,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-811/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-812/mcq",
+      "tier": 2,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-813/mcq",
+      "tier": 3,
+      "difficulty": 0.5086,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-814/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-815/mcq",
+      "tier": 3,
+      "difficulty": -2.256,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-816/mcq",
+      "tier": 3,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-040/mcq",
+      "tier": 3,
+      "difficulty": 0.5086,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-040/altered-mcq",
+      "tier": 3,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-501/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-502/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-503/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-503/altered-mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-504/mcq",
+      "tier": 2,
+      "difficulty": -0.7801,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-505/mcq",
+      "tier": 1,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-506/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-020/mcq",
+      "tier": 1,
+      "difficulty": -0.2456,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-020/free",
+      "tier": 1,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-021/mcq",
+      "tier": 2,
+      "difficulty": -0.031,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-021/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-022/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-023/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-024/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-301/mcq",
+      "tier": 1,
+      "difficulty": -0.7801,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-301/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-302/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-303/free",
+      "tier": 1,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-304/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-305/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-306/free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-307/mcq",
+      "tier": 2,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-307/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-308/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-309/mcq",
+      "tier": 2,
+      "difficulty": 0.7701,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-309/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-310/mcq",
+      "tier": 3,
+      "difficulty": 2.0897,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "CS-310/free",
+      "tier": 3,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "CS-311/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-601/mcq",
+      "tier": 1,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-601/free",
+      "tier": 1,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-602/mcq",
+      "tier": 1,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-602/free",
+      "tier": 1,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-603/free",
+      "tier": 1,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-604/mcq",
+      "tier": 2,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-604/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-605/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-606/mcq",
+      "tier": 2,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-606/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "CS-702/free",
+      "tier": 1,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-901/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "CS-902/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-903/mcq",
+      "tier": 2,
+      "difficulty": -2.0538,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-904/mcq",
+      "tier": 3,
+      "difficulty": 0.9453,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-905/mcq",
+      "tier": 3,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-905/free",
+      "tier": 3,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "CS-906/mcq",
+      "tier": 3,
+      "difficulty": 0.6102,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-906/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-907/free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "CS-908/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-909/mcq",
+      "tier": 3,
+      "difficulty": 0.4587,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-910/mcq",
+      "tier": 3,
+      "difficulty": -0.3654,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "CS-911/mcq",
+      "tier": 3,
+      "difficulty": 0.2436,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-911/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "CS-912/mcq",
+      "tier": 3,
+      "difficulty": 1.0898,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "CS-912/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-001/mcq",
+      "tier": 3,
+      "difficulty": -0.5106,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-001/altered-mcq",
+      "tier": 3,
+      "difficulty": 1.9754,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-001/altered-free",
+      "tier": 3,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-002/mcq",
+      "tier": 3,
+      "difficulty": -0.5216,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-002/altered-mcq",
+      "tier": 3,
+      "difficulty": -0.3654,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-003/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-003/altered-free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-004/free",
+      "tier": 3,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-004/altered-free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-004/altered-free-2",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-005/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-005/altered-free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-006/mcq",
+      "tier": 2,
+      "difficulty": 0.6293,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-006/altered-mcq",
+      "tier": 2,
+      "difficulty": -0.7995,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-007/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-007/altered-free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-008/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-008/altered-free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-009/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-009/altered-free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-010/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-010/altered-free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-011/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-011/altered-free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-012/mcq",
+      "tier": 3,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-012/altered-mcq",
+      "tier": 3,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-013/mcq",
+      "tier": 3,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-013/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-013/altered-mcq",
+      "tier": 3,
+      "difficulty": 1.3304,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-014/mcq",
+      "tier": 2,
+      "difficulty": -1.0748,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-015/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-016/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-017/free",
+      "tier": 3,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-018/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-019/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-020/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-021/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-022/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-023/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-024/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-025/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-026/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-027/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-028/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-029/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-030/mcq",
+      "tier": 3,
+      "difficulty": 0.6875,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-031/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-032/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-033/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-034/mcq",
+      "tier": 2,
+      "difficulty": -1.261,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-035/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-036/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-037/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-038/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-039/mcq",
+      "tier": 2,
+      "difficulty": -0.3654,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-039/converse-mcq",
+      "tier": 2,
+      "difficulty": -0.8392,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-040/mcq",
+      "tier": 3,
+      "difficulty": -0.3654,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-041/mcq",
+      "tier": 3,
+      "difficulty": 0.3785,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-042/mcq",
+      "tier": 3,
+      "difficulty": -0.9851,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-042/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-042/onefalse-mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-043/mcq",
+      "tier": 3,
+      "difficulty": -1.132,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-043/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-044/mcq",
+      "tier": 3,
+      "difficulty": 0.1874,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-044/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-045/mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-045/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-046/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-047/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-048/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-049/mcq",
+      "tier": 3,
+      "difficulty": 3.635,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "NEW-050/mcq",
+      "tier": 3,
+      "difficulty": 1.5331,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-051/mcq",
+      "tier": 2,
+      "difficulty": 0.4879,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-052/mcq",
+      "tier": 3,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-052/altered-mcq",
+      "tier": 3,
+      "difficulty": 1.7881,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-053/mcq",
+      "tier": 3,
+      "difficulty": 1.5784,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-054/mcq",
+      "tier": 2,
+      "difficulty": -0.7781,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-055/mcq",
+      "tier": 2,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-056/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-057/mcq",
+      "tier": 2,
+      "difficulty": -1.0748,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-058/mcq",
+      "tier": 3,
+      "difficulty": 0.2697,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-059/mcq",
+      "tier": 3,
+      "difficulty": 0.3645,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-060/mcq",
+      "tier": 2,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-061/mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-062/mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-062/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-063/free",
+      "tier": 2,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-064/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-065/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-066/mcq",
+      "tier": 2,
+      "difficulty": 0.581,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-067/mcq",
+      "tier": 2,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-068/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-069/mcq",
+      "tier": 3,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-069/altered-mcq",
+      "tier": 3,
+      "difficulty": -0.8193,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-070/mcq",
+      "tier": 3,
+      "difficulty": -0.0461,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-070/third-order-mcq",
+      "tier": 3,
+      "difficulty": 1.4936,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-071/mcq",
+      "tier": 3,
+      "difficulty": -0.2337,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-071/read-mcq",
+      "tier": 3,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-072/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-073/mcq",
+      "tier": 2,
+      "difficulty": 0.2436,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-074/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-075/mcq",
+      "tier": 3,
+      "difficulty": 0.4884,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-075/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-076/mcq",
+      "tier": 2,
+      "difficulty": 0.0071,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-076/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-077/mcq",
+      "tier": 3,
+      "difficulty": 1.7526,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-078/mcq",
+      "tier": 2,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-079/mcq",
+      "tier": 3,
+      "difficulty": 0.2697,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-079/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-080/free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-081/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-081/free-outer",
+      "tier": 3,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "NEW-082/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-083/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-084/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-085/mcq",
+      "tier": 3,
+      "difficulty": -0.5431,
+      "guess": 0.125,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-086/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-087/mcq",
+      "tier": 3,
+      "difficulty": 3.3766,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 0
+    },
+    {
+      "key": "NEW-087/prone-mcq",
+      "tier": 3,
+      "difficulty": 0.4547,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-088/free",
+      "tier": 2,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-089/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-090/mcq",
+      "tier": 3,
+      "difficulty": 1.7476,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-091/mcq",
+      "tier": 2,
+      "difficulty": -2.0538,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-092/mcq",
+      "tier": 2,
+      "difficulty": 0.4351,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-093/mcq",
+      "tier": 3,
+      "difficulty": 1.3335,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-093/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-094/mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-094/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-095/mcq",
+      "tier": 3,
+      "difficulty": 1.5397,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-095/free",
+      "tier": 3,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-096/mcq",
+      "tier": 3,
+      "difficulty": 0.7335,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-096/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-097/mcq",
+      "tier": 3,
+      "difficulty": 1.1914,
+      "guess": 0.125,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-097/free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-098/mcq",
+      "tier": 3,
+      "difficulty": 2.231,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-098/free",
+      "tier": 3,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-099/mcq",
+      "tier": 3,
+      "difficulty": 2.0969,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-099/free",
+      "tier": 3,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-100/mcq",
+      "tier": 3,
+      "difficulty": -0.5293,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-100/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-101/mcq",
+      "tier": 3,
+      "difficulty": -0.5293,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-101/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-102/mcq",
+      "tier": 3,
+      "difficulty": 2.0557,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-102/free",
+      "tier": 3,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-103/mcq",
+      "tier": 2,
+      "difficulty": -2.3323,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-103/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-104/mcq",
+      "tier": 3,
+      "difficulty": 0.1357,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-104/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-105/mcq",
+      "tier": 3,
+      "difficulty": -0.5293,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-105/free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-106/mcq",
+      "tier": 3,
+      "difficulty": -1.2852,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-106/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-107/mcq",
+      "tier": 3,
+      "difficulty": 1.1822,
+      "guess": 0.14285714285714285,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-107/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-108/free",
+      "tier": 3,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-109/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-110/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-111/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-112/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-113/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-114/mcq",
+      "tier": 2,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-114/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-115/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-116/free",
+      "tier": 3,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-117/free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-118/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-119/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-120/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-121/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-122/mcq",
+      "tier": 3,
+      "difficulty": -0.045,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-122/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-122/distance-free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-123/mcq",
+      "tier": 3,
+      "difficulty": 0.843,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-123/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-123/distance-free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-124/mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-124/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-124/distance-free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-125/mcq",
+      "tier": 3,
+      "difficulty": -0.5106,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-125/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-126/mcq",
+      "tier": 3,
+      "difficulty": -0.5106,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-126/free",
+      "tier": 3,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-127/mcq",
+      "tier": 3,
+      "difficulty": -0.5106,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-127/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-128/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-129/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-130/mcq",
+      "tier": 3,
+      "difficulty": 0.8911,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-130/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-131/mcq",
+      "tier": 3,
+      "difficulty": -1.0369,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-131/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-132/mcq",
+      "tier": 3,
+      "difficulty": -0.0414,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-132/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-133/mcq",
+      "tier": 3,
+      "difficulty": -1.0369,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-133/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-134/mcq",
+      "tier": 3,
+      "difficulty": -1.261,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-135/mcq",
+      "tier": 3,
+      "difficulty": -2.1844,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-135/time-free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-135/order-free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-136/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-136/rolls-free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-137/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-137/hospital-free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-138/free",
+      "tier": 3,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "NEW-138/great-free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-139/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-139/child-free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-140/mcq",
+      "tier": 3,
+      "difficulty": -1.1718,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-140/ben-mcq",
+      "tier": 3,
+      "difficulty": 0.566,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-141/mcq",
+      "tier": 3,
+      "difficulty": 0.8567,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-141/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-141/bridge-mcq",
+      "tier": 3,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-142/free",
+      "tier": 3,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "NEW-142/landing-free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "NEW-143/free",
+      "tier": 3,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "NEW-143/lookup-free",
+      "tier": 1,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "NEW-144/free",
+      "tier": 3,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "NEW-144/ben-free",
+      "tier": 3,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-145/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-146/free",
+      "tier": 2,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "NEW-147/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "NEW-148/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "NEW-149/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "MATH-001/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-002/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-003/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-004/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-005/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-006/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-007/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-008/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-009/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-010/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-011/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-012/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-013/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-014/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-015/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-016/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-017/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-018/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "MATH-019/free",
+      "tier": 2,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-020/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-021/free",
+      "tier": 2,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-022/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-023/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-024/free",
+      "tier": 2,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "MATH-025/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-026/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-027/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-028/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-029/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-030/free",
+      "tier": 3,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "MATH-031/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-032/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-033/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-034/free",
+      "tier": 3,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "MATH-035/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "MATH-036/free",
+      "tier": 3,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T4-001/mcq",
+      "tier": 4,
+      "difficulty": 3.4303,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T4-002/mcq",
+      "tier": 4,
+      "difficulty": 1.5247,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T4-003/mcq",
+      "tier": 4,
+      "difficulty": -0.3117,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-004/mcq",
+      "tier": 2,
+      "difficulty": -1.2262,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T4-004/altered-mcq",
+      "tier": 4,
+      "difficulty": 0.6125,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-005/mcq",
+      "tier": 4,
+      "difficulty": -1.0732,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T4-006/mcq",
+      "tier": 4,
+      "difficulty": 2.4704,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T4-007/mcq",
+      "tier": 4,
+      "difficulty": -2.256,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T4-008/mcq",
+      "tier": 4,
+      "difficulty": 0.4172,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-009/mcq",
+      "tier": 4,
+      "difficulty": 0.1874,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-010/mcq",
+      "tier": 4,
+      "difficulty": 0.4201,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-011/mcq",
+      "tier": 4,
+      "difficulty": 0.4045,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-012/mcq",
+      "tier": 4,
+      "difficulty": 1.1544,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-013/mcq",
+      "tier": 2,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-013/altered-mcq",
+      "tier": 4,
+      "difficulty": 0.098,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-014/mcq",
+      "tier": 4,
+      "difficulty": -2.256,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T4-015/mcq",
+      "tier": 4,
+      "difficulty": -0.3205,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-016/mcq",
+      "tier": 2,
+      "difficulty": -0.9237,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T4-016/altered-mcq",
+      "tier": 4,
+      "difficulty": -2.256,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T4-017/mcq",
+      "tier": 4,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-018/mcq",
+      "tier": 2,
+      "difficulty": 1.8384,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T4-018/altered-mcq",
+      "tier": 4,
+      "difficulty": -0.4413,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-019/mcq",
+      "tier": 4,
+      "difficulty": -2.256,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T4-020/mcq",
+      "tier": 4,
+      "difficulty": -1.0732,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T4-021/mcq",
+      "tier": 4,
+      "difficulty": 0.553,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-022/mcq",
+      "tier": 4,
+      "difficulty": 0.2078,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-023/mcq",
+      "tier": 4,
+      "difficulty": 0.3896,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-024/mcq",
+      "tier": 4,
+      "difficulty": -1.2262,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T4-025/mcq",
+      "tier": 4,
+      "difficulty": -1.0369,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T4-025/free",
+      "tier": 4,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-026/mcq",
+      "tier": 4,
+      "difficulty": 0.7237,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-026/free",
+      "tier": 4,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-027/mcq",
+      "tier": 4,
+      "difficulty": 0.7707,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-027/free",
+      "tier": 4,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-028/mcq",
+      "tier": 4,
+      "difficulty": 0.7145,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-028/free",
+      "tier": 4,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-029/free",
+      "tier": 4,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T4-030/free",
+      "tier": 4,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T4-031/mcq",
+      "tier": 4,
+      "difficulty": 3.0055,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T4-031/free",
+      "tier": 4,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T4-032/mcq",
+      "tier": 4,
+      "difficulty": 3.2832,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T4-032/free",
+      "tier": 4,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T4-033/mcq",
+      "tier": 4,
+      "difficulty": 1.096,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-033/free",
+      "tier": 4,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-034/mcq",
+      "tier": 4,
+      "difficulty": 2.2161,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T4-034/free",
+      "tier": 4,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-035/mcq",
+      "tier": 4,
+      "difficulty": 2.3864,
+      "guess": 0.1111111111111111,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T4-035/free",
+      "tier": 4,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T4-036/mcq",
+      "tier": 4,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-037/mcq",
+      "tier": 4,
+      "difficulty": -0.3298,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-038/mcq",
+      "tier": 4,
+      "difficulty": 1.3963,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T4-039/mcq",
+      "tier": 4,
+      "difficulty": -0.2026,
+      "guess": 0.16666666666666666,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-039/count-free",
+      "tier": 4,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T4-040/mcq",
+      "tier": 4,
+      "difficulty": -0.1251,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-041/mcq",
+      "tier": 4,
+      "difficulty": 0.2727,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-042/mcq",
+      "tier": 4,
+      "difficulty": -2.256,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T4-043/mcq",
+      "tier": 4,
+      "difficulty": -0.4836,
+      "guess": 0.2,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-044/free",
+      "tier": 4,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T4-045/free",
+      "tier": 4,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T4-045/missing-free",
+      "tier": 4,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T5-001/free",
+      "tier": 5,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T5-002/free",
+      "tier": 5,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T5-003/free",
+      "tier": 5,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T5-004/free",
+      "tier": 5,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T5-005/free",
+      "tier": 5,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T5-006/free",
+      "tier": 5,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T5-007/free",
+      "tier": 5,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T5-008/free",
+      "tier": 5,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T5-009/free",
+      "tier": 5,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T5-010/free",
+      "tier": 5,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T5-011/free",
+      "tier": 5,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T5-012/free",
+      "tier": 5,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T5-013/free",
+      "tier": 5,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T5-014/free",
+      "tier": 5,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T5-015/free",
+      "tier": 5,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T5-016/free",
+      "tier": 5,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T5-017/free",
+      "tier": 5,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T5-018/free",
+      "tier": 5,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T5-019/free",
+      "tier": 5,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T5-020/free",
+      "tier": 5,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T5-021/free",
+      "tier": 5,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T5-022/free",
+      "tier": 5,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T5-023/free",
+      "tier": 5,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T5-024/free",
+      "tier": 5,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T5-025/free",
+      "tier": 5,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T5-026/free",
+      "tier": 5,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T5-027/free",
+      "tier": 5,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T5-028/free",
+      "tier": 5,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T5-029/free",
+      "tier": 5,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T5-030/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-031/free",
+      "tier": 5,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T5-032/free",
+      "tier": 5,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T5-033/free",
+      "tier": 5,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T5-034/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-035/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-036/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-037/free",
+      "tier": 5,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T5-038/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-039/free",
+      "tier": 5,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T5-040/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-041/free",
+      "tier": 5,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T5-042/free",
+      "tier": 5,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T5-043/free",
+      "tier": 5,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T5-044/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-045/free",
+      "tier": 5,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T5-046/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T5-047/free",
+      "tier": 5,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-001/free",
+      "tier": 6,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T6-002/free",
+      "tier": 6,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T6-003/free",
+      "tier": 6,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T6-004/free",
+      "tier": 6,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T6-005/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-006/free",
+      "tier": 6,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T6-007/free",
+      "tier": 6,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T6-008/free",
+      "tier": 6,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T6-009/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-010/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-011/free",
+      "tier": 6,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T6-012/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-013/free",
+      "tier": 6,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T6-014/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-015/free",
+      "tier": 6,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T6-016/free",
+      "tier": 6,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T6-017/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-018/free",
+      "tier": 6,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T6-019/free",
+      "tier": 6,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T6-020/free",
+      "tier": 6,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T6-021/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-022/free",
+      "tier": 6,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T6-023/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-024/free",
+      "tier": 6,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T6-025/free",
+      "tier": 6,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T6-026/free",
+      "tier": 6,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T6-027/free",
+      "tier": 6,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T6-028/free",
+      "tier": 6,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T6-029/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-030/free",
+      "tier": 6,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T6-031/free",
+      "tier": 6,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T6-032/free",
+      "tier": 6,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T6-033/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-034/free",
+      "tier": 6,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T6-035/free",
+      "tier": 6,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T6-036/free",
+      "tier": 6,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T6-037/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-038/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-039/free",
+      "tier": 6,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T6-040/free",
+      "tier": 6,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T6-041/free",
+      "tier": 6,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T6-042/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-043/free",
+      "tier": 6,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T6-044/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T6-045/free",
+      "tier": 6,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T7-001/free",
+      "tier": 7,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T7-002/free",
+      "tier": 7,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T7-003/free",
+      "tier": 7,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T7-004/free",
+      "tier": 7,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T7-004/altered",
+      "tier": 7,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T7-005/free",
+      "tier": 7,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T7-006/free",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-007/free",
+      "tier": 7,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T7-007/altered",
+      "tier": 7,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T7-008/free",
+      "tier": 7,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T7-009/free",
+      "tier": 7,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T7-009/altered",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-010/free",
+      "tier": 7,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T7-011/free",
+      "tier": 7,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T7-012/free",
+      "tier": 7,
+      "difficulty": -2.5018,
+      "guess": 0,
+      "responses": 12,
+      "correct": 12
+    },
+    {
+      "key": "T7-013/free",
+      "tier": 7,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T7-014/free",
+      "tier": 7,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T7-015/free",
+      "tier": 7,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T7-016/free",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-017/free",
+      "tier": 7,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T7-018/free",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-019/free",
+      "tier": 7,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T7-020/free",
+      "tier": 7,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T7-021/free",
+      "tier": 7,
+      "difficulty": -1.42,
+      "guess": 0,
+      "responses": 12,
+      "correct": 11
+    },
+    {
+      "key": "T7-022/free",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-023/free",
+      "tier": 7,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T7-024/free",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-024/altered",
+      "tier": 7,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T7-025/free",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-026/free",
+      "tier": 7,
+      "difficulty": -0.6332,
+      "guess": 0,
+      "responses": 12,
+      "correct": 10
+    },
+    {
+      "key": "T7-027/free",
+      "tier": 7,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T7-028/free",
+      "tier": 7,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T7-029/free",
+      "tier": 7,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T7-030/free",
+      "tier": 7,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T8-001/free",
+      "tier": 8,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T8-002/free",
+      "tier": 8,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T8-003/free",
+      "tier": 8,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T8-004/free",
+      "tier": 8,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T8-005/free",
+      "tier": 8,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T8-006/free",
+      "tier": 8,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T8-007/free",
+      "tier": 8,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T8-008/free",
+      "tier": 8,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T8-009/free",
+      "tier": 8,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T8-010/free",
+      "tier": 8,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T8-011/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-012/free",
+      "tier": 8,
+      "difficulty": 0.5182,
+      "guess": 0,
+      "responses": 12,
+      "correct": 8
+    },
+    {
+      "key": "T8-013/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-014/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-015/free",
+      "tier": 8,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T8-016/free",
+      "tier": 8,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T8-017/free",
+      "tier": 8,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T8-018/free",
+      "tier": 8,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T8-019/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-020/free",
+      "tier": 8,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T8-021/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-022/free",
+      "tier": 8,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T8-023/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-024/free",
+      "tier": 8,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T8-025/free",
+      "tier": 8,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T8-026/free",
+      "tier": 8,
+      "difficulty": 2.2034,
+      "guess": 0,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T8-027/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-028/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-029/free",
+      "tier": 8,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T8-030/free",
+      "tier": 8,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T9-005/mcq",
+      "tier": 9,
+      "difficulty": 2.9486,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T9-007/mcq",
+      "tier": 9,
+      "difficulty": 2.1323,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T9-008/mcq",
+      "tier": 9,
+      "difficulty": 3.9328,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T9-010/free",
+      "tier": 9,
+      "difficulty": 4.3466,
+      "guess": 0,
+      "responses": 12,
+      "correct": 0
+    },
+    {
+      "key": "T9-012/free",
+      "tier": 9,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T9-015/mcq",
+      "tier": 9,
+      "difficulty": 2.8715,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T9-016/free",
+      "tier": 9,
+      "difficulty": 3.6303,
+      "guess": 0,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T9-017/mcq",
+      "tier": 9,
+      "difficulty": 2.2017,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 0
+    },
+    {
+      "key": "T9-018/mcq",
+      "tier": 9,
+      "difficulty": 2.936,
+      "guess": 0.3333333333333333,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T9-021/free",
+      "tier": 9,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T9-022/mcq",
+      "tier": 9,
+      "difficulty": 2.6817,
+      "guess": 0.25,
+      "responses": 12,
+      "correct": 4
+    },
+    {
+      "key": "T9-029/free",
+      "tier": 9,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T9-032/free",
+      "tier": 9,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T9-036/free",
+      "tier": 9,
+      "difficulty": 4.3466,
+      "guess": 0,
+      "responses": 12,
+      "correct": 0
+    },
+    {
+      "key": "T9-047/mcq",
+      "tier": 9,
+      "difficulty": 3.6424,
+      "guess": 0.06666666666666667,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T9-048/mcq",
+      "tier": 9,
+      "difficulty": 3.6836,
+      "guess": 0.06666666666666667,
+      "responses": 12,
+      "correct": 1
+    },
+    {
+      "key": "T9-049/mcq",
+      "tier": 9,
+      "difficulty": 2.7987,
+      "guess": 0.06666666666666667,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T9-050/free",
+      "tier": 9,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T9-057/free",
+      "tier": 9,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T9-059/free",
+      "tier": 9,
+      "difficulty": -0.0058,
+      "guess": 0,
+      "responses": 12,
+      "correct": 9
+    },
+    {
+      "key": "T9-061/free",
+      "tier": 9,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T9-076/free",
+      "tier": 9,
+      "difficulty": 4.3466,
+      "guess": 0,
+      "responses": 12,
+      "correct": 0
+    },
+    {
+      "key": "T9-081/free",
+      "tier": 9,
+      "difficulty": 2.6244,
+      "guess": 0,
+      "responses": 12,
+      "correct": 3
+    },
+    {
+      "key": "T9-083/free",
+      "tier": 9,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    },
+    {
+      "key": "T9-084/free",
+      "tier": 9,
+      "difficulty": 1.3971,
+      "guess": 0,
+      "responses": 12,
+      "correct": 6
+    },
+    {
+      "key": "T9-092/free",
+      "tier": 9,
+      "difficulty": 0.9766,
+      "guess": 0,
+      "responses": 12,
+      "correct": 7
+    },
+    {
+      "key": "T9-098/free",
+      "tier": 9,
+      "difficulty": 1.8002,
+      "guess": 0,
+      "responses": 12,
+      "correct": 5
+    },
+    {
+      "key": "T9-106/free",
+      "tier": 9,
+      "difficulty": 3.0866,
+      "guess": 0,
+      "responses": 12,
+      "correct": 2
+    }
+  ]
+}

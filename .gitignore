@@ -1,0 +1,12 @@
+bin/
+obj/
+.vs/
+*.user
+TestResults/
+# runs are published; not the server logs of "auto" and the backups written by "rescore"
+/runs/_auto/
+results.before-rescore-*.jsonl
+/exports/
+/dist/
+# the heatmap PNG is written next to the HTML pages but not published
+/docs/heatmap.png

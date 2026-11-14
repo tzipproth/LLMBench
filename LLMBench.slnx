@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/LLMBench.Cli/LLMBench.Cli.csproj" />
+    <Project Path="src/LLMBench.Core/LLMBench.Core.csproj" />
+    <Project Path="src/LLMBench.Gui/LLMBench.Gui.csproj" />
+    <Project Path="src/LLMBench.Heatmap/LLMBench.Heatmap.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LLMBench.Tests/LLMBench.Tests.csproj" />
+  </Folder>
+</Solution>

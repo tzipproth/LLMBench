@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>LLMBenchGui</AssemblyName>
+    <RootNamespace>LLMBench.Gui</RootNamespace>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <ApplicationDefaultFont>Segoe UI, 9.75pt</ApplicationDefaultFont>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LLMBench.Core\LLMBench.Core.csproj" />
+  </ItemGroup>
+</Project>

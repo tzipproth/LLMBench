@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLMBench Leaderboard</title>
+<meta name="description" content="Reasoning leaderboard for local open-weight LLMs that run on a 16 GB graphics card.">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f6f6f4; --surface: #fcfcfb; --line: #e4e3df; --line-strong: #cfcdc7;
+  --text: #0b0b0b; --text-2: #52514e; --text-3: #7a7974;
+  --accent: #2a78d6; --accent-soft: #2a78d61f; --top: #2a78d60f;
+  --track: #ecebe7; --flag: #b2560f; --green: #1e8c32;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #121211; --surface: #1a1a19; --line: #2c2c2a; --line-strong: #3d3d3a;
+    --text: #f0efec; --text-2: #c3c2b7; --text-3: #8f8e86;
+    --accent: #3987e5; --accent-soft: #3987e52e; --top: #3987e514;
+    --track: #262624; --flag: #e8914a; --green: #3fb450;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+main { max-width: 1240px; margin: 0 auto; padding: 48px 16px 40px; }
+a { color: var(--accent); }
+.eyebrow { margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { margin: 0 0 12px; font-size: clamp(26px, 4vw, 38px); line-height: 1.15; letter-spacing: -.01em; }
+h2 { margin: 48px 0 16px; font-size: 21px; }
+.lede { margin: 0; max-width: 760px; font-size: 17px; color: var(--text-2); }
+.facts { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 0; padding: 0; }
+.facts div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 18px; min-width: 120px; }
+.facts dt { font-size: 12px; color: var(--text-3); text-transform: uppercase; letter-spacing: .05em; }
+.facts dd { margin: 0; font-size: 24px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.board { margin-top: 32px; }
+.scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; min-width: 980px; font-variant-numeric: tabular-nums; }
+th { position: relative; padding: 12px 10px 30px; font-size: 12px; font-weight: 600; color: var(--text-2); text-align: left;
+  white-space: nowrap; border-bottom: 1px solid var(--line-strong); cursor: pointer; user-select: none; vertical-align: top; }
+th:hover, th:focus-visible { color: var(--text); outline: none; }
+th[aria-sort="ascending"]::after { content: " ▲"; font-size: 9px; }
+th[aria-sort="descending"]::after { content: " ▼"; font-size: 9px; }
+th.plot { cursor: default; min-width: 300px; padding-left: 14px; padding-right: 14px; }
+td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover td { background: var(--accent-soft); }
+tr.top1 td { background: var(--top); }
+.num { text-align: right; }
+th.num { text-align: right; }
+.muted { color: var(--text-3); }
+.strong { font-weight: 650; font-size: 16px; }
+.pm { margin-left: 4px; font-size: 12px; font-weight: 400; color: var(--text-3); }
+.sub { display: block; font-size: 12px; color: var(--text-3); font-weight: 400; }
+.name { font-weight: 600; }
+.model .sub { max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+.rank { display: inline-block; min-width: 26px; padding: 1px 7px; border-radius: 999px; text-align: center;
+  font-size: 13px; font-weight: 600; background: var(--track); color: var(--text-2); }
+tr.top1 .rank { background: var(--accent); color: #fff; }
+.flag { color: var(--flag); font-weight: 700; margin-left: 2px; cursor: help; }
+td.plot { padding-left: 14px; padding-right: 14px; }
+.axis { position: absolute; left: 14px; right: 14px; bottom: 9px; height: 14px; }
+.axis span { position: absolute; transform: translateX(-50%); font-size: 11px; font-weight: 400; color: var(--text-3); }
+.track { position: relative; height: 22px; background:
+  linear-gradient(var(--track), var(--track)) center / 100% 2px no-repeat; border-radius: 4px; }
+.track .ci { position: absolute; top: 5px; height: 12px; border-left: 2px solid var(--accent); border-right: 2px solid var(--accent);
+  background: linear-gradient(var(--accent), var(--accent)) center / 100% 2px no-repeat; }
+.track .ref { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line-strong); }
+.track .dot { position: absolute; top: 5px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 2px var(--surface); }
+.note { margin: 10px 2px 0; font-size: 13px; color: var(--text-3); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin: 0; }
+.cols div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+.cols dt { font-weight: 650; margin-bottom: 4px; }
+.cols dd { margin: 0; color: var(--text-2); font-size: 14px; }
+.callout { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; align-items: center; margin: 32px 0 0;
+  padding: 18px 22px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--green);
+  border-radius: 10px; color: var(--text); text-decoration: none; }
+.callout:hover, .callout:focus-visible { background: var(--accent-soft); outline: none; }
+.callout-title { font-size: 17px; font-weight: 650; color: var(--green); }
+.callout-text { grid-row: 2; font-size: 14px; color: var(--text-2); }
+.callout-arrow { grid-row: 1 / 3; grid-column: 2; font-size: 26px; color: var(--green); }
+.method { max-width: 820px; color: var(--text-2); }
+.method strong { color: var(--text); }
+blockquote { margin: 12px 0 16px; padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface);
+  border-radius: 0 8px 8px 0; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 13px; color: var(--text); }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-3); }
+@media (max-width: 640px) { main { padding-top: 28px; } .facts div { min-width: 0; flex: 1 1 40%; } }
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+<p class="eyebrow">LLMBench</p>
+<h1>LLM general intelligence leaderboard for 16 GB graphics cards</h1>
+<p class="lede">Which local LLM thinks best on a graphics card with 16 GB? Every model here fits completely into 16 GB of VRAM, and all 12 answer the same 662 reasoning questions on the same RTX 5070 Ti. Spatial and physical reasoning, keeping track of objects, altered classic puzzles, logic, math, time and social reasoning: tasks where a model has to think, not recall.</p>
+<dl class="facts"><div><dt>questions</dt><dd>528</dd></div><div><dt>question variants</dt><dd>662</dd></div><div><dt>models</dt><dd>12</dd></div><div><dt>GPU, 16 GB VRAM</dt><dd>RTX 5070 Ti</dd></div></dl>
+</header>
+<section class="board">
+<div class="scroll"><table id="lb">
+<thead><tr><th class="num" data-key="pos" title="Position in the list" tabindex="0" aria-sort="none">#</th><th class="num" data-key="rank" title="Shared rank = not distinguishable (see below)" tabindex="0" aria-sort="none">Rank</th><th class="" data-key="model" tabindex="0" aria-sort="none">Model</th><th class="num" data-key="strength" title="Odds of solving a question, compared with llama3.1-8b (= 1&#215;); 95 % range below" tabindex="0" aria-sort="none">Strength</th><th class="plot" aria-hidden="true"><div class="axis"><span style="left:0%">0.2×</span><span style="left:14.74%">0.5×</span><span style="left:25.9%">1×</span><span style="left:37.05%">2×</span><span style="left:51.8%">5×</span><span style="left:62.95%">10×</span><span style="left:74.1%">20×</span><span style="left:88.85%">50×</span><span style="left:100%">100×</span></div></th><th class="num" data-key="npm" title="Right minus wrong answers per minute on the RTX 5070 Ti" tabindex="0" aria-sort="none">Quality per time</th><th class="num" data-key="acc" title="Share of correct answers, 95 % range" tabindex="0" aria-sort="none">Accuracy</th><th class="num" data-key="correct" title="Correct answers / scored answers" tabindex="0" aria-sort="none">Correct</th><th class="num" data-key="spa" title="Mean seconds per answer on the RTX 5070 Ti" tabindex="0" aria-sort="none">s / answer</th><th class="num" data-key="net" title="Right minus wrong answers, per 100 answers" tabindex="0" aria-sort="none">Quality</th></tr></thead>
+<tbody>
+<tr class="top1"><td class="num muted" data-v="1">1</td><td class="num" data-v="1"><span class="rank">1</span></td><td class="model" data-v="qwen3.8-27b"><span class="name">qwen3.8-27b</span><span class="sub">Qwen3.8-27B-UD-IQ4_XS</span></td><td class="num strong" data-v="63.81931856739401">64×<span class="sub">46–89</span></td><td class="plot"><div class="track" title="Strength 64×, 95 % range 46–89"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:87.48%;right:1.93%"></span><span class="dot" style="left:92.77%"></span></div></td><td class="num strong" data-v="2.643652327965772">2.6<span class="pm">/ min</span></td><td class="num" data-v="0.9244712990936556">92.4 %<span class="sub">90–94 %</span></td><td class="num" data-v="612">612<span class="muted"> / 662</span></td><td class="num" data-v="19.81460646676736">19.8</td><td class="num" data-v="0.8730488418932528">87.3 %</td></tr>
+<tr class="top1"><td class="num muted" data-v="2">2</td><td class="num" data-v="1"><span class="rank">1</span></td><td class="model" data-v="gemma4-26b-a4b"><span class="name">gemma4-26b-a4b</span><span class="sub">gemma-4-26B-A4B-it-UD-Q4_K_XL</span></td><td class="num strong" data-v="47.734636747222666">48×<span class="sub">35–65</span></td><td class="plot"><div class="track" title="Strength 48×, 95 % range 35–65"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:83.2%;right:7%"></span><span class="dot" style="left:88.1%"></span></div></td><td class="num strong" data-v="9.094088550568419">9.1<span class="pm">/ min</span></td><td class="num" data-v="0.9063444108761329">90.6 %<span class="sub">88–93 %</span></td><td class="num" data-v="600">600<span class="muted"> / 662</span></td><td class="num" data-v="5.488965051057403">5.5</td><td class="num" data-v="0.8319522370881887">83.2 %</td></tr>
+<tr><td class="num muted" data-v="3">3</td><td class="num" data-v="3"><span class="rank">3</span></td><td class="model" data-v="gemma4-12b"><span class="name">gemma4-12b</span><span class="sub">gemma-4-12b-it-Q8_0</span></td><td class="num strong" data-v="32.56707856825765">33×<span class="sub">25–43</span></td><td class="plot"><div class="track" title="Strength 33×, 95 % range 25–43"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:77.49%;right:13.59%"></span><span class="dot" style="left:81.95%"></span></div></td><td class="num strong" data-v="12.314961495559624">12.3<span class="pm">/ min</span></td><td class="num" data-v="0.8806646525679759">88.1 %<span class="sub">85–90 %</span></td><td class="num" data-v="583">583<span class="muted"> / 662</span></td><td class="num" data-v="3.8499299681268893">3.8</td><td class="num" data-v="0.7901956553013955">79.0 %</td></tr>
+<tr><td class="num muted" data-v="4">4</td><td class="num" data-v="4"><span class="rank">4</span></td><td class="model" data-v="qwen3.5-9b"><span class="name">qwen3.5-9b</span><span class="sub">Qwen3.5-9B-Q8_0</span></td><td class="num strong" data-v="19.974840947254947">20×<span class="sub">16–26</span></td><td class="plot"><div class="track" title="Strength 20×, 95 % range 16–26"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:70.07%;right:21.91%"></span><span class="dot" style="left:74.08%"></span></div></td><td class="num strong" data-v="3.2932117723775707">3.3<span class="pm">/ min</span></td><td class="num" data-v="0.8368580060422961">83.7 %<span class="sub">81–86 %</span></td><td class="num" data-v="554">554<span class="muted"> / 662</span></td><td class="num" data-v="13.490365130664646">13.5</td><td class="num" data-v="0.7404438210329449">74.0 %</td></tr>
+<tr><td class="num muted" data-v="5">5</td><td class="num" data-v="4"><span class="rank">4</span></td><td class="model" data-v="muse-glimmer-30b"><span class="name">muse-glimmer-30b<sup class="flag" title="invalid+truncated ≥ 5 %">†</sup></span><span class="sub">Muse-Glimmer-30B-IQ4_XS</span></td><td class="num strong" data-v="15.266710542361318">15×<span class="sub">12–19</span></td><td class="plot"><div class="track" title="Strength 15×, 95 % range 12–19"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:65.95%;right:26.43%"></span><span class="dot" style="left:69.76%"></span></div></td><td class="num strong" data-v="1.1949153935557124">1.2<span class="pm">/ min</span></td><td class="num" data-v="0.8126888217522659">81.3 %<span class="sub">78–84 %</span></td><td class="num" data-v="538">538<span class="muted"> / 662</span></td><td class="num" data-v="39.76441009667677">39.8</td><td class="num" data-v="0.7919184290030211">79.2 %</td></tr>
+<tr><td class="num muted" data-v="6">6</td><td class="num" data-v="5"><span class="rank">5</span></td><td class="model" data-v="gpt-oss-20b"><span class="name">gpt-oss-20b<sup class="flag" title="invalid+truncated ≥ 5 %">†</sup></span><span class="sub">gpt-oss-20b-UD-Q8_K_XL</span></td><td class="num strong" data-v="13.900104198787531">14×<span class="sub">11–18</span></td><td class="plot"><div class="track" title="Strength 14×, 95 % range 11–18"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:64.5%;right:28%"></span><span class="dot" style="left:68.25%"></span></div></td><td class="num strong" data-v="4.2491165128188975">4.2<span class="pm">/ min</span></td><td class="num" data-v="0.797583081570997">79.8 %<span class="sub">77–83 %</span></td><td class="num" data-v="528">528<span class="muted"> / 662</span></td><td class="num" data-v="9.86135079108761">9.9</td><td class="num" data-v="0.698367141418501">69.8 %</td></tr>
+<tr><td class="num muted" data-v="7">7</td><td class="num" data-v="6"><span class="rank">6</span></td><td class="model" data-v="gemma4-e4b"><span class="name">gemma4-e4b</span><span class="sub">gemma-4-E4B-it-UD-Q8_K_XL</span></td><td class="num strong" data-v="10.117921642772748">10×<span class="sub">8.1–13</span></td><td class="plot"><div class="track" title="Strength 10×, 95 % range 8.1–13"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:59.57%;right:33.3%"></span><span class="dot" style="left:63.14%"></span></div></td><td class="num strong" data-v="5.515633248485403">5.5<span class="pm">/ min</span></td><td class="num" data-v="0.7613293051359517">76.1 %<span class="sub">73–79 %</span></td><td class="num" data-v="504">504<span class="muted"> / 662</span></td><td class="num" data-v="6.229654175981874">6.2</td><td class="num" data-v="0.5726747949935261">57.3 %</td></tr>
+<tr><td class="num muted" data-v="8">8</td><td class="num" data-v="7"><span class="rank">7</span></td><td class="model" data-v="ministral3-14b"><span class="name">ministral3-14b<sup class="flag" title="invalid+truncated ≥ 5 %">†</sup></span><span class="sub">Ministral-3-14B-Instruct-2512-UD-Q6_K_XL</span></td><td class="num strong" data-v="7.536073888168945">7.5×<span class="sub">6.1–9.3</span></td><td class="plot"><div class="track" title="Strength 7.5×, 95 % range 6.1–9.3"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:54.97%;right:38.18%"></span><span class="dot" style="left:58.4%"></span></div></td><td class="num strong" data-v="1.8935913260143045">1.9<span class="pm">/ min</span></td><td class="num" data-v="0.7265861027190332">72.7 %<span class="sub">69–76 %</span></td><td class="num" data-v="481">481<span class="muted"> / 662</span></td><td class="num" data-v="17.441504922658606">17.4</td><td class="num" data-v="0.5504513739030356">55.0 %</td></tr>
+<tr><td class="num muted" data-v="9">9</td><td class="num" data-v="8"><span class="rank">8</span></td><td class="model" data-v="phi-4-14b"><span class="name">phi-4-14b</span><span class="sub">phi-4-Q6_K_L</span></td><td class="num strong" data-v="7.386655614285338">7.4×<span class="sub">6.0–9.1</span></td><td class="plot"><div class="track" title="Strength 7.4×, 95 % range 6.0–9.1"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:54.66%;right:38.51%"></span><span class="dot" style="left:58.07%"></span></div></td><td class="num strong" data-v="5.955152174436623">6.0<span class="pm">/ min</span></td><td class="num" data-v="0.7175226586102719">71.8 %<span class="sub">68–75 %</span></td><td class="num" data-v="475">475<span class="muted"> / 662</span></td><td class="num" data-v="4.953204533836856">5.0</td><td class="num" data-v="0.49161811250179815">49.2 %</td></tr>
+<tr><td class="num muted" data-v="10">10</td><td class="num" data-v="10"><span class="rank">10</span></td><td class="model" data-v="granite-4.2-8b"><span class="name">granite-4.2-8b<sup class="flag" title="invalid+truncated ≥ 5 %">†</sup></span><span class="sub">granite-4.2-8b-Q8_0</span></td><td class="num strong" data-v="4.89507767537009">4.9×<span class="sub">4.0–6.0</span></td><td class="plot"><div class="track" title="Strength 4.9×, 95 % range 4.0–6.0"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:48.18%;right:45.27%"></span><span class="dot" style="left:51.45%"></span></div></td><td class="num strong" data-v="1.0358899672765718">1.0<span class="pm">/ min</span></td><td class="num" data-v="0.6661631419939577">66.6 %<span class="sub">63–70 %</span></td><td class="num" data-v="441">441<span class="muted"> / 662</span></td><td class="num" data-v="32.11758574954683">32.1</td><td class="num" data-v="0.5545047475183427">55.5 %</td></tr>
+<tr><td class="num muted" data-v="11">11</td><td class="num" data-v="11"><span class="rank">11</span></td><td class="model" data-v="llama3.1-8b"><span class="name">llama3.1-8b<sup class="flag" title="invalid+truncated ≥ 5 %">†</sup></span><span class="sub">Llama-3.1-8B-Instruct-UD-Q8_K_XL</span></td><td class="num strong" data-v="1.0000279051464083">1.0×<span class="sub">0.82–1.2</span></td><td class="plot"><div class="track" title="Strength 1.0×, 95 % range 0.82–1.2"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:22.65%;right:70.85%"></span><span class="dot" style="left:25.9%"></span></div></td><td class="num strong" data-v="0.17104455556482617">0.2<span class="pm">/ min</span></td><td class="num" data-v="0.4108761329305136">41.1 %<span class="sub">37–45 %</span></td><td class="num" data-v="272">272<span class="muted"> / 662</span></td><td class="num" data-v="10.708151399093651">10.7</td><td class="num" data-v="0.030526183282980752">3.1 %</td></tr>
+<tr><td class="num muted" data-v="12">12</td><td class="num" data-v="12"><span class="rank">12</span></td><td class="model" data-v="mistral-7b-v0.3"><span class="name">mistral-7b-v0.3<sup class="flag" title="invalid+truncated ≥ 5 %">†</sup></span><span class="sub">Mistral-7B-Instruct-v0.3-Q8_0</span></td><td class="num strong" data-v="0.3848880955069719">0.38×<span class="sub">0.31–0.48</span></td><td class="plot"><div class="track" title="Strength 0.38×, 95 % range 0.31–0.48"><span class="ref" style="left:25.9%"></span><span class="ci" style="left:6.82%;right:85.76%"></span><span class="dot" style="left:10.53%"></span></div></td><td class="num strong" data-v="-8.414336226787029">−8.4<span class="pm">/ min</span></td><td class="num" data-v="0.27492447129909364">27.5 %<span class="sub">24–31 %</span></td><td class="num" data-v="182">182<span class="muted"> / 662</span></td><td class="num" data-v="1.6784453941087618">1.7</td><td class="num" data-v="-0.23538339807221975">−23.5 %</td></tr>
+</tbody></table></div>
+<p class="note"><span class="flag">†</span> 5 % or more of the answers were cut off at the output limit or had no readable final answer. They count as wrong, so the model may do better with a larger limit.</p>
+<p class="note">Click a column header to sort. Rows with rank 1 are highlighted.</p>
+</section>
+<section class="explain">
+<h2>How to read the columns</h2>
+<dl class="cols">
+<div><dt>Rank</dt><dd>1 + the number of models that are <em>significantly</em> better. Two models share a rank when the difference between them could be chance: every pair of models is compared question by question (paired McNemar test, p &lt; 0.05).</dd></div>
+<div><dt>Model</dt><dd>The model name and below it the exact model file (quantization), so the result can be reproduced.</dd></div>
+<div><dt>Strength</dt><dd>How much better a model is, as a plain factor: how many times higher its odds (right : wrong) of solving a question are than those of <strong>llama3.1-8b</strong> (= 1×). Example: on a question that llama3.1-8b gets right half of the time (odds 1 : 1), qwen3.8-27b with 64× has odds of 64 : 1 and is right 98 % of the time; on a question llama3.1-8b gets right only 1 time in 10 (odds 1 : 9), it is right 88 % of the time. Ratios between models are meaningful too: 40× has twice the odds of 20×. The chart uses a log scale; the line shows the 95 % range. Where two lines overlap a lot, the order of the two models is not certain.</dd></div>
+<div><dt>Quality per time</dt><dd>How much good answering a model delivers per minute: right minus wrong answers per minute of model time on the RTX 5070 Ti. A model that is a little weaker but much faster can be the better choice in daily use; this column shows it. All models run completely in VRAM, so another graphics card mostly makes every model faster or slower by a similar factor.</dd></div>
+<div><dt>Accuracy</dt><dd>The share of correct answers. Below: the 95 % range (Wilson interval). It puts the models in the same order as the strength, but squeezes the top: near 100 % every further percent is much harder to gain than in the middle, the strength shows that.</dd></div>
+<div><dt>Correct</dt><dd>Correct answers out of all scored answers.</dd></div>
+<div><dt>s / answer</dt><dd>Mean time per answer in seconds on the RTX 5070 Ti. Depends on the speed of the model and on how much it writes before it answers.</dd></div>
+<div><dt>Quality</dt><dd>Right minus wrong answers per 100 answers: what the answers are worth if you trust them. No usable answer counts 0. A wrong multiple-choice answer with <em>k</em> options costs only 1/(<em>k</em>−1), so guessing gains nothing. A model that is often wrong drops further here than in accuracy. Quality per time is the same value per minute instead of per answer.</dd></div>
+</dl>
+<a class="callout" href="heatmap.html"><span class="callout-title">Every single answer of every model</span><span class="callout-text">Heatmap of all results: one square per question and model, with the question, the answer and the time on hover.</span><span class="callout-arrow" aria-hidden="true">→</span></a>
+<h2>How the benchmark works</h2>
+<div class="method">
+<p><strong>Questions.</strong> 528 questions, many of them in two forms (free answer and multiple choice), 662 variants in total. Some are well-known puzzles with a twist that changes the answer, so a memorized solution is wrong. The options of multiple-choice questions are shuffled the same way for every model.</p>
+<p><strong>Same conditions for every model.</strong> Each model runs locally in llama-server on one RTX 5070 Ti, completely in its 16 GB of VRAM, with temperature 0, seed 42 and at most 7,000 output tokens per answer. Models with a thinking switch run with thinking off, the others as they come. Every question is sent on its own, with this system prompt:</p>
+<blockquote>You are a helpful assistant. Answer the question accurately. You may reason first. End your reply with a last line &quot;Final Answer:&quot; followed by your answer.</blockquote>
+<p><strong>Scoring.</strong> Only the final answer counts: the line starting with “Final Answer:”, compared with the solution (numbers as numbers, options by letter or text). The reasoning before it is not graded. Answers cut off at the output limit count as wrong.</p>
+<p><strong>Strength scale.</strong> The difficulty of every question was estimated once from the answers of all 12 models (Rasch model with a guessing floor for multiple choice) on 2026-11-14 and is now fixed. Models added later are placed on the same scale without changing the values above, and llama3.1-8b stays the reference (= 1×).</p>
+</div>
+</section>
+<footer>Generated 2026-11-14 by LLMBench 0.1.0 · catalogs/core-v5.json · question set 175ed02d</footer>
+</main>
+<script>
+(() => {
+  const table = document.getElementById('lb');
+  const body = table.tBodies[0];
+  const heads = [...table.tHead.rows[0].cells];
+  const sortBy = th => {
+    const i = heads.indexOf(th);
+    const text = th.dataset.key === 'model';
+    const lowerIsBetter = ['pos', 'rank', 'spa'].includes(th.dataset.key);
+    const cur = th.getAttribute('aria-sort');
+    const dir = cur === 'none' ? ((text || lowerIsBetter) ? 1 : -1) : (cur === 'ascending' ? -1 : 1);
+    heads.forEach(h => h.dataset.key && h.setAttribute('aria-sort', 'none'));
+    th.setAttribute('aria-sort', dir === 1 ? 'ascending' : 'descending');
+    const rows = [...body.rows];
+    rows.sort((a, b) => {
+      const x = a.cells[i].dataset.v, y = b.cells[i].dataset.v;
+      return dir * (text ? x.localeCompare(y) : parseFloat(x) - parseFloat(y));
+    });
+    rows.forEach(r => body.appendChild(r));
+  };
+  heads.forEach(th => {
+    if (!th.dataset.key) return;
+    th.addEventListener('click', () => sortBy(th));
+    th.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sortBy(th); } });
+  });
+})();
+</script>
+</body></html>

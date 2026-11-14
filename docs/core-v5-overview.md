@@ -1,0 +1,8014 @@
+# Catalog core-v5.json – overview
+
+528 questions, 662 variants. Each question has a **base** (main question, answer list, answer) and the **variants** that are actually asked; every variant is sent to the model as its own request. Catalog sha256 `38d0c839b0e5`.
+
+## Questions by category and tier (tier of the question)
+
+| Category | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Tier 5 | Tier 6 | Tier 7 | Tier 8 | Tier 9 | Questions | Variants |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| altered_classic | 3 | 16 | 12 | 0 | 0 | 0 | 0 | 0 | 11 | 42 | 73 |
+| arithmetic | 7 | 12 | 11 | 2 | 0 | 0 | 0 | 0 | 0 | 32 | 34 |
+| char | 4 | 4 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 9 | 9 |
+| logic | 6 | 7 | 9 | 2 | 0 | 0 | 5 | 4 | 5 | 38 | 48 |
+| long_context | 0 | 0 | 11 | 2 | 0 | 0 | 0 | 0 | 0 | 13 | 26 |
+| math | 0 | 21 | 15 | 0 | 0 | 0 | 0 | 0 | 0 | 36 | 36 |
+| physical | 6 | 11 | 9 | 9 | 8 | 0 | 7 | 8 | 1 | 59 | 64 |
+| planning | 0 | 1 | 6 | 0 | 0 | 0 | 1 | 0 | 3 | 11 | 11 |
+| room_puzzle | 0 | 0 | 0 | 0 | 0 | 45 | 0 | 0 | 0 | 45 | 45 |
+| scene | 0 | 13 | 11 | 12 | 7 | 0 | 1 | 0 | 0 | 44 | 51 |
+| social | 4 | 5 | 4 | 5 | 0 | 0 | 0 | 0 | 3 | 21 | 27 |
+| spatial | 6 | 11 | 24 | 5 | 18 | 0 | 6 | 18 | 3 | 91 | 116 |
+| temporal | 4 | 6 | 12 | 2 | 2 | 0 | 4 | 0 | 2 | 32 | 45 |
+| tracking | 0 | 1 | 30 | 6 | 12 | 0 | 6 | 0 | 0 | 55 | 77 |
+| **total** | 40 | 108 | 155 | 45 | 47 | 45 | 30 | 30 | 28 | 528 | 662 |
+
+## Variants
+
+| | Count |
+|---|---|
+| kind `altered` | 41 |
+| kind `distractor` | 1 |
+| kind `original` | 620 |
+| format multiple choice | 226 |
+| format free answer (number) | 255 |
+| format free answer (text) | 181 |
+| multiple choice with 2 options | 1 |
+| multiple choice with 3 options | 23 |
+| multiple choice with 4 options | 115 |
+| multiple choice with 5 options | 52 |
+| multiple choice with 6 options | 20 |
+| multiple choice with 7 options | 9 |
+| multiple choice with 8 options | 2 |
+| multiple choice with 9 options | 1 |
+| multiple choice with 15 options | 3 |
+| effective tier 1 | 51 |
+| effective tier 2 | 139 |
+| effective tier 3 | 232 |
+| effective tier 4 | 56 |
+| effective tier 5 | 47 |
+| effective tier 6 | 45 |
+| effective tier 7 | 34 |
+| effective tier 8 | 30 |
+| effective tier 9 | 28 |
+| questions with both multiple choice and free answer | 74 |
+| questions with original + altered (control pair) | 38 |
+
+Kinds: `original` = the base question as it is, `altered` = one detail changed so that the memorized answer of a well-known puzzle becomes wrong, `distractor` = an irrelevant sentence added. Original + altered of the same question form a control pair: altered wrong but original right means the model only recognizes the known puzzle.
+
+## altered_classic
+
+### CS-001 — tier 2 — river-crossing
+
+**Base**
+
+> A farmer stands on the left bank of a river with a wolf, a goat and a cabbage. His boat is large enough to carry him and all three of them at the same time. What is the minimum number of river crossings needed to bring everything to the right bank?
+
+Answer list: **1** ✔ · 2 · 3 · 5 · 7 · It is impossible (fixed order)
+
+*Note: trap: 7 (original puzzle)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (number):
+  answer: 1
+
+### CS-002 — tier 2
+
+**Base**
+
+> A boy is brought to the hospital after an accident. The surgeon, who is the boy's father, looks at him and says: "I can't operate on this boy, he is my son." How is the surgeon related to the boy?
+
+Answer list: his mother · **his father** ✔ · his stepfather · his grandfather · not related · cannot be determined (fixed order)
+
+*Note: trap: mother (original riddle)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+
+### CS-003 — tier 2 — arithmetic
+
+**Base**
+
+> A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost?
+
+Answer list: **$0.05** ✔ · $0.10 · $0.15 · $1.00
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > A bat and a ball cost $1.10 in total. The bat costs $1.00. How much does the ball cost?
+  options: A. $0.05 · B. $0.10 ✔ · C. $0.15 · D. $1.00
+- `altered-free` — altered, free answer (number):
+  > A bat and a ball cost $1.10 in total. The bat costs $1.00. How much does the ball cost, in dollars?
+  answer: 0.10
+
+### CS-004 — tier 1 — units
+
+**Base**
+
+> Which weighs more: one kilogram of feathers or one pound of steel?
+
+Answer list: **the feathers** ✔ · the steel · both weigh the same · cannot be determined (fixed order)
+
+*Note: trap: the same*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-005 — tier 2
+
+**Base**
+
+> A snail sits at the bottom of a well that is 3 metres deep. Each day it climbs up 3 metres, and each night it slides back 2 metres. On which day does it reach the top?
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### CS-101 — tier 2 — draft
+
+**Base**
+
+> Sally has 3 brothers. Each of her brothers has 2 sisters. How many sisters does Sally have?
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+- `altered-free` — altered, free answer (number):
+  > Sally has 3 brothers. Each of her brothers has 3 sisters. How many sisters does Sally have?
+  answer: 2
+  *note: trap: 1 (original riddle)*
+
+### CS-102 — tier 3 — draft
+
+**Base**
+
+> A rope ladder with 15 rungs hangs over the side of a floating boat down into the sea. The rungs are 30 cm apart. At low tide exactly 2 rungs are under water. Then the tide rises by 90 cm. How many rungs are under water now?
+
+Answer: **2** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+- `altered-free` — altered, free answer (number):
+  > A rope ladder with 15 rungs hangs from a fixed concrete pier down into the sea. The rungs are 30 cm apart. At low tide exactly 2 rungs are under water. Then the tide rises by 90 cm. How many rungs are under water now?
+  answer: 5
+  *note: trap: 2 (original: ladder on a floating ship)*
+
+### CS-103 — tier 1 — draft, anchor
+
+**Base**
+
+> Which weighs more: 1 kilogram of feathers or 1 kilogram of steel?
+
+Answer list: the feathers · the steel · **both weigh the same** ✔ · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > Which weighs more: 2 kilograms of feathers or 1 kilogram of steel?
+  options: A. the feathers ✔ · B. the steel · C. both weigh the same · D. cannot be determined
+
+### CS-104 — tier 2 — draft
+
+**Base**
+
+> A rooster lays an egg exactly on the ridge of a symmetric roof. A strong wind is blowing from the east. Which way does the egg most likely roll?
+
+Answer list: down the east side · down the west side · it stays on the ridge · **roosters do not lay eggs** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > A hen lays an egg exactly on the ridge of a symmetric roof. A strong wind is blowing from the east. Which way does the egg most likely roll?
+  options: A. down the east side · B. down the west side ✔ · C. it stays on the ridge · D. roosters do not lay eggs
+  *note: trap: 'roosters do not lay eggs' reflex*
+
+### CS-105 — tier 2 — draft
+
+**Base**
+
+> How many months of the year have at least 28 days?
+
+Answer: **12** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 12
+- `altered-free` — altered, free answer (number):
+  > How many months of the year have exactly 28 days in a year that is not a leap year?
+  answer: 1
+  *note: trap: 12 (original riddle)*
+
+### CS-106 — tier 2 — draft
+
+**Base**
+
+> A hole 2 m long, 2 m wide and 2 m deep has just been dug and nothing has been put back into it. How many cubic metres of soil are in the hole?
+
+Answer: **0** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 0
+- `altered-free` — altered, free answer (number):
+  > A pit 2 m long, 2 m wide and 2 m deep was dug. Later the pit was completely filled up again with the same soil, so that the ground is level. How many cubic metres of soil were put back into the pit?
+  answer: 8
+  *note: trap: 0 (original riddle). Reworded after calibration: 'how much soil is in the hole' was ambiguous (a filled hole is no longer a hole).*
+
+### CS-107 — tier 2 — draft
+
+**Base**
+
+> During a race you overtake the runner in second place. Nobody overtakes you. In which place are you now?
+
+Answer list: first · **second** ✔ · third · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > During a race you overtake the runner in second place, and a little later you also overtake the runner in first place. Nobody overtakes you. In which place are you now?
+  options: A. first ✔ · B. second · C. third · D. cannot be determined
+  *note: trap: second*
+
+### CS-108 — tier 2 — draft
+
+**Base**
+
+> A doctor gives you 3 pills and tells you to take one every 30 minutes, starting right now. How many minutes pass between taking the first and taking the last pill?
+
+Answer: **60** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 60
+- `altered-free` — altered, free answer (number):
+  > A doctor gives you 4 pills and tells you to take one every 30 minutes, starting right now. How many minutes pass between taking the first and taking the last pill?
+  answer: 90
+  *note: trap: 120*
+
+### CS-110 — tier 3 — draft
+
+**Base**
+
+> A man points at a portrait and says: "Brothers and sisters I have none, but this man's father is my father's son." Who is in the portrait?
+
+Answer list: the speaker himself · the speaker's father · **the speaker's son** ✔ · the speaker's grandfather · the speaker's brother
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `altered-mcq` — altered, multiple choice, 5 options:
+  > A man points at a portrait and says: "Brothers and sisters I have none, but this man's son is my father's son." Who is in the portrait?
+  options: A. the speaker himself · B. the speaker's father ✔ · C. the speaker's son · D. the speaker's grandfather · E. the speaker's brother
+  *note: trap: 'his son' (original riddle)*
+
+### CS-111 — tier 3 — draft
+
+**Base**
+
+> A patch of water lilies doubles its area every day. On day 30 it covers the whole pond for the first time. On which day did it cover half of the pond?
+
+Answer: **29** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 29
+- `altered-free` — altered, free answer (number):
+  > A patch of water lilies triples its area every day. On day 30 it covers the whole pond for the first time. On which day did it cover one ninth of the pond?
+  answer: 28
+  *note: traps: 10, 29*
+
+### CS-112 — tier 3 — draft
+
+**Base**
+
+> 5 machines need 5 minutes to make 5 widgets. How many minutes do 100 machines need to make 100 widgets?
+
+Answer: **5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+- `altered-free` — altered, free answer (number):
+  > 5 machines need 5 minutes to make 5 widgets. How many minutes do 10 machines need to make 100 widgets?
+  answer: 50
+  *note: trap: 5 (original riddle)*
+
+### CS-113 — tier 1 — draft, anchor
+
+**Base**
+
+> A farmer has 17 sheep. All but 9 of them run away. How many sheep does the farmer still have?
+
+Answer: **9** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 9
+- `altered-free` — altered, free answer (number):
+  > A farmer has 17 sheep. 9 of them run away. How many sheep does the farmer still have?
+  answer: 8
+  *note: trap: 9 (original 'all but 9')*
+
+### NEW-001 — tier 3 — draft
+
+**Base**
+
+> A farmer stands on the left bank of a river with a wolf, a goat and a cabbage. His boat can carry him and only one of the three at a time. Whenever the farmer is not present, the wolf eats the goat and the goat eats the cabbage. What is the minimum number of river crossings needed to bring everything safely to the right bank?
+
+Answer list: 1 · 3 · 5 · **7** ✔ · 9 · It is impossible (fixed order)
+
+*Note: original puzzle: 7 crossings. Unlike CS-001 the altered version still needs planning.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `altered-mcq` — altered, multiple choice, 6 options:
+  > A farmer stands on the left bank of a river with a wolf, a goat and a cabbage. His boat can carry him and two of the three at a time. Whenever the farmer is not present, the wolf eats the goat and the goat eats the cabbage. What is the minimum number of river crossings needed to bring everything safely to the right bank?
+  options: A. 1 · B. 3 ✔ · C. 5 · D. 7 · E. 9 · F. It is impossible
+  *note: wolf and cabbage over, back alone, goat over = 3; one trip cannot take all three. Traps: 7 (original), 1 (CS-001 pattern)*
+- `altered-free` — altered, free answer (number):
+  > A farmer stands on the left bank of a river with a wolf, a goat and a cabbage. His boat can carry him and two of the three at a time. Whenever the farmer is not present, the wolf eats the goat and the goat eats the cabbage. What is the minimum number of river crossings needed to bring everything safely to the right bank?
+  answer: 3
+
+### NEW-002 — tier 3 — draft
+
+**Base**
+
+> In a game show there are three closed doors. Behind one door is a car, behind the other two are goats. You pick door 1. The host, who knows what is behind every door, then opens door 3 and shows a goat, as he always does in this show. He offers you to switch to door 2. What should you do to have the best chance of winning the car?
+
+Answer list: **switch to door 2** ✔ · stay with door 1 · it makes no difference (fixed order)
+
+*Note: original Monty Hall problem: switching wins with probability 2/3*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+- `altered-mcq` — altered, multiple choice, 3 options:
+  > In a game show there are three doors made of clear glass, so you can plainly see that the car stands behind door 1 and that goats stand behind doors 2 and 3. You pick door 1. The host then opens door 3 and shows the goat. He offers you to switch to door 2. What should you do to win the car?
+  options: A. switch to door 2 · B. stay with door 1 ✔ · C. it makes no difference
+  *note: the car is visibly behind door 1; trap: the memorized 'always switch'*
+
+### NEW-003 — tier 3 — draft
+
+**Base**
+
+> You have 9 coins that look identical. One of them is slightly heavier than the other eight. Using a balance scale with two pans and no weights, what is the smallest number of weighings that is always enough to find the heavy coin?
+
+Answer: **2** (number)
+
+*Note: original: 3 against 3, then 1 against 1 = 2 weighings*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+- `altered-free` — altered, free answer (number):
+  > You have 9 coins that look identical and are numbered 1 to 9. One of them is slightly heavier than the other eight, and a reliable friend has already told you that it is coin number 4. Using a balance scale with two pans and no weights, what is the smallest number of weighings you still need to know which coin is the heavy one?
+  answer: 0
+  *note: the heavy coin is already known; trap: 2 (original)*
+
+### NEW-004 — tier 3 — draft
+
+**Base**
+
+> A drawer contains 10 black socks and 10 white socks, all mixed up. The room is completely dark, so you cannot see the colours. What is the smallest number of socks you must take out to be certain that you have two socks of the same colour?
+
+Answer: **3** (number)
+
+*Note: original: 3 (pigeonhole)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+- `altered-free` — altered, free answer (number):
+  > A drawer contains 10 black socks and 10 white socks, all mixed up. The room is completely dark, so you cannot see the colours. What is the smallest number of socks you must take out to be certain that you have two black socks?
+  answer: 12
+  *note: worst case: all 10 white socks first, then 2 black = 12; trap: 3*
+- `altered-free-2` — altered, free answer (number):
+  > A drawer contains 10 black socks and 10 white socks, all mixed up. The room is completely dark, so you cannot see the colours. What is the smallest number of socks you must take out to be certain that you have two socks of different colours?
+  answer: 11
+  *note: worst case: 10 socks of one colour first, then 1 of the other = 11; trap: 3 or 2*
+
+### NEW-005 — tier 2 — draft
+
+**Base**
+
+> There are 3 apples on the table and you have none. You take 2 of the apples away from the table. How many apples do you have now?
+
+Answer: **2** (number)
+
+*Note: original riddle: you have the 2 you took (trap: 1)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+- `altered-free` — altered, free answer (number):
+  > There are 3 apples on the table. You take 2 of the apples away from the table. How many apples are on the table now?
+  answer: 1
+  *note: plain subtraction; trap: 2 (answer of the riddle)*
+
+### NEW-006 — tier 2 — draft
+
+**Base**
+
+> An electric train travels north at 100 km/h. The wind blows from the west at 20 km/h. In which direction does the smoke of the train drift?
+
+Answer list: towards the north · towards the south · towards the east · **there is no smoke** ✔ (fixed order)
+
+*Note: original riddle: an electric train has no smoke*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > A steam locomotive travels north at 60 km/h on a completely windless day. Seen from the moving train, in which direction does its smoke trail away?
+  options: A. towards the north · B. towards the south ✔ · C. towards the east · D. there is no smoke
+  *note: a steam locomotive does produce smoke, which stays behind the train; trap: 'there is no smoke' reflex*
+
+### NEW-007 — tier 3 — draft
+
+**Base**
+
+> A frying pan has room for exactly 2 pancakes at a time. Every pancake must be fried for 1 minute on each of its two sides. What is the shortest time, in minutes, needed to fry 3 pancakes completely?
+
+Answer: **3** (number)
+
+*Note: original: 3 minutes (A1+B1, A2+C1, B2+C2); trap: 4*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+- `altered-free` — altered, free answer (number):
+  > A frying pan has room for exactly 3 pancakes at a time. Every pancake must be fried for 1 minute on each of its two sides. What is the shortest time, in minutes, needed to fry 3 pancakes completely?
+  answer: 2
+  *note: all three fit at once: 2 minutes; trap: 3 (original answer)*
+
+### NEW-008 — tier 2 — draft
+
+**Base**
+
+> A square room has 4 corners. In each corner sits one cat. Each cat can see 3 other cats. How many cats are in the room?
+
+Answer: **4** (number)
+
+*Note: original riddle: 4 cats (trap: 12 or 16)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+- `altered-free` — altered, free answer (number):
+  > A square room has 4 corners. In each corner sit 2 cats. Each cat can see 7 other cats. How many cats are in the room?
+  answer: 8
+  *note: 4 x 2 = 8; trap: 4 (original answer)*
+
+### NEW-009 — tier 2 — draft
+
+**Base**
+
+> A mother has 4 daughters. Each of her daughters has exactly one brother. How many children does the mother have?
+
+Answer: **5** (number)
+
+*Note: original riddle: the daughters share one brother, 5 children (trap: 8)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+- `altered-free` — altered, free answer (number):
+  > A mother has 4 daughters. Each of her daughters has exactly two brothers. How many children does the mother have?
+  answer: 6
+  *note: the daughters share the same two brothers: 6; traps: 5 (original), 12*
+
+### NEW-010 — tier 2 — draft
+
+**Base**
+
+> When I was 6 years old, my sister was half my age. Today I am 70 years old. How old is my sister today, in years?
+
+Answer: **67** (number)
+
+*Note: original riddle: she is 3 years younger, 67 (trap: 35)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 67
+- `altered-free` — altered, free answer (number):
+  > When I was 6 years old, my sister was twice my age. Today I am 70 years old. How old is my sister today, in years?
+  answer: 76
+  *note: she is 6 years older: 76; traps: 67 (original), 140*
+
+### NEW-011 — tier 3 — draft
+
+**Base**
+
+> I keep only dogs, cats and parrots as pets. All of my pets except 2 are dogs, all except 2 are cats, and all except 2 are parrots. How many pets do I have?
+
+Answer: **3** (number)
+
+*Note: original riddle: one of each, 3 pets*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+- `altered-free` — altered, free answer (number):
+  > I keep only dogs, cats and parrots as pets. All of my pets except 3 are dogs, all except 3 are cats, and all except 2 are parrots. How many pets do I have?
+  answer: 4
+  *note: n-3 dogs, n-3 cats, n-2 parrots sum to n, so n = 4 (1 dog, 1 cat, 2 parrots); trap: 3 (original)*
+
+### NEW-012 — tier 3 — draft
+
+**Base**
+
+> Four cards lie on a table. Each card has a letter on one side and a number on the other side. You can see: A, K, 4 and 7. Someone claims: "If a card has a vowel on one side, then it has an even number on the other side." Which cards must you turn over to check whether this claim is true for these four cards, without turning any card unnecessarily?
+
+Answer list: only the A · the A and the 4 · **the A and the 7** ✔ · the 4 and the K · all four cards (fixed order)
+
+*Note: original Wason selection task: the vowel and the odd number*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `altered-mcq` — altered, multiple choice, 5 options:
+  > Four cards lie on a table. Each card has a letter on one side and a number on the other side. You can see: A, K, 4 and 7. Someone claims: "If a card has an even number on one side, then it has a vowel on the other side." Which cards must you turn over to check whether this claim is true for these four cards, without turning any card unnecessarily?
+  options: A. only the A · B. the A and the 4 · C. the A and the 7 · D. the 4 and the K ✔ · E. all four cards
+  *note: reversed rule: check the even number and the consonant; trap: 'the A and the 7' (memorized)*
+
+### NEW-013 — tier 3 — draft
+
+**Base**
+
+> A snail sits at the bottom of a well that is 10 metres deep. Each day it climbs up 3 metres, and each night it slides back 2 metres. On which day does it reach the top?
+
+Answer list: on day 4 · **on day 8** ✔ · on day 10 · it never reaches the top (fixed order)
+
+*Note: original: 7 m after seven days and nights, out on day 8 (trap: day 10)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (number):
+  answer: 8
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > A snail sits at the bottom of a well that is 10 metres deep. Each day it climbs up 3 metres, and each night it slides back 3 metres. On which day does it reach the top?
+  options: A. on day 4 · B. on day 8 · C. on day 10 · D. it never reaches the top ✔
+  *note: it is back at the bottom every morning and never gets higher than 3 m; trap: day 8*
+
+### NEW-014 — tier 2 — draft
+
+**Base**
+
+> Two doors stand side by side: one leads to freedom, the other to a dungeon. In front of them stand two guards: one always tells the truth and the other always lies. You know for certain that the guard in the red coat is the one who always lies. You ask the guard in the red coat: "Does the left door lead to freedom?" He answers: "Yes." Which door leads to freedom?
+
+Answer list: the left door · **the right door** ✔ · cannot be determined (fixed order)
+
+*Note: the known liar says yes, so it is the right door; trap: reciting the 'what would the other guard say' solution or 'cannot be determined'*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### T9-005 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> In a room of 30 people, what is the probability that at least two of them do not share a birthday?
+
+Answer list: less than 1 % · about 29 % · about 71 % · **more than 99 %** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### T9-007 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> Imagine you're on a game show, and there are three doors in front of you. Behind one door is a car, and behind the other two doors are goats. You don't know what's behind any of the doors. You get to choose one door. Let's say you pick Door #1. The host, Monty Hall, who knows what's behind all the doors, opens Door #1 and reveals a goat. Now you have two doors left: Door #3 and Door #2. You pick Door #3. Monty gives you a choice: you can either stick with your pick, Door #3, or switch to Door #2. What should you do to maximise your chance of winning the car?
+
+Answer list: stick with Door #3 · switch to Door #2 · **both doors give the same chance** ✔
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### T9-008 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> Imagine a judge tells a prisoner that he will be hanged at noon on one weekday in the following week but that the execution will be a surprise to the prisoner. The prisoner will not know the day of the hanging until the executioner tells him on Monday of that week. The prisoner deduces that he will never be hanged by surprise. The prisoner is executed on a Friday. Was the execution a surprise to the prisoner?
+
+Answer list: yes · **no** ✔ · it cannot be determined
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### T9-010 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> I have a 7-litre bucket that is missing a bottom, and the top was welded and sealed shut. How many litres of water can I hold in it? Answer with a number.
+
+Answer: **7** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 7
+
+### T9-012 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> Four people come to a rickety bridge at night. The bridge can support four people at a time, and they share a single torch. A takes 1 minute, B takes 3, C takes 5, D takes 10. What is the shortest total time, in minutes, in which all four can get across? Answer with a number.
+
+Answer: **10** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 10
+
+### T9-015 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> You're a rabbit and are presented with three rabbit holes. In one is a fox, in the other two are carrots. You pick one, but before you enter it, god reveals carrots in one of the others. You can stick with yours or swap to the other unrevealed one. What should you do to minimise your chance of being eaten?
+
+Answer list: **stick with your hole** ✔ · swap to the other unrevealed hole · it makes no difference
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### T9-016 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> I stole a ball and a bat that together cost $1.10. The bat is $1 more than the ball. How much, in dollars, did I pay for the ball? Answer with a number.
+
+Answer: **0** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 0
+
+### T9-017 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> Linda is 31 years old, single, outspoken, active in the feminist movement, and very bright. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice, and participated in anti-nuclear demonstrations. Which is more probable? (1) Linda is a bank teller. (2) Linda is a bank teller and is active in the feminist movement.
+
+Answer list: (1) is more probable · (2) is more probable · **both are equally probable** ✔
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### T9-018 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> Linda is 31 years old, single, outspoken, not a bank teller, and very bright. As a student, she was deeply concerned with issues of discrimination and social justice. Which is more probable? (1) Linda is a bank teller. (2) Linda is a bank teller and is active in the feminist movement.
+
+Answer list: (1) is more probable · (2) is more probable · **both are impossible** ✔
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### T9-021 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> A pair of rabbits gives birth to two baby rabbits each year, starting two years after their own birth. If you had one single rabbit in your stable, how many rabbits would there be in 7 years? Answer with a number.
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### T9-022 — tier 9 — tier9, misguided-attention
+
+**Base**
+
+> A customer comes into a hardware store and picks up a boxed appliance from a stack of four. The sales clerk interrupts: 'One of the appliances may be defective', and proceeds to open one of the other boxes and tests the product, finding that it is in flawless order. Which box should the customer take?
+
+Answer list: the box the customer already picked up · **the box the clerk tested** ✔ · one of the two untested boxes the customer did not pick · it makes no difference
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+## arithmetic
+
+### CS-212 — tier 2 — draft
+
+**Base**
+
+> A bathtub holds 150 litres. With the drain closed, I turn on the tap, which delivers 10 litres per minute. After 5 minutes I open the drain, which lets out 5 litres per minute, and the tap keeps running. How many minutes after turning on the tap is the tub full?
+
+Answer: **25** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 25
+
+### CS-701 — tier 1 — draft, anchor
+
+**Base**
+
+> Lisa has 12 apples. She gives 5 to her brother and then buys 4 more. How many apples does she have now?
+
+Answer: **11** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 11
+
+### CS-703 — tier 1 — draft, anchor
+
+**Base**
+
+> A box holds 3 rows of 4 eggs and is full. Two of the eggs break. How many unbroken eggs are in the box?
+
+Answer: **10** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 10
+
+### CS-704 — tier 1 — draft, anchor
+
+**Base**
+
+> A shirt costs 20 euros. The price is reduced by 25 %. What is the new price in euros?
+
+Answer: **15** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 15
+
+### CS-705 — tier 1 — draft, anchor
+
+**Base**
+
+> It takes 3 minutes to boil one egg in a pot of boiling water. How long does it take to boil 3 eggs at the same time in the same pot?
+
+Answer list: 1 minute · **3 minutes** ✔ · 6 minutes · 9 minutes (fixed order)
+
+*Note: trap: 9*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (number):
+  > It takes 3 minutes to boil one egg in a pot of boiling water. How many minutes does it take to boil 3 eggs at the same time in the same pot?
+  answer: 3
+
+### CS-706 — tier 1 — draft, anchor
+
+**Base**
+
+> A straight rope is cut into 4 pieces. Each cut goes once straight through the rope. How many cuts were made?
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### CS-707 — tier 2 — draft
+
+**Base**
+
+> A straight fence is 20 metres long. There is a post every 4 metres, including one post at each end. How many posts are there?
+
+Answer: **6** (number)
+
+*Note: trap: 5*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+- `distractor` — distractor, free answer (number):
+  > A straight fence is 20 metres long. It was built in 2019 by three workers and painted green. There is a post every 4 metres, including one post at each end. How many posts are there?
+  answer: 6
+
+### CS-708 — tier 2 — draft
+
+**Base**
+
+> Anna is 4 years old. Her brother is three times as old as she is. How old will her brother be when Anna is 12?
+
+Answer: **20** (number)
+
+*Note: trap: 36*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 20
+
+### CS-709 — tier 1 — draft, anchor
+
+**Base**
+
+> A pizza is cut into 8 equal slices. Tom eats a quarter of the pizza and Lisa eats 3 slices. How many slices are left?
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### CS-710 — tier 3 — draft
+
+**Base**
+
+> A car drives 60 km at 60 km/h and then another 60 km at 30 km/h. What is its average speed for the whole trip, in km/h?
+
+Answer: **40** (number)
+
+*Note: trap: 45*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 40
+
+### CS-711 — tier 3 — draft
+
+**Base**
+
+> 3 cats catch 3 mice in 3 minutes. Assuming all cats work at the same constant rate, how many cats are needed to catch 100 mice in 100 minutes?
+
+Answer: **3** (number)
+
+*Note: trap: 100*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### CS-712 — tier 2 — draft
+
+**Base**
+
+> A shop raises the price of a lamp by 10 % and later lowers the new price by 10 %. Compared to the original price, the final price is:
+
+Answer list: higher · **lower** ✔ · the same · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-713 — tier 1 — draft, anchor
+
+**Base**
+
+> In a group of 30 people, two thirds are adults. Half of the adults wear glasses. How many adults do not wear glasses?
+
+Answer: **10** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 10
+
+### NEW-015 — tier 3 — draft
+
+**Base**
+
+> A church clock strikes 6 times at 6 o'clock. From the first strike to the last strike this takes exactly 10 seconds. How many seconds does it take from the first strike to the last strike at 11 o'clock, when the clock strikes 11 times at the same rhythm?
+
+Answer: **20** (number)
+
+*Note: 6 strikes have 5 gaps of 2 s; 11 strikes have 10 gaps = 20 s; trap: 18.3 (rule of three)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 20
+
+### NEW-016 — tier 3 — draft
+
+**Base**
+
+> It takes 12 minutes to saw a wooden beam into 4 pieces. Every cut goes straight across the beam and takes the same time. How many minutes does it take to saw an identical beam into 8 pieces?
+
+Answer: **28** (number)
+
+*Note: 4 pieces = 3 cuts of 4 min; 8 pieces = 7 cuts = 28 min; trap: 24*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 28
+
+### NEW-017 — tier 3 — draft
+
+**Base**
+
+> Walking at a steady pace, Maya needs 30 seconds to climb the stairs from the 1st floor to the 4th floor. All floors are the same height. At the same pace, how many seconds does she need from the 1st floor to the 8th floor?
+
+Answer: **70** (number)
+
+*Note: 3 flights in 30 s, 7 flights in 70 s; trap: 60*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 70
+
+### NEW-018 — tier 2 — draft
+
+**Base**
+
+> 3 hens lay 3 eggs in 3 days. At the same rate, how many eggs do 6 hens lay in 6 days?
+
+Answer: **12** (number)
+
+*Note: one hen lays one egg in 3 days; 6 hens x 2 eggs = 12; trap: 6*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 12
+
+### NEW-019 — tier 2 — draft
+
+**Base**
+
+> Tom stands in a queue. He is the 5th person counted from the front and the 7th person counted from the back. How many people are in the queue, including Tom?
+
+Answer: **11** (number)
+
+*Note: 4 in front + Tom + 6 behind = 11; trap: 12*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 11
+
+### NEW-020 — tier 3 — draft
+
+**Base**
+
+> A train that is 200 m long travels at a constant 20 metres per second. It passes through a tunnel that is 600 m long. How many seconds pass from the moment the front of the train enters the tunnel until the last carriage has completely left the tunnel?
+
+Answer: **40** (number)
+
+*Note: the front must travel 600 + 200 = 800 m: 40 s; trap: 30*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 40
+
+### NEW-021 — tier 3 — draft
+
+**Base**
+
+> A bathtub has two taps. The first tap alone fills the empty tub in 20 minutes, the second tap alone fills it in 30 minutes. With the drain closed, how many minutes does it take to fill the empty tub when both taps are fully open?
+
+Answer: **12** (number)
+
+*Note: 1/20 + 1/30 = 1/12 of the tub per minute; traps: 25 (average), 50 (sum)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 12
+
+### NEW-022 — tier 3 — draft
+
+**Base**
+
+> A square garden has sides of 20 metres. A fence runs around the whole garden, with a post at each of the four corners and further posts so that neighbouring posts are always 4 metres apart. How many posts does the fence have in total?
+
+Answer: **20** (number)
+
+*Note: closed loop: 80 m / 4 m = 20 posts (no extra end post, unlike the straight fence of CS-707); traps: 24, 21*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 20
+
+### NEW-023 — tier 2 — draft
+
+**Base**
+
+> A straight road is 100 metres long. On both sides of the road stands a row of trees: one tree every 10 metres, including one at each end of the road. How many trees are there in total?
+
+Answer: **22** (number)
+
+*Note: 11 per side, 22 in total; traps: 20, 11*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 22
+
+### NEW-024 — tier 2 — draft
+
+**Base**
+
+> A guest checks into a hotel on 28 March and checks out on 3 April of the same year. How many nights does he stay?
+
+Answer: **6** (number)
+
+*Note: nights of 28, 29, 30, 31 March and 1, 2 April = 6; traps: 5 (30-day March), 7*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+
+### NEW-025 — tier 2 — draft
+
+**Base**
+
+> A fruit drink is mixed from 1 part syrup and 4 parts water. How many millilitres of syrup are needed for exactly 1 litre of the finished drink?
+
+Answer: **200** (number)
+
+*Note: 5 parts in total, 1000 / 5 = 200 ml; trap: 250*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 200
+
+### NEW-026 — tier 3 — draft
+
+**Base**
+
+> A painter writes the house numbers 1 to 50 on the doors of a street, one number per door. How many single digits does he paint in total?
+
+Answer: **91** (number)
+
+*Note: 9 one-digit numbers + 41 two-digit numbers = 9 + 82 = 91; traps: 100, 50*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 91
+
+### NEW-027 — tier 3 — draft
+
+**Base**
+
+> Two candles of the same height are lit at the same moment. Candle A burns down completely in 6 hours, candle B in 3 hours, both at a steady rate. After how many hours is candle A exactly twice as tall as candle B?
+
+Answer: **2** (number)
+
+*Note: after 2 h A has 2/3 and B has 1/3 of its height; traps: 1.5, 3*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### NEW-028 — tier 2 — draft
+
+**Base**
+
+> Tom buys a used bicycle for 100 euros and sells it for 120 euros. Later he buys the same bicycle back for 140 euros and finally sells it again for 160 euros. How many euros of profit has he made in total?
+
+Answer: **40** (number)
+
+*Note: two separate deals with 20 euros profit each; traps: 20, 60*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 40
+
+### NEW-029 — tier 2 — draft
+
+**Base**
+
+> Leo's school is 2 km from his home. He starts walking to school, notices exactly halfway that he has forgotten his lunch, walks back home to fetch it and then walks all the way to school. How many kilometres does he walk in total?
+
+Answer: **4** (number)
+
+*Note: 1 + 1 + 2 = 4 km; traps: 3, 6*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### NEW-030 — tier 3 — draft
+
+**Base**
+
+> A train leaves town A at 9:00 and travels towards town B at 80 km/h. Another train leaves town B at 10:00 and travels towards town A at 100 km/h on the same line. At what time do the two trains meet?
+
+Answer list: at 11:00 · at 11:30 · at 12:00 · **cannot be determined** ✔ (fixed order)
+
+*Note: the distance between A and B is not given; trap: computing a time anyway*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-031 — tier 2 — draft
+
+**Base**
+
+> Consider these six statements: (1) 7 is larger than 5. (2) A week has 8 days. (3) Ice is colder than boiling water. (4) Monday comes directly after Tuesday. (5) A triangle has three sides. (6) 12 minus 5 is 8. How many of the six statements are true?
+
+Answer: **3** (number)
+
+*Note: true: 1, 3, 5*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T4-042 — tier 4 — draft, tier4, type-E
+
+**Base**
+
+> At a meeting 10 people greet one another: everybody shakes hands exactly once with every other person. Mr Kaya is one of the ten. In how many handshakes does Mr Kaya himself take part?
+
+Answer list: **9** ✔ · 10 · 20 · 45 · 90 (fixed order)
+
+*Note: Solution: 9, one with each of the other nine people. Unique: the question asks about one participant. Tempting: 45 (the total number of handshakes, the classic question). Why a strong model may fail: the wording up to the last sentence is the classic handshake problem with the answer 45.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-043 — tier 4 — draft, tier4, type-E
+
+**Base**
+
+> Tom usually reads 20 pages a day. His new novel has 300 pages. He reads the first page on 1 March, reads some pages on every single day, and finishes the last page on 10 March. How many pages per day did Tom read on average while he was reading this novel?
+
+Answer list: 15 · 20 · **30** ✔ · 33 · 300 (fixed order)
+
+*Note: Solution: 30. He read 300 pages on the 10 days from 1 to 10 March. Unique: start and end date are given and every day counts. Tempting: 20 (his usual rate) or 15 (300 / 20, the number of days the usual rate would need). Why a strong model may fail: '20 pages a day' and '300 pages' form the familiar task 'how many days does he need'; the question asks for something else.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+## char
+
+### CS-050 — tier 1 — tokenization
+
+**Base**
+
+> How many times does the letter "e" occur in the word "nevertheless"?
+
+Answer: **4** (number)
+
+*Note: measures tokenization rather than reasoning; keep out of the core score*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### CS-051 — tier 1 — draft, anchor
+
+**Base**
+
+> How many letters does the word "banana" have?
+
+Answer: **6** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+
+### CS-052 — tier 1 — draft, anchor
+
+**Base**
+
+> If you write the word "level" backwards, do you get the same word?
+
+Answer list: **yes** ✔ · no (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 2 options
+
+### CS-053 — tier 1 — draft, anchor
+
+**Base**
+
+> How many words are in this sentence: "The quick brown fox jumps over the lazy dog"?
+
+Answer: **9** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 9
+
+### NEW-145 — tier 2 — draft, tokenization
+
+**Base**
+
+> Write the word "stressed" backwards, letter by letter. Which English word do you get? Answer with the word.
+
+Answer: **desserts** (text)
+
+*Note: tokenization task*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: desserts
+
+### NEW-146 — tier 2 — draft, tokenization
+
+**Base**
+
+> How many times does the letter "s" occur in the word "possessiveness"?
+
+Answer: **6** (number)
+
+*Note: tokenization task: po-ss-e-ss-ivene-ss*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+
+### NEW-147 — tier 2 — draft, tokenization
+
+**Base**
+
+> Sort these five words alphabetically: pear, plum, pepper, pea, peach. Which word comes third? Answer with the word.
+
+Answer: **pear** (text)
+
+*Note: pea, peach, pear, pepper, plum*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: pear
+
+### NEW-148 — tier 2 — draft, tokenization
+
+**Base**
+
+> What is the 7th letter of the word "understanding"? Answer with the letter.
+
+Answer: **t** (text)
+Also accepted (free answer): letter t
+
+*Note: u-n-d-e-r-s-t*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: t | letter t
+
+### NEW-149 — tier 3 — draft, tokenization
+
+**Base**
+
+> Take the word BLUEBERRY and delete every second letter, that is, the 2nd, 4th, 6th and 8th letter. Which sequence of letters remains? Answer as one word.
+
+Answer: **BUBRY** (text)
+
+*Note: B-U-B-R-Y*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: BUBRY
+
+## logic
+
+### CS-030 — tier 1 — underdetermined
+
+**Base**
+
+> Anna is taller than Ben. Clara is taller than Ben. Who is the tallest of the three?
+
+Answer list: Anna · Ben · Clara · **cannot be determined** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-031 — tier 2 — ordering
+
+**Base**
+
+> Five runners finish a race with no ties. Alex finishes before Bo. Eli finishes directly behind Alex. Dana finishes after Bo but before Cy. Who finishes in third place?
+
+Answer list: Alex · **Bo** ✔ · Cy · Dana · Eli
+
+*Note: order: Alex, Eli, Bo, Dana, Cy*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Five runners finish a race with no ties. Alex finishes before Bo. Eli finishes directly behind Alex. Dana finishes after Bo but before Cy. Who finishes in third place? Answer with the name.
+  answer: Bo
+
+### CS-032 — tier 1 — calendar, anchor
+
+**Base**
+
+> If the day before yesterday was Tuesday, what day will the day after tomorrow be?
+
+Answer list: Thursday · Friday · **Saturday** ✔ · Sunday
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > If the day before yesterday was Tuesday, what day will the day after tomorrow be? Answer with the day of the week.
+  answer: Saturday
+
+### CS-401 — tier 1 — draft, anchor
+
+**Base**
+
+> All cats in the shelter are vaccinated. Tom is a cat in the shelter. Is Tom vaccinated?
+
+Answer list: **yes** ✔ · no · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### CS-402 — tier 1 — draft, anchor
+
+**Base**
+
+> Peter is older than Anna. Anna is older than Max. Who is the youngest?
+
+Answer list: Peter · Anna · **Max** ✔ · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Peter is older than Anna. Anna is older than Max. Who is the youngest? Answer with the name.
+  answer: Max
+
+### CS-403 — tier 1 — draft, anchor
+
+**Base**
+
+> Whenever it rains, the street in front of my house gets wet. Right now the street in front of my house is completely dry. Is it raining right now?
+
+Answer list: yes · **no** ✔ · cannot be determined (fixed order)
+
+*Note: Reworded after calibration: 'this morning ... dry' did not rule out earlier rain that had dried.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### CS-404 — tier 1 — draft, anchor
+
+**Base**
+
+> A bag contains only red balls. You take one ball out without looking. What colour is it?
+
+Answer list: **red** ✔ · blue · green · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-405 — tier 3 — draft
+
+**Base**
+
+> Three boxes are labelled "apples", "oranges" and "mixed". Every label is wrong. You take one fruit from the box labelled "mixed" and it is an apple. What does the box labelled "oranges" contain?
+
+Answer list: apples · oranges · **a mixture of apples and oranges** ✔ · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-406 — tier 2 — draft
+
+**Base**
+
+> Five friends run a race with no ties. Omar finishes first. Kim finishes after Max but before Lou. Nia finishes after Lou. Who finishes last?
+
+Answer list: Kim · Lou · Max · **Nia** ✔ · Omar
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Five friends run a race with no ties. Omar finishes first. Kim finishes after Max but before Lou. Nia finishes after Lou. Who finishes last? Answer with the name.
+  answer: Nia
+
+### CS-407 — tier 2 — draft
+
+**Base**
+
+> Some members of a club play chess. All members of the club who play chess also play go. Does every member of the club play go?
+
+Answer list: yes · no · **cannot be determined** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### CS-408 — tier 2 — draft
+
+**Base**
+
+> Everyone in a room speaks English or French or both. 8 people speak English, 6 people speak French and 3 people speak both languages. How many people are in the room?
+
+Answer: **11** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 11
+
+### CS-409 — tier 3 — draft
+
+**Base**
+
+> Each of A, B and C either always tells the truth or always lies. A says: "B is lying." B says: "C is lying." C says: "A and B are both lying." Who tells the truth?
+
+Answer list: only A · **only B** ✔ · only C · A and C · nobody (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### NEW-039 — tier 2 — draft
+
+**Base**
+
+> Every student who passed the exam went on the class trip. Paul did not go on the class trip. Did Paul pass the exam?
+
+Answer list: yes · **no** ✔ · cannot be determined (fixed order)
+
+*Note: contrapositive: not on the trip -> not passed*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+- `converse-mcq` — original, multiple choice, 3 options:
+  > Every student who passed the exam went on the class trip. Lea went on the class trip. Did Lea pass the exam?
+  options: A. yes · B. no · C. cannot be determined ✔
+  *note: students who failed may have gone too; trap: yes (converse error)*
+
+### NEW-040 — tier 3 — draft
+
+**Base**
+
+> It is not true that Tom did not fail to attend the meeting. Did Tom attend the meeting?
+
+Answer list: yes · **no** ✔ · cannot be determined (fixed order)
+
+*Note: 'did not fail to attend' = attended; this is denied, so he did not attend; trap: yes*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### NEW-041 — tier 3 — draft
+
+**Base**
+
+> Mia is the daughter of Tom. Tom is the brother of Eva. Eva is the mother of Jan. Jan is the father of Lili. What is Tom to Lili?
+
+Answer list: her uncle · **her great-uncle** ✔ · her grandfather · her cousin · her great-grandfather
+
+*Note: Tom is the brother of Lili's grandmother Eva; trap: uncle*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### NEW-042 — tier 3 — draft, bruteforce-checked
+
+**Base**
+
+> Four children were alone in the kitchen, and exactly one of them ate the cake. Ida says: "It was Jan." Jan says: "It was Lea." Kai says: "It was not me." Lea says: "Jan is lying." Exactly one of these four statements is true. Who ate the cake?
+
+Answer list: Ida · Jan · **Kai** ✔ · Lea (fixed order)
+
+*Note: only with Kai as the culprit is exactly one statement (Lea's) true*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Four children were alone in the kitchen, and exactly one of them ate the cake. Ida says: "It was Jan." Jan says: "It was Lea." Kai says: "It was not me." Lea says: "Jan is lying." Exactly one of these four statements is true. Who ate the cake? Answer with the name.
+  answer: Kai
+- `onefalse-mcq` — original, multiple choice, 4 options:
+  > Four children were alone in the kitchen, and exactly one of them ate the cake. Ida says: "It was Jan." Jan says: "It was Lea." Kai says: "It was not me." Lea says: "Jan is lying." Exactly one of these four statements is false. Who ate the cake?
+  options: A. Ida · B. Jan ✔ · C. Kai · D. Lea
+  *note: only with Jan as the culprit is exactly one statement (Jan's) false*
+
+### NEW-043 — tier 3 — draft, bruteforce-checked
+
+**Base**
+
+> Six people stand in a queue at a ticket counter. Cem stands directly in front of Dua. Exactly two people stand between Ada and Finn. Ben stands somewhere behind Eva. Eva is not at the front. Finn stands directly behind Ben. Ada stands further forward than Cem. Who is in fourth place, counted from the front?
+
+Answer list: Ada · Ben · Cem · Dua · Eva · **Finn** ✔ (fixed order)
+
+*Note: unique order (checked by exhaustive search): Ada, Eva, Ben, Finn, Cem, Dua*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > Six people stand in a queue at a ticket counter. Cem stands directly in front of Dua. Exactly two people stand between Ada and Finn. Ben stands somewhere behind Eva. Eva is not at the front. Finn stands directly behind Ben. Ada stands further forward than Cem. Who is in fourth place, counted from the front? Answer with the name.
+  answer: Finn
+
+### NEW-044 — tier 3 — draft, bruteforce-checked
+
+**Base**
+
+> Five talks are given from Monday to Friday, one talk per day, by Ali, Bea, Cy, Dee and Eli. Bea speaks earlier in the week than Ali. Cy speaks on the day directly after Dee. Eli speaks neither on Monday nor on Friday. Ali speaks exactly two days before Cy. Who speaks on Wednesday?
+
+Answer list: **Ali** ✔ · Bea · Cy · Dee · Eli (fixed order)
+
+*Note: unique schedule (checked by exhaustive search): Bea, Eli, Ali, Dee, Cy*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Five talks are given from Monday to Friday, one talk per day, by Ali, Bea, Cy, Dee and Eli. Bea speaks earlier in the week than Ali. Cy speaks on the day directly after Dee. Eli speaks neither on Monday nor on Friday. Ali speaks exactly two days before Cy. Who speaks on Wednesday? Answer with the name.
+  answer: Ali
+
+### NEW-045 — tier 3 — draft, bruteforce-checked
+
+**Base**
+
+> Four houses stand in a row and are numbered 1 to 4 from left to right. In each house lives one person (Anna, Bela, Chris, Dora) with one pet (cat, dog, fish, bird); every pet occurs once. Chris lives in house 3. The dog lives in the house directly to the left of Anna's house. The fish lives in one of the two end houses. Dora lives directly next to the house with the cat. Anna owns neither the bird nor the fish. Bela does not own the bird and does not live in house 1. Who owns the fish?
+
+Answer list: Anna · **Bela** ✔ · Chris · Dora (fixed order)
+
+*Note: unique solution (checked by exhaustive search): 1 Dora/dog, 2 Anna/cat, 3 Chris/bird, 4 Bela/fish*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Four houses stand in a row and are numbered 1 to 4 from left to right. In each house lives one person (Anna, Bela, Chris, Dora) with one pet (cat, dog, fish, bird); every pet occurs once. Chris lives in house 3. The dog lives in the house directly to the left of Anna's house. The fish lives in one of the two end houses. Dora lives directly next to the house with the cat. Anna owns neither the bird nor the fish. Bela does not own the bird and does not live in house 1. Who owns the fish? Answer with the name.
+  answer: Bela
+
+### NEW-046 — tier 2 — draft, bruteforce-checked
+
+**Base**
+
+> Six parcels P, Q, R, S, T and U all have different weights. Q is heavier than S but lighter than R. T is heavier than R. U is lighter than S. P is heavier than Q but lighter than R. Which parcel is the third lightest? Answer with its letter.
+
+Answer: **Q** (text)
+Also accepted (free answer): parcel Q
+
+*Note: from heaviest to lightest: T, R, P, Q, S, U; trap: P (third heaviest)*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Q | parcel Q
+
+### NEW-047 — tier 2 — draft
+
+**Base**
+
+> In a class of 20 pupils, 12 play football and 11 play chess. 3 pupils play neither football nor chess. How many pupils play both?
+
+Answer: **6** (number)
+
+*Note: 17 play at least one game; 12 + 11 - 17 = 6*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+
+### NEW-048 — tier 3 — draft
+
+**Base**
+
+> What is the smallest number of people that must be in a room so that you can be absolutely certain that at least two of them were born on the same day of the week?
+
+Answer: **8** (number)
+
+*Note: 7 people could all have different weekdays; trap: 7 or 2*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### T4-040 — tier 4 — draft, tier4, type-E
+
+**Base**
+
+> A rapid test for a rare infection gives the correct result in 99 % of all cases, for infected and for healthy people alike. 1 % of the population are infected. Anna's rapid test is positive. Two days later the hospital examines her blood with a laboratory method that is never wrong, and the result shows without any doubt that Anna is not infected. What is the probability that Anna is infected?
+
+Answer list: **0 %** ✔ · 1 % · about 9 % · about 50 % · 99 % (fixed order)
+
+*Note: Solution: 0 %. The laboratory method is never wrong and says she is not infected. Unique: 'never wrong', 'without any doubt'. Tempting: about 50 % (the textbook base-rate result for the rapid test) or 99 %. Why a strong model may fail: the first three sentences are the standard base-rate problem, and its well-known answer is among the options.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-041 — tier 4 — draft, tier4, type-E
+
+**Base**
+
+> It is well known that in a group of 23 randomly chosen people the probability that at least two of them have their birthday on the same day of the year is about 50 %. Class 7b has exactly 23 pupils, among them the twin sisters Mia and Lea, who were born on the same afternoon. What is the probability that at least two pupils of class 7b have their birthday on the same day of the year?
+
+Answer list: about 6 % · about 50 % · about 54 % · **100 %** ✔ (fixed order)
+
+*Note: Solution: 100 %. The twins already are two pupils with the same birthday. Unique: born on the same afternoon. Tempting: about 50 % (the birthday paradox quoted in the text). Why a strong model may fail: the first sentence supplies the memorized result for exactly 23 people.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### T7-015 — tier 7 — draft, tier7, counterfactual-reexecution
+
+**Base**
+
+> A bakery starts with 4 plain rolls and 2 cheese rolls. Customers act in this order, each buying the first available choice in their own rule. Ada buys 3 plain rolls if that many remain; otherwise she buys 1 cheese roll if available. Ben buys 2 cheese rolls if that many remain; otherwise he buys 2 plain rolls if available. Cleo buys 2 plain rolls if available; otherwise she buys 1 cheese roll if available. Dev buys 1 cheese roll if available; otherwise he buys 1 plain roll if available. If neither choice is available, that customer buys nothing. Each customer leaves immediately after their own turn. Imagine exactly the same morning except that Ada never comes. Everyone else still follows their rule using the stock that actually remains at their turn. How many plain rolls remain after Dev leaves in this changed morning? Answer with a number.
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### T7-017 — tier 7 — draft, tier7, inverse-action-history
+
+**Base**
+
+> Three jugs named Oak, Pine and Ash have capacities 9, 6 and 4 litres. Initially Oak contains 9 litres, and the others are empty. A pour continues until its source is empty or its destination is full, whichever happens first; a pour from an empty jug or into a full jug does nothing. Six people have instructions in this order: Ada pours Oak into Pine; Ben pours Oak into Ash; Cleo pours Pine into Ash; Dev pours Ash into Oak; Eli pours Pine into Ash; Fay pours Ash into Pine. Exactly one person is absent and their pour is omitted. Everyone else performs their instructed pour, in order, using the amounts actually present then. At the end Oak contains 3 litres, Pine 6 litres and Ash 0 litres. Who was absent? Answer with the first name.
+
+Answer: **Cleo** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Cleo
+
+### T7-018 — tier 7 — draft, tier7, inverse-action-history
+
+**Base**
+
+> A wooden strip has six squares, numbered 1 to 6 from its original left end. It starts entirely white. Ada paints squares 1,2,3 red. Ben paints squares 3,4,5 blue. Cleo turns the strip end for end. Dev paints the two squares at the current left end yellow. Eli paints the square currently second from the right green. Fay turns the strip end for end. All coats are opaque and dry before the next action; positions such as second from the right refer to the strip as it lies at that moment. Exactly one of these six people misses their turn, while the others carry out their actions in the stated order. Looking from left to right after the last scheduled turn, the colours are yellow, yellow, blue, blue, green, red. Who missed their turn? Answer with the first name.
+
+Answer: **Fay** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Fay
+
+### T7-019 — tier 7 — draft, tier7, inverse-measurement
+
+**Base**
+
+> A digital kitchen scale has a ZERO button: pressing it stores the current total load as the reference, and later readings show current load minus that reference, even if negative. An empty tray weighs 300 g. It is put on the scale, and the scale is correctly zeroed. Ada adds a 200 g tin. Ben presses ZERO. Cleo adds a 500 g jar. Dev removes the tin. Eli presses ZERO. Fay removes the jar. Gus adds a 100 g cup. Exactly one of Ben and Eli forgets to press ZERO; every other action happens exactly as stated, and the scale does not reset itself. The final reading is -400 g. Who forgot? Answer with the first name.
+
+Answer: **Ben** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Ben
+
+### T7-020 — tier 7 — draft, tier7, order-sensitive-cause
+
+**Base**
+
+> A packing bench has three open boxes: red contains 6 tokens, blue contains 2, and green contains none. Ada's job is to move half of the tokens currently in red into blue. Ben's job is to empty blue into green. Cleo's job is to move 1 token from green into red. Dev's job is to empty red into blue. The scheduled order is Ada, Ben, Cleo, Dev. In fact, exactly one pair of neighbours in that scheduled order exchange their turns; all four jobs are still done exactly once, and every transfer is possible. No other changes occur. The final counts are red 0, blue 7, green 1. Which person acted immediately before Ada? Answer with the first name.
+
+Answer: **Ben** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Ben
+
+### T8-016 — tier 8 — draft, tier8, inverse-orientation-history
+
+**Base**
+
+> A transparent square panel initially has red at NW, blue at NE, green at SW and gold at SE. The colours can be seen identically through either face. Five people are scheduled to handle it in order. Ada turns it over about a north-south axis. Ben rotates it a quarter turn clockwise on the table. Cleo turns it over about a north-south axis. Dev rotates it a quarter turn clockwise on the table. Eli rotates it a half turn on the table. All axes are room-relative through the panel's centre, and all clockwise turns are viewed from above. Exactly one person does nothing; the others perform their own actions on the panel as it then lies. At the end, viewed from above, blue is at NW and gold is at NE. Who did nothing? Answer with the first name.
+
+Answer: **Ben** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Ben
+
+### T8-017 — tier 8 — draft, tier8, inverse-stamp-registration
+
+**Base**
+
+> A square stamp is initially held with its printing face UP. From above, its four corner dots are red at NW, blue at NE, green at SW and gold at SE. Its owner rotates it clockwise on the table by an unknown number of quarter turns: zero, one, two or three. Keeping that orientation, she turns it face down about a north-south axis and prints onto an aligned square card. She lifts the stamp away and rotates only the card a quarter turn counterclockwise. The card's northeast corner is then covered by an opaque label. Of the remaining dots, red is at SW and blue at SE. How many clockwise quarter turns did she initially give the face-up stamp? Answer with a number.
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### T8-018 — tier 8 — draft, tier8, wrong-copy-source
+
+**Base**
+
+> A master sheet has a 3-by-3 colour grid. Its rows from north to south are red/blue/green, gold/white/black, orange/pink/purple. Number positions 1 to 9 across rows. The master is never rotated or permanently altered. Covers hide whole squares during copying; a hidden square becomes an empty, uncoloured square in the copy. Covers are removed from the source afterwards. Ada covers master positions 1,2,4, makes a copy, and rotates her copy a quarter turn clockwise. Ben is meant to copy Ada's sheet while covering positions 2,3,6, then rotate his new copy clockwise. Cleo is meant to copy Ben's sheet while covering positions 6,8,9, then rotate her new copy clockwise. Dev is meant to copy Cleo's sheet while covering positions 4,7,8, without rotating the result. Positions always refer to the source as it currently lies, and all stated rotations are quarter turns. Exactly one of Ben, Cleo and Dev uses the unchanged master instead of their assigned source, but still applies their own covers and rotation. Dev's final copy has orange/gold/red across its north row. Who used the wrong source? Answer with the first name.
+
+Answer: **Cleo** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Cleo
+
+### T8-025 — tier 8 — draft, tier8, inverse-adaptive-folds
+
+**Base**
+
+> A strip has eight equal panels labelled 1 to 8 from west to east. Panel identity can be read from either face. Ada is supposed to fold the eastern half of the CURRENT packet OVER its western half. Ben is then supposed to fold the western half of the CURRENT packet OVER its eastern half. Cleo is then supposed to fold the eastern half of the CURRENT packet OVER its western half. Exactly one person skips their fold. The other two each fold their current packet in half as instructed; they do not use a crease chosen in advance. Nobody rotates the packet on the table. The final packet is two panels wide and four layers thick. The exposed upper panel at its eastern position is panel 7. Who skipped their fold? Answer with the first name.
+
+Answer: **Ada** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Ada
+
+### T9-032 — tier 9 — tier9, easy-problems
+
+**Base**
+
+> How many pairs of twins do you need in a room for there to be at least a 50 % chance that two people have the same birthday? Answer with a number.
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### T9-057 — tier 9 — draft, tier9, logic-grid, computed
+
+**Base**
+
+> Five allotment gardens lie side by side in a row, numbered 1 to 5 from left to right as seen from the path in front of them. Each garden belongs to a different person (Anton, Berta, Carl, Dora, Emil), grows mainly one vegetable (beans, carrots, leeks, onions, pumpkins) and has a shed of a different colour (brown, grey, black, orange, purple). The following is known: (1) The garden with the beans is directly to the left of the garden with the black shed. (2) Exactly one garden lies between the garden with the pumpkins and Anton's garden. (3) The garden with the grey shed is not Anton's garden. (4) The garden with the purple shed is directly next to the garden with the carrots. (5) Exactly one garden lies between the garden with the grey shed and the garden with the purple shed. (6) The garden with the brown shed is directly next to Carl's garden. (7) The garden with the leeks is somewhere to the left of Dora's garden, but not directly next to it. (8) The garden with the brown shed is not Dora's garden. (9) The garden with the orange shed is directly to the left of the garden with the leeks. (10) The garden with the carrots is directly next to Emil's garden. (11) The garden with the onions is Emil's garden. Which vegetable grows in the garden with the purple shed? Answer with one word.
+
+Answer: **beans** (text)
+
+*Note: Solution (position: owner, item, colour): 1: Carl, pumpkins, orange; 2: Berta, leeks, brown; 3: Anton, beans, purple; 4: Dora, carrots, black; 5: Emil, onions, grey. Why unique: exhaustive search over all 1,728,000 assignments leaves exactly this one, and no single clue states the asked pair. Tempting wrong answer: none in particular; any value that is consistent with a few clues only. Why a strong model may fail (untested): nothing is narrated, there is no sequence to follow; the clues must be combined by case analysis with backtracking.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: beans
+
+### T9-059 — tier 9 — draft, tier9, round-table, computed
+
+**Base**
+
+> Six people sit at a round table on six evenly spaced chairs, all facing the centre of the table. 'To the right of X' always means on X's own right-hand side. (1) Clara sits directly to the left of David. (2) Clara is the second person to the right of Felix. (3) Bruno and David do not sit next to each other. (4) Felix sits directly to the right of Ada. Who sits directly to the left of Eva? Answer with one name.
+
+Answer: **David** (text)
+
+*Note: Solution: clockwise seen from above the order is Ada, Eva, David, Clara, Bruno, Felix. Facing the centre, a person's left-hand neighbour is the next one clockwise. Why unique: all 120 seatings (up to rotation) were checked; exactly one satisfies the clues, and the asked neighbour is not stated directly. Tempting wrong answer: Ada (the neighbour on the other side). Why a strong model may fail (untested): constraint solving on a circle where left and right are relative to each person.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: David
+
+### T9-061 — tier 9 — draft, tier9, round-table, computed, frame-conversion
+
+**Base**
+
+> Six children sit on a small round playground carousel, evenly spaced, with their backs to the centre: each of them faces outwards. 'To the right of X' always means on X's own right-hand side. (1) Rosa sits directly to the left of Pit. (2) Going clockwise as seen from above, Olga is the second person after Mona. (3) Sven is the second person to the right of Nils. (4) Olga and Rosa do not sit next to each other. Who sits directly to the left of Rosa? Answer with one name.
+
+Answer: **Sven** (text)
+
+*Note: Solution: clockwise seen from above the order is Mona, Nils, Olga, Sven, Rosa, Pit. Facing OUTWARDS, a person's left-hand neighbour is the next one counterclockwise (the opposite of people facing the centre of a table). Why unique: all 120 seatings were checked. Tempting wrong answer: Pit (using the usual round-table rule for people facing inwards). Why a strong model may fail (untested): in tier 5 both test models failed circles facing outwards; here that frame is combined with constraint solving.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Sven
+
+### T9-098 — tier 9 — draft, tier9, kinship, computed
+
+**Base**
+
+> Lea has 2 sisters and 1 brother. Her mother has exactly one sister and two brothers. The mother's sister has no children; she has 5 nephews and 6 nieces in total. Lea's father has exactly one brother and two sisters. This brother has 4 nephews and 5 nieces in total and, in addition, 3 daughters of his own and no sons. In this family, 'nephews' and 'nieces' are only the children of a person's own brothers and sisters, and 'cousins' are only the children of the brothers and sisters of one's parents. There are no half-siblings, and nobody has children with a relative. How many cousins does Lea's brother have? Answer with a number.
+
+Answer: **15** (number)
+
+*Note: Solution: Lea's parents have 4 children (1 son, 3 daughters). The childless aunt's 11 nephews and nieces include these 4, so the mother's brothers have 7 children. The father's brother's 9 nephews and nieces also include Lea's 4 siblings-and-self, leaving 5 children of the father's sisters; his own 3 daughters are cousins too. Total 15. Why unique: computed from an explicit family tree. Tempting wrong answer: 23 (nothing subtracted), 19 (subtracted only once) or 12 (uncle's daughters forgotten). Why a strong model may fail (untested): the asked person's own family is hidden twice inside the given totals (the pattern of the hard 'Alice in Wonderland' questions, with new numbers and structure).*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 15
+
+## long_context
+
+### NEW-134 — tier 3 — draft, long-text, object-tracking
+
+**Base**
+
+> On Saturday morning the Berger family got ready for a day trip, and as usual nobody could find anything. At 8:10 Mr Berger came down to the hall, took the car key from the hook next to the mirror and put it into the left pocket of his grey jacket, because he wanted to check the tyre pressure before breakfast. Then he noticed that it was raining, changed his mind, hung the jacket over the back of a kitchen chair and made coffee instead. His daughter Nele, who was looking for her headphones, searched through every pocket of the grey jacket, found a packet of chewing gum, a parking ticket and the car key, kept the chewing gum and dropped the other two things into the blue fruit bowl on the kitchen table. Her brother Jonas came in, complained that the fruit bowl was "full of rubbish again", took out the parking ticket and threw it into the bin, but did not touch anything else. At 8:40 Mrs Berger cleared the kitchen table for breakfast. She carried the fruit bowl, with everything that was in it, to the sideboard in the living room. The grey jacket she took upstairs and hung it in the wardrobe in the bedroom. After breakfast the grandmother phoned for twenty minutes about her neighbour's new dog, a poodle called Bruno. Meanwhile Mr Berger looked for the key: first on the hook in the hall, then in the kitchen, and finally he went upstairs and searched the pockets of the grey jacket, without success. Annoyed, he took the spare key out of the desk drawer in the study, put it into his trouser pocket and went out to the garage to check the tyres after all. Jonas, in the meantime, wanted an apple. He took the fruit bowl from the sideboard, carried it out onto the terrace because the rain had stopped, ate two apples there and left the bowl on the terrace table. Nele finally found her headphones under the sofa. Mrs Berger packed sandwiches, a thermos flask and the road atlas into a basket and asked twice whether everybody had been to the toilet. At 9:30 everybody got into the car, and Mr Berger started the engine with the key from his trouser pocket.
+> 
+> Where is the car key that was hanging on the hook in the hall at 8:10 when the family drives off?
+
+Answer list: on the hook in the hall · in the grey jacket in the bedroom · on the sideboard in the living room · **in the fruit bowl on the terrace** ✔ · in Mr Berger's trouser pocket · on the kitchen table
+
+*Note: hook -> jacket -> fruit bowl (Nele) -> sideboard (inside the bowl) -> terrace (inside the bowl); traps: trouser pocket (that is the spare key), sideboard, jacket*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+
+### NEW-135 — tier 3 — draft, long-text, superseded-information
+
+**Base**
+
+> Minutes of the committee meeting of the Lindenhof gardening club.
+> 
+> Present: Mrs Aydin (chair), Mr Bauer, Ms Costa, Mr Dietrich, Mrs Engel. Mr Falk sent his apologies.
+> 
+> 1. Summer party. The chair proposed Saturday, 14 June, starting at 15:00 on the club meadow. Mr Bauer pointed out that the brass band, which the club would like to book again, is only free on Sundays in June. After a short discussion the party was moved to Sunday, 15 June, at the same time. Ms Costa reminded the committee that the meadow is being reseeded until the end of June and must not be walked on; the party will therefore take place in the yard behind the tool shed. Mr Dietrich asked whether the party could start one hour earlier than proposed, so that families with small children can come; this was agreed. Mrs Engel will order cakes for 60 people, 10 more than last year. For comparison, the secretary noted that last year's party started at 16:00 and ended at 22:00; the entrance fee stays at 3 euros, children are free.
+> 
+> 2. Water. The new water meter will be installed on 3 June. On that day the water will be turned off from 8:00 to 12:00. Members are asked to fill their watering cans the evening before.
+> 
+> 3. Tools. Two spades and the long ladder are missing from the shed. Mr Dietrich will ask the members of plots 12 to 20.
+> 
+> 4. Membership fees. The annual fee stays at 45 euros. Members who help on two work days pay 30 euros. Mrs Engel will send the reminders in August, and the treasurer will report on unpaid fees on 2 July.
+> 
+> 5. Any other business. Shortly before the end of the meeting Mr Bauer received a text message from the band leader: the band has made a mistake in its calendar and could play on 15 June only in the evening, from 18:00, but it would be free all day on Sunday, 22 June. The committee decided unanimously to move the party by one week to 22 June and to leave everything else exactly as agreed under item 1. The chair closed the meeting at 21:10. The next committee meeting is on 2 July at 19:30 in the clubhouse.
+> 
+> Addendum by the secretary, two days later: Mrs Engel reports that the bakery needs the cake order exactly three weeks before the day of the party at the latest.
+> 
+> According to these minutes, where does the summer party take place?
+
+Answer list: on the club meadow · **in the yard behind the tool shed** ✔ · in the clubhouse · it has been cancelled
+
+*Note: the meadow is being reseeded; the later change of date keeps everything else*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `time-free` — original, free answer (text):
+  > Minutes of the committee meeting of the Lindenhof gardening club.
+  > 
+  > Present: Mrs Aydin (chair), Mr Bauer, Ms Costa, Mr Dietrich, Mrs Engel. Mr Falk sent his apologies.
+  > 
+  > 1. Summer party. The chair proposed Saturday, 14 June, starting at 15:00 on the club meadow. Mr Bauer pointed out that the brass band, which the club would like to book again, is only free on Sundays in June. After a short discussion the party was moved to Sunday, 15 June, at the same time. Ms Costa reminded the committee that the meadow is being reseeded until the end of June and must not be walked on; the party will therefore take place in the yard behind the tool shed. Mr Dietrich asked whether the party could start one hour earlier than proposed, so that families with small children can come; this was agreed. Mrs Engel will order cakes for 60 people, 10 more than last year. For comparison, the secretary noted that last year's party started at 16:00 and ended at 22:00; the entrance fee stays at 3 euros, children are free.
+  > 
+  > 2. Water. The new water meter will be installed on 3 June. On that day the water will be turned off from 8:00 to 12:00. Members are asked to fill their watering cans the evening before.
+  > 
+  > 3. Tools. Two spades and the long ladder are missing from the shed. Mr Dietrich will ask the members of plots 12 to 20.
+  > 
+  > 4. Membership fees. The annual fee stays at 45 euros. Members who help on two work days pay 30 euros. Mrs Engel will send the reminders in August, and the treasurer will report on unpaid fees on 2 July.
+  > 
+  > 5. Any other business. Shortly before the end of the meeting Mr Bauer received a text message from the band leader: the band has made a mistake in its calendar and could play on 15 June only in the evening, from 18:00, but it would be free all day on Sunday, 22 June. The committee decided unanimously to move the party by one week to 22 June and to leave everything else exactly as agreed under item 1. The chair closed the meeting at 21:10. The next committee meeting is on 2 July at 19:30 in the clubhouse.
+  > 
+  > Addendum by the secretary, two days later: Mrs Engel reports that the bakery needs the cake order exactly three weeks before the day of the party at the latest.
+  > 
+  > According to these minutes, at what time does the summer party start? Answer as HH:MM.
+  answer: 14:00
+  *note: 15:00, then one hour earlier, unchanged by the move to 22 June; traps: 15:00, 16:00 (last year), 18:00 (band on 15 June)*
+- `order-free` — original, free answer (number):
+  > Minutes of the committee meeting of the Lindenhof gardening club.
+  > 
+  > Present: Mrs Aydin (chair), Mr Bauer, Ms Costa, Mr Dietrich, Mrs Engel. Mr Falk sent his apologies.
+  > 
+  > 1. Summer party. The chair proposed Saturday, 14 June, starting at 15:00 on the club meadow. Mr Bauer pointed out that the brass band, which the club would like to book again, is only free on Sundays in June. After a short discussion the party was moved to Sunday, 15 June, at the same time. Ms Costa reminded the committee that the meadow is being reseeded until the end of June and must not be walked on; the party will therefore take place in the yard behind the tool shed. Mr Dietrich asked whether the party could start one hour earlier than proposed, so that families with small children can come; this was agreed. Mrs Engel will order cakes for 60 people, 10 more than last year. For comparison, the secretary noted that last year's party started at 16:00 and ended at 22:00; the entrance fee stays at 3 euros, children are free.
+  > 
+  > 2. Water. The new water meter will be installed on 3 June. On that day the water will be turned off from 8:00 to 12:00. Members are asked to fill their watering cans the evening before.
+  > 
+  > 3. Tools. Two spades and the long ladder are missing from the shed. Mr Dietrich will ask the members of plots 12 to 20.
+  > 
+  > 4. Membership fees. The annual fee stays at 45 euros. Members who help on two work days pay 30 euros. Mrs Engel will send the reminders in August, and the treasurer will report on unpaid fees on 2 July.
+  > 
+  > 5. Any other business. Shortly before the end of the meeting Mr Bauer received a text message from the band leader: the band has made a mistake in its calendar and could play on 15 June only in the evening, from 18:00, but it would be free all day on Sunday, 22 June. The committee decided unanimously to move the party by one week to 22 June and to leave everything else exactly as agreed under item 1. The chair closed the meeting at 21:10. The next committee meeting is on 2 July at 19:30 in the clubhouse.
+  > 
+  > Addendum by the secretary, two days later: Mrs Engel reports that the bakery needs the cake order exactly three weeks before the day of the party at the latest.
+  > 
+  > On which day of June must the cakes be ordered at the latest? Answer with the day of the month as a number.
+  answer: 1
+  *note: three weeks before 22 June is 1 June; traps: 25 (counted from 15 June), 3 (water meter)*
+
+### NEW-136 — tier 3 — draft, long-text, bookkeeping
+
+**Base**
+
+> Monday at the Kornblume bakery, from the notebook of the apprentice. Everything that is sold is taken from the shelf, and nothing else happens to the shelf than what is written here.
+> 
+> 06:00 – I count the shelf before we open: 48 bread rolls, 14 rye loaves, 10 croissants and 6 apple turnovers.
+> 06:30 – The first tray comes out of the oven: 60 bread rolls and 8 rye loaves. Two of these new loaves are burnt underneath; the boss puts them aside for the pig farmer, so they never reach the shelf.
+> 07:05 – The café next door collects its standing order: 30 bread rolls and 4 croissants.
+> 07:40 – A customer buys 3 rye loaves and comes back a minute later because she only wanted 2; I put one loaf back on the shelf and return her money.
+> 08:15 – School rush: 25 bread rolls and all the apple turnovers are gone within ten minutes.
+> 09:00 – Second tray: 20 croissants and 12 apple turnovers. No bread this time.
+> 09:30 – Mr Okafor phones and orders 5 rye loaves for Thursday. I write it into the order book.
+> 10:10 – A tourist group buys 18 bread rolls, 9 croissants and 1 rye loaf.
+> 11:00 – The boss takes 2 rye loaves from the shelf for the sandwich counter, but a little later she brings one of them back untouched.
+> 12:30 – Lunch customers: 12 bread rolls, 5 apple turnovers and 3 rye loaves.
+> 13:15 – The mill delivers 20 sacks of flour. They go into the store room; nothing changes on the shelf.
+> 14:00 – I drop a basket: 4 bread rolls fall on the floor and have to be thrown away. Luckily the loaves are on the upper shelf.
+> 15:20 – The retirement home fetches 6 rye loaves and 10 bread rolls.
+> 15:50 – A girl buys 2 croissants and 1 apple turnover with her pocket money.
+> 16:10 – The boss takes 6 fresh rye loaves out of the oven for tomorrow's market stall. They are packed straight into the van and are not put on the shelf.
+> 16:45 – A man asks for a rye loaf, but he has forgotten his wallet and leaves without buying anything.
+> 17:30 – Half an hour before closing everything costs half price. We sell 7 bread rolls, 2 rye loaves and 3 croissants.
+> 18:00 – We close. The boss asks me what is still on the shelf.
+> 
+> How many rye loaves are on the shelf at 18:00?
+
+Answer: **5** (number)
+
+*Note: 14 + 6 - 2 - 1 - 1 - 3 - 6 - 2 = 5; traps: the burnt loaves, the returned loaves, the phone order for Thursday, the loaves for the market stall, the customer without a wallet*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+- `rolls-free` — original, free answer (number):
+  > Monday at the Kornblume bakery, from the notebook of the apprentice. Everything that is sold is taken from the shelf, and nothing else happens to the shelf than what is written here.
+  > 
+  > 06:00 – I count the shelf before we open: 48 bread rolls, 14 rye loaves, 10 croissants and 6 apple turnovers.
+  > 06:30 – The first tray comes out of the oven: 60 bread rolls and 8 rye loaves. Two of these new loaves are burnt underneath; the boss puts them aside for the pig farmer, so they never reach the shelf.
+  > 07:05 – The café next door collects its standing order: 30 bread rolls and 4 croissants.
+  > 07:40 – A customer buys 3 rye loaves and comes back a minute later because she only wanted 2; I put one loaf back on the shelf and return her money.
+  > 08:15 – School rush: 25 bread rolls and all the apple turnovers are gone within ten minutes.
+  > 09:00 – Second tray: 20 croissants and 12 apple turnovers. No bread this time.
+  > 09:30 – Mr Okafor phones and orders 5 rye loaves for Thursday. I write it into the order book.
+  > 10:10 – A tourist group buys 18 bread rolls, 9 croissants and 1 rye loaf.
+  > 11:00 – The boss takes 2 rye loaves from the shelf for the sandwich counter, but a little later she brings one of them back untouched.
+  > 12:30 – Lunch customers: 12 bread rolls, 5 apple turnovers and 3 rye loaves.
+  > 13:15 – The mill delivers 20 sacks of flour. They go into the store room; nothing changes on the shelf.
+  > 14:00 – I drop a basket: 4 bread rolls fall on the floor and have to be thrown away. Luckily the loaves are on the upper shelf.
+  > 15:20 – The retirement home fetches 6 rye loaves and 10 bread rolls.
+  > 15:50 – A girl buys 2 croissants and 1 apple turnover with her pocket money.
+  > 16:10 – The boss takes 6 fresh rye loaves out of the oven for tomorrow's market stall. They are packed straight into the van and are not put on the shelf.
+  > 16:45 – A man asks for a rye loaf, but he has forgotten his wallet and leaves without buying anything.
+  > 17:30 – Half an hour before closing everything costs half price. We sell 7 bread rolls, 2 rye loaves and 3 croissants.
+  > 18:00 – We close. The boss asks me what is still on the shelf.
+  > 
+  > How many bread rolls are on the shelf at 18:00?
+  answer: 2
+  *note: 48 + 60 - 30 - 25 - 18 - 12 - 4 - 10 - 7 = 2*
+
+### NEW-137 — tier 3 — draft, long-text, bookkeeping
+
+**Base**
+
+> Tram line 7 runs from the depot to the harbour. This morning the first tram left the depot at 6:02 with only the driver on board; the driver is not counted as a passenger.
+> At Mill Street, the first stop, 9 passengers got on.
+> At Market Square 14 passengers got on and 3 got off.
+> At the Hospital 6 passengers got off and 11 got on. One of the six who had got off was a nurse who had left her bag on her seat; she jumped back on just before the doors closed and rode on (she is not one of the eleven).
+> At Park Lane nobody got on or off: the stop is closed because of roadworks, and the tram drove through without stopping.
+> At the University 17 passengers got off and 5 got on.
+> At the Town Hall the tram waited four minutes because it was early; 8 passengers got on and 2 got off.
+> At the Museum 6 passengers got off and 2 got on; one of the six was a ticket inspector who had got on at Market Square as one of the fourteen.
+> At Bridge Road a school class of 22 children with their 2 teachers got on, and 4 other passengers got off.
+> At the Stadium 1 passenger got off.
+> At the Old Port, the last stop before the terminus, the whole school class with both teachers got off, and 3 passengers got on.
+> At the Harbour terminus all remaining passengers got off, and the driver took a break of twelve minutes.
+> 
+> How many passengers got off the tram at the Harbour terminus?
+
+Answer: **14** (number)
+
+*Note: 9, 20, 26 (the nurse rides on), 26, 14, 20, 16, 36, 35, 14; traps: forgetting the nurse (13), counting the driver (15), counting the inspector separately*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 14
+- `hospital-free` — original, free answer (number):
+  > Tram line 7 runs from the depot to the harbour. This morning the first tram left the depot at 6:02 with only the driver on board; the driver is not counted as a passenger.
+  > At Mill Street, the first stop, 9 passengers got on.
+  > At Market Square 14 passengers got on and 3 got off.
+  > At the Hospital 6 passengers got off and 11 got on. One of the six who had got off was a nurse who had left her bag on her seat; she jumped back on just before the doors closed and rode on (she is not one of the eleven).
+  > At Park Lane nobody got on or off: the stop is closed because of roadworks, and the tram drove through without stopping.
+  > At the University 17 passengers got off and 5 got on.
+  > At the Town Hall the tram waited four minutes because it was early; 8 passengers got on and 2 got off.
+  > At the Museum 6 passengers got off and 2 got on; one of the six was a ticket inspector who had got on at Market Square as one of the fourteen.
+  > At Bridge Road a school class of 22 children with their 2 teachers got on, and 4 other passengers got off.
+  > At the Stadium 1 passenger got off.
+  > At the Old Port, the last stop before the terminus, the whole school class with both teachers got off, and 3 passengers got on.
+  > At the Harbour terminus all remaining passengers got off, and the driver took a break of twelve minutes.
+  > 
+  > How many passengers were on the tram when it left the Hospital stop?
+  answer: 26
+  *note: 20 - 6 + 11 + 1 (the nurse) = 26; trap: 25*
+
+### NEW-138 — tier 3 — draft, long-text, relations
+
+**Base**
+
+> Dear Margot,
+> 
+> thank you for your long letter. You asked how everybody is, so here is the complete family news, and I warn you, it is a lot.
+> 
+> I turned eighty in May, as you know, and all three of my children came: Karin from Hamburg, Stefan from Vienna and Uwe, who still lives two streets away. Karin brought her husband Jörg and their two children. Lena, the elder one, is thirty already, can you imagine, and she came with her husband and with little Emil, their first child, who is eight months old and slept through the whole party on my bed. Her brother Paul, whom we have always called "the professor" because he read the newspaper at the age of five, is now really at the university and studies physics. The professor gave a speech at the party that made everybody cry, including the waiter.
+> 
+> Stefan and his wife Irina could only stay for one night, because the twins, Finn and Greta, had a school concert the next day. The twins are eleven now and played a piece for violin and flute for me. Stefan says they practised for weeks. They are his and Irina's only children, and they are quite enough, he says.
+> 
+> Jörg's brother Rainer also looked in for an hour with his three children. They are Lena's and Paul's cousins, of course, but strictly speaking they are no relations of mine, although the youngest gave me a drawing of a horse that now hangs on my fridge.
+> 
+> Uwe, as you know, never married and has no children, but he has two dogs, Max and Moritz, whom he treats like sons, and of course he brought them along. He is also the godfather of the neighbours' daughter Sophie, who calls me "Granny Ilse" and visits me every Wednesday. I love her dearly, but of course she is not family.
+> 
+> My sister Hanne came with her grandson Tobias, who drove her all the way from Leipzig.
+> 
+> So you see, the house was full: we were twenty-three at the table, and the dogs under it. Next year Karin wants all of us to come to Hamburg.
+> 
+> Love,
+> Ilse
+> 
+> How many grandchildren does Ilse, the writer of this letter, have?
+
+Answer: **4** (number)
+
+*Note: Lena, Paul (= 'the professor'), Finn, Greta; traps: counting Paul twice, Emil (great-grandchild), Rainer's three children, Sophie, Tobias, the dogs*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+- `great-free` — original, free answer (number):
+  > Dear Margot,
+  > 
+  > thank you for your long letter. You asked how everybody is, so here is the complete family news, and I warn you, it is a lot.
+  > 
+  > I turned eighty in May, as you know, and all three of my children came: Karin from Hamburg, Stefan from Vienna and Uwe, who still lives two streets away. Karin brought her husband Jörg and their two children. Lena, the elder one, is thirty already, can you imagine, and she came with her husband and with little Emil, their first child, who is eight months old and slept through the whole party on my bed. Her brother Paul, whom we have always called "the professor" because he read the newspaper at the age of five, is now really at the university and studies physics. The professor gave a speech at the party that made everybody cry, including the waiter.
+  > 
+  > Stefan and his wife Irina could only stay for one night, because the twins, Finn and Greta, had a school concert the next day. The twins are eleven now and played a piece for violin and flute for me. Stefan says they practised for weeks. They are his and Irina's only children, and they are quite enough, he says.
+  > 
+  > Jörg's brother Rainer also looked in for an hour with his three children. They are Lena's and Paul's cousins, of course, but strictly speaking they are no relations of mine, although the youngest gave me a drawing of a horse that now hangs on my fridge.
+  > 
+  > Uwe, as you know, never married and has no children, but he has two dogs, Max and Moritz, whom he treats like sons, and of course he brought them along. He is also the godfather of the neighbours' daughter Sophie, who calls me "Granny Ilse" and visits me every Wednesday. I love her dearly, but of course she is not family.
+  > 
+  > My sister Hanne came with her grandson Tobias, who drove her all the way from Leipzig.
+  > 
+  > So you see, the house was full: we were twenty-three at the table, and the dogs under it. Next year Karin wants all of us to come to Hamburg.
+  > 
+  > Love,
+  > Ilse
+  > 
+  > How many great-grandchildren does Ilse, the writer of this letter, have?
+  answer: 1
+  *note: only Emil, Lena's child*
+
+### NEW-139 — tier 3 — draft, long-text, rule-application
+
+**Base**
+
+> Lending rules of the Seeberg town library (extract).
+> 
+> 1. Books may be borrowed for 21 days. Films and games may be borrowed for 7 days. The day of borrowing is not counted: an item borrowed on a Tuesday for 7 days is due on the following Tuesday.
+> 2. A loan can be extended once by the same period, unless another reader has reserved the item. The extension is added to the original due date, no matter on which day it is requested.
+> 3. For each item returned late, a fee of 0.50 euros is charged for every opening day after the due date, up to and including the day of return. The library is open from Tuesday to Saturday; Sundays and Mondays are not opening days and are never charged.
+> 4. Children under 14 pay no late fees for books, but they pay the normal late fee for films and games.
+> 5. The late fee for a single item is never higher than 5 euros.
+> 6. Items put into the return box while the library is closed count as returned on the next opening day.
+> 7. Reserving an item costs 1 euro, which is paid when the reserved item is collected.
+> 8. A lost library card is replaced for 3 euros.
+> 
+> Case: Mr Novak, 45 years old, borrowed a film on Tuesday, 4 March. He did not extend the loan. On Sunday, 16 March, in the evening, he put the film into the return box. How many euros does Mr Novak have to pay as a late fee?
+
+Answer: **2.50** (number)
+
+*Note: due Tuesday 11 March; counts as returned on Tuesday 18 March; charged days: Wed 12, Thu 13, Fri 14, Sat 15, Tue 18 = 5 x 0.50; traps: 2.00 (return on Sunday), 3.50 (Sunday and Monday charged)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2.50
+- `child-free` — original, free answer (number):
+  > Lending rules of the Seeberg town library (extract).
+  > 
+  > 1. Books may be borrowed for 21 days. Films and games may be borrowed for 7 days. The day of borrowing is not counted: an item borrowed on a Tuesday for 7 days is due on the following Tuesday.
+  > 2. A loan can be extended once by the same period, unless another reader has reserved the item. The extension is added to the original due date, no matter on which day it is requested.
+  > 3. For each item returned late, a fee of 0.50 euros is charged for every opening day after the due date, up to and including the day of return. The library is open from Tuesday to Saturday; Sundays and Mondays are not opening days and are never charged.
+  > 4. Children under 14 pay no late fees for books, but they pay the normal late fee for films and games.
+  > 5. The late fee for a single item is never higher than 5 euros.
+  > 6. Items put into the return box while the library is closed count as returned on the next opening day.
+  > 7. Reserving an item costs 1 euro, which is paid when the reserved item is collected.
+  > 8. A lost library card is replaced for 3 euros.
+  > 
+  > Case: Lina, 12 years old, borrowed a game on Tuesday, 4 March. On 6 March she extended the loan once; nobody had reserved the game. She returned the game at the desk on Saturday, 22 March. How many euros does Lina have to pay as a late fee?
+  answer: 2.00
+  *note: due 11 March, extended to Tuesday 18 March; late on Wed 19, Thu 20, Fri 21, Sat 22 = 4 x 0.50 = 2.00; traps: 0 (children are exempt only for books), 4.50 (extension ignored), 3.50 (extension counted from the day of the request)*
+
+### NEW-140 — tier 3 — draft, long-text, theory-of-mind
+
+**Base**
+
+> On Monday the team of a small architecture office was told by e-mail that Thursday's client presentation would take place in the large meeting room on the second floor at 10:00. Everybody read that e-mail.
+> 
+> On Tuesday morning the office manager, Mrs Roth, learned that the large meeting room would be repainted on Thursday. She booked the library on the ground floor instead and announced the change at the Tuesday lunch meeting. Daniel, Farida and Olga were at that lunch. Ben was at the dentist, and Petra was on a train to a building site in Kassel, from where she came back late on Wednesday night; neither of them heard the announcement.
+> 
+> On Tuesday afternoon Farida met Ben at the coffee machine and told him about the new room. Ben thanked her and said: "Good to know, I would have gone upstairs." Nobody told Petra, because everybody assumed that somebody else had done it. Petra did not look at the room booking system; she never does.
+> 
+> On Wednesday afternoon Daniel and Farida carried the cardboard model of the building and the projector down to the library and tested the slides there. Ben helped them for a few minutes. Petra's desk stayed empty all day.
+> 
+> On Wednesday evening the painters called: they were ill and would come a week later. Mrs Roth, who was already at home, decided that it was too late to change everything again and left the booking as it was, so the presentation stays in the library. She sent no message to anybody.
+> 
+> On Thursday at 9:50 Olga, who had worked from home since Wednesday morning, phoned Daniel and asked whether there was anything new. Daniel said: "No, nothing has changed since Tuesday lunch." At 9:55 the client arrived at the reception desk, where Mrs Roth welcomed him.
+> 
+> To which place does Petra most likely go at 10:00 on Thursday for the presentation?
+
+Answer list: **to the large meeting room on the second floor** ✔ · to the library on the ground floor · to the reception desk · to the building site in Kassel (fixed order)
+
+*Note: Petra only knows Monday's e-mail; trap: the library (where the presentation really is)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `ben-mcq` — original, multiple choice, 4 options:
+  > On Monday the team of a small architecture office was told by e-mail that Thursday's client presentation would take place in the large meeting room on the second floor at 10:00. Everybody read that e-mail.
+  > 
+  > On Tuesday morning the office manager, Mrs Roth, learned that the large meeting room would be repainted on Thursday. She booked the library on the ground floor instead and announced the change at the Tuesday lunch meeting. Daniel, Farida and Olga were at that lunch. Ben was at the dentist, and Petra was on a train to a building site in Kassel, from where she came back late on Wednesday night; neither of them heard the announcement.
+  > 
+  > On Tuesday afternoon Farida met Ben at the coffee machine and told him about the new room. Ben thanked her and said: "Good to know, I would have gone upstairs." Nobody told Petra, because everybody assumed that somebody else had done it. Petra did not look at the room booking system; she never does.
+  > 
+  > On Wednesday afternoon Daniel and Farida carried the cardboard model of the building and the projector down to the library and tested the slides there. Ben helped them for a few minutes. Petra's desk stayed empty all day.
+  > 
+  > On Wednesday evening the painters called: they were ill and would come a week later. Mrs Roth, who was already at home, decided that it was too late to change everything again and left the booking as it was, so the presentation stays in the library. She sent no message to anybody.
+  > 
+  > On Thursday at 9:50 Olga, who had worked from home since Wednesday morning, phoned Daniel and asked whether there was anything new. Daniel said: "No, nothing has changed since Tuesday lunch." At 9:55 the client arrived at the reception desk, where Mrs Roth welcomed him.
+  > 
+  > To which place does Ben most likely go at 10:00 on Thursday for the presentation?
+  options: A. to the large meeting room on the second floor · B. to the library on the ground floor ✔ · C. to the reception desk · D. to the building site in Kassel
+  *note: control: Farida told Ben*
+
+### NEW-141 — tier 3 — draft, long-text, route
+
+**Base**
+
+> How to find the Clockwork Museum from the railway station. Leave the station through the main exit; when you step out of it you are facing south, and the taxi rank is directly in front of you. Walk straight ahead across the square to the fountain with the three stone fish. At the fountain turn left and walk along Baker Street, past the bakery with the blue awning and the bicycle shop, until you reach the traffic lights. There a tram line crosses your way; the trams run east and west, so do not be confused by them. At the traffic lights turn right and cross the old stone bridge over the river. Directly after the bridge the road bends sharply to the right, by a full quarter turn; simply follow the bend. Walk on until you see a church with a green tower on your left-hand side. At the church turn left into Lantern Lane. Most visitors now walk too far: after about a hundred metres you reach a flower shop, and that means you have missed the entrance to the alley. Turn around there and walk back about twenty metres. Now Tinsmith Alley branches off to your right; turn right into it. The alley is narrow and paved with cobblestones. At its end, on your left-hand side, is the museum. Turn left to face its red entrance door. The museum is open from ten to five and is closed on Mondays.
+> 
+> If you follow this description exactly, in which compass direction are you facing when you stand in front of the red entrance door and look at it?
+
+Answer list: **north** ✔ · east · south · west (fixed order)
+
+*Note: south, left -> east, right -> south, bend right -> west, left -> south, turn around -> north, right -> east, left -> north; trap: skipping the turn-around gives south*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > How to find the Clockwork Museum from the railway station. Leave the station through the main exit; when you step out of it you are facing south, and the taxi rank is directly in front of you. Walk straight ahead across the square to the fountain with the three stone fish. At the fountain turn left and walk along Baker Street, past the bakery with the blue awning and the bicycle shop, until you reach the traffic lights. There a tram line crosses your way; the trams run east and west, so do not be confused by them. At the traffic lights turn right and cross the old stone bridge over the river. Directly after the bridge the road bends sharply to the right, by a full quarter turn; simply follow the bend. Walk on until you see a church with a green tower on your left-hand side. At the church turn left into Lantern Lane. Most visitors now walk too far: after about a hundred metres you reach a flower shop, and that means you have missed the entrance to the alley. Turn around there and walk back about twenty metres. Now Tinsmith Alley branches off to your right; turn right into it. The alley is narrow and paved with cobblestones. At its end, on your left-hand side, is the museum. Turn left to face its red entrance door. The museum is open from ten to five and is closed on Mondays.
+  > 
+  > If you follow this description exactly, in which compass direction are you facing when you stand in front of the red entrance door and look at it? Answer with north, east, south or west.
+  answer: north
+- `bridge-mcq` — original, multiple choice, 4 options:
+  > How to find the Clockwork Museum from the railway station. Leave the station through the main exit; when you step out of it you are facing south, and the taxi rank is directly in front of you. Walk straight ahead across the square to the fountain with the three stone fish. At the fountain turn left and walk along Baker Street, past the bakery with the blue awning and the bicycle shop, until you reach the traffic lights. There a tram line crosses your way; the trams run east and west, so do not be confused by them. At the traffic lights turn right and cross the old stone bridge over the river. Directly after the bridge the road bends sharply to the right, by a full quarter turn; simply follow the bend. Walk on until you see a church with a green tower on your left-hand side. At the church turn left into Lantern Lane. Most visitors now walk too far: after about a hundred metres you reach a flower shop, and that means you have missed the entrance to the alley. Turn around there and walk back about twenty metres. Now Tinsmith Alley branches off to your right; turn right into it. The alley is narrow and paved with cobblestones. At its end, on your left-hand side, is the museum. Turn left to face its red entrance door. The museum is open from ten to five and is closed on Mondays.
+  > 
+  > If you follow this description exactly, in which compass direction are you walking while you cross the old stone bridge?
+  options: A. north · B. east · C. south ✔ · D. west
+  *note: south, left -> east, right at the traffic lights -> south*
+
+### NEW-142 — tier 3 — draft, long-text, time-zones
+
+**Base**
+
+> Ines travels from Lisbon to Helsinki to visit her brother. All times in her travel plan are local times. Lisbon time is one hour behind Frankfurt time, and Helsinki time is one hour ahead of Frankfurt time.
+> 
+> Her alarm clock rings at 4:30. The taxi comes at 5:15 and needs 25 minutes to the airport. Boarding for her first flight closes 20 minutes before departure, and her seat is 14C. Her first flight leaves Lisbon at 7:10 and takes 3 hours and 5 minutes to Frankfurt. In Frankfurt her plan allows 1 hour and 35 minutes between landing and the departure of her second flight. The second flight is scheduled to take 2 hours and 30 minutes to Helsinki. From Helsinki airport a train runs to the central station at 10 and at 40 minutes past every hour; the ride takes 30 minutes. Ines needs 45 minutes from the moment of landing until she stands on the train platform, because of the long walk and the luggage. Her brother lives ten minutes on foot from the central station.
+> 
+> On the day of the journey everything goes exactly as planned until Frankfurt. There the second flight takes off 50 minutes late, but it makes up 10 minutes in the air, so the flight is 10 minutes shorter than scheduled.
+> 
+> At what local time does Ines arrive at Helsinki central station? Answer as HH:MM.
+
+Answer: **18:40** (text)
+
+*Note: lands in Frankfurt 11:15, departs 13:40, lands in Helsinki 17:00 local, on the platform 17:45, train 18:10, arrival 18:40; traps: 17:40 (time zones ignored or wrong train), 18:10*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 18:40
+- `landing-free` — original, free answer (text):
+  > Ines travels from Lisbon to Helsinki to visit her brother. All times in her travel plan are local times. Lisbon time is one hour behind Frankfurt time, and Helsinki time is one hour ahead of Frankfurt time.
+  > 
+  > Her alarm clock rings at 4:30. The taxi comes at 5:15 and needs 25 minutes to the airport. Boarding for her first flight closes 20 minutes before departure, and her seat is 14C. Her first flight leaves Lisbon at 7:10 and takes 3 hours and 5 minutes to Frankfurt. In Frankfurt her plan allows 1 hour and 35 minutes between landing and the departure of her second flight. The second flight is scheduled to take 2 hours and 30 minutes to Helsinki. From Helsinki airport a train runs to the central station at 10 and at 40 minutes past every hour; the ride takes 30 minutes. Ines needs 45 minutes from the moment of landing until she stands on the train platform, because of the long walk and the luggage. Her brother lives ten minutes on foot from the central station.
+  > 
+  > On the day of the journey everything goes exactly as planned until Frankfurt. There the second flight takes off 50 minutes late, but it makes up 10 minutes in the air, so the flight is 10 minutes shorter than scheduled.
+  > 
+  > At what local time does the second flight land in Helsinki? Answer as HH:MM.
+  answer: 17:00
+  *note: 13:40 Frankfurt time + 2 h 20 min = 16:00 Frankfurt time = 17:00 in Helsinki*
+
+### NEW-143 — tier 3 — draft, long-text, scene
+
+**Base**
+
+> On Sunday the Wilson family drove to Lake Arden for a picnic. On Saturday evening Emma had prepared everything: she made 12 cheese sandwiches and 8 ham sandwiches, wrapped each one in paper and put all of them into the big green cool box, together with 6 bottles of lemonade and a bag of 10 apples. She also packed paper plates, a knife, salt and a thermos flask of coffee into a wicker basket, which Noah carried to the car straight away. Her husband Noah put the picnic blanket, the football and the folding chairs into the boot of the car that same evening. On Sunday morning the children, Mia (9) and Leo (6), could not agree who was allowed to sit behind the driver, the cat escaped into the garden and had to be caught, and in the end the family left forty minutes later than planned. Emma carried the cool box as far as the hall, put it down next to the shoe cabinet in order to lock the terrace door, and then everybody got into the car and drove off; the cool box was still standing next to the shoe cabinet when they came home that evening.
+> 
+> The drive to the lake took 1 hour and 20 minutes. On the way Noah stopped at a petrol station and bought a newspaper and 4 chocolate bars. At the lake they found a nice place under an old oak tree, spread out the blanket and played football for a while. At half past twelve everybody was hungry. Mia said that she wanted 3 sandwiches, Leo wanted 2, and Noah announced that he could easily eat 5. They drank the coffee from the thermos flask, and a friendly family under the next tree gave the children 2 bananas. In the afternoon they swam, built a dam in the little stream and drove home at five o'clock.
+> 
+> How many of the sandwiches that Emma had made did the family eat at the lake?
+
+Answer: **0** (number)
+
+*Note: the cool box with all the sandwiches stayed in the hall at home; trap: 10 (3 + 2 + 5)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 0
+- `lookup-free` — original, free answer (number), tier 1:
+  > On Sunday the Wilson family drove to Lake Arden for a picnic. On Saturday evening Emma had prepared everything: she made 12 cheese sandwiches and 8 ham sandwiches, wrapped each one in paper and put all of them into the big green cool box, together with 6 bottles of lemonade and a bag of 10 apples. She also packed paper plates, a knife, salt and a thermos flask of coffee into a wicker basket, which Noah carried to the car straight away. Her husband Noah put the picnic blanket, the football and the folding chairs into the boot of the car that same evening. On Sunday morning the children, Mia (9) and Leo (6), could not agree who was allowed to sit behind the driver, the cat escaped into the garden and had to be caught, and in the end the family left forty minutes later than planned. Emma carried the cool box as far as the hall, put it down next to the shoe cabinet in order to lock the terrace door, and then everybody got into the car and drove off; the cool box was still standing next to the shoe cabinet when they came home that evening.
+  > 
+  > The drive to the lake took 1 hour and 20 minutes. On the way Noah stopped at a petrol station and bought a newspaper and 4 chocolate bars. At the lake they found a nice place under an old oak tree, spread out the blanket and played football for a while. At half past twelve everybody was hungry. Mia said that she wanted 3 sandwiches, Leo wanted 2, and Noah announced that he could easily eat 5. They drank the coffee from the thermos flask, and a friendly family under the next tree gave the children 2 bananas. In the afternoon they swam, built a dam in the little stream and drove home at five o'clock.
+  > 
+  > How many chocolate bars did Noah buy at the petrol station?
+  answer: 4
+  *note: control: simple lookup in the long text*
+
+### NEW-144 — tier 3 — draft, long-text, simulation
+
+**Base**
+
+> Ada and Ben play a simple board game. The track has squares numbered from 0 (start) to 60. Both pieces start on square 0. The players take turns; Ada begins, then Ben, then Ada again, and so on. The rules are:
+> (a) On your turn you roll one die and move your own piece forward by the number rolled.
+> (b) If you roll a 1, you do not move at all in that turn, and rules (c) and (d) do not apply.
+> (c) If your piece ends its move on a square whose number can be divided by 7 without remainder (7, 14, 21, ...), it immediately moves 3 further squares forward. This bonus is given at most once per turn.
+> (d) If your piece, after rules (a) and (c), stands on the same square as the other player's piece, the other player's piece is sent back to square 0. Square 0 itself is never a multiple of 7 for rule (c), and two pieces on square 0 do not affect each other.
+> 
+> The dice rolls of the game so far, in the order in which they were rolled, are: 2, 4, 6, 5, 4, 3, 5, 2, 4, 5, 5, 1, 1, 6. The first roll was Ada's.
+> 
+> On which square does Ada's piece stand after these rolls? Answer with the number of the square.
+
+Answer: **17** (number)
+
+*Note: Ada: 2, 8, 12, sent back to 0 when Ben lands on 12, then 5, 9, 14 -> 17 (bonus), a rolled 1; Ben: 4, 9, 12, 14 -> 17, 22, a rolled 1, 28 -> 31; traps: forgetting the capture (29), the bonus or the rolled 1*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 17
+- `ben-free` — original, free answer (number):
+  > Ada and Ben play a simple board game. The track has squares numbered from 0 (start) to 60. Both pieces start on square 0. The players take turns; Ada begins, then Ben, then Ada again, and so on. The rules are:
+  > (a) On your turn you roll one die and move your own piece forward by the number rolled.
+  > (b) If you roll a 1, you do not move at all in that turn, and rules (c) and (d) do not apply.
+  > (c) If your piece ends its move on a square whose number can be divided by 7 without remainder (7, 14, 21, ...), it immediately moves 3 further squares forward. This bonus is given at most once per turn.
+  > (d) If your piece, after rules (a) and (c), stands on the same square as the other player's piece, the other player's piece is sent back to square 0. Square 0 itself is never a multiple of 7 for rule (c), and two pieces on square 0 do not affect each other.
+  > 
+  > The dice rolls of the game so far, in the order in which they were rolled, are: 2, 4, 6, 5, 4, 3, 5, 2, 4, 5, 5, 1, 1, 6. The first roll was Ada's.
+  > 
+  > On which square does Ben's piece stand after these rolls? Answer with the number of the square.
+  answer: 31
+  *note: 4, 9, 12 (Ada is sent back), 14 -> 17, 22, no move on the 1, 28 -> 31*
+
+### T4-044 — tier 4 — draft, tier4, type-F, long-text
+
+**Base**
+
+> Subject: Saturday's autumn walk – please read to the end!
+> 
+> Dear walking friends,
+> 
+> here are the details for our autumn walk next Saturday. Thank you to the 17 of you who have signed up; with Gerd and me as leaders we will be 19, so we just fit onto one group ticket (maximum 20 people, 9 euros each).
+> 
+> We meet at 7:50 at the main station under the big clock. Our train leaves at 8:12 from platform 3 and arrives in Bergdorf at 9:05. Please be on time: last year we waited for Rainer until 8:11, and I do not want to see anybody running along the platform again.
+> 
+> In Bergdorf we first have coffee at the station bakery, so we set off on foot at 9:30 sharp. The first leg takes us up through the beech forest to the Kramer hut. I walked it last week with my sister: it took us exactly 2 hours and 30 minutes, including the short stop at the viewing platform. At the hut we have lunch; I have reserved the long table for exactly one hour. The pea soup costs 6.50 euros, and the apple strudel is famous in the whole valley.
+> 
+> After lunch we walk on to Lake Silber, which takes 1 hour and 15 minutes; it is downhill almost all the way. Those who wish can put their feet into the water, but we will not stay: the bus back to Bergdorf station leaves the car park at the lake at 40 minutes past every hour, and the ride takes 25 minutes. Trains from Bergdorf back home leave at 10 minutes past every hour (15:10, 16:10, 17:10 and so on), and the journey takes 53 minutes, exactly as in the morning. As always, we take the first bus we can catch and then the first train we can catch.
+> 
+> A few more things. Sturdy shoes are a must; the path was muddy last week, and Gerd's sister lost a shoe there in 2019. Dogs are welcome on a lead; Hasso is coming again. Ilse will bring her first-aid kit, and Gerd has the map, although he has not needed it in 14 years. The group ticket means that we must all travel on the same trains, so please, nobody leaves early. If you want to bring a guest, tell me by Wednesday; one place is still free.
+> 
+> If it rains heavily, we postpone the walk by one week. I will send an e-mail by Friday at 18:00 at the latest.
+> 
+> Looking forward to a lovely day,
+> Marianne
+> 
+> P.S. Two corrections, sorry! First: Gerd has just phoned the Kramer hut, and it is closed for renovation until spring. So we skip the hut altogether and take the direct path from Bergdorf to the lake instead, which takes 3 hours and 20 minutes; we eat our own sandwiches at the lake and allow exactly one hour for that, just as planned for the lunch. We still set off from the bakery at 9:30. Second: I misread the timetable. On Saturdays the bus from the lake does not run every hour but only every two hours, at 11:40, 13:40, 15:40 and 17:40. Everything else stays as described above.
+> 
+> According to this e-mail including its corrections, at what time does the group arrive back at the main station? Answer as HH:MM.
+
+Answer: **17:03** (text)
+
+*Note: Solution (computed): leave 9:30, at the lake 12:50, lunch until 13:50, next bus 15:40 (the 13:40 has gone), Bergdorf station 16:05, train 16:10, arrival 17:03. Unique: every time is fixed by the text. Tempting: 16:03 (the original plan, or only the first correction applied with hourly buses), 15:03. Why a strong model may fail: two corrections at the very end override facts scattered over the text; the bus correction matters only together with the new walking time.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 17:03
+
+### T4-045 — tier 4 — draft, tier4, type-F, long-text
+
+**Base**
+
+> Notes from the planning evening for the Lindenstrasse street party (written up by Hatice, treasurer)
+> 
+> We were nine people in Uwe's garage and it took three hours, so here is the short version, which is still long.
+> 
+> Date and place: Saturday, 6 September, from 15:00, on the street between house numbers 4 and 22. The council charges 60 euros for closing the street and wants the form by 1 August. Uwe will hand it in personally, because last time the letter got lost.
+> 
+> Tables and benches: we need 12 sets. The fire brigade lends us 8 sets free of charge; the remaining ones we rent from the drinks shop for 9 euros per set. Karl and his sons will fetch and return everything with the trailer.
+> 
+> Music: the band 'Kellerkinder' (Jana's son plays the drums) would play for two hours for 300 euros. Several people found that expensive, but in the end we agreed. Mr Petrow from number 17 offered to play the accordion for nothing; we thanked him warmly.
+> 
+> Bouncy castle: 150 euros for the afternoon, including delivery and collection. The parents from numbers 9 and 14 will supervise in shifts of 30 minutes.
+> 
+> Food: everybody brings salads and cakes, which costs the committee nothing. We buy 120 sausages at 0.80 euros each from the butcher and 15 baguettes at 1.20 euros each from the bakery. Karl lends his big grill; the charcoal costs 18 euros.
+> 
+> Drinks are sold by the drinks shop on its own account, so they do not appear in our budget at all. The same is true of the ice-cream van.
+> 
+> Toilets: number 12 opens its ground-floor bathroom, but that is not enough for 200 visitors, so we rent 2 portable toilets at 35 euros each.
+> 
+> Rubbish: the council lends us three large bins free of charge. Selin's children will collect the deposit bottles afterwards and may keep the deposit for themselves.
+> 
+> Decoration: bunting and balloons for exactly 25 euros from the stationery shop; Selin still has the paper lanterns from last year.
+> 
+> Insurance: the one-day liability policy costs 45 euros. Nobody likes it, everybody agreed.
+> 
+> Raffle: the prizes are donated by the shops in the street. Tickets cost 1 euro each; last year we sold 140. The income from the raffle goes entirely to the kindergarten and therefore does not reduce our costs.
+> 
+> Money: the committee's cash box contains 412.50 euros. Whatever is missing will be collected in a hat at the party.
+> 
+> Update, two days later: three things have changed. (1) The band says that the price it named was for one hour; for the two hours we want it charges 450 euros. We keep the two hours. (2) The butcher sponsors half of the sausages, so we pay for only 60 of the 120. (3) The fire brigade needs two of its table sets for an event of its own and can lend us only 6; the rest we rent from the drinks shop as planned. Everything else is unchanged.
+> 
+> According to these notes including the update, how many euros does the committee have to pay for the street party in total?
+
+Answer: **938** (number)
+
+*Note: Solution (computed): street 60 + tables 6 x 9 = 54 + band 450 + bouncy castle 150 + sausages 60 x 0.80 = 48 + baguettes 18 + charcoal 18 + toilets 70 + decoration 25 + insurance 45 = 938. Unique: every amount is fixed. Tempting: 818 (without the update), totals that include drinks or subtract the raffle income or the cash box. Why a strong model may fail: ten cost items spread over the text, three of them changed by the update, plus four money amounts that do not belong to the costs (raffle, cash box, drinks, ice cream).*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 938
+- `missing-free` — original, free answer (number):
+  > Notes from the planning evening for the Lindenstrasse street party (written up by Hatice, treasurer)
+  > 
+  > We were nine people in Uwe's garage and it took three hours, so here is the short version, which is still long.
+  > 
+  > Date and place: Saturday, 6 September, from 15:00, on the street between house numbers 4 and 22. The council charges 60 euros for closing the street and wants the form by 1 August. Uwe will hand it in personally, because last time the letter got lost.
+  > 
+  > Tables and benches: we need 12 sets. The fire brigade lends us 8 sets free of charge; the remaining ones we rent from the drinks shop for 9 euros per set. Karl and his sons will fetch and return everything with the trailer.
+  > 
+  > Music: the band 'Kellerkinder' (Jana's son plays the drums) would play for two hours for 300 euros. Several people found that expensive, but in the end we agreed. Mr Petrow from number 17 offered to play the accordion for nothing; we thanked him warmly.
+  > 
+  > Bouncy castle: 150 euros for the afternoon, including delivery and collection. The parents from numbers 9 and 14 will supervise in shifts of 30 minutes.
+  > 
+  > Food: everybody brings salads and cakes, which costs the committee nothing. We buy 120 sausages at 0.80 euros each from the butcher and 15 baguettes at 1.20 euros each from the bakery. Karl lends his big grill; the charcoal costs 18 euros.
+  > 
+  > Drinks are sold by the drinks shop on its own account, so they do not appear in our budget at all. The same is true of the ice-cream van.
+  > 
+  > Toilets: number 12 opens its ground-floor bathroom, but that is not enough for 200 visitors, so we rent 2 portable toilets at 35 euros each.
+  > 
+  > Rubbish: the council lends us three large bins free of charge. Selin's children will collect the deposit bottles afterwards and may keep the deposit for themselves.
+  > 
+  > Decoration: bunting and balloons for exactly 25 euros from the stationery shop; Selin still has the paper lanterns from last year.
+  > 
+  > Insurance: the one-day liability policy costs 45 euros. Nobody likes it, everybody agreed.
+  > 
+  > Raffle: the prizes are donated by the shops in the street. Tickets cost 1 euro each; last year we sold 140. The income from the raffle goes entirely to the kindergarten and therefore does not reduce our costs.
+  > 
+  > Money: the committee's cash box contains 412.50 euros. Whatever is missing will be collected in a hat at the party.
+  > 
+  > Update, two days later: three things have changed. (1) The band says that the price it named was for one hour; for the two hours we want it charges 450 euros. We keep the two hours. (2) The butcher sponsors half of the sausages, so we pay for only 60 of the 120. (3) The fire brigade needs two of its table sets for an event of its own and can lend us only 6; the rest we rent from the drinks shop as planned. Everything else is unchanged.
+  > 
+  > According to these notes including the update, how many euros are missing, that is, by how much do the total costs exceed the money in the committee's cash box?
+  answer: 525.50
+  *note: 938 - 412.50 = 525.50; tempting: 405.50 (without the update), 385.50 (raffle income subtracted).*
+
+## math
+
+### MATH-001 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> The price of a television, 250 euros, is first raised by 12 % and later the new price is reduced by 15 %. What is the final price in euros?
+
+Answer: **238** (number)
+
+*Note: 250 x 1.12 = 280, 280 x 0.85 = 238; trap: 242.50 (adding the percentages: -3 %)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 238
+
+### MATH-002 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> A bill shows a total of 357 euros. This amount already includes 19 % value added tax. What is the net amount without the tax, in euros?
+
+Answer: **300** (number)
+
+*Note: 357 / 1.19 = 300; trap: 289.17 (19 % of 357 subtracted)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 300
+
+### MATH-003 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> 400 euros are invested at an interest rate of 5 % per year. The interest is added to the capital at the end of every year (compound interest). How many euros are in the account after exactly 3 years?
+
+Answer: **463.05** (number)
+
+*Note: 400 x 1.05^3 = 463.05; trap: 460 (simple interest)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 463.05
+
+### MATH-004 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> Three friends share a prize of 840 euros in the ratio 2 : 3 : 7. How many euros does the friend with the largest share receive?
+
+Answer: **490** (number)
+
+*Note: 12 parts of 70 euros, 7 parts = 490; trap: 280 (a third)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 490
+
+### MATH-005 — tier 3 — draft, mittelstufe, approach
+
+**Base**
+
+> 6 identical pumps need 15 hours to empty a flooded basement. They all start together, but after 5 hours 2 of the pumps break down and the remaining pumps finish the job alone. How many hours does it take in total to empty the basement?
+
+Answer: **20** (number)
+
+*Note: 90 pump-hours in total, 30 done after 5 h, 60 left for 4 pumps = 15 h more; traps: 22.5, 15*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 20
+
+### MATH-006 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> For a school concert 120 tickets were sold. Adult tickets cost 9 euros and children's tickets cost 5 euros. The total income was 824 euros. How many adult tickets were sold?
+
+Answer: **56** (number)
+
+*Note: 9a + 5(120 - a) = 824, a = 56*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 56
+
+### MATH-007 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> Two cyclists start at the same time from two towns that are 63 km apart and ride towards each other on the same road, one at 16 km/h and the other at 20 km/h. After how many minutes do they meet?
+
+Answer: **105** (number)
+
+*Note: 63 km / 36 km/h = 1.75 h = 105 minutes; trap: 1.75 (hours instead of minutes)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 105
+
+### MATH-008 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> A rectangle has a diagonal of 25 cm, and one of its sides is 7 cm long. What is the area of the rectangle in square centimetres?
+
+Answer: **168** (number)
+
+*Note: other side = sqrt(625 - 49) = 24 cm, area 7 x 24 = 168; trap: 175 (7 x 25)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 168
+
+### MATH-009 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> An aquarium in the shape of a cuboid is 80 cm long and 35 cm wide. It is filled with water up to a height of 30 cm. How many litres of water does it contain?
+
+Answer: **84** (number)
+
+*Note: 84 000 cubic centimetres = 84 litres; trap: 84000*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 84
+
+### MATH-010 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> In a triangle, the second angle is twice as large as the first angle, and the third angle is 30 degrees larger than the first angle. How many degrees does the largest angle of the triangle have?
+
+Answer: **75** (number)
+
+*Note: a + 2a + a + 30 = 180, a = 37.5; angles 37.5, 75 and 67.5; trap: 67.5 or 37.5*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 75
+
+### MATH-011 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> After six tests a pupil has an average of 72 points. After the seventh test her average over all seven tests is 74 points. How many points did she score in the seventh test?
+
+Answer: **86** (number)
+
+*Note: 7 x 74 - 6 x 72 = 518 - 432 = 86; trap: 76*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 86
+
+### MATH-012 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> A bag contains 3 red balls and 2 blue balls. Two balls are drawn at random one after the other, and the first ball is not put back. What is the probability, in percent, that both balls are red?
+
+Answer: **30** (number)
+
+*Note: 3/5 x 2/4 = 0.3 = 30 %; trap: 36 (with replacement)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 30
+
+### MATH-013 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> A four-digit code is formed from the digits 1, 2, 3, 4, 5 and 6, and no digit may be used more than once. How many different codes are possible?
+
+Answer: **360** (number)
+
+*Note: 6 x 5 x 4 x 3 = 360; traps: 1296 (with repetition), 15*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 360
+
+### MATH-014 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> A car uses 6.5 litres of petrol per 100 km. Petrol costs 1.80 euros per litre. How many euros does the petrol for a trip of 340 km cost?
+
+Answer: **39.78** (number)
+
+*Note: 3.4 x 6.5 = 22.1 litres, 22.1 x 1.80 = 39.78*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 39.78
+
+### MATH-015 — tier 3 — draft, mittelstufe, approach
+
+**Base**
+
+> A canister contains 6 litres of a cleaning solution that consists of 40 % concentrate and 60 % water. How many litres of water must be added so that the mixture contains exactly 15 % concentrate?
+
+Answer: **10** (number)
+
+*Note: 2.4 litres of concentrate must be 15 % of the total: 16 litres, so 10 litres are added; trap: 16*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 10
+
+### MATH-016 — tier 2 — draft, mittelstufe, approach
+
+**Base**
+
+> Anna spends two fifths of her money on a book. Then she spends one third of the remaining money on lunch. After that she has 24 euros left. How many euros did she have at the beginning?
+
+Answer: **60** (number)
+
+*Note: remaining share 3/5 x 2/3 = 2/5, and 2/5 of the start is 24 euros; trap: 90*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 60
+
+### MATH-017 — tier 2 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate 347 × 28. Write the result as a plain number without thousands separators.
+
+Answer: **9716** (number)
+
+*Note: 347 x 28 = 9716*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 9716
+
+### MATH-018 — tier 3 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate 738 × 46. Write the result as a plain number without thousands separators.
+
+Answer: **33948** (number)
+
+*Note: 738 x 46 = 29520 + 4428 = 33948*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 33948
+
+### MATH-019 — tier 2 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate 4368 ÷ 56.
+
+Answer: **78** (number)
+
+*Note: 56 x 78 = 4368*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 78
+
+### MATH-020 — tier 2 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate 18 - 6 × (7 - 4)^2 ÷ 9 + 5.
+
+Answer: **17** (number)
+
+*Note: bracket and power first: 6 x 9 / 9 = 6, then 18 - 6 + 5 = 17; traps: 21, 7*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 17
+
+### MATH-021 — tier 2 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate 3/4 + 5/8 - 1/2 and give the result as a decimal number.
+
+Answer: **0.875** (number)
+
+*Note: 6/8 + 5/8 - 4/8 = 7/8 = 0.875*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 0.875
+
+### MATH-022 — tier 2 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate 12.5 × 0.48 + 7.35.
+
+Answer: **13.35** (number)
+
+*Note: 12.5 x 0.48 = 6, plus 7.35 = 13.35*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 13.35
+
+### MATH-023 — tier 2 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate the square root of (13^2 - 5^2) and add 2^5 to it. What is the result?
+
+Answer: **44** (number)
+
+*Note: sqrt(144) = 12, 2^5 = 32, sum 44*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 44
+
+### MATH-024 — tier 2 — draft, mittelstufe, calculation
+
+**Base**
+
+> Calculate 0.6 ÷ 0.025.
+
+Answer: **24** (number)
+
+*Note: 600 / 25 = 24; traps: 2.4, 0.24*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 24
+
+### MATH-025 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> A rectangle has an area of 221 square centimetres, and its length is 4 cm greater than its width. What is the perimeter of the rectangle in centimetres?
+
+Answer: **60** (number)
+
+*Note: w(w + 4) = 221 gives w = 13, sides 13 and 17, perimeter 60*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 60
+
+### MATH-026 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> A culture of bacteria doubles every 3 hours. At the start it contains 500 bacteria. After how many hours does it contain 32 000 bacteria?
+
+Answer: **18** (number)
+
+*Note: 32 000 / 500 = 64 = 2^6, six doublings = 18 hours; trap: 6*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 18
+
+### MATH-027 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> Which real number x solves the equation log2(x) + log2(x - 6) = 4, where log2 is the logarithm to base 2?
+
+Answer: **8** (number)
+
+*Note: x(x - 6) = 16, x^2 - 6x - 16 = 0, x = 8 (x = -2 is not allowed)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### MATH-028 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> 20 % of all e-mails that arrive at a company are spam. A filter marks 75 % of the spam e-mails as spam, but it also wrongly marks 12.5 % of the normal e-mails as spam. An e-mail has been marked as spam. What is the probability, in percent, that it really is spam?
+
+Answer: **60** (number)
+
+*Note: 0.2 x 0.75 = 0.15 and 0.8 x 0.125 = 0.10; 0.15 / 0.25 = 60 %; trap: 75*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 60
+
+### MATH-029 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> A farmer wants to fence a rectangular meadow that lies directly on a straight river. No fence is needed along the river, so only three sides are fenced. He has 80 metres of fence. What is the largest possible area of the meadow in square metres?
+
+Answer: **800** (number)
+
+*Note: A(x) = x(80 - 2x) is largest for x = 20: 20 x 40 = 800; trap: 400 (square with four sides) or 711*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 800
+
+### MATH-030 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> A ball is dropped from a height of 8 metres. After every impact it bounces back up to three quarters of the height from which it has just fallen. How many metres does the ball travel in total until it comes to rest (as the sum of the infinitely many falls and rebounds)?
+
+Answer: **56** (number)
+
+*Note: 8 + 2 x (6 + 4.5 + ...) = 8 + 2 x 6 / (1 - 0.75) = 56; trap: 32 (only the falls)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 56
+
+### MATH-031 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> A fair coin is tossed 5 times. What is the probability, in percent, that it shows heads exactly 3 times?
+
+Answer: **31.25** (number)
+
+*Note: 10 of 32 equally likely outcomes = 31.25 %; trap: 60*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 31.25
+
+### MATH-032 — tier 3 — draft, oberstufe, approach
+
+**Base**
+
+> A committee of 3 people is to be chosen from 5 women and 4 men. How many different committees are possible that contain at least one man?
+
+Answer: **74** (number)
+
+*Note: all committees 84 minus those with women only 10 = 74; trap: 84*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 74
+
+### MATH-033 — tier 3 — draft, oberstufe, calculation
+
+**Base**
+
+> Calculate the definite integral of f(x) = 3x^2 - 2x + 1 from x = 1 to x = 3.
+
+Answer: **20** (number)
+
+*Note: antiderivative x^3 - x^2 + x: 21 - 1 = 20*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 20
+
+### MATH-034 — tier 3 — draft, oberstufe, calculation
+
+**Base**
+
+> Let f(x) = (x^2 + 1)^3. What is the value of the derivative of f at x = 2?
+
+Answer: **300** (number)
+
+*Note: f'(x) = 3(x^2 + 1)^2 x 2x, f'(2) = 3 x 25 x 4 = 300; trap: 75 (inner derivative forgotten)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 300
+
+### MATH-035 — tier 3 — draft, oberstufe, calculation
+
+**Base**
+
+> Calculate the sum of these three logarithms: the logarithm of 64 to base 2, the logarithm of 1/9 to base 3, and the logarithm of 1000 to base 10.
+
+Answer: **7** (number)
+
+*Note: 6 + (-2) + 3 = 7; trap: 11*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 7
+
+### MATH-036 — tier 3 — draft, oberstufe, calculation
+
+**Base**
+
+> Simplify (2^10 × 4^3) ÷ 8^4 and give the result as a whole number.
+
+Answer: **16** (number)
+
+*Note: 2^10 x 2^6 / 2^12 = 2^4 = 16*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 16
+
+## physical
+
+### CS-010 — tier 2
+
+**Base**
+
+> I put a marble into a drinking glass. I cover the glass with a piece of cardboard, turn it upside down, place it on the kitchen table and pull the cardboard out. Then I lift the glass straight up and put it into the cupboard. Where is the marble now?
+
+Answer list: in the glass · in the cupboard, next to the glass · **on the kitchen table** ✔ · on the cardboard · on the floor
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### CS-011 — tier 3 — capacity
+
+**Base**
+
+> Drying 5 shirts on a clothesline in the sun takes 4 hours. The clothesline has room for exactly 10 shirts at a time. Under the same conditions, what is the shortest time needed to dry 30 shirts?
+
+Answer list: 4 hours · 8 hours · **12 hours** ✔ · 20 hours · 24 hours (fixed order)
+
+*Note: traps: 24 (rule of three) and 4 (memorised 'drying is parallel')*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### CS-012 — tier 2
+
+**Base**
+
+> Three identical candles are lit at the same moment. Later they are blown out one after another, each at a different time. Afterwards candle A is 12 cm long, candle B is 7 cm long and candle C is 3 cm long. Which candle was blown out first?
+
+Answer list: **A** ✔ · B · C · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Three identical candles are lit at the same moment. Later they are blown out one after another, each at a different time. Afterwards candle A is 12 cm long, candle B is 7 cm long and candle C is 3 cm long. Which candle was blown out first? Answer with the letter of the candle.
+  answer: A | Candle A
+  *note: 'Candle A' accepted after the first standard run (correct answer was rejected)*
+
+### CS-201 — tier 1 — draft, anchor
+
+**Base**
+
+> A glass of water is left in a freezer at -18 °C overnight. What is most likely in the glass the next morning?
+
+Answer list: **ice** ✔ · warm water · steam · nothing, the glass is empty
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-202 — tier 1 — draft, anchor
+
+**Base**
+
+> Which of these objects floats in a bucket of water?
+
+Answer list: **a wooden spoon** ✔ · an iron nail · a glass marble · a small stone
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-203 — tier 1 — draft, anchor
+
+**Base**
+
+> In a normal room with air, you drop a feather and a hammer at the same moment from the same height. Which one reaches the floor first?
+
+Answer list: **the hammer** ✔ · the feather · both at the same time · cannot be determined (fixed order)
+
+*Note: trap: 'same time' (vacuum / moon experiment)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-204 — tier 3 — draft
+
+**Base**
+
+> A small boat floats in a closed swimming pool. A heavy rock lies in the boat. Someone throws the rock out of the boat into the pool, where it sinks to the bottom. What happens to the water level of the pool?
+
+Answer list: it rises · **it falls** ✔ · it stays the same · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-205 — tier 2 — draft
+
+**Base**
+
+> An ice cube floats in a glass of water that is filled exactly to the brim. What happens when the ice cube has melted completely?
+
+Answer list: the glass overflows · **the water level stays exactly at the brim** ✔ · the water level drops below the brim · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-206 — tier 1 — draft, anchor
+
+**Base**
+
+> You put an unopened can of soda into the freezer and forget it there for two days. What is most likely to happen?
+
+Answer list: **the can bulges or bursts because the liquid expands when it freezes** ✔ · the can shrinks · nothing at all changes · the soda turns into gas
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-207 — tier 2 — draft
+
+**Base**
+
+> A passenger stands in a train that moves at constant speed on a straight, smooth track. She throws a ball straight up. Where does the ball land?
+
+Answer list: **back in her hands** ✔ · behind her · in front of her · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-208 — tier 1 — draft, anchor
+
+**Base**
+
+> A metal spoon and a wooden spoon stand in a pot of boiling water for five minutes. Which handle is more likely to be too hot to hold?
+
+Answer list: **the metal spoon** ✔ · the wooden spoon · both are equally hot · neither gets warm (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-209 — tier 2 — draft
+
+**Base**
+
+> A cup of hot tea and a cup of cold water are placed on a table in a room at 20 °C. After 24 hours, which is warmer?
+
+Answer list: the tea · the water · **both have about the same temperature** ✔ · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-210 — tier 2 — draft
+
+**Base**
+
+> In the living room I put a coin into a cup, place the cup upside down on a plate and carry the plate with the cup into the kitchen. There I lift the cup and put only the cup into the dishwasher. Where is the coin now?
+
+Answer list: in the cup in the dishwasher · **on the plate in the kitchen** ✔ · in the living room · on the kitchen floor
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-211 — tier 1 — draft, anchor
+
+**Base**
+
+> A burning candle is covered with a glass jar that closes tightly on the table. What happens after a while?
+
+Answer list: **the flame goes out** ✔ · the candle burns as before until it is used up · the flame becomes much brighter · the jar melts
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-049 — tier 3 — draft, buoyancy
+
+**Base**
+
+> A small boat floats in a swimming pool. A heavy rock lies in the boat. Someone ties the rock to a short rope and lowers it over the side until it hangs completely under water, held by the rope from the boat, without touching the bottom of the pool. Compared with before, what happens to the water level of the pool?
+
+Answer list: it rises · it falls · **it stays the same** ✔ · cannot be determined (fixed order)
+
+*Note: boat and rock still float as one system and displace their full weight; trap: 'it falls' (memorized answer for the rock thrown overboard, CS-204)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-050 — tier 3 — draft, buoyancy
+
+**Base**
+
+> A block of ice with a small stone frozen inside it floats in a glass of water. The ice melts completely and the stone sinks to the bottom of the glass. Compared with the moment before the ice began to melt, the water level in the glass is now:
+
+Answer list: higher · **lower** ✔ · the same · cannot be determined (fixed order)
+
+*Note: while floating, the stone displaced its weight in water, afterwards only its smaller volume; trap: 'the same' (memorized pure ice cube, CS-205)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-051 — tier 2 — draft
+
+**Base**
+
+> Which weighs more: one litre of liquid water or a solid block of ice with a volume of exactly one litre?
+
+Answer list: **the water** ✔ · the ice · both weigh the same · cannot be determined (fixed order)
+
+*Note: ice is less dense than water (it floats); trap: 'the same' (kilogram-of-feathers reflex, mass conservation of CS-816)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-052 — tier 3 — draft, inertia
+
+**Base**
+
+> A heavy steel ball hangs on a string from the ceiling in the middle of a closed van. The van, which was standing still, suddenly accelerates hard forwards. In which direction does the ball swing, relative to the van?
+
+Answer list: forwards · **backwards** ✔ · to the side · it does not move (fixed order)
+
+*Note: inertia: the ball lags behind*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > A helium balloon on a string is tied to the floor in the middle of a closed van, so that it floats upright. The van, which was standing still, suddenly accelerates hard forwards. In which direction does the balloon lean, relative to the van?
+  options: A. forwards ✔ · B. backwards · C. to the side · D. it does not move
+  *note: the heavier air is pressed to the back, the lighter balloon moves forwards (mirror image of CS-813); trap: backwards*
+
+### NEW-053 — tier 3 — draft, inertia
+
+**Base**
+
+> A spirit level (bubble level) lies on the dashboard of a car and points in the driving direction. The car is driving straight ahead and then brakes hard. In which direction does the air bubble in the spirit level move?
+
+Answer list: towards the front of the car · **towards the back of the car** ✔ · it stays in the middle · to the left (fixed order)
+
+*Note: the liquid surges forwards, the bubble is pushed backwards; trap: towards the front*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-054 — tier 2 — draft
+
+**Base**
+
+> Two identical blocks of ice lie on two plates in a warm room. One block is tightly wrapped in a thick wool blanket, the other is left unwrapped. Which block takes longer to melt completely?
+
+Answer list: **the wrapped block** ✔ · the unwrapped block · both take the same time · cannot be determined (fixed order)
+
+*Note: the blanket insulates against the warm air; trap: 'a blanket warms'*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-055 — tier 2 — draft
+
+**Base**
+
+> A plastic bucket is 30 cm high. It has a hole as large as a coin in its side wall, 10 cm above the bottom. The bucket stands upright on level ground, is filled to the brim with a garden hose and is then left alone. One hour later, roughly how high does the water stand in the bucket?
+
+Answer list: 0 cm (empty) · **about 10 cm** ✔ · about 20 cm · 30 cm (full) (fixed order)
+
+*Note: water runs out only down to the height of the hole*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-056 — tier 3 — draft
+
+**Base**
+
+> You stand 2 metres in front of a flat wall mirror, facing it, and then walk half a metre straight towards the mirror. How far away from you does your mirror image appear to be now, in metres?
+
+Answer: **3** (number)
+
+*Note: you are 1.5 m from the mirror, the image is 1.5 m behind it: 3 m; traps: 1.5, 3.5*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### NEW-057 — tier 2 — draft, gears
+
+**Base**
+
+> Eight gear wheels are arranged in a row so that each gear meshes with the next one. The first gear turns clockwise. In which direction does the eighth gear turn?
+
+Answer list: clockwise · **counterclockwise** ✔ · it cannot turn (fixed order)
+
+*Note: direction alternates; gears with even numbers turn counterclockwise*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### NEW-058 — tier 3 — draft, gears
+
+**Base**
+
+> Three gear wheels lie flat on a table and are arranged in a triangle so that each gear meshes with both of the other two. Someone tries to turn one of the gears clockwise. What happens?
+
+Answer list: all three gears turn clockwise · the other two gears turn counterclockwise · only the gear that is pushed turns · **the gears block each other and none of them can turn** ✔
+
+*Note: the two neighbours would both have to turn counterclockwise, but they mesh with each other; trap: 'the other two turn counterclockwise'*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-059 — tier 3 — draft, gears
+
+**Base**
+
+> Wheel A drives wheel B with a normal, uncrossed belt. Wheel B is fixed on the same axle as gear C, so B and C turn together. Gear C meshes directly with gear D. Gear D drives wheel E with a crossed belt that runs in the shape of a figure eight. Wheel A turns clockwise. In which direction does wheel E turn?
+
+Answer list: **clockwise** ✔ · counterclockwise · it cannot turn (fixed order)
+
+*Note: A cw, B cw (uncrossed belt), C cw (same axle), D ccw (meshing), E cw (crossed belt reverses); trap: counterclockwise*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### NEW-060 — tier 2 — draft
+
+**Base**
+
+> In January, Erik sits on the 30 cm thick ice of a frozen lake at -15 °C. He takes 4 ice cubes out of a bag and puts them on the ice next to his fishing hole. Then he fishes for 20 minutes without touching them. How many ice cubes lie next to the hole when he packs up?
+
+Answer list: 0 · 2 · **4** ✔ · cannot be determined (fixed order)
+
+*Note: nothing melts at -15 °C; control for CS-802 (trap: 0 from over-suspicion)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### T4-001 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Lena buys a pack of 12 small fridge magnets shaped like lemons. At home she presses 7 of them onto the solid oak door of her wardrobe, one on top of each of her 7 holiday postcards, and the other 5 onto the door of her refrigerator, where they hold her shopping lists. On Sunday she decides that the wardrobe deserves more colour, takes 2 magnets from the refrigerator and presses them onto the wardrobe door as well. Nobody else touches the magnets. On Monday morning, how many of the 12 magnets are holding on to a door?
+
+Answer list: 0 · **3** ✔ · 5 · 9 · 12 (fixed order)
+
+*Note: Solution: 3. Magnets do not stick to wood, so every magnet pressed onto the oak wardrobe (7 + 2) falls off; 5 - 2 = 3 remain on the refrigerator. Unique because wood is never magnetic and the fridge magnets are said to hold. Tempting: 12 (all are 'on a door'), 9 (the wardrobe) or 0. Why a strong model may fail: the text describes the magnets as placed and counts them, which invites bookkeeping; the material of the door has to be noticed and applied twice.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-004 — tier 4 — draft, tier4, type-A, control-pair
+
+**Base**
+
+> Rex, a young sheepdog who loves balls, lies next to the lamp post without a leash in front of the bakery while Sam is inside buying rolls. A boy on the pavement kicks a ball, which comes to rest exactly 12 metres away from the lamp post. Rex can sprint at 6 metres per second. Nobody helps him. How long does it take until Rex has the ball in his mouth?
+
+Answer list: after about 1.7 seconds · **after about 2 seconds** ✔ · after about 6 seconds · after about 12 seconds · never – Rex cannot reach the ball (fixed order)
+
+*Note: Control: 12 m at 6 m/s = 2 seconds; here the computed answer is right.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options, tier 2
+- `altered-mcq` — altered, multiple choice, 5 options:
+  > Rex, a young sheepdog who loves balls, is tied to the lamp post with a 2-metre leash in front of the bakery while Sam is inside buying rolls. A boy on the pavement kicks a ball, which comes to rest exactly 12 metres away from the lamp post. Rex can sprint at 6 metres per second. Nobody helps him, and the knot and his collar hold firmly. How long does it take until Rex has the ball in his mouth?
+  options: A. after about 1.7 seconds · B. after about 2 seconds · C. after about 6 seconds · D. after about 12 seconds · E. never – Rex cannot reach the ball ✔
+  *note: Solution: never. The leash is 2 m long and the ball lies 12 m from the post. Unique because knot and collar hold and nobody helps. Tempting: 2 seconds (12 / 6) or 1.7 seconds (10 / 6, 'the leash gives him 2 m'). Why a strong model may fail: distance and speed form a complete rate problem; the leash looks like one more number to subtract.*
+
+### T4-009 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Sofia prints her 10-page report on 10 separate sheets, one page per sheet. Pages 1 to 4, the summary, she staples together in the top left corner; pages 5 to 10 lie loose in a folder. Her boss phones and wants to see only page 2 and page 7 in his office. Sofia has no staple remover at hand and does not want to tear anything, so she takes as few sheets as possible to him and leaves everything else on her desk. How many sheets of paper does she carry to her boss's office?
+
+Answer list: 2 · 4 · **5** ✔ · 6 · 10 (fixed order)
+
+*Note: Solution: 5. Page 2 is stapled to pages 1, 3 and 4, so the whole stapled summary (4 sheets) goes along, plus the loose page 7. Unique: no staple remover, no tearing, as few sheets as possible. Tempting: 2. Why a strong model may fail: 'only page 2 and page 7' answers the question numerically; the staple is a detail of the first sentence.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-011 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> A stream flows at a steady 1 metre per second from the old mill down through the village and on into the lake. Tim stands on the village bridge, 300 metres from the mill, sets a paper boat onto the water and immediately runs up the path along the stream to the mill at 5 metres per second, because he wants to see his boat arrive there. How long after the launch does the paper boat arrive at the mill?
+
+Answer list: after 60 seconds · after 75 seconds · after 240 seconds · after 300 seconds · **it never arrives at the mill** ✔
+
+*Note: Solution: never. The stream flows from the mill to the village, so the boat drifts away from the mill towards the lake. Unique: the direction of flow is stated in the first sentence. Tempting: 300 seconds (300 m / 1 m/s) or 60 seconds (Tim's time). Why a strong model may fail: distance and speed of the boat are given and match perfectly; the direction has to be read from 'from the mill down through the village'.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-016 — tier 4 — draft, tier4, type-A, control-pair
+
+**Base**
+
+> Karl wants a bath. His bathtub holds exactly 150 litres up to the rim. He closes the drain and opens the tap, which delivers 10 litres per minute. After 12 minutes he turns the tap off and gets in. How many litres of water are in the bathtub at that moment?
+
+Answer list: 0 litres · **120 litres** ✔ · 150 litres · 450 litres · 600 litres (fixed order)
+
+*Note: Control: 12 minutes x 10 l = 120 litres; here the computed answer is right.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options, tier 2
+- `altered-mcq` — altered, multiple choice, 5 options:
+  > Karl wants a bath. His bathtub holds exactly 150 litres up to the rim. He closes the drain and opens the tap, which delivers 10 litres per minute. Then the doorbell rings; his neighbour needs help with a wardrobe, and Karl forgets the bath. Exactly 60 minutes after opening the tap he rushes back into the bathroom and turns it off. How many litres of water are in the bathtub at that moment?
+  options: A. 0 litres · B. 120 litres · C. 150 litres ✔ · D. 450 litres · E. 600 litres
+  *note: Solution: 150 litres. The tub is full after 15 minutes; everything after that runs over the rim onto the floor. Unique: capacity 150 l up to the rim, drain closed. Tempting: 600 (60 x 10), 450 (600 - 150). Why a strong model may fail: rate times time gives a clean number; the capacity is mentioned before the story begins.*
+
+### T4-021 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Before a hike Ben fills his 750 ml drinking bottle to the brim. He cannot find the cap, so he pushes the open bottle, with the opening pointing down, into the mesh side pocket of his rucksack and sets off at once. He walks uphill for two hours and normally drinks 250 ml per hour, but this time he is so busy talking that he does not drink at all on the way. How many millilitres of water can Ben drink from his bottle at the summit?
+
+Answer list: **0** ✔ · 250 · 375 · 500 · 750 (fixed order)
+
+*Note: Solution: 0. An open bottle carried upside down empties itself within seconds. Unique: no cap, opening pointing down. Tempting: 750 (he did not drink) or 250 (750 - 500). Why a strong model may fail: the drinking rate and the two hours invite a subtraction, and 'he does not drink at all' seems to protect the full bottle.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-022 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Nora has breakfast in the garden on a windless morning. On the table lies a neat pile of 20 paper napkins. The honey jar has been dripping, and its whole underside is smeared with sticky honey when Nora puts it down on top of the pile. After breakfast she grasps the jar with one hand, carries it into the kitchen and puts it into the cupboard without looking at it. Nobody touches the napkins. How many napkins are most likely lying on the garden table now?
+
+Answer list: 0 · 1 · 18 · **19** ✔ · 20 (fixed order)
+
+*Note: Solution: 19. The top napkin sticks to the honey under the jar and is carried into the kitchen. Unique: sticky underside, napkins are light, no wind, nobody touches them. Tempting: 20 ('nobody touches the napkins'). Why a strong model may fail: the napkins are never mentioned as being moved; only the jar is.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-023 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Mia rides up a 20-metre-long escalator that moves at 0.5 metres per second; she stands still on her step the whole way. Right at the bottom her scarf slips from her shoulders and lands on the step directly behind her, without her noticing. Nobody else is on the escalator. Where is the scarf at the moment when Mia steps off at the top?
+
+Answer list: still at the bottom of the escalator · about halfway up the escalator · 20 metres behind Mia · **on the step directly behind Mia, just arriving at the top** ✔ · already carried back down to the bottom
+
+*Note: Solution: on the step behind her. The scarf lies on a step, and the steps move with her. Unique: it landed on the step and nobody touches it. Tempting: at the bottom ('where it fell') or 20 m behind her. Why a strong model may fail: length and speed suggest computing 40 seconds and a distance; the scarf is 'left behind' in everyday language but not physically.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-024 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> At 10:00, at low tide, three children build 6 sandcastles on the wet sand, 2 metres from the water's edge, and decorate each of them with 4 shells. The tide table at the kiosk says: high tide at 16:00; the sea then reaches all the way up to the foot of the dunes, 40 metres further up the beach. The family goes to lunch and to the playground and comes back to the same spot at 18:30, when the water has gone out again. How many of the sandcastles are still standing?
+
+Answer list: **0** ✔ · 2 · 3 · 6 · 24 (fixed order)
+
+*Note: Solution: 0. The castles stood 2 m from the water and the high tide covered the beach 40 m further up; sandcastles do not survive that. Unique: the tide table is explicit about how far the water comes. Tempting: 6. Why a strong model may fail: nothing in the text says that anything happens to the castles; the numbers (6 castles, 4 shells) invite 6 or 24.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T5-031 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> Ms Brandt decorates her classroom. With small round magnets she fixes 9 pupils' drawings to the steel whiteboard and 6 drawings to the cork pinboard next to it, one magnet per drawing. The next morning she fixes 4 more drawings to the whiteboard and 5 more to the cork pinboard in the same way. During the week 3 drawings are taken down from the whiteboard and given back to the pupils. No pins, tape or glue are used anywhere. How many drawings are held on a board by a magnet at the end of the week? Give the number.
+
+Answer: **10** (number)
+
+*Note: Solution: 10. Magnets hold on the steel whiteboard (9 + 4 - 3 = 10) but not on cork, so the 11 drawings 'fixed' to the pinboard fall down. Unique: no pins, tape or glue. Tempting: 21 (all drawings) or 11. Why a strong model may fail: the same pattern as T4-001, which both test models failed: a material property that is not stated, inside a bookkeeping task.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 10
+
+### T5-032 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> For the school fete the caretaker ties 20 balloons to the fence of the sports field: 12 that he has filled from a helium cylinder and 8 that the pupils have blown up with their mouths. On the windless afternoon some children untie all 20 strings for fun and let the balloons go. No balloon bursts or gets caught anywhere. In the evening the caretaker walks across the field to pick up the balloons that are lying on the grass. How many balloons does he find there? Give the number.
+
+Answer: **8** (number)
+
+*Note: Solution: 8. The helium balloons rise into the sky; the balloons filled with breath sink to the ground. Unique: no wind, nothing bursts or gets caught. Tempting: 20 or 0. Why a strong model may fail: the two fillings are mentioned only as a detail of how the balloons were prepared.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### T5-033 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> From the upstream side of a wooden footbridge four cousins throw things into the slowly flowing stream and then run to the other railing to watch them come out from under the bridge: Ole throws 3 dry sticks, Ida 2 pine cones, Max 4 round pebbles and Lina her 2 metal toy cars. The stream is about a metre deep, and nothing gets stuck under the bridge. How many of these things come floating out on the other side? Give the number.
+
+Answer: **5** (number)
+
+*Note: Solution: 5. Sticks and pine cones float; pebbles and metal toy cars sink to the bottom. Unique. Tempting: 11. Why a strong model may fail: the task reads as an addition of four numbers.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### T5-034 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> For his birthday party on a hot July afternoon Jan buys a box of 10 ice lollies. At home only 3 of them fit into the crammed freezer; the other 7 stay in the shopping bag on the sunny balcony, where he forgets them. Three hours later his 6 guests have finished the cake, and Jan wants to hand each guest one properly frozen ice lolly, first from the freezer and then from the bag. How many guests get a frozen ice lolly? Give the number.
+
+Answer: **3** (number)
+
+*Note: Solution: 3. After three hours in the July sun the 7 lollies in the bag are liquid; only the 3 from the freezer are frozen. Unique. Tempting: 6 (10 lollies are enough for 6 guests). Why a strong model may fail: 10 is more than 6, so the comparison seems to settle the question.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T5-035 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> Tom's bowl of steaming hot soup contains 7 meatballs and 12 slices of carrot. Because the soup is far too hot to eat, he drops in 4 ice cubes from the freezer and then takes a phone call. Ten minutes later, when the soup is pleasantly warm, he lifts every solid piece out of the bowl with his spoon, one at a time, and counts aloud. Which number does he reach? Give the number.
+
+Answer: **19** (number)
+
+*Note: Solution: 19. The ice cubes have melted in the hot soup; 7 + 12 pieces remain. Unique. Tempting: 23. Why a strong model may fail: the ice cubes are introduced as countable pieces like the others.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 19
+
+### T5-041 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> The garden is on fire at one corner, and the children carry water from the pond to the flames. On every trip Tim carries two full 10-litre buckets, Mia a full 12-litre watering can, Leo the wicker laundry basket, which holds 40 litres, filled to the top at the pond, and Ida a 5-litre kitchen colander, also filled to the top at the pond. The way is 60 metres long, and each child makes 3 trips. How many litres of water arrive at the fire in total? Give the number.
+
+Answer: **96** (number)
+
+*Note: Solution: 96. Buckets and watering can hold water: (20 + 12) x 3 = 96 litres. The water runs out of a wicker basket and out of a colander long before 60 metres are covered. Unique. Tempting: 231 ((20 + 12 + 40 + 5) x 3). Why a strong model may fail: four capacities and a multiplication; two of the containers are not watertight, which is not said.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 96
+
+### T5-046 — tier 5 — draft, tier5, type-new, generated
+
+**Base**
+
+> An old machine in a museum has 10 wheels, numbered 1 to 10, all mounted on the same wall and all seen from the same side. They are connected like this: wheel 1 is a gear whose teeth mesh directly with the teeth of wheel 2; wheel 2 drives wheel 3 with a crossed belt that runs in the shape of a figure eight; wheel 3 drives wheel 4 with a crossed belt that runs in the shape of a figure eight; wheel 4 is a gear whose teeth mesh directly with the teeth of wheel 5; wheel 5 is fixed on the same axle as wheel 6, so the two turn together; wheel 6 drives wheel 7 with a crossed belt that runs in the shape of a figure eight; wheel 7 drives wheel 8 with a normal, uncrossed belt; wheel 8 drives wheel 9 with a crossed belt that runs in the shape of a figure eight; wheel 9 is a gear whose teeth mesh directly with the teeth of wheel 10. A visitor turns wheel 1 clockwise. In which direction does wheel 10 turn? Answer with one word: clockwise or counterclockwise.
+
+Answer: **counterclockwise** (text)
+Also accepted (free answer): anticlockwise | counter-clockwise | anti-clockwise
+
+*Note: Solution (computed): counterclockwise. Meshing gears and crossed belts reverse the direction, a common axle and an uncrossed belt keep it; the machine has 7 reversals. Unique. Tempting: the opposite direction (one reversal miscounted, or a crossed belt treated like an uncrossed one). Why a strong model may fail: 9 links of four kinds; a single slip flips the answer.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: counterclockwise | anticlockwise | counter-clockwise | anti-clockwise
+
+### T5-047 — tier 5 — draft, tier5, type-new, generated
+
+**Base**
+
+> An old machine in a museum has 12 wheels, numbered 1 to 12, all mounted on the same wall and all seen from the same side. They are connected like this: wheel 1 is a gear whose teeth mesh directly with the teeth of wheel 2; wheel 2 drives wheel 3 with a crossed belt that runs in the shape of a figure eight; wheel 3 is a gear whose teeth mesh directly with the teeth of wheel 4; wheel 4 is fixed on the same axle as wheel 5, so the two turn together; wheel 5 is a gear whose teeth mesh directly with the teeth of wheel 6; wheel 6 drives wheel 7 with a normal, uncrossed belt; wheel 7 drives wheel 8 with a normal, uncrossed belt; wheel 8 drives wheel 9 with a normal, uncrossed belt; wheel 9 drives wheel 10 with a normal, uncrossed belt; wheel 10 is a gear whose teeth mesh directly with the teeth of wheel 11; wheel 11 is a gear whose teeth mesh directly with the teeth of wheel 12. A visitor turns wheel 1 clockwise. In which direction does wheel 12 turn? Answer with one word: clockwise or counterclockwise.
+
+Answer: **clockwise** (text)
+
+*Note: Solution (computed): clockwise. Meshing gears and crossed belts reverse the direction, a common axle and an uncrossed belt keep it; the machine has 6 reversals. Unique. Tempting: the opposite direction (one reversal miscounted, or a crossed belt treated like an uncrossed one). Why a strong model may fail: 11 links of four kinds; a single slip flips the answer.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: clockwise
+
+### T7-003 — tier 7 — draft, tier7, connectivity-after-removal
+
+**Base**
+
+> Seven rigid metal rings are painted red, blue, green, yellow, white, black and orange. Six form a closed chain in this order: red, blue, green, yellow, white, black, back to red. Each consecutive pair is linked like links of an ordinary chain. The orange ring is additionally linked through the green ring and through the white ring, and through no other ring. These are all the links. The white ring is secured to a ceiling hook. A worker cuts the red ring and the green ring and removes both of those rings completely, without opening or cutting any other ring. Of the five remaining rings, which one is no longer connected to the ceiling hook, either directly or through other rings? Answer with its colour.
+
+Answer: **blue** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: blue
+
+### T7-006 — tier 7 — draft, tier7, protected-surfaces
+
+**Base**
+
+> A wooden strip has eight equal squares in a row, initially all red. For the following work, positions are counted from the left without turning the strip. Lee covers squares 2,3 and 6 with separate pieces of masking tape, then paints every uncovered square blue and lets it dry. Lee peels the tape off square 3, puts that same piece over square 5, and paints every currently uncovered square yellow. The tape neither removes nor transfers paint, and each coat completely hides the earlier colour. After the paint dries, Lee removes all the tape, turns the strip end for end on the table, and counts its squares from the new left end. Which position now contains the only blue square? Answer with a number.
+
+Answer: **4** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### T7-021 — tier 7 — draft, tier7, phase-versus-object
+
+**Base**
+
+> For a kitchen demonstration, a bowl contains 500 ml of warm water, 12 teaspoons of sugar and 7 whole dried beans. Maya stirs until the water is clear and there are no sugar crystals left. She pours everything through a clean tea strainer into an empty jug; the mesh is fine enough to retain all seven beans. She rinses those beans in the strainer with another 100 ml of clean water, catching that rinse in the same jug. She then tips all the beans into a second, empty bowl and adds 4 fresh teaspoons of dry sugar to that bowl. No water from the jug is put into the second bowl, and the rinsing removes all sugar solution from the beans for this demonstration. How many teaspoons of sugar are in the second bowl? Answer with a number.
+
+Answer: **4** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### T7-022 — tier 7 — draft, tier7, measurement-boundary
+
+**Base**
+
+> A tray, an empty cup and a wet towel are together on a digital scale. Their masses are 300 g, 100 g and 600 g respectively. With all three on it, Jo presses ZERO, so the display reads 0 g. Jo lifts the towel, wrings exactly 200 g of water into the cup, and puts the towel back on the tray. Then Jo lifts the cup, pours exactly 150 g of its water into the sink, and returns the cup to the tray. Finally Jo removes the towel and hangs it from a wall hook; it does not touch anything on the scale. No other water is lost and ZERO is not pressed again. What is the final scale reading in grams? Include a minus sign if needed and answer with a number.
+
+Answer: **-550** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: -550
+
+### T7-023 — tier 7 — draft, tier7, support-versus-location
+
+**Base**
+
+> A bathroom scale reads 72 kg while Sam stands on it holding a 4 kg empty suitcase and a 3 kg bag. Sam sets the bag on a nearby table. A wall hook then takes the suitcase's entire weight by its handle; Sam remains on the scale and merely steadies the suitcase sideways without lifting or pressing down. Sam takes 2 kg of books from the table and puts them into the hanging suitcase, then takes 1 kg of those books back out and holds them against his chest. While the suitcase hangs and the bag rests on the table, neither transmits any vertical force to Sam or the scale. The table and hook are not supported by the scale. What does the scale now read in kilograms? Answer with a number.
+
+Answer: **66** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 66
+
+### T7-024 — tier 7 — draft, tier7, overflow-is-irreversible
+
+**Base**
+
+> An open container holds exactly 10 litres up to its rim and begins with 8 litres of water. Two watertight solid blocks, red and blue, each occupy exactly 3 litres. A rack holds either block fully underwater without the blocks touching each other; water can flow freely around them. Lee lowers the red block fully into the container and waits for any overflow to run into a drain. Lee then lowers the blue block fully in beside it and again lets overflow drain away. Lee removes the red block, adds exactly 2 litres of water, and finally removes the blue block. Blocks carry no water away on removal, and no drained water returns. How many litres of water remain in the container at the end? Answer with a number.
+
+Answer: **6** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+- `altered` — altered, free answer (number):
+  > An open container holds exactly 10 litres up to its rim and begins with 8 litres of water. Two watertight solid blocks, red and blue, each occupy exactly 3 litres. A rack holds either block fully underwater without the blocks touching each other; water can flow freely around them. Lee lowers the red block fully into the container and waits for any overflow to run into an empty catch bucket. Lee then lowers the blue block fully in beside it and again collects all overflow in that same bucket. Lee removes the red block, adds exactly 2 litres of water, and finally removes the blue block. Blocks carry no water away on removal. No water is lost from the catch bucket. After removing both blocks, Lee pours all the collected overflow back into the container. How many litres of water remain in the container at the end? Answer with a number.
+  answer: 10
+  *note: Solution: insertion loses1+3=4 litres into the bucket. After the removals and the2-litre addition the main container has6 litres, as in the base. Returning the captured4 litres brings it to its10-litre capacity exactly, with no further overflow. Why unique: all overflow is collected and returned only after both blocks are removed. Tempting wrong answer:6, forgetting the final return. Why a strong model may fail (untested): conservation applies to the container-plus-bucket system even while the main vessel alone loses water.*
+
+### T7-025 — tier 7 — draft, tier7, shared-length-constraint
+
+**Base**
+
+> A basket hangs from a small pulley attached to its handle. One continuous rope is tied to a wall hook, runs vertically down around the basket pulley, vertically up over a second pulley fixed near the ceiling, and vertically down to a free end held by Jo. The basket moves only vertically. The rope stays taut, does not stretch, and slides freely; the lengths of the curved portions around the pulleys stay constant. Initially the wall hook and the upper pulley are each 8 metres above the floor, the basket pulley is 2 metres above the floor, and the free rope end is 3 metres above the floor. Jo lowers the free end by 2 metres and holds it there. A helper then lowers the wall hook by 2 metres, without changing the position of the upper pulley or the free end. Finally Jo raises the free end by 1 metre. How high above the floor is the basket pulley now, in metres? Answer with a number.
+
+Answer: **1.5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1.5
+
+### T8-004 — tier 8 — draft, tier8, stitched-connectivity
+
+**Base**
+
+> Two narrow fabric ribbons, red and blue, are each 8 cm long. They lie exactly on top of each other, with their left ends aligned at 0 cm. They are stitched to each other at the 1, 3, 5 and 7 cm marks; these are the only attachments. Cut ONLY the red ribbon across its full width at 2 cm and 6 cm. Cut ONLY the blue ribbon across its full width at 4 cm. Next remove the stitch at 5 cm completely, without cutting fabric. Finally cut ONLY the red ribbon across its full width at 4 cm. No other stitch is removed. When the resulting material is separated as far as the remaining stitches allow, how many disconnected bundles are there? A bundle may contain several fabric pieces still stitched together. Answer with a number.
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T8-020 — tier 8 — draft, tier8, saturation-erases-uncertainty
+
+**Base**
+
+> An open tank holds exactly 10 litres up to its rim. It initially contains an unrecorded amount of water somewhere from 6 to 9 litres, inclusive. A rack lowers a watertight solid block of volume 4 litres fully underwater. Any overflow drains away. Remove that block, then add exactly 5 litres of water, again allowing overflow to drain away. Lower a different solid block, of volume 3 litres, fully underwater and let overflow drain away. Remove exactly 2 litres of water with a measuring jug while that block remains submerged, then remove the block. Blocks carry no water away, and none of the overflow returns. How many litres of water are now in the tank? Answer with a number.
+
+Answer: **5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### T8-022 — tier 8 — draft, tier8, cut-loop-then-untie
+
+**Base**
+
+> A red cord and a blue cord each form a closed loop. The two loops are tied to each other at two distinct places, Oak and Pine. Each loop therefore has two arcs between Oak and Pine. Cut the red loop once in the middle of EACH of its two arcs, leaving the knots untouched. Cut the blue loop once in the middle of just ONE of its two arcs. Now completely untie Oak, separating the red cord there from the blue cord, but leave Pine tied. No other cuts or ties occur. How many disconnected bundles of cord remain, counting cords still tied to one another as one bundle? Answer with a number.
+
+Answer: **2** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### T8-023 — tier 8 — draft, tier8, carbon-contact-faces
+
+**Base**
+
+> Four blank paper sheets named Ada, Ben, Cleo and Dev are stacked in that order from top to bottom. Their original upper faces stay uppermost throughout. Put red carbon paper between Ada and Ben with its coated face DOWN, between Ben and Cleo with its coated face UP, and between Cleo and Dev with its coated face DOWN. Press one aligned point with a blunt stylus. The stylus itself leaves no ink; pressure passes through the whole pile, and each carbon layer makes a red dot only on the paper face its coated side directly touches. Remove all carbon paper. Exchange Ben's and Dev's positions without turning either sheet over. Put blue carbon between the top two sheets with its coated face UP, and between the bottom two sheets with its coated face DOWN. Press the same aligned point again. A blue dot covers a red dot at that same point on the same face. Remove the carbon. Which sheet now has a red dot on one face and a blue dot on its other face? Answer with the sheet's name.
+
+Answer: **Ben** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Ben
+
+### T8-026 — tier 8 — draft, tier8, unknown-history-connectedness
+
+**Base**
+
+> Two long cords, one red and one blue, are each joined end to end to make a loop. Tie the two loops to one another at three separate places. A worker makes exactly one cut in the red cord and exactly one cut in the blue cord, each away from every knot; you are not told where. The worker then completely unties exactly two of the three knots joining the cords; you are not told which two. The cords are not threaded through each other in any other way. No further cuts, joins or knots occur. How many disconnected bundles of cord remain? Cords joined by the surviving knot count as one bundle. Answer with a number.
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### T8-027 — tier 8 — draft, tier8, unknown-orientation-invariant
+
+**Base**
+
+> Six blank paper cards form a stack, with one sheet of carbon paper in each of the five gaps. Each carbon sheet has ink on exactly one face, but you do not know which way any of them faces. A blunt stylus presses one point through the whole stack. It makes no mark itself. Each carbon sheet makes exactly one dot on the paper face that its coated side directly touches; pressure reaches all five carbon sheets. Remove all the carbon paper. Exactly two of the six paper cards are still blank on BOTH faces. How many cards have a dot on BOTH faces? Answer with a number.
+
+Answer: **1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### T8-028 — tier 8 — draft, tier8, overflow-across-two-containers
+
+**Base**
+
+> A red container holds 10 litres up to its rim and starts with 8 litres of water. A blue container holds 8 litres and starts with 5 litres. One watertight solid block occupies exactly 3 litres. Lower it fully underwater in red and let overflow drain away. Transfer exactly 2 litres of water from red to blue. Lift the block out of red and lower it fully underwater in blue, letting overflow drain away. Transfer exactly 3 litres of water from blue to red. Move the block back from blue to red, again fully submerging it and losing any overflow. Finally remove the block from red. The block carries no water between containers; all measured transfers are made without spilling, and drained overflow never returns. How many litres of water remain in the TWO containers together? Answer with a number.
+
+Answer: **9** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 9
+
+### T8-030 — tier 8 — draft, tier8, rolling-contact-with-axle-reversal
+
+**Base**
+
+> A small cylindrical roller is held above a long sheet of paper with its axle running north-south. Its centre stays fixed while paper is pulled underneath, and friction turns it without slipping. Four coloured stripes run along the axle and are spaced equally around its 8 cm circumference. Initially red is at the bottom touching the paper, green is at the top, blue is on the east side and yellow on the west side. Pull the paper 6 cm east. Lift the roller clear of the paper, turn the whole roller assembly a half turn around a vertical axis without spinning it about its own axle, then lower it again without any extra rolling. Pull the paper another 2 cm east. Which coloured stripe is now at the bottom, touching the paper? Answer with one colour.
+
+Answer: **green** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: green
+
+### T9-036 — tier 9 — tier9, easy-problems
+
+**Base**
+
+> A man steps over a 0.5 m hurdle. What is the minimum height, in metres, he could have jumped? Answer with a number.
+
+Answer: **0** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 0
+
+## planning
+
+### NEW-032 — tier 3 — draft, scheduling
+
+**Base**
+
+> A household has one washing machine and one tumble dryer. Each load of laundry must first be washed (40 minutes) and then dried (60 minutes). Each machine can handle only one load at a time, and moving laundry takes no time. What is the shortest time, in minutes, to wash and dry 3 loads completely?
+
+Answer: **220** (number)
+
+*Note: the dryer is the bottleneck: it starts after 40 min and runs 3 x 60 min without a gap = 220; traps: 300 (3 x 100), 180*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 220
+
+### NEW-033 — tier 3 — draft, scheduling
+
+**Base**
+
+> Ten people stand on the left bank of a river and all want to get to the right bank. They have one rowing boat that carries at most 4 people. The boat cannot cross on its own: someone must row it back each time. What is the smallest number of crossings (each one-way trip counts as one crossing) needed to bring all ten people to the right bank?
+
+Answer: **5** (number)
+
+*Note: 4 over, 1 back, 4 over, 1 back, 4 over: 5 crossings (3 trips over move at most 12 - 2 = 10 people); traps: 3, 7*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### NEW-034 — tier 2 — draft, ordering
+
+**Base**
+
+> Six jobs have to be done one after another when a room is renovated. The floor must be covered before the old wallpaper is removed. The brushes are cleaned after the walls are painted. The holes in the wall can only be filled once the old wallpaper is off. The furniture must be carried out before the floor is covered. The walls are painted after the holes are filled. Which job is done fourth?
+
+Answer list: carrying out the furniture · covering the floor · removing the old wallpaper · **filling the holes** ✔ · painting the walls · cleaning the brushes
+
+*Note: order: furniture, floor, wallpaper, holes, paint, brushes*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+
+### NEW-035 — tier 3 — draft, routes
+
+**Base**
+
+> Buses run between four villages. The ride from A to B takes 20 minutes, from B to C 30 minutes, from A to C 60 minutes, from C to D 10 minutes and from B to D 50 minutes. Changing buses takes no time. What is the shortest possible travel time from A to D, in minutes?
+
+Answer: **60** (number)
+
+*Note: A-B-C-D = 60; A-C-D = 70; A-B-D = 70*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 60
+
+### NEW-036 — tier 3 — draft, scheduling
+
+**Base**
+
+> Anna, Ben and Carl need a meeting of exactly one hour at which all three are present. Anna is free from 9:00 to 11:30 and from 14:00 to 17:00. Ben is free from 10:30 to 15:00. Carl is free from 8:00 to 11:00 and from 13:30 to 16:00. At what time does the only possible meeting start? Answer as HH:MM.
+
+Answer: **14:00** (text)
+
+*Note: all three are free 10:30-11:00 (too short) and 14:00-15:00; trap: 10:30*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 14:00
+
+### NEW-037 — tier 3 — draft
+
+**Base**
+
+> A country has only three kinds of coins: 1 cent, 4 cents and 6 cents. What is the smallest number of coins with which you can pay exactly 8 cents?
+
+Answer: **2** (number)
+
+*Note: 4 + 4; trap: 3 (greedy 6 + 1 + 1)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### NEW-038 — tier 3 — draft, scheduling
+
+**Base**
+
+> Buses to the railway station leave the village at 8:00, 8:20, 8:40, 9:00 and 9:20. The bus ride takes 35 minutes, and the walk from the bus stop at the station to the platform takes 10 minutes. Mira's train leaves at 9:30. Which is the latest bus she can take to be on the platform before the train leaves? Answer as HH:MM.
+
+Answer: **08:40** (text)
+Also accepted (free answer): 8:40
+
+*Note: 8:40 + 45 min = 9:25; the 9:00 bus arrives on the platform at 9:45; trap: 9:00*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 08:40 | 8:40
+
+### T7-016 — tier 7 — draft, tier7, counterfactual-reexecution
+
+**Base**
+
+> A shuttle has 8 passenger seats. Four groups wait in this order: Ada's group of 5, Ben's group of 4, Cleo's group of 3, Dev's group of 2. For each trip the driver scans the waiting groups in that order. A group boards only if everyone in it fits in the seats still free; otherwise the driver leaves it waiting and continues to later groups. Groups never split. Once all waiting groups have been considered, the shuttle departs and the boarded groups leave the system. It returns empty and repeats. Consider a change made before any trip: exactly two people leave Ada's group, so that it has 3 people. All other groups and rules stay the same. On which numbered trip does Cleo's group now travel? Answer with a number, counting the first departure as trip 1.
+
+Answer: **2** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### T9-076 — tier 9 — draft, tier9, shortest-plan, computed
+
+**Base**
+
+> In a storeroom there are exactly three places where crates can stand, called place 1, place 2 and place 3. Five equally sized crates A, B, C, D and E are stacked as follows: on place 1, crate B stands on the floor with D on top of it; on place 2, crate A stands on the floor with C on top of it; on place 3, crate E stands alone. One move consists of lifting the topmost crate of one place and putting it down on another place (on the floor if that place is empty, otherwise on top of the stack there). The crates are to end up in one single stack on place 3, in alphabetical order with A on the floor and E on top. What is the smallest number of moves needed? Answer with a number.
+
+Answer: **11** (number)
+
+*Note: Solution (stacks bottom to top, places 1|2|3): BD|AC|E -> BDC|A|E -> BDCA|-|E -> BDCA|E|- -> BDC|E|A -> BD|EC|A -> B|ECD|A -> -|ECD|AB -> D|EC|AB -> D|E|ABC -> -|E|ABCD -> -|-|ABCDE. Why unique: breadth-first search over all configurations. Tempting wrong answer: 9 or 10 (forgetting that E must first leave place 3 and that A is buried under C), or the length of a longer working plan. Why a strong model may fail (untested): a plan must be optimised, not just found; temporary parking places are scarce.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 11
+
+### T9-083 — tier 9 — draft, tier9, schedule-opt, computed
+
+**Base**
+
+> Mia and Tom renovate a room together on a Saturday. The jobs: strip the old wallpaper (3 hours); fill the cracks (2 hours, only after the wallpaper is off); let the filler dry (2 hours, nobody has to be there); paint the ceiling (2 hours, only after the filler is dry); paint the walls (3 hours, only after the ceiling is painted); hang the lamp (1 hour, only after the ceiling is painted); carry the old sofa down to the street (1 hour, needs both of them at the same time, possible at any time); assemble the new shelves in the hall (6 hours, possible at any time); clean the windows (3 hours, possible at any time); varnish the door (3 hours, possible at any time). Unless stated otherwise a job needs exactly one person, and two people cannot speed it up. A job, once begun, is finished without interruption by the same person. Both work equally fast and take no breaks. What is the smallest number of hours after which all jobs can be finished? Answer with a number.
+
+Answer: **13** (number)
+
+*Note: Solution: two lower bounds both fall short. The chain wallpaper 3 + filler 2 + drying 2 + ceiling 2 + walls 3 needs 12 hours; the total work is 25 person-hours, i.e. at least 12.5 hours for two people. The true minimum is 13 hours. One possible plan (start hours): strip the old wallpaper 0, assemble the new shelves in the hall 0, fill the cracks 3, let the filler dry 5, carry the old sofa down to the street 6, paint the ceiling 7, clean the windows 7, paint the walls 9, varnish the door 10, hang the lamp 12. Why unique: exhaustive schedule generation over all job orders (with unlimited helpers it would be 12 hours). Tempting wrong answer: 12 (the longest chain) or 12.5 (work divided by two). Why a strong model may fail (untested): neither simple bound is attainable, because jobs cannot be split and the sofa needs both people at once; an actual timetable must be constructed.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 13
+
+### T9-084 — tier 9 — draft, tier9, schedule-opt, computed
+
+**Base**
+
+> A camping grill has room for exactly four burgers at a time. Each burger must be grilled for 3 minutes on each of its two sides; a side must get its 3 minutes in one go, but the two sides need not be grilled directly one after the other, and a half-done burger may wait on a plate. Turning burgers and swapping them takes no time. What is the smallest number of minutes in which five burgers can be completely grilled? Answer with a number.
+
+Answer: **9** (number)
+
+*Note: Solution: ten sides, four per round, need at least three rounds, and three are enough: round 1 burgers 1-4 (first side); round 2 burgers 1-3 (second side) and burger 5 (first side); round 3 burgers 4 and 5 (second side). 3 x 3 = 9 minutes. Why unique: brute force over all round assignments. Tempting wrong answer: 12 (four burgers on both sides, then the fifth on both sides). Why a strong model may fail (untested): the batch-wise habit hides the interleaved plan; it is the known three-pancake idea with numbers for which no memorised answer exists.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 9
+
+## room_puzzle
+
+### T6-001 — tier 6 — draft, tier6, chain-first
+
+**Base**
+
+> You are shut in an old farm shed. The front door, through which you came in, has slammed shut behind you; its handle has fallen off on the outside, and on the inside there is nothing to grip. The only other way out is a low back door in the opposite wall. It is not locked, only latched, but it opens inwards, into the shed, and right in front of it stands a wheelbarrow with a flat tyre, loaded to the brim with clay roof tiles. Loaded like this, the wheelbarrow cannot be moved an inch, not even by two strong people; the tiles can only be lifted out by hand, a few at a time. An old mattress lies on top of the wheelbarrow and covers the tiles completely; it is not fastened to anything. Along the side wall stands a workbench with an anvil on it. A rake, a spade and a broom lean in one corner, a coil of rope hangs from a nail, and an empty rain barrel stands under the only window, which is tiny and has iron bars on the outside. A paraffin lamp hangs from a beam, but it is bright daylight. Nobody can hear you. Which object do you have to move first in order to get out? Answer with the name of one object in the room (one word).
+
+Answer: **mattress** (text)
+
+*Note: Solution path: 1. take the mattress off the wheelbarrow; 2. lift the tiles out by hand; 3. push the now empty wheelbarrow aside; 4. unlatch the back door and pull it open. Why nothing else works: the front door has no handle inside; the window is tiny and barred; the back door opens inwards and is blocked by the wheelbarrow; the loaded wheelbarrow cannot be moved; the tiles are completely covered by the mattress. Anvil, rake, spade, broom, rope, rain barrel and lamp are never needed. Tempting: wheelbarrow (it blocks the door) or spade (as a tool). Why a strong model may fail: the blocking relations (door opens inwards, wheelbarrow in front, tiles in it, mattress on them) must be chained backwards.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: mattress
+
+### T6-002 — tier 6 — draft, tier6, chain-last
+
+**Base**
+
+> You are shut in an old farm shed. The front door, through which you came in, has slammed shut behind you; its handle has fallen off on the outside, and on the inside there is nothing to grip. The only other way out is a low back door in the opposite wall. It is not locked, only latched, but it opens inwards, into the shed, and right in front of it stands a wheelbarrow with a flat tyre, loaded to the brim with clay roof tiles. Loaded like this, the wheelbarrow cannot be moved an inch, not even by two strong people; the tiles can only be lifted out by hand, a few at a time. An old mattress lies on top of the wheelbarrow and covers the tiles completely; it is not fastened to anything. Along the side wall stands a workbench with an anvil on it. A rake, a spade and a broom lean in one corner, a coil of rope hangs from a nail, and an empty rain barrel stands under the only window, which is tiny and has iron bars on the outside. A paraffin lamp hangs from a beam, but it is bright daylight. Nobody can hear you. Which object is the last one you have to move out of the way before the back door can be opened? Answer with the name of one object in the room (one word).
+
+Answer: **wheelbarrow** (text)
+Also accepted (free answer): barrow
+
+*Note: Solution path: 1. take the mattress off the wheelbarrow; 2. lift the tiles out by hand; 3. push the now empty wheelbarrow aside; 4. unlatch the back door and pull it open. Why nothing else works: the front door has no handle inside; the window is tiny and barred; the back door opens inwards and is blocked by the wheelbarrow; the loaded wheelbarrow cannot be moved; the tiles are completely covered by the mattress. Anvil, rake, spade, broom, rope, rain barrel and lamp are never needed. Tempting: tiles or mattress.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: wheelbarrow | barrow
+
+### T6-003 — tier 6 — draft, tier6, count
+
+**Base**
+
+> You are shut in an old farm shed. The front door, through which you came in, has slammed shut behind you; its handle has fallen off on the outside, and on the inside there is nothing to grip. The only other way out is a low back door in the opposite wall. It is not locked, only latched, but it opens inwards, into the shed, and right in front of it stands a wheelbarrow with a flat tyre, loaded to the brim with clay roof tiles. Loaded like this, the wheelbarrow cannot be moved an inch, not even by two strong people; the tiles can only be lifted out by hand, a few at a time. An old mattress lies on top of the wheelbarrow and covers the tiles completely; it is not fastened to anything. Along the side wall stands a workbench with an anvil on it. A rake, a spade and a broom lean in one corner, a coil of rope hangs from a nail, and an empty rain barrel stands under the only window, which is tiny and has iron bars on the outside. A paraffin lamp hangs from a beam, but it is bright daylight. Nobody can hear you. How many different things do you have to move out of their place, at the very least, before the back door can be opened? Count all the roof tiles together as one thing. Answer with a number.
+
+Answer: **3** (number)
+
+*Note: Solution path: 1. take the mattress off the wheelbarrow; 2. lift the tiles out by hand; 3. push the now empty wheelbarrow aside; 4. unlatch the back door and pull it open. Why nothing else works: the front door has no handle inside; the window is tiny and barred; the back door opens inwards and is blocked by the wheelbarrow; the loaded wheelbarrow cannot be moved; the tiles are completely covered by the mattress. Anvil, rake, spade, broom, rope, rain barrel and lamp are never needed. Count: mattress, tiles, wheelbarrow = 3. Tempting: 1 (only the wheelbarrow) or 2.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T6-004 — tier 6 — draft, tier6, chain-first
+
+**Base**
+
+> It is a moonless night, the storm has cut the power, and you stand in the keeper's room at the foot of the lighthouse in complete darkness. You know the room well and can find everything by touch, but you cannot read a single letter without light. The emergency flares are in a steel locker secured with a combination padlock. The keeper once told you that he wrote the combination on the last page of the logbook, which lies on the desk. On the desk there is also an electric torch, but when you press its switch it stays dark; it takes two thin batteries. Next to it stands a transistor radio that plays loudly when you switch it on; it runs on four thick batteries. A paraffin lantern, filled and ready, hangs on a hook by the stairs. On the windowsill lies a box of matches, but rain has come in through a broken pane and the box is soaked through. On the shelf above the desk lie the keeper's petrol lighter, which works at the first try, a pair of binoculars, a brass bell and a magnifying glass. Before the combination can be read, one object in the room has to be used first. Which one? Answer with the name of one object in the room (one word).
+
+Answer: **lighter** (text)
+Also accepted (free answer): petrol lighter | cigarette lighter
+
+*Note: Solution path: 1. strike the lighter (its flame is enough, or light the lantern with it); 2. read the combination on the last page of the logbook; 3. open the padlock. Why nothing else works: the torch is dead and the radio's thick batteries do not fit it; the matches are soaked; the lantern needs a flame; the magnifying glass and binoculars make no light, least of all at night. Tempting: lantern, torch or logbook. Why a strong model may fail: the lantern is the 'obvious' light source, but it cannot be lit without the lighter.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: lighter | petrol lighter | cigarette lighter
+
+### T6-005 — tier 6 — draft, tier6, clue
+
+**Base**
+
+> You are looking for the secret door that is said to exist in the old study. The room has no other exit than the door you came through. You have already checked a good deal. Behind the tapestry on the north wall there is nothing but solid brickwork with unbroken mortar. The fireplace is bricked up, and its iron back plate is cemented in. The wardrobe stands free in a corner; you have emptied it and tapped its back panel, behind which, through a knot hole, you can see the garden. The grandfather clock has plainly not been moved for decades: thick old cobwebs join it to the wall on both sides. Under the rug the floorboards run unbroken from wall to wall. The bookcase fills the whole west wall and seems to be part of it. On the floorboards in front of it a pale scratch runs in a quarter circle, from the right-hand foot of the bookcase out into the room and round towards its left-hand end. A floor globe stands between the bookcase and this scratch; the armchair and the side table stand further out in the room, beyond the scratch. All the books on the shelves are grey with dust, except the atlas, whose spine is clean and shows finger marks. A writing desk with an inkwell, a paperweight and a letter opener stands under the window. Which piece of furniture is the secret door? Answer with the name of one object in the room (one word).
+
+Answer: **bookcase** (text)
+Also accepted (free answer): bookshelf | bookshelves | shelves | bookcases
+
+*Note: Solution path: 1. the quarter-circle scratch shows that the right-hand end of the bookcase swings out into the room around its left-hand end: the bookcase is the door; 2. the globe stands inside the swept area and must be moved; 3. the atlas, the only book that is regularly touched, releases the catch. Why the others fail: tapestry (solid brick behind it), fireplace (bricked up, plate cemented), wardrobe (the garden is visible behind its back), clock (old cobwebs), rug (unbroken boards). Tempting: wardrobe or tapestry (classic hiding places). Why a strong model may fail: the decisive clue is a scratch on the floor whose meaning (a swinging door) is not explained.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: bookcase | bookshelf | bookshelves | shelves | bookcases
+
+### T6-006 — tier 6 — draft, tier6, chain-first
+
+**Base**
+
+> You are looking for the secret door that is said to exist in the old study. The room has no other exit than the door you came through. You have already checked a good deal. Behind the tapestry on the north wall there is nothing but solid brickwork with unbroken mortar. The fireplace is bricked up, and its iron back plate is cemented in. The wardrobe stands free in a corner; you have emptied it and tapped its back panel, behind which, through a knot hole, you can see the garden. The grandfather clock has plainly not been moved for decades: thick old cobwebs join it to the wall on both sides. Under the rug the floorboards run unbroken from wall to wall. The bookcase fills the whole west wall and seems to be part of it. On the floorboards in front of it a pale scratch runs in a quarter circle, from the right-hand foot of the bookcase out into the room and round towards its left-hand end. A floor globe stands between the bookcase and this scratch; the armchair and the side table stand further out in the room, beyond the scratch. All the books on the shelves are grey with dust, except the atlas, whose spine is clean and shows finger marks. A writing desk with an inkwell, a paperweight and a letter opener stands under the window. Which object has to be moved out of the way so that the secret door can swing open? Answer with the name of one object in the room (one word).
+
+Answer: **globe** (text)
+Also accepted (free answer): floor globe
+
+*Note: Solution path: 1. the quarter-circle scratch shows that the right-hand end of the bookcase swings out into the room around its left-hand end: the bookcase is the door; 2. the globe stands inside the swept area and must be moved; 3. the atlas, the only book that is regularly touched, releases the catch. Why the others fail: tapestry (solid brick behind it), fireplace (bricked up, plate cemented), wardrobe (the garden is visible behind its back), clock (old cobwebs), rug (unbroken boards). The armchair and the side table stand beyond the scratch, outside the swept area. Tempting: armchair or rug. Why a strong model may fail: the swept area must be reconstructed from the scratch.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: globe | floor globe
+
+### T6-007 — tier 6 — draft, tier6, clue
+
+**Base**
+
+> You are looking for the secret door that is said to exist in the old study. The room has no other exit than the door you came through. You have already checked a good deal. Behind the tapestry on the north wall there is nothing but solid brickwork with unbroken mortar. The fireplace is bricked up, and its iron back plate is cemented in. The wardrobe stands free in a corner; you have emptied it and tapped its back panel, behind which, through a knot hole, you can see the garden. The grandfather clock has plainly not been moved for decades: thick old cobwebs join it to the wall on both sides. Under the rug the floorboards run unbroken from wall to wall. The bookcase fills the whole west wall and seems to be part of it. On the floorboards in front of it a pale scratch runs in a quarter circle, from the right-hand foot of the bookcase out into the room and round towards its left-hand end. A floor globe stands between the bookcase and this scratch; the armchair and the side table stand further out in the room, beyond the scratch. All the books on the shelves are grey with dust, except the atlas, whose spine is clean and shows finger marks. A writing desk with an inkwell, a paperweight and a letter opener stands under the window. The door is held by a hidden catch. Which object do you most likely have to pull to release it? Answer with the name of one object in the room (one word).
+
+Answer: **atlas** (text)
+
+*Note: Solution path: 1. the quarter-circle scratch shows that the right-hand end of the bookcase swings out into the room around its left-hand end: the bookcase is the door; 2. the globe stands inside the swept area and must be moved; 3. the atlas, the only book that is regularly touched, releases the catch. Why the others fail: tapestry (solid brick behind it), fireplace (bricked up, plate cemented), wardrobe (the garden is visible behind its back), clock (old cobwebs), rug (unbroken boards). Tempting: paperweight, letter opener or inkwell on the desk. Why a strong model may fail: the clue is the absence of dust on one book among many objects.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: atlas
+
+### T6-008 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You stand in the doorway of the late notary's office and look into the room. The door is in the south wall; straight ahead of you, in the north wall, is the window, and in front of the window stands the desk. Earlier you pulled out both top drawers of the desk: in the top drawer on your left, as you look at the desk from the doorway, lies a stapler on a pile of papers; in the top drawer on your right lies a box of cigars on a similar pile. On the wall to your right hangs a painting of a lighthouse, on the wall to your left a painting of a windmill, and next to the door behind you a framed map. Two chairs for clients stand in front of the desk. If you stood at the window and looked back into the room, the chair with the green cushion would be on your left and the chair with the red cushion on your right. In the notary's diary you find this entry: "I always sit at my desk with my back to the window. The key of the safe lies at the bottom of the top drawer on my right. The safe is behind the picture on the wall on my left. And the envelope with the will is taped under the seat of the client's chair that stands on my right." In the drawer with which object does the key of the safe lie? Answer with the name of one object in the room (one word).
+
+Answer: **stapler** (text)
+
+*Note: Solution: the notary sat facing south, so his right is the west side of the room and his left the east side. From the doorway you look north: west is on your left, east on your right. So the key is in the drawer with the stapler, the safe is behind the lighthouse (on your right), and the will is under the chair on the west side. Seen from the window, the green chair is on the left, which is east, so the west chair is the red one. Tempting: cigars ('right' taken from the doorway). Why a strong model may fail: the note is written from the point of view of a person facing the reader.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: stapler
+
+### T6-009 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You stand in the doorway of the late notary's office and look into the room. The door is in the south wall; straight ahead of you, in the north wall, is the window, and in front of the window stands the desk. Earlier you pulled out both top drawers of the desk: in the top drawer on your left, as you look at the desk from the doorway, lies a stapler on a pile of papers; in the top drawer on your right lies a box of cigars on a similar pile. On the wall to your right hangs a painting of a lighthouse, on the wall to your left a painting of a windmill, and next to the door behind you a framed map. Two chairs for clients stand in front of the desk. If you stood at the window and looked back into the room, the chair with the green cushion would be on your left and the chair with the red cushion on your right. In the notary's diary you find this entry: "I always sit at my desk with my back to the window. The key of the safe lies at the bottom of the top drawer on my right. The safe is behind the picture on the wall on my left. And the envelope with the will is taped under the seat of the client's chair that stands on my right." Which picture hides the safe? Answer with one word that names what the picture shows.
+
+Answer: **lighthouse** (text)
+
+*Note: Solution: the notary sat facing south, so his right is the west side of the room and his left the east side. From the doorway you look north: west is on your left, east on your right. So the key is in the drawer with the stapler, the safe is behind the lighthouse (on your right), and the will is under the chair on the west side. Seen from the window, the green chair is on the left, which is east, so the west chair is the red one. Tempting: windmill ('left' taken from the doorway).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: lighthouse
+
+### T6-010 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You stand in the doorway of the late notary's office and look into the room. The door is in the south wall; straight ahead of you, in the north wall, is the window, and in front of the window stands the desk. Earlier you pulled out both top drawers of the desk: in the top drawer on your left, as you look at the desk from the doorway, lies a stapler on a pile of papers; in the top drawer on your right lies a box of cigars on a similar pile. On the wall to your right hangs a painting of a lighthouse, on the wall to your left a painting of a windmill, and next to the door behind you a framed map. Two chairs for clients stand in front of the desk. If you stood at the window and looked back into the room, the chair with the green cushion would be on your left and the chair with the red cushion on your right. In the notary's diary you find this entry: "I always sit at my desk with my back to the window. The key of the safe lies at the bottom of the top drawer on my right. The safe is behind the picture on the wall on my left. And the envelope with the will is taped under the seat of the client's chair that stands on my right." What colour is the cushion of the chair under which the will is taped? Answer with one word.
+
+Answer: **red** (text)
+
+*Note: Solution: the notary sat facing south, so his right is the west side of the room and his left the east side. From the doorway you look north: west is on your left, east on your right. So the key is in the drawer with the stapler, the safe is behind the lighthouse (on your right), and the will is under the chair on the west side. Seen from the window, the green chair is on the left, which is east, so the west chair is the red one. Tempting: green (one of the two changes of viewpoint forgotten). Why a strong model may fail: two changes of viewpoint: the notary's and the view from the window.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: red
+
+### T6-011 — tier 6 — draft, tier6, count, world-knowledge
+
+**Base**
+
+> You want to borrow the lawnmower from your neighbour's garden shed, which is secured with a number padlock. He is on holiday and has sent you a message: "The number is easy to remember: it is the number of wheels of all the things that stand in my garage. For the second lock, on the tool cupboard in the shed, it is the number of legs of all the furniture and stands in my garage." You go into his open garage and look around. A bicycle leans against the wall, complete and ready to ride. A second bicycle hangs from two hooks under the ceiling; its front wheel is missing. In the corner stand a child's tricycle and a wheelbarrow. A skateboard lies under the workbench. A wooden sledge hangs on the wall next to a pair of skis. The workbench stands on four stout legs; in front of it is a three-legged stool. Two folding garden chairs, each with four legs, are stacked against the back wall, and next to them stands a camera tripod. A rubber dinghy, a watering can and three paint tins complete the collection. The car is away with its owner. Which number opens the padlock on the garden shed? Answer with a number.
+
+Answer: **11** (number)
+
+*Note: Solution: bicycle 2 + bicycle without front wheel 1 + tricycle 3 + wheelbarrow 1 + skateboard 4 = 11; the sledge and the skis have no wheels, the car is not there. Tempting: 12 (missing front wheel overlooked), 7 (skateboard forgotten), 10. Why a strong model may fail: the number of wheels of each thing is not stated, and one wheel is missing.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 11
+
+### T6-012 — tier 6 — draft, tier6, count, world-knowledge
+
+**Base**
+
+> You want to borrow the lawnmower from your neighbour's garden shed, which is secured with a number padlock. He is on holiday and has sent you a message: "The number is easy to remember: it is the number of wheels of all the things that stand in my garage. For the second lock, on the tool cupboard in the shed, it is the number of legs of all the furniture and stands in my garage." You go into his open garage and look around. A bicycle leans against the wall, complete and ready to ride. A second bicycle hangs from two hooks under the ceiling; its front wheel is missing. In the corner stand a child's tricycle and a wheelbarrow. A skateboard lies under the workbench. A wooden sledge hangs on the wall next to a pair of skis. The workbench stands on four stout legs; in front of it is a three-legged stool. Two folding garden chairs, each with four legs, are stacked against the back wall, and next to them stands a camera tripod. A rubber dinghy, a watering can and three paint tins complete the collection. The car is away with its owner. Which number opens the lock on the tool cupboard? Answer with a number.
+
+Answer: **18** (number)
+
+*Note: Solution: workbench 4 + stool 3 + two garden chairs 8 + tripod 3 = 18. Tempting: 14 (only one chair counted), 15 (tripod forgotten), 19. Why a strong model may fail: the tripod's three legs are not stated, and the chairs come as a pair.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 18
+
+### T6-013 — tier 6 — draft, tier6, own, world-knowledge, control-pair
+
+**Base**
+
+> In the cellar a key has slipped out of your hand and through the iron grating of the floor drain. It now lies at the bottom of the dry drain shaft, about 70 cm below the grating; in the light of the ceiling lamp you can see it clearly. It is a brass key, with a large ring at its head. The grating is cemented in, and its slots are only two fingers wide, so neither your hand nor anything thick fits through. In the cellar you find the following things: a horseshoe magnet tied to a long piece of string; a coat hanger made of thin, stiff wire; a broom with a thick wooden handle; a garden hose connected to a working tap; a bucket; and a sponge. Which object do you use to bring the key up? Answer with the name of one object in the room (one word).
+
+Answer: **hanger** (text)
+Also accepted (free answer): coat hanger | coathanger | wire | wire hanger | clothes hanger | wire coat hanger
+
+*Note: Solution path: 1. bend the wire coat hanger straight and form a small hook at its end; 2. push it through a slot and hook the ring of the key; 3. pull the key up. Why the others fail: brass is not magnetic, so the magnet does not lift the key; the broom handle is too thick for the slots; water from the hose runs away through the drain and would not make a metal key float anyway; bucket and sponge are of no use. Tempting: magnet (the obvious fishing tool). Why a strong model may fail: the magnet on a string is made for exactly this job; only the unstated fact that brass is not magnetic rules it out.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: hanger | coat hanger | coathanger | wire | wire hanger | clothes hanger | wire coat hanger
+
+### T6-014 — tier 6 — draft, tier6, own, world-knowledge, control-pair
+
+**Base**
+
+> In the cellar a key has slipped out of your hand and through the iron grating of the floor drain. It now lies at the bottom of the dry drain shaft, about 70 cm below the grating; in the light of the ceiling lamp you can see it clearly. It is an old iron key, with a large ring at its head. The grating is cemented in, and its slots are only two fingers wide, so neither your hand nor anything thick fits through. In the cellar you find the following things: a horseshoe magnet tied to a long piece of string; a thick plastic coat hanger that cannot be bent; a broom with a thick wooden handle; a garden hose connected to a working tap; a bucket; and a sponge. Which object do you use to bring the key up? Answer with the name of one object in the room (one word).
+
+Answer: **magnet** (text)
+Also accepted (free answer): horseshoe magnet | string
+
+*Note: Solution path: 1. lower the magnet on its string through a slot; 2. the iron key sticks to it; 3. pull it up. Why the others fail: the plastic hanger is too thick and cannot be bent into a hook; the broom handle is too thick; the hose, bucket and sponge do not help. This is the control for the brass version: here the obvious tool is right. Tempting: hanger.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: magnet | horseshoe magnet | string
+
+### T6-015 — tier 6 — draft, tier6, resources
+
+**Base**
+
+> You need the key of the back door. Your grandmother keeps it in a biscuit tin on the shelf above the kitchen door, so high that your fingertips are still two hand's breadths short of the shelf even when you stretch. The shelf has a high front rail, so nothing can be pushed or knocked off it; the tin has to be lifted out. You look around the kitchen for something to stand on. The only chair has lost one leg, which lies beside it. The plastic step stool has a crack right across its seat and would not carry a child. The kitchen table is screwed to the wall under the window at the other end of the room, and the worktop, the cooker and the refrigerator are nowhere near the door. By the far wall stands a sturdy wooden crate, knee-high, which easily carries a grown man. In it lies a full sack of potatoes; crate and sack together are too heavy to shift, but each of them alone can be lifted and carried without trouble. A broom, a mop and a folded ironing board, which is far too wobbly to stand on, lean in the corner. Which object do you stand on to reach the tin? Answer with the name of one object in the room (one word).
+
+Answer: **crate** (text)
+Also accepted (free answer): box | wooden crate
+
+*Note: Solution path: 1. lift the sack of potatoes out of the crate; 2. carry the empty crate to the door; 3. stand on it and lift the tin out of the shelf; 4. take the key. Why the others fail: chair (three legs), stool (cracked seat), table (screwed to the wall, far from the door), worktop, cooker and refrigerator (not near the door), ironing board (too wobbly), broom and mop (the rail prevents knocking the tin down). Tempting: chair or stool. Why a strong model may fail: the usable object is at the far wall and blocked by its contents.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: crate | box | wooden crate
+
+### T6-016 — tier 6 — draft, tier6, chain-first
+
+**Base**
+
+> You need the key of the back door. Your grandmother keeps it in a biscuit tin on the shelf above the kitchen door, so high that your fingertips are still two hand's breadths short of the shelf even when you stretch. The shelf has a high front rail, so nothing can be pushed or knocked off it; the tin has to be lifted out. You look around the kitchen for something to stand on. The only chair has lost one leg, which lies beside it. The plastic step stool has a crack right across its seat and would not carry a child. The kitchen table is screwed to the wall under the window at the other end of the room, and the worktop, the cooker and the refrigerator are nowhere near the door. By the far wall stands a sturdy wooden crate, knee-high, which easily carries a grown man. In it lies a full sack of potatoes; crate and sack together are too heavy to shift, but each of them alone can be lifted and carried without trouble. A broom, a mop and a folded ironing board, which is far too wobbly to stand on, lean in the corner. Which object do you have to lift first? Answer with the name of one object in the room (one word).
+
+Answer: **sack** (text)
+Also accepted (free answer): potatoes | potato sack | sack of potatoes | bag
+
+*Note: Solution path: 1. lift the sack of potatoes out of the crate; 2. carry the empty crate to the door; 3. stand on it and lift the tin out of the shelf; 4. take the key. Why the others fail: chair (three legs), stool (cracked seat), table (screwed to the wall, far from the door), worktop, cooker and refrigerator (not near the door), ironing board (too wobbly), broom and mop (the rail prevents knocking the tin down). Tempting: crate. Why a strong model may fail: the crate cannot be moved while the sack is in it.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: sack | potatoes | potato sack | sack of potatoes | bag
+
+### T6-017 — tier 6 — draft, tier6, clue
+
+**Base**
+
+> Somewhere in the wooden floor of this bedroom there is an old trapdoor to the cellar. Most of the floor is in plain view, and there is no trapdoor in it. You have rolled back the rug: nothing but unbroken boards. With a torch you have looked under the iron bed and under the wardrobe, which stands on tall legs: unbroken boards and thick dust in both places. You have lifted the wicker laundry basket in the corner: nothing. That leaves the upright piano against the east wall, whose heavy case reaches right down to the floor. It stands on four small brass wheels, and under two of the wheels somebody has pushed wooden wedges. On the floor to the left of the piano you notice two pale parallel tracks, exactly as far apart as the piano's wheels, leading about a metre along the wall, as if the piano had often been rolled to the left and back again. To the right of the piano is the corner of the room. A tall floor lamp with a heavy marble base stands on the tracks, right next to the piano. The piano stool stands in front of the keyboard and is in nobody's way. At ankle height, in front of the pedals, you feel a faint cold draught. Under which object is the trapdoor? Answer with the name of one object in the room (one word).
+
+Answer: **piano** (text)
+
+*Note: Solution path: 1. the tracks and the draught show that the trapdoor is under the piano; 2. pull the wedges out from under the wheels; 3. move the floor lamp off the tracks; 4. roll the piano about a metre to the left; 5. open the trapdoor. Why the others fail: rug, bed, wardrobe and basket have been checked (unbroken boards); the piano cannot go to the right (corner); the stool is not in the way. Tempting: rug (the classic place). Why a strong model may fail: the classic answer is explicitly excluded; the right one follows from tracks and a draught.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: piano
+
+### T6-018 — tier 6 — draft, tier6, chain-first
+
+**Base**
+
+> Somewhere in the wooden floor of this bedroom there is an old trapdoor to the cellar. Most of the floor is in plain view, and there is no trapdoor in it. You have rolled back the rug: nothing but unbroken boards. With a torch you have looked under the iron bed and under the wardrobe, which stands on tall legs: unbroken boards and thick dust in both places. You have lifted the wicker laundry basket in the corner: nothing. That leaves the upright piano against the east wall, whose heavy case reaches right down to the floor. It stands on four small brass wheels, and under two of the wheels somebody has pushed wooden wedges. On the floor to the left of the piano you notice two pale parallel tracks, exactly as far apart as the piano's wheels, leading about a metre along the wall, as if the piano had often been rolled to the left and back again. To the right of the piano is the corner of the room. A tall floor lamp with a heavy marble base stands on the tracks, right next to the piano. The piano stool stands in front of the keyboard and is in nobody's way. At ankle height, in front of the pedals, you feel a faint cold draught. Which objects have to be removed before the wheels of the piano can turn at all? Answer with one word.
+
+Answer: **wedges** (text)
+Also accepted (free answer): wedge | wooden wedges | the wedges | chocks
+
+*Note: Solution path: 1. the tracks and the draught show that the trapdoor is under the piano; 2. pull the wedges out from under the wheels; 3. move the floor lamp off the tracks; 4. roll the piano about a metre to the left; 5. open the trapdoor. Why the others fail: rug, bed, wardrobe and basket have been checked (unbroken boards); the piano cannot go to the right (corner); the stool is not in the way. Tempting: lamp (it blocks the way, but not the wheels).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: wedges | wedge | wooden wedges | the wedges | chocks
+
+### T6-019 — tier 6 — draft, tier6, count
+
+**Base**
+
+> Somewhere in the wooden floor of this bedroom there is an old trapdoor to the cellar. Most of the floor is in plain view, and there is no trapdoor in it. You have rolled back the rug: nothing but unbroken boards. With a torch you have looked under the iron bed and under the wardrobe, which stands on tall legs: unbroken boards and thick dust in both places. You have lifted the wicker laundry basket in the corner: nothing. That leaves the upright piano against the east wall, whose heavy case reaches right down to the floor. It stands on four small brass wheels, and under two of the wheels somebody has pushed wooden wedges. On the floor to the left of the piano you notice two pale parallel tracks, exactly as far apart as the piano's wheels, leading about a metre along the wall, as if the piano had often been rolled to the left and back again. To the right of the piano is the corner of the room. A tall floor lamp with a heavy marble base stands on the tracks, right next to the piano. The piano stool stands in front of the keyboard and is in nobody's way. At ankle height, in front of the pedals, you feel a faint cold draught. How many things have to be moved out of their place, at the very least, before the trapdoor can be opened? Count the two wedges together as one thing. Answer with a number.
+
+Answer: **3** (number)
+
+*Note: Solution path: 1. the tracks and the draught show that the trapdoor is under the piano; 2. pull the wedges out from under the wheels; 3. move the floor lamp off the tracks; 4. roll the piano about a metre to the left; 5. open the trapdoor. Why the others fail: rug, bed, wardrobe and basket have been checked (unbroken boards); the piano cannot go to the right (corner); the stool is not in the way. Count: wedges, floor lamp, piano = 3 (the rug is already rolled back and is not over the trapdoor; the stool stays). Tempting: 1 or 2, or 4 with the stool.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T6-020 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You are below deck in the cabin of a small sailing boat. On a boat, 'port' is the left-hand side and 'starboard' the right-hand side for somebody who looks forward, towards the bow; these names never change, whichever way you yourself are looking. You have just climbed down the ladder into the cabin and now stand at its foot, looking towards the stern, the back end of the boat, with the bow behind you. Without turning round, you see a red locker on your left and a blue locker on your right. The skipper's bunk is a little further forward. He always sleeps on his back with his head towards the bow. A piece of paper is pinned to the ladder: "The flare pistol is in the locker on the starboard side. The fuel tap is under the floorboard on the port side, next to the engine at the stern. And my reading lamp is fixed to the hull on the side of my left hand when I lie in my bunk." In the locker of which colour is the flare pistol? Answer with one word.
+
+Answer: **red** (text)
+
+*Note: Solution: looking towards the stern, starboard (the right-hand side for somebody looking forward) is on your left and port on your right. So the flare pistol is in the red locker and the fuel tap is on your right. The skipper lies on his back with his head towards the bow; like that, his left hand is on the starboard side. Tempting: blue (starboard = right). Why a strong model may fail: 'starboard is right' is applied without noticing that you look towards the stern.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: red
+
+### T6-021 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You are below deck in the cabin of a small sailing boat. On a boat, 'port' is the left-hand side and 'starboard' the right-hand side for somebody who looks forward, towards the bow; these names never change, whichever way you yourself are looking. You have just climbed down the ladder into the cabin and now stand at its foot, looking towards the stern, the back end of the boat, with the bow behind you. Without turning round, you see a red locker on your left and a blue locker on your right. The skipper's bunk is a little further forward. He always sleeps on his back with his head towards the bow. A piece of paper is pinned to the ladder: "The flare pistol is in the locker on the starboard side. The fuel tap is under the floorboard on the port side, next to the engine at the stern. And my reading lamp is fixed to the hull on the side of my left hand when I lie in my bunk." As you stand there, still looking towards the stern: is the fuel tap on your left or on your right? Answer with one word: left or right.
+
+Answer: **right** (text)
+Also accepted (free answer): on my right | on your right | to the right | right side | on the right
+
+*Note: Solution: looking towards the stern, starboard (the right-hand side for somebody looking forward) is on your left and port on your right. So the flare pistol is in the red locker and the fuel tap is on your right. The skipper lies on his back with his head towards the bow; like that, his left hand is on the starboard side. Tempting: left.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: right | on my right | on your right | to the right | right side | on the right
+
+### T6-022 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You are below deck in the cabin of a small sailing boat. On a boat, 'port' is the left-hand side and 'starboard' the right-hand side for somebody who looks forward, towards the bow; these names never change, whichever way you yourself are looking. You have just climbed down the ladder into the cabin and now stand at its foot, looking towards the stern, the back end of the boat, with the bow behind you. Without turning round, you see a red locker on your left and a blue locker on your right. The skipper's bunk is a little further forward. He always sleeps on his back with his head towards the bow. A piece of paper is pinned to the ladder: "The flare pistol is in the locker on the starboard side. The fuel tap is under the floorboard on the port side, next to the engine at the stern. And my reading lamp is fixed to the hull on the side of my left hand when I lie in my bunk." On which side of the boat is the skipper's reading lamp? Answer with one word: port or starboard.
+
+Answer: **starboard** (text)
+
+*Note: Solution: looking towards the stern, starboard (the right-hand side for somebody looking forward) is on your left and port on your right. So the flare pistol is in the red locker and the fuel tap is on your right. The skipper lies on his back with his head towards the bow; like that, his left hand is on the starboard side. Tempting: port ('left hand = port'). Why a strong model may fail: a person lying on his back with the head towards the bow has left and right exchanged compared with somebody standing and looking forward; both test models failed such lying-body questions in tier 5.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: starboard
+
+### T6-023 — tier 6 — draft, tier6, end-state
+
+**Base**
+
+> You are tidying your grandparents' attic. At the start a big trunk and an empty suitcase stand on the floor, and a locked cupboard stands against the wall. This is what you do, in this order. First you open the trunk and take out the two things that are in it, a hatbox and a photo album. You put the album into the suitcase. In the hatbox you find a biscuit tin; you take it out and put the empty hatbox on top of the wardrobe for the moment. The biscuit tin contains a small key and the glass eye of a teddy bear. You put the key into your pocket and close the tin again, with the glass eye still in it, and put the tin back into the trunk. With the key you unlock the cupboard, in which you find the teddy bear itself. You fetch the hatbox down from the wardrobe, put the teddy bear into it and then put the hatbox into the suitcase, next to the album. You close the suitcase and push it under the bed. The key you hang on the nail by the door. Finally you close the lid of the trunk and push the trunk right up against the doors of the cupboard, so that they can no longer be opened. Which object directly contains the teddy bear at the end? Answer with the name of one object in the room (one word).
+
+Answer: **hatbox** (text)
+Also accepted (free answer): hat box | box
+
+*Note: End state (simulated): teddy bear in the hatbox, hatbox and album in the suitcase, suitcase under the bed; glass eye in the biscuit tin, tin in the trunk; trunk in front of the cupboard; key on the nail. Tempting: cupboard (where it was found) or suitcase (the outer container). Why a strong model may fail: nested containers; the hatbox is parked on the wardrobe in between.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: hatbox | hat box | box
+
+### T6-024 — tier 6 — draft, tier6, end-state
+
+**Base**
+
+> You are tidying your grandparents' attic. At the start a big trunk and an empty suitcase stand on the floor, and a locked cupboard stands against the wall. This is what you do, in this order. First you open the trunk and take out the two things that are in it, a hatbox and a photo album. You put the album into the suitcase. In the hatbox you find a biscuit tin; you take it out and put the empty hatbox on top of the wardrobe for the moment. The biscuit tin contains a small key and the glass eye of a teddy bear. You put the key into your pocket and close the tin again, with the glass eye still in it, and put the tin back into the trunk. With the key you unlock the cupboard, in which you find the teddy bear itself. You fetch the hatbox down from the wardrobe, put the teddy bear into it and then put the hatbox into the suitcase, next to the album. You close the suitcase and push it under the bed. The key you hang on the nail by the door. Finally you close the lid of the trunk and push the trunk right up against the doors of the cupboard, so that they can no longer be opened. Under which piece of furniture is the photo album at the end? Answer with the name of one object in the room (one word).
+
+Answer: **bed** (text)
+
+*Note: End state (simulated): teddy bear in the hatbox, hatbox and album in the suitcase, suitcase under the bed; glass eye in the biscuit tin, tin in the trunk; trunk in front of the cupboard; key on the nail. Tempting: wardrobe (the hatbox was there for a while) or 'trunk' (where the album started).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: bed
+
+### T6-025 — tier 6 — draft, tier6, end-state
+
+**Base**
+
+> You are tidying your grandparents' attic. At the start a big trunk and an empty suitcase stand on the floor, and a locked cupboard stands against the wall. This is what you do, in this order. First you open the trunk and take out the two things that are in it, a hatbox and a photo album. You put the album into the suitcase. In the hatbox you find a biscuit tin; you take it out and put the empty hatbox on top of the wardrobe for the moment. The biscuit tin contains a small key and the glass eye of a teddy bear. You put the key into your pocket and close the tin again, with the glass eye still in it, and put the tin back into the trunk. With the key you unlock the cupboard, in which you find the teddy bear itself. You fetch the hatbox down from the wardrobe, put the teddy bear into it and then put the hatbox into the suitcase, next to the album. You close the suitcase and push it under the bed. The key you hang on the nail by the door. Finally you close the lid of the trunk and push the trunk right up against the doors of the cupboard, so that they can no longer be opened. The glass eye is to be fixed to the teddy bear again. Which big object do you have to open to get at the glass eye? Answer with the name of one object in the room (one word).
+
+Answer: **trunk** (text)
+Also accepted (free answer): chest
+
+*Note: End state (simulated): teddy bear in the hatbox, hatbox and album in the suitcase, suitcase under the bed; glass eye in the biscuit tin, tin in the trunk; trunk in front of the cupboard; key on the nail. The eye went back into the trunk inside the tin. Tempting: suitcase (where the teddy bear is) or cupboard.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: trunk | chest
+
+### T6-026 — tier 6 — draft, tier6, count, computed
+
+**Base**
+
+> In a disused railway signal box four big levers stand in a row: a red one, a blue one, a green one and a yellow one. Each lever is either up or down; at the moment all four are up. Pulling the yellow lever down would open the gate of the yard, and that is what you want. The levers are interlocked, and a brass plate on the wall states the rules. The red lever can always be moved. The blue lever can be moved only while the red lever is down. The green lever can be moved only while the blue lever is down and the red lever is up. The yellow lever can be moved only while the green lever is down and both the red and the blue lever are up. 'Moving' a lever means pulling it down or pushing it up once; only one lever can be moved at a time. What is the smallest number of lever movements after which the yellow lever is down? Answer with a number.
+
+Answer: **8** (number)
+
+*Note: Solution path (the only shortest one, found by exhaustive search): 1. red, 2. blue, 3. red, 4. green, 5. red, 6. blue, 7. red, 8. yellow. At the end green and yellow are down, red and blue are up. Tempting: 4 (one movement per lever) or 6. Why a strong model may fail: the plan needs the red and blue levers to be moved back and forth; it has to be planned backwards from the yellow lever.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### T6-027 — tier 6 — draft, tier6, own, computed
+
+**Base**
+
+> In a disused railway signal box four big levers stand in a row: a red one, a blue one, a green one and a yellow one. Each lever is either up or down; at the moment all four are up. Pulling the yellow lever down would open the gate of the yard, and that is what you want. The levers are interlocked, and a brass plate on the wall states the rules. The red lever can always be moved. The blue lever can be moved only while the red lever is down. The green lever can be moved only while the blue lever is down and the red lever is up. The yellow lever can be moved only while the green lever is down and both the red and the blue lever are up. 'Moving' a lever means pulling it down or pushing it up once; only one lever can be moved at a time. You use the smallest possible number of lever movements. How many of them are movements of the red lever? Answer with a number.
+
+Answer: **4** (number)
+
+*Note: Solution path (the only shortest one, found by exhaustive search): 1. red, 2. blue, 3. red, 4. green, 5. red, 6. blue, 7. red, 8. yellow. At the end green and yellow are down, red and blue are up. The red lever is moved 4 times. Tempting: 1 or 2.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### T6-028 — tier 6 — draft, tier6, end-state, computed
+
+**Base**
+
+> In a disused railway signal box four big levers stand in a row: a red one, a blue one, a green one and a yellow one. Each lever is either up or down; at the moment all four are up. Pulling the yellow lever down would open the gate of the yard, and that is what you want. The levers are interlocked, and a brass plate on the wall states the rules. The red lever can always be moved. The blue lever can be moved only while the red lever is down. The green lever can be moved only while the blue lever is down and the red lever is up. The yellow lever can be moved only while the green lever is down and both the red and the blue lever are up. 'Moving' a lever means pulling it down or pushing it up once; only one lever can be moved at a time. You use the smallest possible number of lever movements. How many of the four levers are down at the moment when the gate opens? Answer with a number.
+
+Answer: **2** (number)
+
+*Note: Solution path (the only shortest one, found by exhaustive search): 1. red, 2. blue, 3. red, 4. green, 5. red, 6. blue, 7. red, 8. yellow. At the end green and yellow are down, red and blue are up. Tempting: 4 or 1.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### T6-029 — tier 6 — draft, tier6, own, computed
+
+**Base**
+
+> In a disused railway signal box four big levers stand in a row: a red one, a blue one, a green one and a yellow one. Each lever is either up or down; at the moment all four are up. Pulling the yellow lever down would open the gate of the yard, and that is what you want. The levers are interlocked, and a brass plate on the wall states the rules. The red lever can always be moved. The blue lever can be moved only while the red lever is down. The green lever can be moved only while the blue lever is down and the red lever is up. The yellow lever can be moved only while the green lever is down and both the red and the blue lever are up. 'Moving' a lever means pulling it down or pushing it up once; only one lever can be moved at a time. You use the smallest possible number of lever movements. Which lever do you move in the fourth movement? Answer with its colour (one word).
+
+Answer: **green** (text)
+Also accepted (free answer): green lever | the green lever
+
+*Note: Solution path (the only shortest one, found by exhaustive search): 1. red, 2. blue, 3. red, 4. green, 5. red, 6. blue, 7. red, 8. yellow. At the end green and yellow are down, red and blue are up. The fourth movement is the green lever. Tempting: yellow (fourth lever in the row) or blue. Why a strong model may fail: the whole plan has to be worked out before the fourth step is known.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: green | green lever | the green lever
+
+### T6-030 — tier 6 — draft, tier6, useless
+
+**Base**
+
+> The caretaker has locked you in by mistake and gone home. You are in his office and need the key of the front door. On his desk lies a sheet with his notes, which you read carefully. "The front-door key is in the cash box. The cash box is in the bottom drawer of the desk, and that drawer is always locked. The small key that opens the cash box hangs on a ring in the wall cupboard, together with the silver key for the bicycle shed in the yard. The desk drawer is opened with the brass key, which I keep in the tea tin on the top shelf of the wall cupboard. The wall cupboard is locked as well; its iron key hangs on the hook by the window." You look around: the iron key does hang on the hook by the window. The window itself is barred, and the telephone is dead. Which of the keys mentioned in the notes do you never need in order to get out of the building? Answer with the one word that describes it (its material or its size).
+
+Answer: **silver** (text)
+Also accepted (free answer): silver key | the silver key
+
+*Note: Solution path: 1. take the iron key from the hook and unlock the wall cupboard; 2. take the ring with the small key and the brass key from the tea tin; 3. unlock the desk drawer with the brass key; 4. unlock the cash box with the small key; 5. take the front-door key. The silver key belongs to the bicycle shed in the yard and is never needed. Tempting: small or brass.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: silver | silver key | the silver key
+
+### T6-031 — tier 6 — draft, tier6, chain-first
+
+**Base**
+
+> The caretaker has locked you in by mistake and gone home. You are in his office and need the key of the front door. On his desk lies a sheet with his notes, which you read carefully. "The front-door key is in the cash box. The cash box is in the bottom drawer of the desk, and that drawer is always locked. The small key that opens the cash box hangs on a ring in the wall cupboard, together with the silver key for the bicycle shed in the yard. The desk drawer is opened with the brass key, which I keep in the tea tin on the top shelf of the wall cupboard. The wall cupboard is locked as well; its iron key hangs on the hook by the window." You look around: the iron key does hang on the hook by the window. The window itself is barred, and the telephone is dead. Which key do you have to use first? Answer with the one word that describes it (its material or its size).
+
+Answer: **iron** (text)
+Also accepted (free answer): iron key
+
+*Note: Solution path: 1. take the iron key from the hook and unlock the wall cupboard; 2. take the ring with the small key and the brass key from the tea tin; 3. unlock the desk drawer with the brass key; 4. unlock the cash box with the small key; 5. take the front-door key. The silver key belongs to the bicycle shed in the yard and is never needed. Tempting: brass (the notes mention it late, for the drawer).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: iron | iron key
+
+### T6-032 — tier 6 — draft, tier6, count
+
+**Base**
+
+> The caretaker has locked you in by mistake and gone home. You are in his office and need the key of the front door. On his desk lies a sheet with his notes, which you read carefully. "The front-door key is in the cash box. The cash box is in the bottom drawer of the desk, and that drawer is always locked. The small key that opens the cash box hangs on a ring in the wall cupboard, together with the silver key for the bicycle shed in the yard. The desk drawer is opened with the brass key, which I keep in the tea tin on the top shelf of the wall cupboard. The wall cupboard is locked as well; its iron key hangs on the hook by the window." You look around: the iron key does hang on the hook by the window. The window itself is barred, and the telephone is dead. How many locks do you have to unlock before you hold the front-door key in your hand? Answer with a number.
+
+Answer: **3** (number)
+
+*Note: Solution path: 1. take the iron key from the hook and unlock the wall cupboard; 2. take the ring with the small key and the brass key from the tea tin; 3. unlock the desk drawer with the brass key; 4. unlock the cash box with the small key; 5. take the front-door key. The silver key belongs to the bicycle shed in the yard and is never needed. Locks: wall cupboard, desk drawer, cash box = 3. Tempting: 4 (front door included) or 2.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T6-033 — tier 6 — draft, tier6, chain-last
+
+**Base**
+
+> The caretaker has locked you in by mistake and gone home. You are in his office and need the key of the front door. On his desk lies a sheet with his notes, which you read carefully. "The front-door key is in the cash box. The cash box is in the bottom drawer of the desk, and that drawer is always locked. The small key that opens the cash box hangs on a ring in the wall cupboard, together with the silver key for the bicycle shed in the yard. The desk drawer is opened with the brass key, which I keep in the tea tin on the top shelf of the wall cupboard. The wall cupboard is locked as well; its iron key hangs on the hook by the window." You look around: the iron key does hang on the hook by the window. The window itself is barred, and the telephone is dead. Which key is the last one you have to use before you hold the front-door key in your hand? Answer with the one word that describes it (its material or its size).
+
+Answer: **small** (text)
+Also accepted (free answer): small key | the small key
+
+*Note: Solution path: 1. take the iron key from the hook and unlock the wall cupboard; 2. take the ring with the small key and the brass key from the tea tin; 3. unlock the desk drawer with the brass key; 4. unlock the cash box with the small key; 5. take the front-door key. The silver key belongs to the bicycle shed in the yard and is never needed. The cash box is the last lock, and it is opened with the small key. Tempting: brass (the last key the notes explain) or iron (the last key mentioned).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: small | small key | the small key
+
+### T6-034 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You have climbed the church tower and stand in the clock room, directly behind the big dial, which is made of milky glass. The dial looks west, over the market square. From where you stand, inside the tower, you look at its back: you can see the shadows of the two hands through the glass, but no numerals. Seen from your side, the hands look exactly like a clock showing twenty to three. Two bell ropes hang down in front of you, one at each side of the dial: the rope on your left has a red grip, the rope on your right a blue grip. Along the wall on your right-hand side stands a long workbench; at the end of it that is nearest to the dial a vice is mounted, and at its far end stands a grindstone. A note from the sexton is pinned to the door: "For the hour bell, pull the rope that is on the right-hand side of the dial for somebody who looks up at the tower from the market square. The hatch to the bell chamber is in the ceiling exactly above the east end of the workbench." What time does the clock show to the people in the market square? It is morning. Answer as H:MM.
+
+Answer: **9:20** (text)
+Also accepted (free answer): 09:20 | 9:20 am | 9:20 a.m | 9.20
+
+*Note: Solution: seen from behind, a clock face is mirrored, so 2:40 from inside is 12:00 - 2:40 = 9:20 from outside. Somebody on the square looks east at the tower; his right is south. You look west at the dial from inside; south is on your left, so it is the rope with the red grip. The workbench runs along the north wall (your right); its end nearest the dial is the west end, so the east end is the far end with the grindstone. Tempting: 2:40. Why a strong model may fail: the dial is read from behind, which mirrors it.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 9:20 | 09:20 | 9:20 am | 9:20 a.m | 9.20
+
+### T6-035 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You have climbed the church tower and stand in the clock room, directly behind the big dial, which is made of milky glass. The dial looks west, over the market square. From where you stand, inside the tower, you look at its back: you can see the shadows of the two hands through the glass, but no numerals. Seen from your side, the hands look exactly like a clock showing twenty to three. Two bell ropes hang down in front of you, one at each side of the dial: the rope on your left has a red grip, the rope on your right a blue grip. Along the wall on your right-hand side stands a long workbench; at the end of it that is nearest to the dial a vice is mounted, and at its far end stands a grindstone. A note from the sexton is pinned to the door: "For the hour bell, pull the rope that is on the right-hand side of the dial for somebody who looks up at the tower from the market square. The hatch to the bell chamber is in the ceiling exactly above the east end of the workbench." What colour is the grip of the rope for the hour bell? Answer with one word.
+
+Answer: **red** (text)
+
+*Note: Solution: seen from behind, a clock face is mirrored, so 2:40 from inside is 12:00 - 2:40 = 9:20 from outside. Somebody on the square looks east at the tower; his right is south. You look west at the dial from inside; south is on your left, so it is the rope with the red grip. The workbench runs along the north wall (your right); its end nearest the dial is the west end, so the east end is the far end with the grindstone. Tempting: blue (right = right).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: red
+
+### T6-036 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You have climbed the church tower and stand in the clock room, directly behind the big dial, which is made of milky glass. The dial looks west, over the market square. From where you stand, inside the tower, you look at its back: you can see the shadows of the two hands through the glass, but no numerals. Seen from your side, the hands look exactly like a clock showing twenty to three. Two bell ropes hang down in front of you, one at each side of the dial: the rope on your left has a red grip, the rope on your right a blue grip. Along the wall on your right-hand side stands a long workbench; at the end of it that is nearest to the dial a vice is mounted, and at its far end stands a grindstone. A note from the sexton is pinned to the door: "For the hour bell, pull the rope that is on the right-hand side of the dial for somebody who looks up at the tower from the market square. The hatch to the bell chamber is in the ceiling exactly above the east end of the workbench." Which object stands on the workbench directly under the hatch to the bell chamber? Answer with the name of one object in the room (one word).
+
+Answer: **grindstone** (text)
+Also accepted (free answer): grinding stone | whetstone
+
+*Note: Solution: seen from behind, a clock face is mirrored, so 2:40 from inside is 12:00 - 2:40 = 9:20 from outside. Somebody on the square looks east at the tower; his right is south. You look west at the dial from inside; south is on your left, so it is the rope with the red grip. The workbench runs along the north wall (your right); its end nearest the dial is the west end, so the east end is the far end with the grindstone. Tempting: vice. Why a strong model may fail: the compass directions inside the room have to be derived from the fact that the dial looks west.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: grindstone | grinding stone | whetstone
+
+### T6-037 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You have gone down into your uncle's wine cellar. The door is behind you. In the middle of the cellar stands a single wine rack that is open on both sides, so that every bottle can be seen and taken out from the front and from the back. You have walked round it and now stand behind the rack, looking through it towards the door. In the top row there are seven bottles; read from left to right from where you stand, their labels show the years 1961, 1975, 1982, 1990, 2003, 2011 and 2015. When you came in, you noticed chalk letters on the flagstones along the two side walls, starting at the door in each case: A, B, C, D, E along the wall that was on your left as you came in, and P, Q, R, S, T along the wall that was on your right as you came in. Your uncle has written to you: "Take the bottle that is third from the left in the top row, counted as I see the rack when I come in through the door. And should the door ever fall shut, the spare key lies under the fourth flagstone from the door, along the wall that is on your left when you walk out of the cellar." Which year is on the label of the bottle your uncle means? Answer with the year as a number.
+
+Answer: **2003** (number)
+
+*Note: Solution: seen from the door, the row is reversed: 2015, 2011, 2003, ...; the third from the left is 2003. Walking out, you face the other way, so the wall on your left is the wall that was on your right when you came in: P, Q, R, S, T; the fourth stone is S. Tempting: 1982 (third from the left as you stand).*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2003
+
+### T6-038 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You have gone down into your uncle's wine cellar. The door is behind you. In the middle of the cellar stands a single wine rack that is open on both sides, so that every bottle can be seen and taken out from the front and from the back. You have walked round it and now stand behind the rack, looking through it towards the door. In the top row there are seven bottles; read from left to right from where you stand, their labels show the years 1961, 1975, 1982, 1990, 2003, 2011 and 2015. When you came in, you noticed chalk letters on the flagstones along the two side walls, starting at the door in each case: A, B, C, D, E along the wall that was on your left as you came in, and P, Q, R, S, T along the wall that was on your right as you came in. Your uncle has written to you: "Take the bottle that is third from the left in the top row, counted as I see the rack when I come in through the door. And should the door ever fall shut, the spare key lies under the fourth flagstone from the door, along the wall that is on your left when you walk out of the cellar." Which chalk letter is on the flagstone under which the spare key lies? Answer with one letter.
+
+Answer: **S** (text)
+Also accepted (free answer): letter S | stone S
+
+*Note: Solution: seen from the door, the row is reversed: 2015, 2011, 2003, ...; the third from the left is 2003. Walking out, you face the other way, so the wall on your left is the wall that was on your right when you came in: P, Q, R, S, T; the fourth stone is S. Tempting: D (left wall on coming in).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: S | letter S | stone S
+
+### T6-039 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You help out in a small theatre. In the theatre, 'stage left' means the side of the stage that is on the left for an actor who stands on the stage and faces the audience. At the moment you sit in the middle of the auditorium and look at the stage. In the wings on your left you can see a yellow chest, in the wings on your right a green chest. Later you are in the dressing room and stand in front of its only door, facing it, about to go out. On the wall to the left of the door, as you stand there, is a brass switch; on the wall to the right of the door is a black switch. The stage manager has left you a note: "The crown for the last act is in the chest at stage left. And when you leave the dressing room, please turn off the heater: its switch is the one on the right of the door as you come into the dressing room from the corridor." What colour is the chest in which the crown lies? Answer with one word.
+
+Answer: **green** (text)
+
+*Note: Solution: stage left is the actor's left; the actor faces you, so it is on your right: the green chest. Somebody coming in from the corridor faces the opposite way to you; his right is your left: the brass switch. Tempting: yellow.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: green
+
+### T6-040 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You help out in a small theatre. In the theatre, 'stage left' means the side of the stage that is on the left for an actor who stands on the stage and faces the audience. At the moment you sit in the middle of the auditorium and look at the stage. In the wings on your left you can see a yellow chest, in the wings on your right a green chest. Later you are in the dressing room and stand in front of its only door, facing it, about to go out. On the wall to the left of the door, as you stand there, is a brass switch; on the wall to the right of the door is a black switch. The stage manager has left you a note: "The crown for the last act is in the chest at stage left. And when you leave the dressing room, please turn off the heater: its switch is the one on the right of the door as you come into the dressing room from the corridor." Which switch turns off the heater? Answer with the one word that describes it.
+
+Answer: **brass** (text)
+Also accepted (free answer): brass switch | the brass switch
+
+*Note: Solution: stage left is the actor's left; the actor faces you, so it is on your right: the green chest. Somebody coming in from the corridor faces the opposite way to you; his right is your left: the brass switch. Tempting: black.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: brass | brass switch | the brass switch
+
+### T6-041 — tier 6 — draft, tier6, own, perspective, computed
+
+**Base**
+
+> You are to put a letter on Mia's desk while the classroom is empty. You stand at the back of the room and look towards the blackboard. In front of you are three rows of five desks each. The teacher's seating plan, which you hold in your hand, is drawn as the teacher sees the class when she stands at the blackboard and faces the pupils: the front row is at the bottom of the sheet, nearest to her. According to the plan, Mia sits in the front row, on the second desk from the left. The pupils have left things on the desks. On the five desks of the row nearest to the blackboard you see, from left to right as you look from the back of the room: a cactus, a globe, a microscope, a dictionary and an abacus. In the row nearest to you there are, from left to right: a pencil case, a lunch box, a recorder, a ruler and a cap. Which object is on Mia's desk? Answer with the name of one object in the room (one word).
+
+Answer: **dictionary** (text)
+
+*Note: Solution: the front row is the row nearest to the blackboard. The plan is drawn from the teacher's side, so her left is your right: the second desk from the teacher's left is the second from the right for you, the desk with the dictionary. Tempting: globe (second from your left) or lunch box (the row nearest to you taken as the front row). Why a strong model may fail: two inversions: which row is 'front' and which side is 'left'.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: dictionary
+
+### T6-042 — tier 6 — draft, tier6, count, world-knowledge
+
+**Base**
+
+> In the workshop a box of small parts has tipped over, and everything lies mixed up in the sawdust under the workbench: 12 steel screws, 8 brass screws, 5 copper nails, 6 iron washers, 4 wooden dowels, 10 plastic wall plugs and 7 aluminium rivets. You cannot be bothered to pick them out one by one, so you take the strong magnet from the tool wall and sweep it slowly and closely over the whole floor under the bench, until nothing more jumps onto it. How many parts hang on the magnet? Answer with a number.
+
+Answer: **18** (number)
+
+*Note: Solution: only steel and iron are attracted: 12 + 6 = 18. Brass, copper and aluminium are metals but not magnetic; wood and plastic are not either. Tempting: 38 (all metal parts) or 52 (everything). Why a strong model may fail: 'metal' is equated with 'magnetic'.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 18
+
+### T6-043 — tier 6 — draft, tier6, count, world-knowledge
+
+**Base**
+
+> After the storm the cellar is flooded chest-deep with still, muddy water, and you cannot see what is under the surface. Before the flood the following things were standing or lying loose on the cellar floor: 3 empty, tightly closed plastic canisters, 4 wooden planks, 1 football, 10 bricks, 2 iron dumbbells, a stack of 6 ceramic floor tiles and 5 loose wine corks.Nothing was tied down, and nothing is caught under anything else. How many of these objects can you see floating on the water? Answer with a number.
+
+Answer: **13** (number)
+
+*Note: Solution: canisters 3 + planks 4 + football 1 + corks 5 = 13 float; bricks, dumbbells and tiles stay on the bottom. Tempting: 31 (everything), 8 (corks forgotten). Why a strong model may fail: it is an addition task in which each kind of object must first be sorted by an unstated property.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 13
+
+### T6-044 — tier 6 — draft, tier6, chain-first
+
+**Base**
+
+> The bulb in the ceiling socket of your windowless cellar room has burnt out, and you need light down there to read the electricity meter. There is no wall socket in the cellar, and you have no torch, no candles and no matches; the battery of your phone is flat. You go through the flat to find a replacement. The hall is lit by a flat panel whose light-emitting diodes are sealed in; nothing can be unscrewed from it. The refrigerator has a tiny bulb the size of a thumbnail, much too small for an ordinary socket. The aquarium is lit by a long tube. The desk lamp in the study has an ordinary screw-in bulb, the same kind as the one that has burnt out, and it works. The cooker hood has two small spotlights that are pushed into their sockets with two pins. From which object do you take the bulb for the cellar? Answer with the name of one object in the room (one word).
+
+Answer: **lamp** (text)
+Also accepted (free answer): desk lamp | desklamp | the desk lamp
+
+*Note: Solution path: 1. switch off the desk lamp and unscrew its bulb; 2. screw it into the ceiling socket in the cellar; 3. switch on the light and read the meter. Why the others fail: hall panel (sealed diodes), refrigerator (bulb far too small), aquarium (tube), cooker hood (pin sockets); the desk lamp itself cannot be used in the cellar because there is no wall socket. Tempting: refrigerator. Why a strong model may fail: several things 'have a bulb'; only one has the right kind.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: lamp | desk lamp | desklamp | the desk lamp
+
+### T6-045 — tier 6 — draft, tier6, resources, computed
+
+**Base**
+
+> In the old inn a small hand lift, a dumb waiter, runs between the cellar and the kitchen. A sign says that it carries at most 12 kg; if it is loaded with more, it does not move. You are in the cellar and have to send six things up to the kitchen: a sack of flour weighing 10 kg, a crate of apples weighing 8 kg, a ham weighing 7 kg, a box of onions weighing 5 kg, a jar of pickles weighing 4 kg and a bag of salt weighing 2 kg. Nothing can be divided, and the cook upstairs unloads the lift each time. What is the smallest number of times the loaded lift has to travel up? Answer with a number.
+
+Answer: **3** (number)
+
+*Note: Solution: 36 kg in loads of at most 12 kg need at least 3 trips, and 3 are enough: flour + salt (12), apples + pickles (12), ham + onions (12). Tempting: 4 (greedy loading: flour + salt, apples + pickles is found, but ham and onions are sent separately, or 10 + 2, 8, 7 + 5, 4). Why a strong model may fail: the three loads must each be filled exactly.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+## scene
+
+### CS-801 — tier 3 — draft
+
+**Base**
+
+> Lena, 31, is alone in a small changing room that is locked from the inside. She is trying on a red coat in front of a full-length mirror. In the mirror she sees a woman in a red coat with a large price tag still hanging from the left sleeve, and she thinks that this looks rather careless. Who should remove the price tag?
+
+Answer list: the shop assistant · **Lena** ✔ · the other woman in the mirror · nobody, the tag belongs to the coat · cannot be determined
+
+*Note: the woman in the mirror is Lena herself*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Lena, 31, is alone in a small changing room that is locked from the inside. She is trying on a red coat in front of a full-length mirror. In the mirror she sees a woman in a red coat with a large price tag still hanging from the left sleeve, and she thinks that this looks rather careless. Who should remove the price tag? Answer with the name.
+  answer: Lena
+
+### CS-802 — tier 3 — draft
+
+**Base**
+
+> On a warm summer evening, Tom puts six ice cubes into a large mug of freshly boiled tea. One minute later he adds two more ice cubes. Then he sets a timer, sits down on his balcony with the mug next to him and reads the newspaper for 15 minutes. How many ice cubes are in the mug when the timer rings?
+
+Answer list: 8 · 6 · 4 · 2 · **0** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (number):
+  answer: 0
+
+### CS-803 — tier 2 — draft
+
+**Base**
+
+> Mark comes back from a three-month research stay in Antarctica, where he had no news access. His sister calls him and chats about many things: their old cat has learned to open the fridge, she has painted her kitchen bright yellow, the local bakery now sells vegan croissants, and, almost in passing, that their father has been in hospital since yesterday after a serious car accident. Which piece of news will most likely concern Mark the most?
+
+Answer list: the cat that opens the fridge · the yellow kitchen · the vegan croissants · **their father's accident** ✔ · that he had no news access
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### CS-804 — tier 2 — draft
+
+**Base**
+
+> A woman stands on a bathroom scale holding a 5 kg bag of potatoes, and the scale shows 70 kg. She puts the bag on the floor next to the scale, picks up her 3 kg cat and steps back onto the scale while holding the cat. What weight does the scale show now, in kg?
+
+Answer: **68** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 68
+
+### CS-805 — tier 3 — draft
+
+**Base**
+
+> Five paper cups stand upright on a kitchen table, stacked inside each other; they slide apart easily. Ravi ties a string firmly to the rim of the top cup only. He slowly pulls the string straight up until that cup hangs freely in the air above the table, and then he walks with it out into the garden. How many cups are in the garden now?
+
+Answer list: 0 · **1** ✔ · 4 · 5 · cannot be determined (fixed order)
+
+*Note: only the top cup comes along. Reworded after calibration: a sideways pull would drag the whole stack.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (number):
+  answer: 1
+
+### CS-806 — tier 3 — draft
+
+**Base**
+
+> At 10:00, Clara, 82, who walks very slowly with a cane, sets off from her front door to the post office 600 m away. At 10:05 her grandson, 16, a fast cyclist, leaves the same door by bike. He first rides 8 km to a friend's house to fetch a parcel and then rides from there to the same post office. Who most likely reaches the post office first?
+
+Answer list: **Clara** ✔ · her grandson · both at about the same time · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > At 10:00, Clara, 82, who walks very slowly with a cane, sets off from her front door to the post office 600 m away. At 10:05 her grandson, 16, a fast cyclist, leaves the same door by bike. He first rides 8 km to a friend's house to fetch a parcel and then rides from there to the same post office. Who most likely reaches the post office first? Answer with the name.
+  answer: Clara
+
+### CS-807 — tier 2 — draft
+
+**Base**
+
+> Five closed boxes stand on a shelf. At least one of them contains a key. Box 1 is empty and box 5 is empty. Which box contains a key?
+
+Answer list: box 2 · box 3 · box 4 · **cannot be determined** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-808 — tier 2 — draft
+
+**Base**
+
+> In Germany (right-hand traffic) you sit in the front passenger seat of a normal car, next to the driver. The driver turns her head to look out of the window on her own side. Which side of the car is she looking out of?
+
+Answer list: **the left side** ✔ · the right side · the front · the back (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-809 — tier 2 — draft
+
+**Base**
+
+> On a windless day, Sam lets a ripe tomato fall from the window of his fifth-floor flat. Directly below his window is a flower bed. At that moment his neighbour on the second floor, directly below Sam, opens a large umbrella on her balcony that completely covers the flower bed from above. Where does the tomato most likely land?
+
+Answer list: in the flower bed · **on the umbrella** ✔ · on Sam's window sill · on the street
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-810 — tier 2 — draft
+
+**Base**
+
+> Jonas puts his phone into his jacket pocket and hangs the jacket in the hall. His sister borrows the jacket to go to the bakery, comes back and hangs it over a chair in the kitchen. Later his mother empties all the pockets of the jacket onto the hall table and puts the jacket into the washing machine. Where is Jonas's phone now?
+
+Answer list: in the jacket pocket in the kitchen · in the washing machine · **on the hall table** ✔ · at the bakery
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-811 — tier 3 — draft
+
+**Base**
+
+> A plane leaves Berlin at 10:00 local time and flies for 9 hours to New York. New York time is 6 hours behind Berlin time. What is the local time in New York when the plane lands? Answer as HH:MM.
+
+Answer: **13:00** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 13:00
+
+### CS-812 — tier 2 — draft
+
+**Base**
+
+> Mia is planning a surprise party for her husband and tells him that they are only going to a quiet dinner at a friend's house. Her husband has accidentally seen the party invitation on her laptop, but he has not told her and has not let anything show. What does Mia believe her husband expects for the evening?
+
+Answer list: **a quiet dinner at a friend's house** ✔ · a surprise party · nothing at all · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-813 — tier 3 — draft
+
+**Base**
+
+> Jana sits in the back of a car holding a helium balloon on a short string. All windows are closed. The car brakes hard. In which direction does the balloon move relative to the car?
+
+Answer list: forwards · **backwards** ✔ · it does not move · straight down (fixed order)
+
+*Note: the air is pushed forward, the lighter-than-air balloon moves backward*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-814 — tier 2 — draft
+
+**Base**
+
+> Today is Emma's 30th birthday. Exactly 10 years ago, her brother was half as old as Emma was at that time. How old is her brother today?
+
+Answer: **20** (number)
+
+*Note: traps: 15, 25*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 20
+
+### CS-815 — tier 3 — draft
+
+**Base**
+
+> Ben, a careful and honest man, borrows his neighbour's ladder, uses it to clean his gutters and puts it back exactly where it was. The next morning his neighbour finds the ladder broken on the ground after a storm blew it over during the night, which also knocked over several garden chairs in the street. Who most likely broke the ladder?
+
+Answer list: Ben · the neighbour · **the storm** ✔ · a burglar · cannot be determined
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### CS-816 — tier 3 — draft
+
+**Base**
+
+> Pia pours a full litre of water into an empty 2-litre bottle, closes it tightly and lays it on its side in the freezer. After two days she takes it out. Ignoring the bottle itself, roughly how much does its content weigh now?
+
+Answer list: about 0.9 kg · **about 1 kg** ✔ · about 1.1 kg · about 2 kg (fixed order)
+
+*Note: mass does not change when water freezes (volume does)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-061 — tier 3 — draft
+
+**Base**
+
+> Nina's phone shows 10 % battery when she goes to bed at 22:00. She plugs the charging cable into the phone as she does every night; the charger normally adds about 15 % per hour. The other end of the cable, however, lies on the carpet next to the socket and is not plugged in. The phone stays switched on. What does the battery display show at 6:00 the next morning?
+
+Answer list: 100 % · about 70 % · **10 % or less** ✔ · cannot be determined (fixed order)
+
+*Note: nothing is charged without the socket; trap: 100 % (8 h x 15 %)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-062 — tier 3 — draft
+
+**Base**
+
+> Tom wants to cool down a pot of broth. He ladles 6 ladles of 200 ml each into a colander (a bowl with many holes for draining pasta) that stands in the empty kitchen sink, and one minute later he adds 2 more ladles. How much broth is in the colander after another minute?
+
+Answer list: **0 ml** ✔ · 400 ml · 1200 ml · 1600 ml (fixed order)
+
+*Note: the broth runs through the holes into the sink; trap: 1600 ml*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (number):
+  > Tom wants to cool down a pot of broth. He ladles 6 ladles of 200 ml each into a colander (a bowl with many holes for draining pasta) that stands in the empty kitchen sink, and one minute later he adds 2 more ladles. How many millilitres of broth are in the colander after another minute?
+  answer: 0
+
+### NEW-063 — tier 2 — draft
+
+**Base**
+
+> Maria's birthday cake has 8 burning candles on it. She blows once, and 5 of the candles go out. Nobody touches the cake. How many candles are on the cake now?
+
+Answer: **8** (number)
+
+*Note: the candles that went out are still on the cake; trap: 3*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### NEW-064 — tier 2 — draft
+
+**Base**
+
+> Five people sit around the table at a family dinner. On the wall hang 3 painted portraits of ancestors, a large mirror reflects two of the diners, and on the television a talk show with 4 guests is running. How many people are physically present in the room?
+
+Answer: **5** (number)
+
+*Note: portraits, reflections and people on television do not count; traps: 7, 14*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### NEW-065 — tier 3 — draft
+
+**Base**
+
+> In a paddock stand 3 horses and a dog; all of them stand on all four legs. The farmer sits in the saddle of one of the horses, and his daughter stands next to him on the grass. How many legs are standing on the ground in total?
+
+Answer: **18** (number)
+
+*Note: 12 horse legs + 4 dog legs + 2 legs of the daughter; the farmer's legs are not on the ground; trap: 20*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 18
+
+### NEW-066 — tier 2 — draft
+
+**Base**
+
+> Ana's alarm clock is set to ring at 6:30 from Monday to Friday and is switched off at weekends. On Friday evening she goes to bed at midnight, very tired, and changes nothing. At what time does the alarm clock wake her on Saturday morning?
+
+Answer list: at 6:30 · at 7:30 · at 9:00 · **it does not ring on Saturday** ✔ (fixed order)
+
+*Note: Saturday is not a weekday; trap: 6:30*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-067 — tier 2 — draft
+
+**Base**
+
+> Jakob is 1.90 m tall and Emma is 1.60 m tall. They stand next to each other on a flat beach in the evening sun. Emma then climbs onto a wooden box that is 50 cm high. Whose head is higher above the sand now?
+
+Answer list: Jakob's · **Emma's** ✔ · both are at the same height · cannot be determined (fixed order)
+
+*Note: 1.60 + 0.50 = 2.10 m is more than 1.90 m; trap: Jakob (the taller person)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-068 — tier 2 — draft
+
+**Base**
+
+> A lift is on the 3rd floor of a building. It goes up 4 floors, then down 6 floors, then up 2 floors, and finally down 1 floor. A sign in the lift says that it holds at most 8 people. On which floor is the lift now? Answer with the number of the floor.
+
+Answer: **2** (number)
+
+*Note: 3 + 4 - 6 + 2 - 1 = 2; the capacity is irrelevant*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### T4-002 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> At Grandpa Otto's 80th birthday the whole family is gathered in the garden, 14 people in all: Otto, his wife, their 3 children with their 3 partners, and 6 grandchildren. Otto insists on taking the big family picture himself with his 40-year-old film camera, which has no self-timer. He lines everybody up in two rows so that nobody is hidden, looks through the viewfinder, waits until the two youngest have stopped pulling faces, and presses the shutter. The dog sits in front of the first row. How many people can be seen in this photograph?
+
+Answer list: 6 · 12 · **13** ✔ · 14 · 15 (fixed order)
+
+*Note: Solution: 13. The photographer is behind the camera and not in his own picture: 14 - 1. Unique: no self-timer, he looks through the viewfinder, nobody is hidden, the dog is not a person. Tempting: 14 (the family), 15 (with the dog). Why a strong model may fail: the count of 14 is given explicitly and verified by addition (1 + 1 + 3 + 3 + 6), so the model checks the arithmetic and stops.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-003 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Anna is cooking a three-course dinner in her flat on Saturday for her 6 closest friends from university. On Thursday Tom cancels because he has the flu. On Friday Mira asks whether she may bring her new boyfriend, and Anna happily agrees. Anna's husband is abroad on business all week, and the cat Mimi will, as always, watch from the windowsill. Everybody who is there on Saturday evening eats all three courses at the big table. How many places does Anna have to lay at the table?
+
+Answer list: 5 · 6 · **7** ✔ · 8 · 18 (fixed order)
+
+*Note: Solution: 7. Guests: 6 - 1 + 1 = 6, plus Anna herself, who eats too. Unique: the husband is away, the cat does not sit at the table, 'everybody who is there eats'. Tempting: 6 (guests only). Why a strong model may fail: the cook is the narrator of the scene, not an item in the list of people that is being added and subtracted.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-005 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> In the cup final the striker Marco plays the match of his life: he scores in the 4th minute and again in the 8th minute, a goal every four minutes. In the 10th minute he fouls the goalkeeper, is shown the red card and walks off the pitch. The match lasts the regular 90 minutes, and his team wins 5:3 in the end. How many goals does Marco score in this match?
+
+Answer list: **2** ✔ · 3 · 5 · 20 · 22 (fixed order)
+
+*Note: Solution: 2. A player who is sent off does not come back, so he scores nothing after the 10th minute. Unique: the red card is in the 10th minute, both goals came before. Tempting: 22 (90 / 4 rounded) or 20 (80 remaining minutes / 4), or 5 (all goals of his team). Why a strong model may fail: 'a goal every four minutes' plus '90 minutes' is a ready-made rate problem; the consequence of the red card is not spelled out.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-006 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Before sunrise Jonas walks alone to the small frozen pond behind his village. Fresh snow has fallen during the night, and when he arrives the path around the pond is completely untouched: not a single footprint anywhere. To warm up he starts walking round and round the pond in his new winter boots, size 44. After a few minutes he notices a line of fresh boot prints in the snow in front of him, leading in the same direction, and wonders who else is up so early. A few minutes later there are two lines of prints side by side, and a little later three. All of them look like size 44. How many other people have most likely walked around the pond this morning?
+
+Answer list: **0** ✔ · 1 · 2 · 3 · at least 4 (fixed order)
+
+*Note: Solution: 0. The snow was untouched when he arrived and he walks in circles: the prints are his own from earlier laps (one more line per lap, his own boot size). Unique: no other person is mentioned and the path was untouched. Tempting: 3 (three lines) or 1. Why a strong model may fail: the growing number of lines reads like a count of walkers; the model has to see that the observer creates the evidence himself.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-007 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Emre works the night shift as the only security guard in a locked office building. Shortly after midnight he sits in the control room in front of a row of monitors, his red thermos flask next to the keyboard, and eats an apple, although the company rules strictly forbid eating at the desk. That afternoon an electrician installed one more camera, and nobody has told Emre where it is mounted. Its live picture now appears on the last monitor: it shows, from behind and above, a man in a guard's uniform who sits at a desk in front of a row of monitors, with a red thermos flask next to his keyboard, biting into an apple. When Emre began his shift he checked every room and found the building empty, and the alarm system shows that no door has been opened since then. Who is the man on the last monitor most likely?
+
+Answer list: a burglar in a stolen uniform · a colleague who secretly stayed in the building · **Emre himself** ✔ · the electrician · a guard of the day shift on an old recording
+
+*Note: Solution: Emre himself; the new camera is mounted in the control room behind him. Unique: live picture, building empty and locked, same uniform, monitors, red thermos flask and apple. Tempting: a colleague or a burglar. Why a strong model may fail: the scene is told from Emre's point of view as an observation of somebody else; matching the details back to the observer is not prompted by any calculation.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-008 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> A coach with a tour group stops for half an hour at a waterfall. Before the stop the guide counted 31 passengers. One of them is Ms Lin, who is 1.60 m tall, has long black hair and wears glasses and a blue jacket. At the kiosk a cup of coffee is spilled over her jacket, so in the washroom she changes into the red raincoat from her bag, ties her hair back and puts her fogged-up glasses into her pocket. When everybody is back on the coach, the guide counts in a hurry and reaches only 30. Several passengers agree that 'the small woman with the glasses and the blue jacket' is not on board. For the next three hours all passengers, Ms Lin among them, search the paths along the river, and finally the police are called. Where is the missing woman most likely?
+
+Answer list: she has fallen into the river · she has left with a different coach · **she is one of the searchers** ✔ · she is still in the washroom · she has walked back to the last village
+
+*Note: Solution: she is one of the searchers: the 'missing' woman is Ms Lin, who changed her clothes and got back on; the guide simply miscounted. Unique: the description fits only Ms Lin before she changed, and the text says she is on board and searching. Tempting: the river or the washroom. Why a strong model may fail: the question presupposes that somebody is missing; the model must reject the premise by combining two details that are far apart.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-010 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Eva keeps exactly three keys on a single key ring: her house key, her car key and the key of her bicycle lock. On Friday evening her brother Jan borrows her car for the weekend. He is late, so Eva simply presses the key ring into his hand at the front door, and he drives 300 km to Munich. Later her flatmate lets her back into the flat. On Saturday morning the weather is perfect, 22 °C and no wind, and the market is only 2.5 km away, ten minutes by bicycle; Eva's bicycle stands locked in the courtyard. Where is the key of Eva's bicycle lock on Saturday morning?
+
+Answer list: in Eva's jacket pocket · in the bicycle lock · on the hook next to the flat door · **in Munich** ✔ · at the market
+
+*Note: Solution: in Munich. All three keys are on the one ring that Jan took with him. Unique: exactly one ring, handed over as a whole; the flatmate has to let Eva in. Tempting: jacket pocket or hook (where bicycle keys usually are). Why a strong model may fail: the story only talks about lending the car; that the other keys travel along must be inferred.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-012 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> On a rainy Sunday the brothers Jonas and Lukas play table tennis in the garage, just the two of them against each other. Jonas plays 7 sets and wins 4 of them; Lukas also plays 7 sets. Every set lasts exactly 6 minutes, and they take no breaks. For how many minutes do the brothers play table tennis that afternoon?
+
+Answer list: 18 · 24 · **42** ✔ · 84 · 168 (fixed order)
+
+*Note: Solution: 42. Both play the same 7 sets against each other: 7 x 6 minutes. Unique: only the two of them, against each other, no breaks. Tempting: 84 (7 + 7 sets). Why a strong model may fail: two separate counts of 7 are stated, which suggests adding them.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-013 — tier 4 — draft, tier4, type-A, control-pair
+
+**Base**
+
+> Four colleagues live in the same street and work in the same office, which is 30 km away. Each of them owns a car that uses exactly 6 litres of petrol per 100 km. Because their working hours differ, each of them drives alone in his or her own car. How many litres of petrol are used in total to bring all four colleagues from their street to the office on Tuesday morning?
+
+Answer list: 0.45 litres · 1.8 litres · 3.6 litres · **7.2 litres** ✔ · 24 litres (fixed order)
+
+*Note: Control: 4 cars x 30 km x 6 l / 100 km = 7.2 litres; here the computed answer is right.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options, tier 2
+- `altered-mcq` — altered, multiple choice, 5 options:
+  > Four colleagues live in the same street and work in the same office, which is 30 km away. Each of them owns a car that uses exactly 6 litres of petrol per 100 km. Since Monday they have been saving money: all four ride together in Tom's car, and the other three cars stay at home. How many litres of petrol are used in total to bring all four colleagues from their street to the office on Tuesday morning?
+  options: A. 0.45 litres · B. 1.8 litres ✔ · C. 3.6 litres · D. 7.2 litres · E. 24 litres
+  *note: Solution: 1.8 litres. Only one car drives the 30 km. Unique: all four in Tom's car, one way in the morning. Tempting: 7.2 (four people) or 0.45 (divided by four). Why a strong model may fail: 'each of them owns a car that uses 6 litres' primes a per-person calculation.*
+
+### T4-017 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Tina is 46, works in an office and has never trained for running. At the company sports day she sprints 100 metres in 15 seconds, and her colleagues talk her into entering the city marathon next month (42.195 km). One of them calculates that at her sprint speed she would need 1 hour and 45 minutes for the whole distance. If Tina really runs and reaches the finish, which finishing time is the most realistic?
+
+Answer list: about 50 minutes · about 1 hour 30 minutes · about 1 hour 45 minutes · about 2 hours · **clearly more than 3 hours** ✔ (fixed order)
+
+*Note: Solution: clearly more than 3 hours. Nobody keeps a sprint pace for 42 km; even the world's best need about two hours, and an untrained beginner needs four hours or more. Unique: all other options are at or below world-record level. Tempting: 1 hour 45 minutes (the calculation given in the text). Why a strong model may fail: the computed time is offered inside the text by a colleague and looks like the intended result.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-018 — tier 4 — draft, tier4, type-A, control-pair
+
+**Base**
+
+> On a moonless winter evening five friends sit in the windowless reading room of a mountain hut, each with a book: Ida with a crime novel, Omar with a cookbook, Pia with a travel guide, Sven with a volume of poems, and Hanna, who has been blind since birth, with a novel in Braille. All mobile phones lie switched off in a basket in the hall, as the hut rules demand, and there are no candles, lighters or torches in the room. At 21:00 the warden comes in and tells them that the generator will keep running for another 40 minutes before the light is switched off for the night. How many of the five friends can go on reading during these 40 minutes?
+
+Answer list: 0 · 1 · 4 · **5** ✔ (fixed order)
+
+*Note: Control: the light stays on, so all 5 can read; here the obvious answer is right.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options, tier 2
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > On a moonless winter evening five friends sit in the windowless reading room of a mountain hut, each with a book: Ida with a crime novel, Omar with a cookbook, Pia with a travel guide, Sven with a volume of poems, and Hanna, who has been blind since birth, with a novel in Braille. All mobile phones lie switched off in a basket in the hall, as the hut rules demand, and there are no candles, lighters or torches in the room. At 21:00 the generator fails, and the room is pitch dark for exactly 40 minutes. How many of the five friends can go on reading during these 40 minutes?
+  options: A. 0 · B. 1 ✔ · C. 4 · D. 5
+  *note: Solution: 1. Hanna reads Braille with her fingers and needs no light; the other four cannot read in total darkness. Unique: windowless room, moonless night, no phones or other light. Tempting: 0 ('nobody can read in the dark') or 4. Why a strong model may fail: 'pitch dark' triggers the answer 0; Hanna's blindness was mentioned as a description, not as a clue.*
+
+### T4-020 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Lisa keeps a paper diary. She writes exactly one page every day and uses both sides of every sheet; the entry for 1 March is on the front of the first sheet, the entry for 2 March on its back, and so on without a gap. Years later she is so embarrassed by what she wrote on 14 March that she tears the sheet with this entry out of the diary and burns it. Of how many days are the entries now missing from the diary?
+
+Answer list: 1 · **2** ✔ · 3 · 7 · 14 (fixed order)
+
+*Note: Solution: 2. The entry for 14 March is on the back of the seventh sheet, whose front carries 13 March; both are burnt. Unique: one page per day, both sides used, no gaps. Tempting: 1. Why a strong model may fail: the question follows the wording 'the entry of 14 March'; the second entry on the same sheet has to be worked out.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T5-036 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> On election Sunday the turnout in the house at Lindenweg 4 is 100 %: everybody who lives there and is entitled to vote goes to the polling station and puts exactly one ballot paper into the box. On the ground floor live Mr and Mrs Demir with their children Elif (12), Can (9) and Mert (4). On the first floor lives Mrs Vogel, an 81-year-old widow. On the second floor live the students Jonas (23) and Lea (22) with Lea's parrot. All of them are citizens and registered at this address. How many ballot papers from this house are in the box? Give the number.
+
+Answer: **5** (number)
+
+*Note: Solution: 5. Only the five adults vote (Mr and Mrs Demir, Mrs Vogel, Jonas, Lea); children of 12, 9 and 4 are not entitled to vote anywhere. Unique. Tempting: 8 (all residents). Why a strong model may fail: 'turnout 100 %' and a list of eight residents suggest 8.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### T5-037 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> For the class trip the school rents 3 minibuses. Each minibus has exactly 9 seats, the driver's seat included, and every person needs a seat of his or her own. The only adults who come along are the three teachers Ms Roth, Mr Kaya and Ms Lindner, and all three hold the driving licence for such a minibus. What is the largest number of pupils who can go on the trip? Give the number.
+
+Answer: **24** (number)
+
+*Note: Solution: 24. 3 x 9 = 27 seats, but the three teachers drive and each occupies one seat. Unique: the teachers are the only adults, and pupils cannot drive. Tempting: 27. Why a strong model may fail: the seats are counted, the people who are not pupils are not subtracted.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 24
+
+### T5-038 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> This morning a postman has 30 items for Birkenweg in his bag: 18 letters in sealed envelopes and 12 picture postcards. He delivers 5 of the sealed letters and 4 of the postcards in the first half of the street and then sits down on a bench for his break. He is a very curious man, but he would never open an envelope. How many of the messages that are still in his bag could he read during his break? Give the number.
+
+Answer: **8** (number)
+
+*Note: Solution: 8. Only the messages on the postcards can be read without opening anything: 12 - 4 = 8. Unique. Tempting: 21 (everything still in the bag) or 0. Why a strong model may fail: it needs the everyday fact that a postcard is open, applied after a subtraction.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### T5-039 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> Ms Albers teaches a class of 26 pupils. She turns to the blackboard and, with her back to the class and her eyes on the board, writes a long sentence. While she is writing, 9 pupils raise their right hand and 5 other pupils raise their left hand because they have a question; 2 of them put their hands down again before she has finished. How many raised hands does Ms Albers see while she is writing the sentence? Give the number.
+
+Answer: **0** (number)
+
+*Note: Solution: 0. She has her back to the class and looks at the board. Unique. Tempting: 14 or 12. Why a strong model may fail: the numbers form a small bookkeeping task; what she can see is not part of it.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 0
+
+### T5-040 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> On the garden fence sit 9 sparrows; between them stand 3 painted garden gnomes that the children have put there; and on the lawn below, 2 blackbirds are looking for worms. Mr Hoff comes out of the house and claps his hands loudly three times. One minute later, how many of these fourteen are most likely still in the place where they were? Give the number.
+
+Answer: **3** (number)
+
+*Note: Solution: 3. The birds fly away at the noise; the garden gnomes are figures and stay. Unique. Tempting: 0 ('all birds fly away') or 14. Why a strong model may fail: the gnomes are counted among 'these fourteen' as if they were animals.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T5-042 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> Mrs Kunz keeps 15 chickens in her garden: 8 hens, 2 roosters and 5 chicks that hatched last week. A hen of her breed lays one egg every day. She collects all the eggs of one week, from Monday to Sunday, and packs them into boxes of 6 for the market. How many full boxes does she get? Give the number.
+
+Answer: **9** (number)
+
+*Note: Solution: 9. Only the 8 hens lay: 8 x 7 = 56 eggs, that is 9 full boxes and 2 eggs left over. Unique. Tempting: 17 (15 x 7 = 105 eggs). Why a strong model may fail: '15 chickens' is the first number; roosters and week-old chicks must be excluded, then a division with remainder follows.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 9
+
+### T5-043 — tier 5 — draft, tier5, type-A
+
+**Base**
+
+> Mrs Aksoy has five children: Emre, born in 2009; the twins Elif and Selin, born in 2012; Can, born in 2015; and Deniz, born in 2018. Each of her pregnancies lasted nine months. For how many months of her life has Mrs Aksoy been pregnant with these children in total? Give the number.
+
+Answer: **36** (number)
+
+*Note: Solution: 36. The twins come from one pregnancy, so there were four pregnancies: 4 x 9. Unique. Tempting: 45 (5 x 9). Why a strong model may fail: 'five children' and 'nine months' multiply directly.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 36
+
+### T7-011 — tier 7 — draft, tier7, snapshot-versus-source
+
+**Base**
+
+> An office notice has four lines, in this order: ALMOND, BIRCH, CEDAR, DAHLIA. All four are printed on the original sheet. Mira places a removable opaque strip over BIRCH and makes a photocopy, called Copy One. She removes that strip from the original, covers CEDAR instead, and makes Copy Two from the original. She uncovers the original completely. On Copy One she then covers DAHLIA and makes Copy Three from Copy One. She removes every removable strip from every sheet. Finally she writes ELM by hand in the blank second-line space of Copy Three. No writing shows through from another sheet. How many plant names are visible on Copy Three? Answer with a number.
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+## social
+
+### CS-040 — tier 3 — theory-of-mind
+
+**Base**
+
+> Mia puts her keys into the red drawer and leaves the room. While she is away, Tom moves the keys to the blue drawer. Mia happens to watch this through the window, but Tom does not notice her. When Mia comes back, in which drawer does Tom expect her to look first?
+
+Answer list: **the red drawer** ✔ · the blue drawer · both are equally likely · neither
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > Mia puts her keys into the red drawer and leaves the room. While she is away, Tom moves the keys to the blue drawer. Mia happens to watch this through the window, but Tom does not notice her. When Mia comes back, in which drawer will Mia look first?
+  options: A. the red drawer · B. the blue drawer ✔ · C. both are equally likely · D. neither
+  *note: Mia watched the move, so she looks in the blue drawer (the memorized false-belief answer would be red)*
+
+### CS-501 — tier 1 — draft, anchor
+
+**Base**
+
+> Sara's birthday party is tomorrow. She invited all of her classmates except Ben. Ben finds out about it today. How does Ben most likely feel?
+
+Answer list: **left out and hurt** ✔ · excited about the party · proud · relieved because he is invited
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-502 — tier 1 — draft, anchor
+
+**Base**
+
+> Tom borrowed Lena's bicycle and accidentally broke its bell. What is the most appropriate thing for Tom to do?
+
+Answer list: **tell Lena and offer to repair or replace the bell** ✔ · return the bicycle without saying anything · keep the bicycle so she does not notice · say that the bell was already broken
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-503 — tier 1 — draft, anchor
+
+**Base**
+
+> Lea puts a chocolate bar into the blue box and goes outside to play. While she is away, her mother moves the chocolate into the kitchen drawer. Lea did not see this. When Lea comes back, where will she look for the chocolate first?
+
+Answer list: **in the blue box** ✔ · in the kitchen drawer · in the fridge · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > Lea puts a chocolate bar into the blue box and goes outside to play. While she is away, her mother moves the chocolate into the kitchen drawer. Lea watches this through the window. When Lea comes back, where will she look for the chocolate first?
+  options: A. in the blue box · B. in the kitchen drawer ✔ · C. in the fridge · D. cannot be determined
+  *note: trap: the memorized false-belief answer (blue box) is wrong because Lea watched*
+
+### CS-504 — tier 2 — draft
+
+**Base**
+
+> Nora and Ella both applied for the same job. Ella got it and Nora was rejected. When Ella tells her, Nora says: "Congratulations, that's great." How does Nora most likely feel?
+
+Answer list: **happy for Ella, but also disappointed for herself** ✔ · only overjoyed, without any disappointment · angry at the company for hiring anyone · completely indifferent
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-505 — tier 1 — draft, anchor
+
+**Base**
+
+> It rained all weekend and Paul's camping trip was ruined. When a friend asks how it went, Paul says: "Oh, just wonderful. Best weekend ever." What does Paul mean?
+
+Answer list: **the weekend was bad** ✔ · the weekend was great · he liked the rain · he wants to go camping again next weekend
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### CS-506 — tier 2 — draft
+
+**Base**
+
+> Max was told that a meeting starts at 10:00. Later the meeting is moved to 9:00 and everyone except Max receives the message. At 9:30, where is Max most likely?
+
+Answer list: in the meeting · **not yet at the meeting, because he thinks it starts at 10:00** ✔ · on the way home from the meeting · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-069 — tier 3 — draft, theory-of-mind
+
+**Base**
+
+> Sam finds a closed paper bag in the kitchen that he has never seen before. He cannot see through the paper. The label on the bag says "chocolate", but the bag is actually filled with popcorn. Sam reads the label and does not open the bag. What does Sam believe is in the bag?
+
+Answer list: **chocolate** ✔ · popcorn · nothing · cannot be determined (fixed order)
+
+*Note: classic unexpected-contents task: he only has the label*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `altered-mcq` — altered, multiple choice, 4 options:
+  > Sam finds a closed bag made of transparent plastic in the kitchen that he has never seen before. The label on the bag says "chocolate", but everyone can plainly see through the plastic that the bag is filled with popcorn. Sam reads the label and looks at the bag. What does Sam believe is in the bag?
+  options: A. chocolate · B. popcorn ✔ · C. nothing · D. cannot be determined
+  *note: he can see the popcorn; trap: the memorized false-belief answer 'chocolate'*
+
+### NEW-070 — tier 3 — draft, theory-of-mind
+
+**Base**
+
+> Anna puts her wallet into the desk drawer and leaves the office. While she is away, Ben moves the wallet into the filing cabinet. Anna happens to watch this through the glass door, but Ben does not notice her. A little later Carla, who saw Anna standing at the glass door, tells Ben: "Anna saw you move her wallet." Anna knows nothing about this conversation. When Anna comes back, where does Ben expect her to look for the wallet first?
+
+Answer list: in the desk drawer · **in the filing cabinet** ✔ · in Carla's bag · cannot be determined (fixed order)
+
+*Note: Carla has told Ben that Anna watched; trap: desk drawer (answer of CS-040)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `third-order-mcq` — original, multiple choice, 4 options:
+  > Anna puts her wallet into the desk drawer and leaves the office. While she is away, Ben moves the wallet into the filing cabinet. Anna happens to watch this through the glass door, but Ben does not notice her. A little later Carla, who saw Anna standing at the glass door, tells Ben: "Anna saw you move her wallet." Anna knows nothing about this conversation. Where does Anna think that Ben expects her to look for the wallet first?
+  options: A. in the desk drawer ✔ · B. in the filing cabinet · C. in Carla's bag · D. cannot be determined
+  *note: Anna does not know that Ben was told, so she thinks Ben still believes she saw nothing; trap: filing cabinet*
+
+### NEW-071 — tier 3 — draft, theory-of-mind
+
+**Base**
+
+> Before school, Lea puts a chocolate bar into the blue box in her room. During the morning her mother moves the chocolate into the kitchen drawer and sends Lea a text message about it. Lea's phone lies switched off in her school locker all day, and she walks straight home without looking at it. When Lea comes home, where will she look for the chocolate first?
+
+Answer list: **in the blue box** ✔ · in the kitchen drawer · in her school locker · cannot be determined (fixed order)
+
+*Note: the message was sent but never read; trap: kitchen drawer*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `read-mcq` — original, multiple choice, 4 options:
+  > Before school, Lea puts a chocolate bar into the blue box in her room. During the morning her mother moves the chocolate into the kitchen drawer and sends Lea a text message about it. Lea reads the message on the bus on her way home. When Lea comes home, where will she look for the chocolate first?
+  options: A. in the blue box · B. in the kitchen drawer ✔ · C. in her school locker · D. cannot be determined
+  *note: control: she has read the message*
+
+### NEW-072 — tier 2 — draft
+
+**Base**
+
+> A sign hangs in the glass door of a shop. One side of the sign says OPEN, the other side says CLOSED. A customer standing outside in the street reads CLOSED. Which word does the shopkeeper read, who stands inside the shop and looks at the same sign?
+
+Answer list: **OPEN** ✔ · CLOSED · both words · neither word (fixed order)
+
+*Note: he sees the other side of the sign*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-073 — tier 2 — draft
+
+**Base**
+
+> Grandpa Karl is deaf without his hearing aids, which lie upstairs in the bathroom. He sits in his armchair with his back to the front door and reads the newspaper. His grandson stands outside and rings the loud doorbell three times; there is no light signal. What does Karl most likely do in the next few seconds?
+
+Answer list: he gets up and opens the door · he calls out "Come in!" · **he keeps reading his newspaper** ✔ · he looks for his hearing aids because of the bell
+
+*Note: he cannot hear the bell and cannot see the door*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-074 — tier 2 — draft
+
+**Base**
+
+> The children play hide-and-seek in the living room. Nico crouches behind the sofa. Ella stands on the staircase, from where she can look down behind the sofa. Tim stands in the doorway, where the sofa completely blocks his view of Nico. Nobody speaks or makes a sound. Who knows where Nico is hiding, apart from Nico himself?
+
+Answer list: **only Ella** ✔ · only Tim · Ella and Tim · neither of them (fixed order)
+
+*Note: only Ella has a line of sight*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### T4-019 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> Lukas comes back from two weeks of hiking in the mountains, where he had no phone reception at all. His sister picks him up at the station and tells him the news in one breath: his football club has been relegated; the neighbour's boy has scratched the door of his car; his former girlfriend Jana is now engaged to his best friend; and, oh yes, the old dam above the town broke last Tuesday, his street has been under two metres of water ever since, and nobody will be allowed back into those houses for months. Which of these pieces of news will change Lukas's everyday life in the coming weeks the most?
+
+Answer list: the relegation of his football club · the scratch on his car door · Jana's engagement to his best friend · **the flood in his street** ✔ · that he had no phone reception
+
+*Note: Solution: the flood. He cannot live in his home for months; the other items are annoyances or emotional blows that do not change where he sleeps tomorrow. Unique: the question asks about his everyday life in the coming weeks. Tempting: the engagement (the most dramatic personal news). Why a strong model may fail: the flood is tucked in last with 'oh yes', while the engagement carries the emotional weight of the paragraph.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-036 — tier 4 — draft, tier4, type-D
+
+**Base**
+
+> On Monday Mrs Kern hides the birthday present for her son Leo in the garage. Leo's sister Pia happens to watch her through the kitchen window; Mrs Kern does not notice. On Tuesday morning, while both children are at school, Mrs Kern has second thoughts and moves the present to the attic. On Tuesday evening she phones her husband, who is away on a business trip, and tells him that the present is now in the attic. Leo is standing behind the half-open door and hears every word; nobody notices him. Pia is at handball training at that time. On Wednesday Leo says to Pia: "I know that there is a present for me somewhere in this house, and that is all I am telling you." Pia only smiles. On Wednesday evening, which members of the family believe that the present is in the garage?
+
+Answer list: **only Pia** ✔ · Pia and Leo · Pia and her father · only Leo · nobody
+
+*Note: Solution: only Pia. She saw the hiding on Monday and learned nothing afterwards; mother, father (by phone) and Leo (overheard) know about the attic. Unique: every later piece of information is assigned to exactly one listener. Tempting: nobody ('the present was moved') or Pia and Leo. Why a strong model may fail: four people, three channels (seen, told, overheard) and a remark by Leo that carries no location.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-037 — tier 4 — draft, tier4, type-D
+
+**Base**
+
+> The under-15 football team has trained every Thursday at 17:00 on pitch A for years. This Thursday at 14:00 the coach writes in the team's group chat: "Today we start one hour later, at 18:00, and on pitch B." Ali reads the message at once. Bo's phone has been dead since noon, and he goes to training straight from his grandmother's without having seen anything. Cem reads the message in the afternoon. Dan left the group chat by mistake last week; at 15:00 Ali phones him and says only: "Training is at 18:00 today." At 16:30 the coach writes again: "Pitch B is under water. We stay on pitch A, but still at 18:00." Cem reads this second message too. Ali is already on his bicycle, on the way to his guitar lesson and from there straight to training, and does not look at his phone again. Every boy goes to the pitch where he believes the training takes place and is there punctually at the time he believes. Who is standing at pitch B at 18:00?
+
+Answer list: nobody · **only Ali** ✔ · Ali and Bo · Ali and Dan · Ali, Bo and Dan
+
+*Note: Solution: only Ali. Ali knows only the first message (18:00, pitch B). Dan was told only the time and assumes the usual pitch A. Bo knows nothing and goes to pitch A at 17:00. Cem and the coach know the correction. Unique: each boy's information is listed completely. Tempting: Ali and Dan (Dan was informed by Ali), or nobody (the training is on pitch A). Why a strong model may fail: the model must keep apart what was said to Dan (time only) from what Ali knew (time and pitch).*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-038 — tier 4 — draft, tier4, type-D
+
+**Base**
+
+> Ines has decided to resign from her job at the end of the month. On Monday she tells her colleague Jo in strict confidence. On Tuesday Jo cannot keep it to himself and tells their colleague Kai. On Wednesday Kai lets it slip in a conversation with their boss, Ms Lund, who decides to say nothing and to wait until Ines comes to her. On Thursday Jo, plagued by his conscience, confesses to Ines that he has told Kai; neither Jo nor Ines knows anything about Kai's slip. Ines's sister, who does not work at the company, has known about the plan for weeks. On Friday morning Ines walks into Ms Lund's office to hand in her resignation. At that moment, how many people at the company, apart from herself, does Ines know to be aware of her plan?
+
+Answer list: 0 · 1 · **2** ✔ · 3 · 4 (fixed order)
+
+*Note: Solution: 2 (Jo and Kai). Three people at the company know (Jo, Kai, Ms Lund), but Ines has no idea that Ms Lund knows; the sister is not at the company. Unique: the question asks what Ines knows, and the text states that she does not know about the slip. Tempting: 3 (everybody who knows) or 1 (only the person she told). Why a strong model may fail: it asks for a second-order count (what Ines knows about others' knowledge) with a distractor inside (Ms Lund) and one outside the company (the sister).*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-039 — tier 4 — draft, tier4, type-D
+
+**Base**
+
+> In the morning all four flatmates, Anna, Ben, Cleo and Dora, are in the kitchen when Anna puts a bar of chocolate into the red tin. Then Dora leaves for work. Ben moves the chocolate into the blue jar while Anna and Cleo watch. Anna goes to take a shower. Cleo moves the chocolate into the top drawer; Ben sees it. Ben leaves for the gym. When Anna comes back from the shower, Cleo tells her as a joke: "Ben has put the chocolate into the bread bin." Anna believes her and leaves for the library. As soon as she is alone, Cleo takes the chocolate to her own room and hides it under her pillow. At noon Dora phones Ben and asks where the chocolate is, because she wants a piece in the evening; Ben tells her what he believes. Nobody learns anything else during the day. In the evening, which two of the four flatmates have the same belief about where the chocolate is?
+
+Answer list: Anna and Ben · Anna and Dora · Ben and Cleo · **Ben and Dora** ✔ · Cleo and Dora · no two of them (fixed order)
+
+*Note: Solution: Ben and Dora both believe 'top drawer' (Ben saw it there, Dora was told by Ben). Anna believes 'bread bin' (Cleo's joke), Cleo knows 'under her pillow'. Unique: four different information histories are listed step by step. Tempting: 'no two of them' or 'Anna and Ben'. Why a strong model may fail: five moves or statements, one of them a lie, and one belief passed on by phone.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `count-free` — original, free answer (number):
+  > In the morning all four flatmates, Anna, Ben, Cleo and Dora, are in the kitchen when Anna puts a bar of chocolate into the red tin. Then Dora leaves for work. Ben moves the chocolate into the blue jar while Anna and Cleo watch. Anna goes to take a shower. Cleo moves the chocolate into the top drawer; Ben sees it. Ben leaves for the gym. When Anna comes back from the shower, Cleo tells her as a joke: "Ben has put the chocolate into the bread bin." Anna believes her and leaves for the library. As soon as she is alone, Cleo takes the chocolate to her own room and hides it under her pillow. At noon Dora phones Ben and asks where the chocolate is, because she wants a piece in the evening; Ben tells her what he believes. Nobody learns anything else during the day. In the evening, how many of the four flatmates know where the chocolate really is?
+  answer: 1
+  *note: Solution: 1 (only Cleo). Tempting: 2 or 3 (Ben and Dora believe 'top drawer', which is outdated).*
+
+### T9-047 — tier 9 — tier9, hi-tom
+
+**Base**
+
+> Read the following story and answer the question.
+> 
+> Story:
+> 1 Liam, Jack, Hannah, Owen and Noah entered the pantry.
+> 2 The eggplant is in the green envelope.
+> 3 Liam made no movements and stayed in the pantry for 1 minute.
+> 4 Liam exited the pantry.
+> 5 Noah lost his gloves.
+> 6 Jack moved the eggplant to the green bathtub.
+> 7 Jack exited the pantry.
+> 8 Hannah moved the eggplant to the blue cupboard.
+> 9 Hannah exited the pantry.
+> 10 Owen moved the eggplant to the green basket.
+> 11 Owen exited the pantry.
+> 12 Noah moved the eggplant to the green envelope.
+> 13 Noah exited the pantry.
+> 14 Liam, Jack, Hannah, Owen and Noah entered the waiting room.
+> 
+> Question: Where does Owen think Jack thinks Hannah thinks Noah thinks the eggplant is?
+> 
+> Note: You should assume the following. (1) An agent witnesses everything and every movement before exiting a location. (2) An agent A can infer another agent B's mental state only if A and B have been in the same location, or have private or public interactions. (3) Note that every agent tends to lie. What an agent A tells others doesn't affect A's actual belief. An agent tends to trust an agent that exited the room later than himself. The exit order is known to all agents. (4) Agents in private communications know that others won't hear them, but they know that anyone can hear any public claims.
+
+Answer list: green treasure chest · blue treasure chest · red crate · blue drawer · green pantry · green envelope · **green bathtub** ✔ · blue cupboard · blue container · green basket · blue bottle · green drawer · red box · red pantry · red envelope
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 15 options
+
+### T9-048 — tier 9 — tier9, hi-tom
+
+**Base**
+
+> Read the following story and answer the question.
+> 
+> Story:
+> 1 Abigail, Liam, Avery, Noah and Lily entered the garage.
+> 2 The lemon is in the blue bathtub.
+> 3 Abigail moved the lemon to the blue treasure chest.
+> 4 Lily dislikes the cabbage.
+> 5 Abigail exited the garage.
+> 6 Liam made no movements and stayed in the garage for 1 minute.
+> 7 Liam exited the garage.
+> 8 Avery moved the lemon to the blue pantry.
+> 9 Avery exited the garage.
+> 10 Noah made no movements and stayed in the garage for 1 minute.
+> 11 Noah exited the garage.
+> 12 Lily moved the lemon to the blue bathtub.
+> 13 Lily exited the garage.
+> 14 Abigail, Liam, Avery, Noah and Lily entered the waiting room.
+> 15 Abigail lost his watch.
+> 16 Avery privately told Abigail that the lemon is in the green drawer.
+> 17 Liam privately told Noah that the lemon is in the blue treasure chest.
+> 
+> Question: Where does Noah think Liam thinks Avery thinks Lily thinks the lemon is?
+> 
+> Note: You should assume the following. (1) An agent witnesses everything and every movement before exiting a location. (2) An agent A can infer another agent B's mental state only if A and B have been in the same location, or have private or public interactions. (3) Note that every agent tends to lie. What an agent A tells others doesn't affect A's actual belief. An agent tends to trust an agent that exited the room later than himself. The exit order is known to all agents. (4) Agents in private communications know that others won't hear them, but they know that anyone can hear any public claims.
+
+Answer list: blue bathtub · red envelope · blue pantry · green drawer · **blue treasure chest** ✔ · blue crate · blue cupboard · green pantry · blue drawer · green envelope · red drawer · red bucket · green box · red container · red box
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 15 options
+
+### T9-049 — tier 9 — tier9, hi-tom
+
+**Base**
+
+> Read the following story and answer the question.
+> 
+> Story:
+> 1 Emily, Liam, Avery, Elizabeth and Lily entered the hallway.
+> 2 The onion is in the green crate.
+> 3 Emily moved the onion to the blue pantry.
+> 4 Emily exited the hallway.
+> 5 Liam moved the onion to the red drawer.
+> 6 Liam exited the hallway.
+> 7 Avery made no movements and stayed in the hallway for 1 minute.
+> 8 Avery exited the hallway.
+> 9 Elizabeth made no movements and stayed in the hallway for 1 minute.
+> 10 Elizabeth exited the hallway.
+> 11 Lily made no movements and stayed in the hallway for 1 minute.
+> 12 Lily exited the hallway.
+> 13 Emily, Liam, Avery, Elizabeth and Lily entered the waiting room.
+> 14 Avery privately told Emily that the onion is in the blue bottle.
+> 15 Liam privately told Elizabeth that the onion is in the blue treasure chest.
+> 
+> Question: Where does Elizabeth think Emily thinks Avery thinks Lily thinks the onion is?
+> 
+> Note: You should assume the following. (1) An agent witnesses everything and every movement before exiting a location. (2) An agent A can infer another agent B's mental state only if A and B have been in the same location, or have private or public interactions. (3) Note that every agent tends to lie. What an agent A tells others doesn't affect A's actual belief. An agent tends to trust an agent that exited the room later than himself. The exit order is known to all agents. (4) Agents in private communications know that others won't hear them, but they know that anyone can hear any public claims.
+
+Answer list: green crate · blue bottle · blue treasure chest · **blue pantry** ✔ · red drawer · red container · green envelope · green drawer · red basket · green basket · red envelope · green bathtub · blue crate · green pantry · green box
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 15 options
+
+## spatial
+
+### CS-020 — tier 1 — directions
+
+**Base**
+
+> You are facing north. You turn 90 degrees to your right, then 180 degrees, then 90 degrees to your left. Which direction are you facing now?
+
+Answer list: north · east · **south** ✔ · west
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You are facing north. You turn 90 degrees to your right, then 180 degrees, then 90 degrees to your left. Which direction are you facing now? Answer with north, east, south or west.
+  answer: south
+
+### CS-021 — tier 2 — perspective
+
+**Base**
+
+> Anna, Ben and Clara stand side by side in a row, all facing north. Anna is the westernmost, Ben is in the middle and Clara is the easternmost. All three turn around on the spot and now face south. Who is standing directly to Ben's right?
+
+Answer list: **Anna** ✔ · Clara · nobody · cannot be determined
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Anna, Ben and Clara stand side by side in a row, all facing north. Anna is the westernmost, Ben is in the middle and Clara is the easternmost. All three turn around on the spot and now face south. Who is standing directly to Ben's right? Answer with the name.
+  answer: Anna
+
+### CS-022 — tier 3 — cube
+
+**Base**
+
+> A solid 3×3×3 cube is built from 27 small cubes. Only the top face and the bottom face of the large cube are painted red. How many of the small cubes have no paint at all?
+
+Answer: **9** (number)
+
+*Note: trap: 1 (original 'all faces painted')*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 9
+
+### CS-023 — tier 2 — folding
+
+**Base**
+
+> A square sheet of paper is folded in half three times in a row. Then a single hole is punched through all layers, away from every edge and fold. How many holes does the sheet have when it is completely unfolded?
+
+Answer: **8** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### CS-024 — tier 2 — mirror, clock
+
+**Base**
+
+> You look at an analog wall clock in a mirror. In the mirror image the clock appears to show 3:00. What time is it really? Answer as H:MM.
+
+Answer: **9:00** (text)
+Also accepted (free answer): 09:00
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 9:00 | 09:00
+
+### CS-301 — tier 1 — draft, anchor
+
+**Base**
+
+> You are facing east. You turn around on the spot by 180 degrees. Which direction are you facing now?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You are facing east. You turn around on the spot by 180 degrees. Which direction are you facing now? Answer with north, east, south or west.
+  answer: west
+
+### CS-302 — tier 1 — draft, anchor
+
+**Base**
+
+> Five houses stand in a row and are numbered 1 to 5 from left to right. The red house is house number 2. The blue house is directly to the right of the red house. What is the number of the blue house?
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### CS-303 — tier 1 — draft, anchor
+
+**Base**
+
+> An analog clock shows exactly 3:00. What is the smaller angle between the hour hand and the minute hand, in degrees?
+
+Answer: **90** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 90
+
+### CS-304 — tier 2 — draft
+
+**Base**
+
+> You want to paint the six faces of a cube so that faces that share an edge always have different colours. What is the smallest number of colours you need?
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### CS-305 — tier 1 — draft, anchor
+
+**Base**
+
+> You walk 3 km straight north and then 4 km straight east. How far are you from your starting point in a straight line, in km?
+
+Answer: **5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### CS-306 — tier 1 — draft, anchor
+
+**Base**
+
+> On a standard die, opposite faces always add up to 7. A die lies on a table with 2 on top and 3 facing you. Which number is on the bottom face?
+
+Answer: **5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### CS-307 — tier 2 — draft
+
+**Base**
+
+> Anna, Ben, Clara and David sit around a square table, one on each side. Anna sits opposite Ben. Clara sits on Anna's left. Who sits on Anna's right?
+
+Answer list: Ben · Clara · **David** ✔ · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Anna, Ben, Clara and David sit around a square table, one on each side. Anna sits opposite Ben. Clara sits on Anna's left. Who sits on Anna's right? Answer with the name.
+  answer: David
+
+### CS-308 — tier 3 — draft
+
+**Base**
+
+> A large 4×4×4 cube is built from 64 small cubes. All six outer faces of the large cube are painted. How many of the small cubes have paint on exactly one face?
+
+Answer: **24** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 24
+
+### CS-309 — tier 2 — draft
+
+**Base**
+
+> You are driving north. You turn left, then left again, and then right. In which direction are you driving now?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You are driving north. You turn left, then left again, and then right. In which direction are you driving now? Answer with north, east, south or west.
+  answer: west
+
+### CS-310 — tier 3 — draft
+
+**Base**
+
+> Five people stand in a circle, all facing the centre. Seen from above, they stand in clockwise order: Alma, Bert, Cleo, Dana, Emil. Who stands directly on Cleo's left, from Cleo's point of view?
+
+Answer list: Alma · Bert · **Dana** ✔ · Emil · cannot be determined (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Five people stand in a circle, all facing the centre. Seen from above, they stand in clockwise order: Alma, Bert, Cleo, Dana, Emil. Who stands directly on Cleo's left, from Cleo's point of view? Answer with the name.
+  answer: Dana
+
+### CS-311 — tier 3 — draft
+
+**Base**
+
+> You see an analog wall clock in a mirror. In the mirror image it appears to show 2:30. What time is it really? Answer as H:MM.
+
+Answer: **9:30** (text)
+Also accepted (free answer): 09:30
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 9:30 | 09:30
+
+### NEW-075 — tier 3 — draft, shadow
+
+**Base**
+
+> It is early morning in central Europe and the sun has just risen. You walk along a straight path, and your own shadow points exactly to your right. In which direction are you walking?
+
+Answer list: north · east · **south** ✔ · west (fixed order)
+
+*Note: sun in the east, shadow points west; west is on your right when you walk south; trap: north*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > It is early morning in central Europe and the sun has just risen. You walk along a straight path, and your own shadow points exactly to your right. In which direction are you walking? Answer with north, east, south or west.
+  answer: south
+
+### NEW-076 — tier 2 — draft, shadow
+
+**Base**
+
+> It is a summer evening in central Europe, shortly before sunset. You stand in an open field, and your long shadow falls on the ground exactly behind you. In which direction are you facing?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+*Note: sun in the west, shadow points east, so you face the sun*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > It is a summer evening in central Europe, shortly before sunset. You stand in an open field, and your long shadow falls on the ground exactly behind you. In which direction are you facing? Answer with north, east, south or west.
+  answer: west
+
+### NEW-077 — tier 3 — draft, mirror
+
+**Base**
+
+> The word "pod" is printed in simple lower-case letters on the front of a T-shirt. The wearer looks at himself in a mirror. Which sequence of letter shapes does he see in the mirror, read from left to right?
+
+Answer list: **boq** ✔ · qob · dop · pod
+
+*Note: order reversed and every letter mirrored: d->b, o->o, p->q; traps: 'dop' (order only), 'qob' (letters only)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-078 — tier 2 — draft
+
+**Base**
+
+> Anna and Ben sit opposite each other at a small table and face each other. A candle stands on the table at Anna's left hand. From Ben's point of view, where is the candle?
+
+Answer list: on his left · **on his right** ✔ · exactly in front of him · behind him (fixed order)
+
+*Note: left and right are swapped for someone sitting opposite*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-079 — tier 3 — draft
+
+**Base**
+
+> You are driving north on a straight road. A car comes towards you from the opposite direction and, at a crossing ahead of you, turns to its left as seen by its own driver. In which compass direction is that car driving after the turn?
+
+Answer list: north · **east** ✔ · south · west (fixed order)
+
+*Note: the oncoming car drives south; its left is east; trap: west (your own left)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You are driving north on a straight road. A car comes towards you from the opposite direction and, at a crossing ahead of you, turns to its left as seen by its own driver. In which compass direction is that car driving after the turn? Answer with north, east, south or west.
+  answer: east
+
+### NEW-080 — tier 3 — draft
+
+**Base**
+
+> In a normally printed English book, page 1 is a right-hand page and every sheet has one page number on each side. You tear out the single sheet on which page 47 is printed. Which other page number is lost together with it?
+
+Answer: **48** (number)
+
+*Note: odd pages are on the front of a sheet, the back of 47 is 48; trap: 46*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 48
+
+### NEW-081 — tier 3 — draft, folding
+
+**Base**
+
+> A square sheet of paper is folded in half, and then folded in half again at a right angle to the first fold, so that a smaller square with four layers results. With scissors you cut off a small triangle at the one corner of this small square where the two folded edges meet. How many holes does the sheet have when it is completely unfolded?
+
+Answer: **1** (number)
+
+*Note: that corner is the centre of the sheet: one diamond-shaped hole; trap: 4*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+- `free-outer` — original, free answer (number):
+  > A square sheet of paper is folded in half, and then folded in half again at a right angle to the first fold, so that a smaller square with four layers results. With scissors you cut off a small triangle at the one corner of this small square where no folded edge is, that is, where the four original corners of the sheet lie on top of each other. How many holes does the sheet have when it is completely unfolded?
+  answer: 0
+  *note: only the four outer corners of the sheet are cut off, there is no hole; traps: 4, 1*
+
+### NEW-082 — tier 3 — draft, cube
+
+**Base**
+
+> A solid 3×3×3 cube built from 27 small cubes stands on a table. It is spray-painted from above and from all four sides, but its bottom face, which rests on the table, gets no paint. How many of the small cubes have no paint at all?
+
+Answer: **2** (number)
+
+*Note: the centre cube and the cube directly below it in the middle of the bottom layer; trap: 1 (all six faces painted)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### NEW-083 — tier 3 — draft, cube
+
+**Base**
+
+> A solid 4×4×4 cube built from 64 small cubes stands on a table. It is spray-painted from above and from all four sides, but its bottom face, which rests on the table, gets no paint. How many of the small cubes have no paint at all?
+
+Answer: **12** (number)
+
+*Note: the inner 2×2 columns in the three lower layers: 12; trap: 8 (all six faces painted)*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 12
+
+### NEW-084 — tier 3 — draft, cube
+
+**Base**
+
+> A small tower is built from 14 identical cubes on a table: the bottom layer is a 3×3 square of 9 cubes, on it lies a 2×2 square of 4 cubes pushed into one corner, and on top of that lies 1 cube in the same corner. You look at the tower exactly from above. How many of the 14 cubes can you not see at all from there?
+
+Answer: **5** (number)
+
+*Note: 4 cubes of the bottom layer are covered by the 2×2 layer and 1 cube of the 2×2 layer by the top cube; visible from above: 9*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### NEW-085 — tier 3 — draft
+
+**Base**
+
+> Town B lies 10 km straight north of town A. Town C lies 10 km straight east of town B. Town D lies 10 km straight south of town C. In which direction does town B lie, seen from town D?
+
+Answer list: north · north-east · east · south-east · south · south-west · west · **north-west** ✔ (fixed order)
+
+*Note: D is 10 km east of A, B is 10 km north of A, so B is north-west of D; traps: north, west, north-east*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 8 options
+
+### NEW-086 — tier 3 — draft
+
+**Base**
+
+> An analog clock shows exactly 3:30. What is the smaller angle between the hour hand and the minute hand, in degrees?
+
+Answer: **75** (number)
+
+*Note: the hour hand is halfway between 3 and 4 (105°), the minute hand at 6 (180°); trap: 90*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 75
+
+### NEW-087 — tier 3 — draft
+
+**Base**
+
+> A man lies flat on his back, looking up at the ceiling, on the floor, with his head pointing north and his arms stretched out sideways. In which direction does his right hand point?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+*Note: seen from above he is like a person facing you: his right hand is on the west side; trap: east*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `prone-mcq` — original, multiple choice, 4 options:
+  > A man lies flat on his stomach, face down, on the floor, with his head pointing north and his arms stretched out sideways. In which direction does his right hand point?
+  options: A. north · B. east ✔ · C. south · D. west
+  *note: face down he is like a person seen from behind: right hand on the east side; trap: west*
+
+### NEW-088 — tier 2 — draft, rotation
+
+**Base**
+
+> Which capital letter do you get when you rotate the capital letter N by 90 degrees on the page? Answer with the letter.
+
+Answer: **Z** (text)
+Also accepted (free answer): letter Z
+
+*Note: N turned by a quarter turn (in either direction) is a Z*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Z | letter Z
+
+### NEW-089 — tier 3 — draft, rotation
+
+**Base**
+
+> In a simple font without serifs, which lower-case letter do you get when you rotate the lower-case letter b by 180 degrees on the page (turn the page upside down)? Answer with the letter.
+
+Answer: **q** (text)
+Also accepted (free answer): letter q
+
+*Note: b upside down is q; traps: d (mirror image), p (flipped top to bottom)*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: q | letter q
+
+### NEW-090 — tier 3 — draft
+
+**Base**
+
+> A knitted glove for the right hand is turned completely inside out. On which hand does it fit now?
+
+Answer list: **on the left hand** ✔ · on the right hand · equally well on both hands · on neither hand (fixed order)
+
+*Note: turning a glove inside out mirrors it; trap: right hand*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+
+### NEW-091 — tier 2 — draft
+
+**Base**
+
+> Three cars are parked side by side in front of a house. Seen from the street, the red car is on the left, the blue car in the middle and the green car on the right. You walk around the cars and now look at them from the house, facing the street. Which car is on your left now?
+
+Answer list: the red car · the blue car · **the green car** ✔ (fixed order)
+
+*Note: seen from the opposite side, left and right are swapped*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### NEW-092 — tier 2 — draft
+
+**Base**
+
+> A clock with a transparent glass face hangs in a shop window, with its front facing the street. You stand inside the shop and see the clock from behind. In which direction do its hands appear to turn?
+
+Answer list: clockwise · **counterclockwise** ✔ · they do not seem to move (fixed order)
+
+*Note: seen from behind, the rotation is mirrored*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### NEW-093 — tier 3 — draft
+
+**Base**
+
+> You sit in a train on a seat that faces backwards, against the direction of travel. The train is travelling north. Through the window on your right you see a river. On which side of the railway line is the river?
+
+Answer list: east · **west** ✔ · cannot be determined (fixed order)
+
+*Note: you face south, so your right is west; trap: east*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+- `free` — original, free answer (text):
+  > You sit in a train on a seat that faces backwards, against the direction of travel. The train is travelling north. Through the window on your right you see a river. On which side of the railway line is the river? Answer with north, east, south or west.
+  answer: west | the west side | on the west side | west side
+
+### NEW-094 — tier 3 — draft
+
+**Base**
+
+> Four dishes stand on a round turntable in the middle of a dining table: rice at the north side, fish at the east side, soup at the south side and salad at the west side. Seen from above, the turntable is first rotated a quarter turn clockwise and then a half turn. Which dish is at the north side now?
+
+Answer list: rice · **fish** ✔ · soup · salad
+
+*Note: after the quarter turn clockwise the salad is north and the fish south; the half turn brings the fish north; traps: soup, salad*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Four dishes stand on a round turntable in the middle of a dining table: rice at the north side, fish at the east side, soup at the south side and salad at the west side. Seen from above, the turntable is first rotated a quarter turn clockwise and then a half turn. Which dish is at the north side now? Answer with the name of the dish.
+  answer: fish
+
+### NEW-095 — tier 3 — draft, generated, perspective
+
+**Base**
+
+> Seven people stand in a circle, all facing the centre. Seen from above, they stand in clockwise order: Ines, Jonas, Kira, Lars, Mona, Nico, Olga (after Olga comes Ines again). Who is the second person on Mona's right (the person standing one place beyond Mona's direct neighbour on that side), from Mona's own point of view?
+
+Answer list: Ines · Jonas · **Kira** ✔ · Lars · Mona · Nico · Olga (fixed order)
+
+*Note: computed: facing the centre, a person's left-hand neighbour is the next one clockwise; facing outwards it is the other way round (clockwise listing, centre)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > Seven people stand in a circle, all facing the centre. Seen from above, they stand in clockwise order: Ines, Jonas, Kira, Lars, Mona, Nico, Olga (after Olga comes Ines again). Who is the second person on Mona's right (the person standing one place beyond Mona's direct neighbour on that side), from Mona's own point of view? Answer with the name.
+  answer: Kira
+
+### NEW-096 — tier 3 — draft, generated, perspective
+
+**Base**
+
+> Six people stand in a circle, all facing outwards, with their backs to the centre. Seen from above, they stand in clockwise order: Ines, Jonas, Kira, Lars, Mona, Nico (after Nico comes Ines again). Who stands directly on Kira's left, from Kira's own point of view?
+
+Answer list: Ines · **Jonas** ✔ · Kira · Lars · Mona · Nico (fixed order)
+
+*Note: computed: facing the centre, a person's left-hand neighbour is the next one clockwise; facing outwards it is the other way round (clockwise listing, outwards)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > Six people stand in a circle, all facing outwards, with their backs to the centre. Seen from above, they stand in clockwise order: Ines, Jonas, Kira, Lars, Mona, Nico (after Nico comes Ines again). Who stands directly on Kira's left, from Kira's own point of view? Answer with the name.
+  answer: Jonas
+
+### NEW-097 — tier 3 — draft, generated, perspective
+
+**Base**
+
+> Eight people stand in a circle, all facing the centre. Seen from above, they stand in counterclockwise order: Ines, Jonas, Kira, Lars, Mona, Nico, Olga, Paul (after Paul comes Ines again). Who is the third person on Jonas's left (the person standing two places beyond Jonas's direct neighbour on that side), from Jonas's own point of view?
+
+Answer list: Ines · Jonas · Kira · Lars · Mona · Nico · **Olga** ✔ · Paul (fixed order)
+
+*Note: computed: facing the centre, a person's left-hand neighbour is the next one clockwise; facing outwards it is the other way round (counterclockwise listing, centre)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 8 options
+- `free` — original, free answer (text):
+  > Eight people stand in a circle, all facing the centre. Seen from above, they stand in counterclockwise order: Ines, Jonas, Kira, Lars, Mona, Nico, Olga, Paul (after Paul comes Ines again). Who is the third person on Jonas's left (the person standing two places beyond Jonas's direct neighbour on that side), from Jonas's own point of view? Answer with the name.
+  answer: Olga
+
+### NEW-098 — tier 3 — draft, generated, perspective
+
+**Base**
+
+> Six people stand in a circle, all facing outwards, with their backs to the centre. Seen from above, they stand in counterclockwise order: Ines, Jonas, Kira, Lars, Mona, Nico (after Nico comes Ines again). Who is the second person on Lars's right (the person standing one place beyond Lars's direct neighbour on that side), from Lars's own point of view?
+
+Answer list: Ines · **Jonas** ✔ · Kira · Lars · Mona · Nico (fixed order)
+
+*Note: computed: facing the centre, a person's left-hand neighbour is the next one clockwise; facing outwards it is the other way round (counterclockwise listing, outwards)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > Six people stand in a circle, all facing outwards, with their backs to the centre. Seen from above, they stand in counterclockwise order: Ines, Jonas, Kira, Lars, Mona, Nico (after Nico comes Ines again). Who is the second person on Lars's right (the person standing one place beyond Lars's direct neighbour on that side), from Lars's own point of view? Answer with the name.
+  answer: Jonas
+
+### NEW-099 — tier 3 — draft, generated, perspective
+
+**Base**
+
+> Six friends sit at a round table, all facing the middle of the table. Seen from above, they sit in clockwise order: Ines, Jonas, Kira, Lars, Mona, Nico (Nico sits next to Ines). First Jonas and Mona swap seats, then Ines and Lars swap seats. Who sits directly on Kira's right now, from Kira's own point of view?
+
+Answer list: Ines · Jonas · Kira · Lars · **Mona** ✔ · Nico (fixed order)
+
+*Note: computed: new clockwise order Lars, Mona, Kira, Ines, Jonas, Nico; the right-hand neighbour is the previous person in clockwise order*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > Six friends sit at a round table, all facing the middle of the table. Seen from above, they sit in clockwise order: Ines, Jonas, Kira, Lars, Mona, Nico (Nico sits next to Ines). First Jonas and Mona swap seats, then Ines and Lars swap seats. Who sits directly on Kira's right now, from Kira's own point of view? Answer with the name.
+  answer: Mona
+
+### T4-031 — tier 4 — draft, tier4, type-C
+
+**Base**
+
+> Paul lies on his left side on a picnic blanket in a meadow, stretched out straight, with his head pointing east and his feet pointing west. A beetle sits in the grass exactly in front of his nose, 30 cm away from it. In which compass direction from Paul's nose is the beetle?
+
+Answer list: north · east · **south** ✔ · west (fixed order)
+
+*Note: Solution: south. Lying on the left side with the head to the east, the right shoulder points up and the face looks south. Unique: straight body, head east, on the left side. Tempting: north. Why a strong model may fail: three body axes have to be combined; gemma4-12b already failed the simpler case of a person lying on his back (NEW-087).*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Paul lies on his left side on a picnic blanket in a meadow, stretched out straight, with his head pointing east and his feet pointing west. A beetle sits in the grass exactly in front of his nose, 30 cm away from it. In which compass direction from Paul's nose is the beetle? Answer with north, east, south or west.
+  answer: south
+
+### T4-032 — tier 4 — draft, tier4, type-C
+
+**Base**
+
+> Lea does a handstand on the lawn. While she is upside down, her belly faces north and her back faces south. Her two hands stand on the grass half a metre apart. In which compass direction from her left hand is her right hand?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+*Note: Solution: west. Standing with the belly to the north, the right hand is in the east; upside down with the belly still to the north, left and right are exchanged, so the right hand is in the west. Unique: belly north, upside down. Tempting: east. Why a strong model may fail: the usual rule 'facing north, right is east' applies only to an upright body.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Lea does a handstand on the lawn. While she is upside down, her belly faces north and her back faces south. Her two hands stand on the grass half a metre apart. In which compass direction from her left hand is her right hand? Answer with north, east, south or west.
+  answer: west
+
+### T4-033 — tier 4 — draft, tier4, type-C
+
+**Base**
+
+> Tim stands in front of the town hall and holds a city map upside down, so that south is at the top of the sheet as he looks at it. On the sheet as he holds it, the church appears exactly to the left of the town hall. In which compass direction from the town hall does the church really lie?
+
+Answer list: north · **east** ✔ · south · west (fixed order)
+
+*Note: Solution: east. On a map held the normal way east is on the right; turned upside down, east is on the left. Unique: the map is rotated by a half turn, not mirrored. Tempting: west (left on a normal map). Why a strong model may fail: 'left of' on a map is strongly associated with west.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Tim stands in front of the town hall and holds a city map upside down, so that south is at the top of the sheet as he looks at it. On the sheet as he holds it, the church appears exactly to the left of the town hall. In which compass direction from the town hall does the church really lie? Answer with north, east, south or west.
+  answer: east
+
+### T4-034 — tier 4 — draft, tier4, type-C
+
+**Base**
+
+> The owner of a café has had the name TOM painted in large capital letters on the outside of the shop window, so that it can be read from the street. A guest sits inside the café and looks out through this window. Which sequence of letters does the guest see on the glass, read from left to right?
+
+Answer list: TOM · **MOT** ✔ · WOT · TOW
+
+*Note: Solution: MOT. Seen from behind, the lettering is mirrored: the order of the letters is reversed, and T, O and M each look the same in a mirror. Unique: all three letters are symmetrical about a vertical axis. Tempting: TOM (unchanged) or WOT (letters turned upside down). Why a strong model may fail: it requires mirroring the order and checking each letter shape separately.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > The owner of a café has had the name TOM painted in large capital letters on the outside of the shop window, so that it can be read from the street. A guest sits inside the café and looks out through this window. Which sequence of letters does the guest see on the glass, read from left to right? Answer with the letters only.
+  answer: MOT
+
+### T4-035 — tier 4 — draft, tier4, type-C, generated
+
+**Base**
+
+> Nine people stand in a circle, all facing outwards, with their backs to the centre. Seen from above, they stand in counterclockwise order: Ines, Jonas, Kira, Lars, Mona, Nico, Olga, Paul, Rosa (after Rosa comes Ines again). Then Kira and Paul swap places. Who is now the fourth person on Mona's right (the person standing three places beyond Mona's direct neighbour on her right-hand side), from Mona's own point of view?
+
+Answer list: **Ines** ✔ · Jonas · Kira · Lars · Mona · Nico · Olga · Paul · Rosa (fixed order)
+
+*Note: Solution (computed): facing outwards, a person's right-hand neighbour is the next one clockwise, that is the previous name in the counterclockwise list. After the swap the list is Ines, Jonas, Paul, Lars, Mona, Nico, Olga, Kira, Rosa; going backwards from Mona: Lars, Paul, Jonas, Ines. Unique because the rule is fixed by the geometry. Tempting: counting in the listed direction (as if facing the centre), or ignoring the swap. Why a strong model may fail: gemma4-12b failed the simpler version without swap (NEW-097).*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 9 options
+- `free` — original, free answer (text):
+  > Nine people stand in a circle, all facing outwards, with their backs to the centre. Seen from above, they stand in counterclockwise order: Ines, Jonas, Kira, Lars, Mona, Nico, Olga, Paul, Rosa (after Rosa comes Ines again). Then Kira and Paul swap places. Who is now the fourth person on Mona's right (the person standing three places beyond Mona's direct neighbour on her right-hand side), from Mona's own point of view? Answer with the name.
+  answer: Ines
+
+### T5-001 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Paul lies on his back on a lawn, stretched out straight, with his head pointing north. Without moving his head from its place, he rolls a quarter turn onto his right side, then a further quarter turn in the same direction so that he lies on his stomach, and then one more quarter turn in the same direction. In which compass direction is his face turned now? Answer with one word: north, east, south or west.
+
+Answer: **east** (text)
+
+*Note: Solution (computed): east. On his back with the head to the north his right side is to the west; after the first quarter turn he faces west, after the second he faces down, after the third he lies on his left side and faces east. Unique: the head stays in place and all three turns go the same way. Tempting: west (the direction of the first roll) or south. Why a strong model may fail: three rotations of a lying body; both test models failed the single-step version (T4-031).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: east
+
+### T5-002 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Marta lies on her right side on a wide sofa, stretched out straight, with her head pointing south. Her cat sleeps on the sofa directly behind her back. In which compass direction from Marta is the cat? Answer with one word: north, east, south or west.
+
+Answer: **west** (text)
+
+*Note: Solution (computed): west. Lying on the right side with the head to the south, the face is turned east, so the back is turned west. Unique: head south, right side down. Tempting: east. Why a strong model may fail: body axes of a lying person plus 'behind' instead of 'in front'.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: west
+
+### T5-003 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> On the beach Jon lies flat on his stomach, face down, with his head pointing west and his feet pointing east, and stretches both arms straight out sideways. In which compass direction does his left hand point? Answer with one word: north, east, south or west.
+
+Answer: **south** (text)
+
+*Note: Solution (computed): south. Face down with the head to the west he is like a person seen from behind who 'looks' west: left is south. Unique. Tempting: north (the answer for lying on the back). Why a strong model may fail: left and right of a body that is lying face down.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: south
+
+### T5-004 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Lea stands on a lawn, facing east. She bends forward, puts both hands on the grass in front of her feet and swings her legs straight up over her head into a handstand, without twisting her body. In which compass direction does her belly face while she stands on her hands? Answer with one word: north, east, south or west.
+
+Answer: **west** (text)
+
+*Note: Solution (computed): west. Going up into a handstand straight forwards turns the body upside down around the left-right axis; the belly, which faced east, then faces west (if she fell on, she would land on her back towards the east). Unique: no twist. Tempting: east. Why a strong model may fail: 'she was facing east' is carried over without applying the rotation.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: west
+
+### T5-005 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> On the playground Mia hangs upside down from a horizontal bar by her knees, her head pointing to the ground. Her belly faces east. She stretches both arms out sideways. In which compass direction does her left hand point? Answer with one word: north, east, south or west.
+
+Answer: **south** (text)
+
+*Note: Solution (computed): south. Upright with the belly to the east, the left hand would point north; hanging upside down with the belly still to the east, left and right are exchanged. Unique. Tempting: north. Why a strong model may fail: the same error both test models made for the handstand (T4-032), in a different scene and for the left hand.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: south
+
+### T5-006 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Anna lies on her back on a beach towel, her head pointing west and her feet pointing east. Ben stands at her feet and looks along her body towards her head. Anna lifts her right arm straight up. From Ben's point of view, is the lifted arm on his left or on his right? Answer with one word: left or right.
+
+Answer: **left** (text)
+Also accepted (free answer): on his left | to his left | his left | left side | on the left | to the left
+
+*Note: Solution (computed): left. Anna's right side is to the south; Ben looks west, so south is on his left. Unique. Tempting: right ('her right = my right'). Why a strong model may fail: two frames: the lying person's body and the standing observer.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: left | on his left | to his left | his left | left side | on the left | to the left
+
+### T5-007 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Tom lies on his stomach on a picnic blanket, his head pointing north and his feet pointing south. Lena stands at his head and looks along his body towards his feet. Tom holds a phone in his left hand, with the arm stretched out sideways. From Lena's point of view, is the phone on her left or on her right? Answer with one word: left or right.
+
+Answer: **right** (text)
+Also accepted (free answer): on her right | to her right | her right | right side | on the right | to the right
+
+*Note: Solution (computed): right. Face down with the head to the north, Tom's left hand points west; Lena looks south, so west is on her right. Unique. Tempting: left. Why a strong model may fail: face-down body, observer standing at the head and looking the opposite way.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: right | on her right | to her right | her right | right side | on the right | to the right
+
+### T5-008 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Paul lies on his left side on a camping mat, his head pointing south and his feet pointing north. He rolls onto his back, sits up and then stands up on the spot where his feet were, so that he looks in the direction in which his feet had been pointing. Finally he turns a quarter turn to his left and stretches both arms out sideways. In which compass direction does his right hand point? Answer with one word: north, east, south or west.
+
+Answer: **north** (text)
+
+*Note: Solution (computed): north. His feet pointed north, so he stands facing north; after the quarter turn to the left he faces west, and his right hand points north. Unique. Tempting: east (right hand of somebody facing north) or south. Why a strong model may fail: the lying positions are irrelevant noise, then two further steps and a right-hand question.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: north
+
+### T5-009 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Eight people stand in a circle, all facing outwards, with their backs to the centre. Seen from above, they stand in clockwise order: Aylin, Boris, Chiara, Dario, Edda, Finn, Greta, Henry (after Henry comes Aylin again). First Boris and Greta swap places, then Dario and Henry swap places. Who is now the third person on Edda's left (the person standing two places beyond Edda's direct neighbour on her left-hand side), from Edda's own point of view? Answer with the name.
+
+Answer: **Greta** (text)
+
+*Note: Solution (computed): Greta. After the swaps the clockwise order is Aylin, Greta, Chiara, Henry, Edda, Finn, Boris, Dario. Facing outwards, the left-hand neighbour is the previous person in clockwise order; going backwards from Edda: Henry, Chiara, Greta. Unique: fixed by the geometry. Tempting: counting forwards in the listed order (as if facing the centre) or ignoring a swap. Why a strong model may fail: both test models gave a wrong neighbour in the free version of the simpler circle task (T4-035).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Greta
+
+### T5-010 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Ten children stand in a circle and hold hands, all facing the centre. Seen from above, they stand in counterclockwise order: Ida, Jan, Kofi, Lena, Malik, Nora, Oskar, Pia, Ravi, Suna (after Suna comes Ida again). Then every second child, starting with Ida (that is Ida, Kofi, Malik, Oskar and Ravi), lets go, turns around on the spot to face outwards and takes the neighbours' hands again. Whose hand is Malik now holding with his right hand? Answer with the name.
+
+Answer: **Lena** (text)
+
+*Note: Solution (computed): Lena. Malik now faces outwards; for somebody facing outwards the right-hand neighbour is the next person clockwise, which is the previous name in the counterclockwise list. Unique. Tempting: Nora (his right-hand neighbour before he turned around). Why a strong model may fail: counterclockwise listing, then a half turn of only some of the children.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Lena
+
+### T5-011 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Eight friends sit around a round table, all facing the middle of the table. Seen from above, they sit in clockwise order: Hanna, Ivo, Jule, Kemal, Liv, Marek, Nele, Omar (Omar sits next to Hanna). Hanna has the salt. She passes it to the person directly on her left. That person passes it to the person sitting exactly opposite. That person passes it to the second person on his or her right. That person passes it to the person directly on his or her left, who passes it to the person exactly opposite, who passes it to the person directly on his or her right, who finally passes it to the third person on his or her left. 'Left' and 'right' are always meant from the point of view of the person who is passing. Who has the salt at the end? Answer with the name.
+
+Answer: **Jule** (text)
+
+*Note: Solution (computed): the salt goes Hanna -> Ivo -> Marek -> Kemal -> Liv -> Hanna -> Omar -> Jule. For people facing the middle, the left-hand neighbour is the next person clockwise. Unique. Tempting: treating 'left' as the previous name in the list, which mirrors every step. Why a strong model may fail: seven passes, each from a new person's point of view.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Jule
+
+### T5-012 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> A dentist has had the word MOUTH painted in large capital letters on the outside of the glass door of her practice, so that it can be read from the street. A patient sits in the waiting room inside and looks out through this door. Which sequence of letters does the patient see on the glass, read from left to right? Answer with the five letters as one word.
+
+Answer: **HTUOM** (text)
+
+*Note: Solution (computed): HTUOM. Seen from behind, the lettering is mirrored: the order is reversed, and each of the letters M, O, U, T, H looks the same in a mirror. Unique. Tempting: MOUTH. Why a strong model may fail: gemma4-12b gave the unreversed word in the three-letter version (T4-034); here five letters have to be reversed without a slip.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: HTUOM
+
+### T5-013 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> The word WAIT is painted in large capital letters on the outside of the glass door of a pharmacy, so that it can be read from the street. A customer inside the pharmacy stands with his back to the door and looks into a large mirror on the opposite wall, in which he sees the door with the lettering. Which sequence of letters does he see in the mirror, read from left to right? Answer with the four letters as one word.
+
+Answer: **WAIT** (text)
+
+*Note: Solution (computed): WAIT. Seen from inside, the lettering is reversed once (TIAW); the mirror reverses it a second time, so it reads normally again. Unique: all four letters are symmetrical. Tempting: TIAW (only one of the two reversals). Why a strong model may fail: two mirror operations must both be applied.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: WAIT
+
+### T5-014 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Two colleagues sit opposite each other at a narrow table. A card lies flat on the table between them, on which the word NOW is printed in large capital letters; for the woman it is the right way up and she reads NOW. Which sequence of letters does the man sitting opposite her see, read from left to right from his side? Answer with the three letters as one word.
+
+Answer: **MON** (text)
+
+*Note: Solution (computed): MON. For him the card is turned by a half turn: the order of the letters is reversed, an upside-down W looks like an M, and O and N look the same upside down. Unique. Tempting: WON (order reversed only) or NOW. Why a strong model may fail: each letter has to be rotated, not mirrored, in addition to reversing the order.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: MON
+
+### T5-015 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Tim stands next to the fountain in the market square and holds his city map turned in such a way that the western edge of the map is at the top as he looks at it. On the sheet as he holds it, the bakery appears exactly to the right of the fountain. Tim himself is facing south. Where is the bakery from Tim's point of view? Answer with one word: ahead, behind, left or right.
+
+Answer: **behind** (text)
+Also accepted (free answer): behind him | at the back
+
+*Note: Solution (computed): behind. With west at the top of the sheet, north is on its right, so the bakery lies north of the fountain; Tim faces south, so it is behind him. Unique. Tempting: right (as on the sheet) or left. Why a strong model may fail: a quarter-turned map and then a second change of frame to the person's own facing direction; the half-turned map alone (T4-033) was solved.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: behind | behind him | at the back
+
+### T5-016 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> Ben rows a small boat straight north across a lake. As rowers do, he sits with his back to the direction of travel. His sister sits in the stern of the boat and faces him, looking in the direction of travel. She points to a heron that stands on the shore exactly on her left. From Ben's point of view, is the heron on his left or on his right? Answer with one word: left or right.
+
+Answer: **right** (text)
+Also accepted (free answer): on his right | to his right | his right | right side | on the right | to the right
+
+*Note: Solution (computed): right. The sister faces north, so her left is west; Ben faces south, so west is on his right. Unique. Tempting: left. Why a strong model may fail: the rower's reversed seat is everyday knowledge that has to be combined with two facing directions.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: right | on his right | to his right | his right | right side | on the right | to the right
+
+### T5-017 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> A large mirror covers the east wall of a dance studio. Anna stands in the middle of the room with her back to the mirror and raises her right arm. Ben stands at the west wall, faces the mirror and looks past Anna at her reflection. In the mirror, as Ben sees it, is the raised arm on the left or on the right of Anna's reflection? Answer with one word: left or right.
+
+Answer: **left** (text)
+Also accepted (free answer): on the left | to the left | the left | left side | on his left
+
+*Note: Solution (computed): left. Anna faces west, so her right arm is on the north side; a mirror on the east wall does not exchange north and south, so the reflected arm is also on the north side, which is on Ben's left as he faces east. Unique. Tempting: right ('a mirror swaps left and right'). Why a strong model may fail: three frames: Anna's body, the mirror, and the observer.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: left | on the left | to the left | the left | left side | on his left
+
+### T5-018 — tier 5 — draft, tier5, type-C, computed
+
+**Base**
+
+> In a barber's shop a round wall clock without numerals hangs on the wall behind the customer, who can see it only in the big mirror in front of him. In the mirror the clock appears to show 4:40. The barber mentions that this clock is exactly 25 minutes fast. It is morning. What is the correct time? Answer as H:MM.
+
+Answer: **6:55** (text)
+Also accepted (free answer): 06:55
+
+*Note: Solution (computed): 6:55. The mirror image 4:40 corresponds to a real display of 12:00 - 4:40 = 7:20; the clock is 25 minutes fast, so the correct time is 6:55. Unique. Tempting: 7:20 (correction forgotten), 4:15 (mirror forgotten), 7:45 (correction in the wrong direction). Why a strong model may fail: mirror conversion followed by a correction whose direction ('fast') must be applied correctly.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 6:55 | 06:55
+
+### T7-001 — tier 7 — draft, tier7, material-continuity
+
+**Base**
+
+> A narrow ribbon is 24 cm long. It lies straight beside a ruler, with its ends at 0 and 24 cm. Nora folds the right half over the left half, bringing the 24 cm end onto the 0 cm end. Without moving the ruler or the left end of the folded ribbon, she folds the right half of this packet over its left half again. The packet now extends from 0 to 6 cm. She cuts straight across its entire width and through every layer at the ruler marks 2 cm and 5 cm. She unfolds and separates all the resulting pieces; folds themselves are not torn. How many of the separate pieces are exactly 3 cm long? Answer with a number.
+
+Answer: **4** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### T7-002 — tier 7 — draft, tier7, layer-order
+
+**Base**
+
+> A paper strip consists of eight equal square panels in one row, numbered 1 through 8 from left to right. The numbers identify the panels, whichever face is uppermost. All folds are along panel boundaries, and every moved packet is folded OVER the stationary packet. First fold the right half onto the left half, putting panel 8 over panel 1. Next fold the left half of the resulting four-panel-wide packet onto its right half. Finally fold the right half of the resulting two-panel-wide packet onto its left half. There is now a stack eight layers thick. A needle enters from the top, passes through exactly three paper layers and stops before entering the fourth. Which original panel is the third layer pierced? Answer with its number.
+
+Answer: **8** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 8
+
+### T7-004 — tier 7 — draft, tier7, contact-transfer
+
+**Base**
+
+> A square rubber stamp is held flat with its printing face UP. Viewed from above, a red dot is near its northwest corner, a blue dot near its southwest corner, and a green dot near its northeast corner. A square white card lies beside it with edges aligned north-south and east-west. The stamp is turned face down by flipping it about a north-south axis, then lowered onto the card with all four corners aligned. The dots transfer, and the stamp is lifted without turning. The card alone is rotated a quarter turn clockwise as seen from above. The stamp, still in the same face-down orientation and freshly inked in the same colours, is lowered onto the card again with the corners aligned. Each new dot completely covers any old dot at that corner. What colour now covers the position of the FIRST red impression? Answer with one colour.
+
+Answer: **blue** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: blue
+- `altered` — altered, free answer (text):
+  > A square rubber stamp is held flat with its printing face UP. Viewed from above, a red dot is near its northwest corner, a blue dot near its southwest corner, and a green dot near its northeast corner. A square white card lies beside it with edges aligned north-south and east-west. The stamp is turned face down by flipping it about a north-south axis, then lowered onto the card with all four corners aligned. The dots transfer, and the stamp is lifted without turning. The card alone is rotated a quarter turn counterclockwise as seen from above. The stamp, still in the same face-down orientation and freshly inked in the same colours, is lowered onto the card again with the corners aligned. Each new dot completely covers any old dot at that corner. What colour now covers the position of the FIRST red impression? Answer with one colour.
+  answer: green
+  *note: Solution: the first stamp still puts red at NE, blue at SE, green at NW. Counterclockwise card rotation moves the first red to NW, where the unchanged stamp prints green. Final corners: NW green, NE red, SE blue, SW green. Why unique: only the card rotation sense changes. Tempting wrong answer: blue, importing the base result. Why a strong model may fail (untested): contact reflection must still be distinguished from the opposite card rotation.*
+
+### T7-005 — tier 7 — draft, tier7, occlusion-and-history
+
+**Base**
+
+> Nine white squares form a 3-by-3 board. Their fixed numbers are 1,2,3 across the top row, 4,5,6 across the middle, and 7,8,9 across the bottom. Two opaque square stencils fit exactly over the board. In its starting orientation, the lower stencil has windows at 1,2,5,6,9; the upper stencil has windows at 1,3,5,6,8. A window exposes its whole square. With both stencils in place, red paint is applied from above. Only the upper stencil is then rotated a quarter turn clockwise, and blue paint is applied. The lower stencil is removed, the upper stencil is left in its current orientation, and green paint is applied through that stencil alone. All stencils are then removed. Paint never leaks, and a later colour completely covers an earlier colour. How many squares on the board are still white? Answer with a number.
+
+Answer: **2** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### T7-007 — tier 7 — draft, tier7, moving-substrate
+
+**Base**
+
+> A square sheet is divided into a 5-by-5 grid of 1 cm squares. The numbers 1 to 25 run left to right across each row, beginning with the northernmost row. The sheet starts with its edges aligned to compass directions. A pen fixed to the desk hangs vertically over the exact centre of square 13. The pen never moves horizontally. First the sheet slides 1 cm east, then 1 cm north. It is then rotated a quarter turn clockwise around its own centre, as seen from above. Finally the sheet slides another 1 cm north. The pen is lowered to mark the sheet. Which numbered square receives the mark? Answer with a number.
+
+Answer: **20** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 20
+- `altered` — altered, free answer (number):
+  > A square sheet is divided into a 5-by-5 grid of 1 cm squares. The numbers 1 to 25 run left to right across each row, beginning with the northernmost row. The sheet starts with its edges aligned to compass directions. A pen fixed to the desk hangs vertically over the exact centre of square 13. The pen never moves horizontally. First the sheet slides 1 cm east, then 1 cm north. It is then rotated a quarter turn counterclockwise around its own centre, as seen from above. Finally the sheet slides another 1 cm north. The pen is lowered to mark the sheet. Which numbered square receives the mark? Answer with a number.
+  answer: 6
+  *note: Solution: the pen remains at world offset(-1,-2) from the final sheet centre. Undoing a counterclockwise sheet rotation gives original-grid offset(-2,+1), row2 column1, square6. Why unique: only rotation sense changes, and the mark is still at a square centre. Tempting wrong answer:20, the base result. Why a strong model may fail (untested): moving a substrate requires an inverse coordinate transformation.*
+
+### T7-008 — tier 7 — draft, tier7, image-versus-object-frame
+
+**Base**
+
+> A toy car stands on square 25 at the centre of a 7-by-7 floor grid, facing east. Floor squares are numbered 1 to 49, left to right across rows, with the north row numbered 1 to 7. An overhead camera shows the whole grid without mirroring, but its picture is rotated a quarter turn clockwise: north on the floor appears to the right on the screen. A child drives the car two squares forward, turns it a quarter turn left, and reverses one square without turning it. An adult then slides the car one square toward the LEFT EDGE OF THE SCREEN, keeping its heading unchanged. The child turns the car a quarter turn right and drives it one square forward. All turns are on the spot; forward and reverse refer to the car, and all moves are exactly one or two square widths as stated. On which numbered floor square does it finish? Answer with a number.
+
+Answer: **42** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 42
+
+### T8-001 — tier 8 — draft, tier8, folded-cut-connectivity
+
+**Base**
+
+> A square sheet is 4 cm wide and 4 cm high. It lies flat with its edges facing north, east, south and west. Fold its eastern half OVER its western half. Then fold the northern half of the resulting packet OVER its southern half. The four-layer packet is now a 2 cm square. Keep every layer in place. Cut horizontally all the way across this packet, 1 cm north of its southern edge. Then cut vertically from the midpoint of the packet's southern edge up to that first cut, through all layers of the southern half of the packet. No other edges or folds are cut. Unfold everything and separate the pieces. How many separate pieces of paper result? Answer with a number.
+
+Answer: **7** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 7
+
+### T8-002 — tier 8 — draft, tier8, two-axis-layer-order
+
+**Base**
+
+> A sheet consists of nine equal square panels in a 3-by-3 grid. From west to east, the north row is ant, bee, cat; the middle row is dog, eel, fox; the south row is gnu, hen, ibis. These names identify the original panels regardless of which face is uppermost. Fold the eastern column OVER the middle column, then the western column OVER the middle column. There is now a narrow strip three panels long and three layers thick. Fold its northern third OVER its middle third, then its southern third OVER the same middle third. Do not rotate the packet between folds. A needle now enters the packet from underneath, pierces exactly two layers, and stops before the third. Which named panel is the second one pierced? Answer with the panel's one-word name.
+
+Answer: **fox** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: fox
+
+### T8-003 — tier 8 — draft, tier8, folded-surface-preimage
+
+**Base**
+
+> A square sheet is divided into sixteen equal squares. For reference, number the original squares 1 to 16 across rows, from west to east, starting with the north row. Fold the eastern half OVER the western half, then fold the northern half of that packet OVER its southern half. The packet now has four layers and a 2-by-2 arrangement of small squares. Rotate the whole packet a quarter turn clockwise on the table, as seen from above. Paint a small dot on the exposed upper surface in the centre of the packet's northeast small square. The paint does not soak through or transfer to another layer. Unfold the sheet completely. Which original numbered square has the paint dot on one of its faces? Answer with a number.
+
+Answer: **5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### T8-005 — tier 8 — draft, tier8, folded-box-frame
+
+**Base**
+
+> A cardboard box is made from a flat cross-shaped net lying on a table. One square is the floor. Four squares touch its north, east, south and west edges and will become the four walls. A sixth square, the lid, extends still farther south from the southern wall square. All six squares initially have their inside faces UP. On the lid's inside face, an arrow points north, toward the adjacent southern wall square. Fold the four walls upward, then fold the lid inward until it closes the box horizontally. Finally rotate the closed box a quarter turn clockwise as seen from above. In which compass direction does the arrow now point from its tail to its tip? The arrow can be considered through the cardboard; visibility is not being asked. Answer with north, east, south or west.
+
+Answer: **west** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: west
+
+### T8-006 — tier 8 — draft, tier8, inverse-contact-chain
+
+**Base**
+
+> Two equal square cards lie flat side by side, one west of the other, with their edges aligned north-south and east-west. They are joined along their touching edges like an open book. The western card has one wet dot near an unknown corner of its upper face. Fold that card eastward OVER the eastern card. The dot leaves an impression where the faces touch. Unfold and remove the western card. Rotate the eastern card a quarter turn clockwise on the table. Then turn it over about an east-west axis through its centre, keeping its edges compass-aligned. The eastern card is transparent, and the impression is now seen from above near its northeast corner. Near which corner of the western card was the original wet dot, before any folding? Answer with one compass word such as northeast.
+
+Answer: **northwest** (text)
+Also accepted (free answer): north-west | north west | NW
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: northwest | north-west | north west | NW
+
+### T8-007 — tier 8 — draft, tier8, view-to-transfer
+
+**Base**
+
+> A square shop window has four coloured dots. Seen from OUTSIDE, red is at the upper left, blue at the upper right, green at the lower left and gold at the lower right. Iris stands INSIDE facing the window. On a separate square sheet she draws the four-dot pattern exactly as she sees it, using transferable wet ink. She lays that sheet on a table with the drawn face up and with the edge she held uppermost pointing north. She rotates the sheet a quarter turn clockwise as seen from above. She then turns the sheet face down about a north-south axis and presses it onto an aligned blank square card, making an impression. After she lifts the sheet away, what colour is at the northwest corner of the impression on the card? Answer with one colour.
+
+Answer: **blue** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: blue
+
+### T8-008 — tier 8 — draft, tier8, orthogonal-contact-copies
+
+**Base**
+
+> Three equal transparent square panels lie flat in an L shape: a centre panel, a panel immediately west of it, and a panel immediately north of it. The west and north panels are each hinged to the touching edge of the centre panel. The west panel has four wet dots on its upper face: red at NW, blue at NE, green at SW, gold at SE. Fold the west panel eastward OVER the centre panel, leaving a wet impression on the centre panel, then unfold the west panel. Now fold the blank north panel southward OVER the centre panel. It picks up a visible copy of that impression on the face that touches it. Unfold the north panel again and detach it. Viewed from above through the transparent panel, rotate it a quarter turn clockwise on the table. Which colour is now near its southeast corner? Assume copies retain the colours and do not smear. Answer with one colour.
+
+Answer: **green** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: green
+
+### T8-009 — tier 8 — draft, tier8, local-versus-global-reassembly
+
+**Base**
+
+> A 4-by-4 square mosaic initially contains tiles numbered 1 to 16 across rows from west to east, beginning with the north row. Cut it into four 2-by-2 pieces along its central horizontal and vertical lines. Keep the pieces face up. Exchange the northwest and southeast pieces without turning either. Rotate the piece now at northwest a quarter turn clockwise within its place. Rotate the piece at northeast a half turn within its place. Exchange the two northern pieces without any further turning. Finally rotate the entire reassembled 4-by-4 mosaic a quarter turn clockwise. Which original number is now in row 2, column 3, counting rows from the north and columns from the west? Answer with a number.
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T8-010 — tier 8 — draft, tier8, turnover-with-occlusion
+
+**Base**
+
+> Three clear square tiles each have a 3-by-3 grid. In each tile's initial face-up orientation, squares are numbered 1 to 9 across rows from north to south. The green tile has opaque green patches at 1,3,5,9. The blue tile has opaque blue patches at 1,2,4,8. The red tile has opaque red patches at 2,5,6,7. All other squares are transparent, and each patch has the same colour on both faces. Stack them aligned, green at the bottom, blue in the middle, red on top. Rotate only the blue tile a quarter turn clockwise, then hold the stack together and turn the whole stack over about a north-south axis. Finally rotate the whole stack a quarter turn clockwise on the table. With a white board underneath, what colour is visible from directly above in the northeast square? Answer with one colour.
+
+Answer: **green** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: green
+
+### T8-011 — tier 8 — draft, tier8, nested-moving-frames
+
+**Base**
+
+> A circular numbered disc can rotate inside a circular frame. The disc has eight equally spaced numbers, 1 through 8 clockwise, initially with 1 at north. A pointer attached to the outer frame also initially points north and indicates whichever disc number is beneath it. First turn the entire frame-and-disc assembly a quarter turn clockwise. Next rotate only the disc two number-spaces counterclockwise relative to the frame. Now an assistant holds the disc completely stationary relative to the room while you turn the outer frame another quarter turn clockwise. The assistant releases it. Finally rotate only the disc one number-space clockwise relative to the frame. What number does the frame's pointer now indicate? Answer with a number.
+
+Answer: **4** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### T8-012 — tier 8 — draft, tier8, inverse-camera-registration
+
+**Base**
+
+> An overhead camera watches a 5-by-5 floor grid. Floor squares are numbered 1 to 25 across rows from west to east, starting with the north row. Before processing, north is at the top of the picture. The monitor first rotates each camera picture a quarter turn clockwise and THEN mirrors that rotated picture left-to-right. The operator freezes the monitor when a toy car appears in picture row 2, column 4, counted from the screen's top left. While the picture remains frozen, someone moves the actual car two floor squares north and one floor square west. The car does not turn, and the camera and processing settings do not change. On which numbered FLOOR square is the car now? Answer with a number.
+
+Answer: **6** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+
+### T8-013 — tier 8 — draft, tier8, inverse-pivot-location
+
+**Base**
+
+> A large table has a fixed 7-by-7 grid of 1 cm squares, numbered 1 to 49 across rows from west to east, with the north row numbered 1 to 7. A flat square tray has an identical grid of positions and starts exactly aligned over the table grid. A red counter is glued at the tray's centre, initially above table square 25. A pin through the centre of one unknown tray position attaches it to the table as a pivot. Rotate the tray a quarter turn clockwise around that pin, viewed from above. Remove the pin without moving the tray, then slide the tray 2 cm east and 1 cm south. The glued counter is now directly above the centre of fixed TABLE square 32. The table and its grid never moved, and the tray had ample space throughout. Which numbered table square held the pivot pin? Answer with a number.
+
+Answer: **17** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 17
+
+### T8-014 — tier 8 — draft, tier8, opposed-scales-and-carried-marks
+
+**Base**
+
+> Two long transparent rulers lie parallel, one above the other. Both are marked in centimetres. The upper ruler's numbers increase eastward; the lower ruler's numbers increase westward. Initially upper 0 lines up with lower 30. A red clip is attached permanently at upper 12, and a blue clip at lower 8. First slide only the upper ruler until upper 5 lines up with the blue clip. Next move both rulers together 7 cm west, without changing their alignment with each other. Then slide only the lower ruler until lower 20 lines up with the red clip. The clips always move with their own rulers. Which number on the upper ruler now lines up with lower 0? The rulers are long enough for every stated position. Answer with a number.
+
+Answer: **32** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 32
+
+### T8-015 — tier 8 — draft, tier8, hinge-plus-carrier-rotation
+
+**Base**
+
+> A square box stands on a level table. Its closed horizontal lid is hinged along its west edge. A small lamp is fixed to the lid and points straight away from the lid's upper face, so initially it aims at the ceiling. Raise the lid's east edge until the lid is vertical, and lock the hinge at that right angle. Rotate the entire box, lid and lamp a quarter turn clockwise as seen from above. Finally tip the entire rigid assembly through a quarter turn so that the box side which NOW faces north rests on the table. The hinge stays locked and the lamp never moves relative to the lid. In what room-relative direction does the lamp now aim? Answer with one word: north, east, south, west, up or down.
+
+Answer: **down** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: down
+
+### T8-019 — tier 8 — draft, tier8, inverse-cut-and-reassembly
+
+**Base**
+
+> A square sheet has a 5-by-5 grid. For reference, original squares are numbered 1 to 25 across rows from north to south. Exactly one original square contains a red dot. Cut the sheet into five vertical strips, each one square wide. Turn original strips 2 and 4 end for end in the plane of the table, keeping their printed faces up. Exchange strips 1 and 4, then exchange strips 3 and 5, without turning any strip during an exchange. Align the five strips into a square again. Rotate this assembled square a quarter turn clockwise. Photograph it from directly above, then mirror the photograph left-to-right without rotating it further. In that final photograph the red dot is in row 1, column 2, counted from the picture's top left. Which original numbered square contained the dot? Answer with a number.
+
+Answer: **19** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 19
+
+### T8-021 — tier 8 — draft, tier8, removing-only-the-top-layer
+
+**Base**
+
+> A white board has a 3-by-3 grid. For each operation, number its current positions 1 to 9 across rows from north to south. Put separate red stickers on positions 1,2,5,8. Put separate blue stickers on positions 2,3,5,7, directly on top of any existing stickers. Rotate the whole board a quarter turn clockwise. At each of positions 2,4,5,6, peel off only the uppermost sticker if one is present; stickers beneath it remain attached. Put yellow stickers on positions 1,5,9. Finally rotate the whole board a half turn. What colour is now visible in the middle square of the west edge? Each sticker covers its entire square and can be peeled without damaging the one underneath. Answer with one colour.
+
+Answer: **red** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: red
+
+### T8-024 — tier 8 — draft, tier8, two-sided-packet-order
+
+**Base**
+
+> Four rigid cards are stacked with their front faces up. From top to bottom they are Aster, Birch, Clover and Daisy. Aster has FOX on its front and OWL on its back; Birch CAT/HEN; Clover DOG/PIG; Daisy ANT/BEE. The two words on each card are on opposite faces. Turn the top two cards over together as a held packet and put that packet back on top. Next lift the bottom two cards together, turn that packet over, and place it on top of the other two. Move the second card from the top to the bottom without turning it over. Turn the entire four-card stack over together. Finally turn the top two cards over together and put them back on top. What word is on the DOWNWARD-facing side of the final top card? Answer with one word.
+
+Answer: **fox** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: fox
+
+### T8-029 — tier 8 — draft, tier8, aperture-registration
+
+**Base**
+
+> Four opaque square cards each have a 3-by-3 grid. Their initial hole positions, numbered 1 to 9 across rows from north to south, are: Amber 1,2,5,8; Birch 2,4,5,9; Cedar 1,4,5,6,9; Dove 2,3,4,8. Each listed square has a window at its centre, large enough to reveal a number on a board underneath; every other centre is opaque. All windows have the same size and alignment within their squares. Starting from these orientations, turn Amber a quarter turn clockwise, Birch a half turn, Cedar over about a north-south axis, and Dove a quarter turn clockwise. Stack the four cards exactly aligned above a numbered 3-by-3 board whose square 1 remains at northwest. Without moving the stack, look straight down through it. Exactly one board number is visible through all four cards. What is it? Answer with a number.
+
+Answer: **6** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+
+### T9-029 — tier 9 — tier9, easy-problems
+
+**Base**
+
+> A man leaves home at 0 m elevation, makes a left turn and walks straight for a km and reaches 300 m elevation, makes another left turn and walks straight for a km and reaches 500 m elevation, makes another left turn and walks straight for a km and reaches 900 m elevation, and turns left again and walks straight for a km. What is his final elevation in metres? Answer with a number.
+
+Answer: **0** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 0
+
+### T9-050 — tier 9 — tier9, bbeh
+
+**Base**
+
+> You have been given a pointy-topped regular hexagonal tile map consisting of 2 rows, where the first row has one tile and the second row has two tiles. Starting from a vertex, you will move along the edges of these tiles. Initially, you are positioned at the bottom right corner of the map, where you find a paddle wheel. You move up by one step, where you find a Gila monster. You move up-left by one step, where you find an African bush elephant. You move up by one step, where you find a flagpole. You move up-left by one step, where you find a barber chair. You move down-left by one step, where you find a trilobite. You move down by one step, where you find a wolf spider. You move down-right by one step, where you find a tiger cat. You move up-right by one step. What will you find? Your final answer must be only the object name (e.g., laptop). If you have not previously seen the object at the vertex, your final answer must be "unknown".
+
+Answer: **African bush elephant** (text)
+Also accepted (free answer): elephant | bush elephant
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: African bush elephant | elephant | bush elephant
+
+### T9-106 — tier 9 — draft, tier9, lattice-walk, computed
+
+**Base**
+
+> The footpaths of a large park form a honeycomb pattern: regular hexagons, all of the same size, fitted together without gaps. Two sides of every hexagon run exactly north-south; the other sides run diagonally, either north-east/south-west or north-west/south-east. Three paths meet at every junction. Noah walks from junction to junction; each stage of the walk follows exactly one side of a hexagon from one junction to the next. He starts at a junction with a drinking fountain and walks thirteen stages in these directions: north-east, south-east, north-east, south-east, south, south-west, north-west, south-west, south, south-west, north-west, north, north-west. Now he wants to return to the drinking fountain along the paths by the shortest possible way. How many stages does this shortest way back have? Answer with a number.
+
+Answer: **3** (number)
+
+*Note: Solution: after thirteen stages he is only 3 path sides away from the start (breadth-first search on the honeycomb). Why unique: computed by script. Tempting wrong answer: 13 (walking back the same way) or 1. Why a strong model may fail (untested): the end position must be located on the honeycomb and a shortest path found; nothing in the text says how far he has come.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+## temporal
+
+### CS-601 — tier 1 — draft, anchor
+
+**Base**
+
+> Today is Monday. What day of the week will it be in 3 days?
+
+Answer list: Wednesday · **Thursday** ✔ · Friday · Sunday (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Today is Monday. What day of the week will it be in 3 days? Answer with the day of the week.
+  answer: Thursday
+
+### CS-602 — tier 1 — draft, anchor
+
+**Base**
+
+> Which month comes directly after the month that comes directly before May?
+
+Answer list: March · April · **May** ✔ · June (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > Which month comes directly after the month that comes directly before May? Answer with the month.
+  answer: May
+
+### CS-603 — tier 1 — draft, anchor
+
+**Base**
+
+> How many days are there in one and a half weeks?
+
+Answer: **10.5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 10.5
+
+### CS-604 — tier 2 — draft
+
+**Base**
+
+> If the day after tomorrow is a Sunday, what day of the week was yesterday?
+
+Answer list: Wednesday · **Thursday** ✔ · Friday · Saturday (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > If the day after tomorrow is a Sunday, what day of the week was yesterday? Answer with the day of the week.
+  answer: Thursday
+
+### CS-605 — tier 2 — draft
+
+**Base**
+
+> A meeting starts at 23:30 and lasts 90 minutes. At what time does it end? Answer as HH:MM.
+
+Answer: **01:00** (text)
+Also accepted (free answer): 1:00
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 01:00 | 1:00
+
+### CS-606 — tier 2 — draft
+
+**Base**
+
+> In a certain year, 24 December is a Wednesday. On which day of the week is 31 December of the same year?
+
+Answer list: Tuesday · **Wednesday** ✔ · Thursday · Friday (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > In a certain year, 24 December is a Wednesday. On which day of the week is 31 December of the same year? Answer with the day of the week.
+  answer: Wednesday
+
+### CS-702 — tier 1 — draft, anchor
+
+**Base**
+
+> A train leaves at 14:20 and the journey takes 1 hour and 50 minutes. At what time does it arrive? Answer as HH:MM.
+
+Answer: **16:10** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 16:10
+
+### NEW-100 — tier 3 — draft, nested
+
+**Base**
+
+> The day before the day after tomorrow is a Thursday. Which day of the week was the day before yesterday?
+
+Answer list: **Monday** ✔ · Tuesday · Wednesday · Thursday · Friday · Saturday · Sunday (fixed order)
+
+*Note: the day before the day after tomorrow is tomorrow, so today is Wednesday; trap: Tuesday*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > The day before the day after tomorrow is a Thursday. Which day of the week was the day before yesterday? Answer with the day of the week.
+  answer: Monday
+
+### NEW-101 — tier 3 — draft, nested
+
+**Base**
+
+> Three days after the day before yesterday is a Sunday. Which day of the week is four days before tomorrow?
+
+Answer list: Monday · Tuesday · **Wednesday** ✔ · Thursday · Friday · Saturday · Sunday (fixed order)
+
+*Note: three days after the day before yesterday is tomorrow, so today is Saturday; four days before tomorrow is Wednesday*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > Three days after the day before yesterday is a Sunday. Which day of the week is four days before tomorrow? Answer with the day of the week.
+  answer: Wednesday
+
+### NEW-102 — tier 3 — draft, nested
+
+**Base**
+
+> Two days ago it was the day after Monday. In five days it will be the day before which day of the week?
+
+Answer list: Monday · Tuesday · **Wednesday** ✔ · Thursday · Friday · Saturday · Sunday (fixed order)
+
+*Note: two days ago was Tuesday, today is Thursday, in five days it is Tuesday, the day before Wednesday*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > Two days ago it was the day after Monday. In five days it will be the day before which day of the week? Answer with the day of the week.
+  answer: Wednesday
+
+### NEW-103 — tier 2 — draft
+
+**Base**
+
+> Today is Wednesday. Which day of the week will it be 100 days from today?
+
+Answer list: Monday · Tuesday · Wednesday · Thursday · **Friday** ✔ · Saturday · Sunday (fixed order)
+
+*Note: 100 = 14 weeks + 2 days*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > Today is Wednesday. Which day of the week will it be 100 days from today? Answer with the day of the week.
+  answer: Friday
+
+### NEW-104 — tier 3 — draft
+
+**Base**
+
+> In a certain year, 1 March is a Friday. On which day of the week is 1 April of the same year?
+
+Answer list: **Monday** ✔ · Tuesday · Wednesday · Thursday · Friday · Saturday · Sunday (fixed order)
+
+*Note: March has 31 days = 4 weeks + 3 days; trap: Sunday (30 days)*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > In a certain year, 1 March is a Friday. On which day of the week is 1 April of the same year? Answer with the day of the week.
+  answer: Monday
+
+### NEW-105 — tier 3 — draft
+
+**Base**
+
+> In a leap year, 28 February is a Tuesday. On which day of the week is 1 March of that year?
+
+Answer list: Monday · Tuesday · Wednesday · **Thursday** ✔ · Friday · Saturday · Sunday (fixed order)
+
+*Note: 29 February is the Wednesday; trap: Wednesday*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > In a leap year, 28 February is a Tuesday. On which day of the week is 1 March of that year? Answer with the day of the week.
+  answer: Thursday
+
+### NEW-106 — tier 3 — draft
+
+**Base**
+
+> A job takes exactly 10 working days. Work is done only from Monday to Friday. The job starts on a Wednesday morning, and that Wednesday counts as the first working day. On which day of the week is the job finished?
+
+Answer list: Monday · **Tuesday** ✔ · Wednesday · Thursday · Friday · Saturday · Sunday (fixed order)
+
+*Note: Wed, Thu, Fri, Mon, Tue, Wed, Thu, Fri, Mon, Tue; traps: Friday, Wednesday*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > A job takes exactly 10 working days. Work is done only from Monday to Friday. The job starts on a Wednesday morning, and that Wednesday counts as the first working day. On which day of the week is the job finished? Answer with the day of the week.
+  answer: Tuesday
+
+### NEW-107 — tier 3 — draft
+
+**Base**
+
+> A plane leaves Tokyo on a Monday at 18:00 local time and flies for 11 hours to Frankfurt. Frankfurt time is 8 hours behind Tokyo time. On which day of the week does it land, in Frankfurt local time?
+
+Answer list: **Monday** ✔ · Tuesday · Wednesday · Thursday · Friday · Saturday · Sunday (fixed order)
+
+*Note: it lands at 05:00 on Tuesday in Tokyo time, which is 21:00 on Monday in Frankfurt; trap: Tuesday*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 7 options
+- `free` — original, free answer (text):
+  > A plane leaves Tokyo on a Monday at 18:00 local time and flies for 11 hours to Frankfurt. Frankfurt time is 8 hours behind Tokyo time. On which day of the week does it land, in Frankfurt local time? Answer with the day of the week.
+  answer: Monday
+
+### NEW-108 — tier 3 — draft
+
+**Base**
+
+> A month has 30 days and begins on a Wednesday. How many Thursdays does this month have?
+
+Answer: **5** (number)
+
+*Note: Thursdays fall on the 2nd, 9th, 16th, 23rd and 30th; trap: 4*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### NEW-109 — tier 3 — draft
+
+**Base**
+
+> A month has 31 days and begins on a Saturday. On which date of this month does the last Friday fall? Answer with the day of the month as a number.
+
+Answer: **28** (number)
+
+*Note: Fridays fall on the 7th, 14th, 21st and 28th; traps: 27, 30*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 28
+
+### NEW-110 — tier 3 — draft
+
+**Base**
+
+> A night shift begins at 22:15 and ends at 06:45 the next morning. It includes an unpaid break of 45 minutes. How many minutes of the shift are paid?
+
+Answer: **465** (number)
+
+*Note: 8 h 30 min = 510 min minus 45 min = 465*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 465
+
+### NEW-111 — tier 3 — draft
+
+**Base**
+
+> Felix was born on 29 February 2000. Today is 1 March 2021. Not counting the day of his birth, on how many days has the calendar shown his exact birthday, 29 February, during his life so far?
+
+Answer: **5** (number)
+
+*Note: 2004, 2008, 2012, 2016 and 2020; traps: 21, 6*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### NEW-112 — tier 3 — draft
+
+**Base**
+
+> A wall clock runs too slowly: it loses exactly 5 minutes in every real hour. It is set to the correct time at 12:00 noon. What is the real time at the moment when this clock shows 17:30 on the same day? Answer as HH:MM.
+
+Answer: **18:00** (text)
+
+*Note: the clock advances 55 minutes per real hour; 330 clock minutes = 6 real hours; traps: 17:55, 17:57*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 18:00
+
+### NEW-113 — tier 2 — draft
+
+**Base**
+
+> A film in a cinema starts at 19:45. The film itself lasts 2 hours and 35 minutes, and there is one 15-minute break in the middle. At what time does the showing end? Answer as HH:MM.
+
+Answer: **22:35** (text)
+
+*Note: 19:45 + 2:50 = 22:35*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 22:35
+
+### NEW-114 — tier 2 — draft
+
+**Base**
+
+> Five guests arrived at a party one after another. Anna arrived before Ben but after Carl. Dora arrived after Ben. Emil arrived before Carl. Who was the third guest to arrive?
+
+Answer list: **Anna** ✔ · Ben · Carl · Dora · Emil (fixed order)
+
+*Note: order: Emil, Carl, Anna, Ben, Dora*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Five guests arrived at a party one after another. Anna arrived before Ben but after Carl. Dora arrived after Ben. Emil arrived before Carl. Who was the third guest to arrive? Answer with the name.
+  answer: Anna
+
+### T4-014 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> On Monday Mrs Roth plants 6 apple seeds in a row along her garden fence, 3 metres apart. She has read that a mature apple tree of this variety bears about 80 apples every autumn. Every evening she waters each seed with 2 litres of water. How many apples can she pick from these 6 plants on Friday of the same week?
+
+Answer list: **0** ✔ · 80 · 96 · 480 · 2400 (fixed order)
+
+*Note: Solution: 0. A seed planted on Monday is not a tree on Friday. Unique: 'the same week'. Tempting: 480 (6 x 80). Why a strong model may fail: 6 plants times 80 apples is the only calculation on offer; the time span is given as an innocent-looking weekday.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T4-015 — tier 4 — draft, tier4, type-A
+
+**Base**
+
+> In the unlit garden of a Berlin museum stands an old sundial. At 15:00 on a clear, sunny day shortly before Christmas its shadow falls exactly on the Roman numeral III, and a visitor observes that the shadow moves on by one numeral every hour. The sky stays cloudless all day and all night, and there is no moon that night. What does the sundial show five hours later, at 20:00?
+
+Answer list: the numeral VIII · the numeral VII · the numeral III · the numeral XII · **nothing, because there is no shadow to read** ✔
+
+*Note: Solution: nothing. At 20:00 in December it has long been dark in Berlin, and the garden is unlit. Unique: no sun, no moon, no lamp. Tempting: VIII (III + 5). Why a strong model may fail: the rule 'one numeral per hour' makes the extrapolation trivial; that the sun has set is everyday knowledge that is not mentioned.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+
+### T5-044 — tier 5 — draft, tier5, type-new, computed
+
+**Base**
+
+> The day before the day that comes three days after the day before yesterday is a Friday. Which day of the week is the day after the day that comes four days before the day after tomorrow? Answer with the name of the weekday.
+
+Answer: **Thursday** (text)
+
+*Note: Solution (computed): Thursday. The first expression is today (-2 + 3 - 1 = 0), so today is Friday; the second is yesterday (+2 - 4 + 1 = -1). Unique. Tempting: Friday, Saturday. Why a strong model may fail: two nested expressions of depth three; gemma4-12b failed a depth-two version (NEW-102).*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Thursday
+
+### T5-045 — tier 5 — draft, tier5, type-new, computed
+
+**Base**
+
+> Take tomorrow, go two days further on, then five days back, and then one day forward again: the day you reach is a Sunday. Now take yesterday, go three days further back, then six days forward, and then one day back again. Which day of the week do you reach? Answer with the name of the weekday.
+
+Answer: **Tuesday** (text)
+
+*Note: Solution (computed): Tuesday. The first chain ends on yesterday (+1 + 2 - 5 + 1 = -1), so today is Monday; the second chain ends on tomorrow (-1 - 3 + 6 - 1 = +1). Unique. Tempting: Sunday, Monday. Why a strong model may fail: eight signed steps in two chains with a change of reference day in between.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Tuesday
+
+### T7-027 — tier 7 — draft, tier7, interrupted-process
+
+**Base**
+
+> A seven-minute hourglass has all its sand in bulb Oak and none in bulb Pine. When upright, sand falls at a constant rate of one-seventh of the total per minute while the upper bulb contains sand; lying on its side, it transfers no sand. At 12:00 Oak is placed above Pine. At 12:03 the glass is inverted. At 12:05 it is laid on its side. At 12:09 it is stood upright with Oak above Pine again. At 12:10, how many more minutes must pass before its upper bulb becomes empty, assuming it is left untouched? Answer with a number.
+
+Answer: **5** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### T7-028 — tier 7 — draft, tier7, recording-versus-event
+
+**Base**
+
+> A camera records a wall clock continuously from 14:00 to 14:20. The wall clock keeps correct time and shows hours and minutes. At real time 16:00, Noor starts playing that recording from its beginning at normal speed. After 4 real minutes she pauses playback for 3 real minutes. She then moves the playback position backward by 2 recorded minutes and resumes at twice normal speed. At real time 16:10 she pauses it again. What time is visible on the recorded wall clock in the paused picture? Answer as HH:MM.
+
+Answer: **14:08** (text)
+Also accepted (free answer): 14:8
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 14:08 | 14:8
+
+### T7-029 — tier 7 — draft, tier7, edge-versus-state
+
+**Base**
+
+> A warehouse door opens for exactly 4 seconds whenever a floor pressure mat changes from having no person on it to having at least one person on it. Once the door opens, anyone already on the mat can stay there, but their continued presence does not extend the opening. Someone joining an occupied mat also does not restart the timer. A new empty-to-occupied change starts a fresh 4-second opening, even if an earlier opening has not yet ended. Initially the mat is empty and the door is shut. Ada steps on at second 0. Ben joins at second 2. Ada steps off at second 3. Ben steps off at second 5. Cleo steps on at second 6. Dev joins at second 8. Cleo steps off at second 9. Dev steps off at second 11. Eli steps on at second 12. During the interval from second 0 up to second 15, for how many seconds in total is the door open? Answer with a number.
+
+Answer: **11** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 11
+
+### T7-030 — tier 7 — draft, tier7, frozen-booking-versus-live-plan
+
+**Base**
+
+> A rehearsal room has reservations written on paper. Ada books 09:00-09:30. Ben books the first free 20-minute interval starting at or after 09:10. Cleo then books the first free 15-minute interval starting at or after 09:25. These bookings are made in that order. Once written, a reservation keeps its exact start and end times unless its owner explicitly changes or cancels it; freed space never moves other bookings automatically. Ada then shortens her reservation to end at 09:15. Dev now books the first free 20-minute interval starting at or after 09:10. Finally Ben cancels, and Eli books the first free 25-minute interval starting at or after 09:15. Intervals may touch at their endpoints but must not overlap. At what time does Eli's reservation start? Answer as HH:MM.
+
+Answer: **09:15** (text)
+Also accepted (free answer): 9:15
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 09:15 | 9:15
+
+### T9-081 — tier 9 — draft, tier9, schedule, computed
+
+**Base**
+
+> Five colleagues need a meeting of exactly 50 minutes on Thursday. The office is open from 8:00 to 17:00; the meeting must lie completely within these hours and can start at any full five minutes. Their fixed appointments that day: Ahmed is at the dentist until 9:15, has a call from 10:30 to 11:20 and a workshop from 15:25 to 16:00. Birte teaches from 9:00 to 10:00, has lunch with a client from 12:00 to 12:45 and leaves for good at 16:30. Chen arrives at 8:30, is in the lab from 11:00 to 12:10 and has a review from 13:30 to 14:15. Dana has a call from 10:40 to 11:10, is out from 12:30 to 13:40 and leaves for good at 16:00. Emre is on a train until 9:30, has a short call from 13:00 to 13:20 and an interview from 15:10 to 15:40. Outside these times everybody is available. A meeting may begin at the minute an appointment ends and end at the minute one begins. Suppose it is enough if Birte and at least three of the other four take part for the whole 50 minutes. What is the earliest time at which such a meeting can start? Answer as H:MM.
+
+Answer: **13:40** (text)
+Also accepted (free answer): 13:40
+
+*Note: Solution: at 13:40 the following are free for the full 50 minutes: Ahmed, Birte, Dana, Emre. No earlier five-minute start has Birte and three others free throughout. (With all five the earliest start would be 14:15.) Why unique: every start time was checked. Tempting wrong answer: 14:15 (the answer for all five) or 8:30 (Birte is free only until 9:00). Why a strong model may fail (untested): a quorum with one fixed member; every candidate time needs a count over five calendars.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: 13:40
+
+### T9-092 — tier 9 — draft, tier9, calendar, computed
+
+**Base**
+
+> In a certain year the 1st of March is a Friday. How many Fridays does the month of May have in that year? Answer with a number.
+
+Answer: **5** (number)
+
+*Note: Solution: March has 31 days, so 1 April is a Monday; April has 30 days, so 1 May is a Wednesday. The Fridays in May are the 3, 10, 17, 24, 31: 5. Why unique: calendar arithmetic (checked with 2024). Tempting wrong answer: 4. Why a strong model may fail (untested): two month lengths and the fact that a 31-day month has five of three weekdays.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+## tracking
+
+### CS-901 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: east, east, south. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number is on top at the end?
+
+Answer: **2** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### CS-902 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: east, south, east, west, south. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number is on top at the end?
+
+Answer: **3** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### CS-903 — tier 2 — draft, generated
+
+**Base**
+
+> Three identical cups stand upside down in a row: left, middle and right. A coin lies under the middle cup. The cups are swapped, always two at a time, in this order: the right and the middle cup; the right and the middle cup; the right and the left cup; the left and the middle cup. After each swap, 'left', 'middle' and 'right' again refer to the positions on the table. Under which cup is the coin now?
+
+Answer list: **left** ✔ · middle · right (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### CS-904 — tier 3 — draft, generated
+
+**Base**
+
+> Three identical cups stand upside down in a row: left, middle and right. A coin lies under the right cup. The cups are swapped, always two at a time, in this order: the left and the right cup; the left and the right cup; the middle and the left cup; the left and the middle cup; the middle and the left cup; the left and the right cup; the right and the middle cup. After each swap, 'left', 'middle' and 'right' again refer to the positions on the table. Under which cup is the coin now?
+
+Answer list: **left** ✔ · middle · right (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### CS-905 — tier 3 — draft, generated
+
+**Base**
+
+> You stand on an open field facing north. Follow these instructions in order: turn 90 degrees right, walk 2 m forward, walk 1 m forward, walk 3 m forward, turn 90 degrees left, turn 90 degrees left, walk 3 m forward. In which direction are you facing at the end?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You stand on an open field facing north. Follow these instructions in order: turn 90 degrees right, walk 2 m forward, walk 1 m forward, walk 3 m forward, turn 90 degrees left, turn 90 degrees left, walk 3 m forward. In which direction are you facing at the end? Answer with north, east, south or west.
+  answer: west
+
+### CS-906 — tier 3 — draft, generated
+
+**Base**
+
+> You stand on an open field facing north. Follow these instructions in order: walk 1 m forward, walk 2 m forward, turn 90 degrees left, walk 1 m forward, turn 90 degrees right, turn 90 degrees left, turn 90 degrees left, walk 1 m forward, walk 1 m forward, turn 90 degrees right. In which direction are you facing at the end?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You stand on an open field facing north. Follow these instructions in order: walk 1 m forward, walk 2 m forward, turn 90 degrees left, walk 1 m forward, turn 90 degrees right, turn 90 degrees left, turn 90 degrees left, walk 1 m forward, walk 1 m forward, turn 90 degrees right. In which direction are you facing at the end? Answer with north, east, south or west.
+  answer: west
+
+### CS-907 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: east, north, east, north, west, south, south. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number is on top at the end?
+
+Answer: **2** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### CS-908 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: west, west, south, west, south, west, north, east, north. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number is on top at the end?
+
+Answer: **2** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### CS-909 — tier 3 — draft, generated
+
+**Base**
+
+> Three identical cups stand upside down in a row: left, middle and right. A coin lies under the middle cup. The cups are swapped, always two at a time, in this order: the middle and the right cup; the left and the middle cup; the left and the right cup; the left and the middle cup; the right and the left cup; the left and the right cup; the middle and the left cup; the right and the left cup; the left and the right cup; the right and the middle cup. After each swap, 'left', 'middle' and 'right' again refer to the positions on the table. Under which cup is the coin now?
+
+Answer list: **left** ✔ · middle · right (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### CS-910 — tier 3 — draft, generated
+
+**Base**
+
+> Three identical cups stand upside down in a row: left, middle and right. A coin lies under the right cup. The cups are swapped, always two at a time, in this order: the left and the middle cup; the right and the left cup; the left and the right cup; the middle and the right cup; the left and the middle cup; the left and the right cup; the left and the middle cup; the right and the left cup; the right and the left cup; the right and the middle cup; the left and the right cup; the middle and the left cup. After each swap, 'left', 'middle' and 'right' again refer to the positions on the table. Under which cup is the coin now?
+
+Answer list: **left** ✔ · middle · right (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 3 options
+
+### CS-911 — tier 3 — draft, generated
+
+**Base**
+
+> You stand on an open field facing north. Follow these instructions in order: turn 90 degrees left, turn 90 degrees right, walk 1 m forward, walk 3 m forward, turn 90 degrees right, turn 90 degrees right, turn 90 degrees right, walk 3 m forward, turn 90 degrees left, turn 90 degrees right, walk 1 m forward, turn 90 degrees left, walk 1 m forward, turn 90 degrees left. In which direction are you facing at the end?
+
+Answer list: north · **east** ✔ · south · west (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You stand on an open field facing north. Follow these instructions in order: turn 90 degrees left, turn 90 degrees right, walk 1 m forward, walk 3 m forward, turn 90 degrees right, turn 90 degrees right, turn 90 degrees right, walk 3 m forward, turn 90 degrees left, turn 90 degrees right, walk 1 m forward, turn 90 degrees left, walk 1 m forward, turn 90 degrees left. In which direction are you facing at the end? Answer with north, east, south or west.
+  answer: east
+
+### CS-912 — tier 3 — draft, generated
+
+**Base**
+
+> You stand on an open field facing north. Follow these instructions in order: turn 90 degrees right, walk 1 m forward, walk 3 m forward, turn 90 degrees left, walk 2 m forward, turn 90 degrees left, turn 90 degrees left, turn 90 degrees right, turn 90 degrees right, turn 90 degrees left, turn 90 degrees left, turn 90 degrees right, walk 2 m forward, turn 90 degrees left, turn 90 degrees right, walk 1 m forward, turn 90 degrees right, turn 90 degrees right. In which direction are you facing at the end?
+
+Answer list: north · **east** ✔ · south · west (fixed order)
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You stand on an open field facing north. Follow these instructions in order: turn 90 degrees right, walk 1 m forward, walk 3 m forward, turn 90 degrees left, walk 2 m forward, turn 90 degrees left, turn 90 degrees left, turn 90 degrees right, turn 90 degrees right, turn 90 degrees left, turn 90 degrees left, turn 90 degrees right, walk 2 m forward, turn 90 degrees left, turn 90 degrees right, walk 1 m forward, turn 90 degrees right, turn 90 degrees right. In which direction are you facing at the end? Answer with north, east, south or west.
+  answer: east
+
+### NEW-115 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: north, north, north, south, east, south, south, east, north, east, west, west. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number faces north at the end?
+
+Answer: **1** (number)
+
+*Note: computed by simulation; 12 steps, asks for the north face instead of the top face*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### NEW-116 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: south, south, north, west, east, north, east, north, south, west, east, west, north, east. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number is on top at the end?
+
+Answer: **4** (number)
+
+*Note: computed by simulation; 14 steps*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### NEW-117 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: south, east, west, north, north, north, south, north, east, north, north, west, west, north, east, north. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number is on the bottom face (touching the table) at the end?
+
+Answer: **4** (number)
+
+*Note: computed by simulation; 16 steps, asks for the bottom face instead of the top face*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### NEW-118 — tier 3 — draft, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 6 is on top, the 3 faces north and the 2 faces east. The die is now tipped over one of its bottom edges, one step at a time, in these directions: east, east, south, west, north, north, west, south, east, east. (Tipping it north means the top face turns towards the north and ends up facing north.) Which number faces west at the end?
+
+Answer: **5** (number)
+
+*Note: computed by simulation; different starting position (bottom 1, south 4, west 5), asks for the west face*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### NEW-119 — tier 3 — draft, generated
+
+**Base**
+
+> Five identical cups stand upside down in a row on a table. The places on the table are numbered 1 to 5 from left to right. A coin lies under the cup at position 2; it always stays under its cup. The cups are now moved in these steps, one after another: the cup at position 5 is moved to the left end of the row and the other four cups each move one position to the right; the cup at position 5 is moved to the left end of the row and the other four cups each move one position to the right; the cups at positions 1 and 3 are swapped; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 3 and 5 are swapped; the cups at positions 1 and 5 are swapped; the cups at positions 2 and 4 are swapped; the cups at positions 3 and 5 are swapped; the cups at positions 3 and 4 are swapped. The position numbers always refer to the places on the table, not to particular cups. At which position is the cup with the coin at the end? Answer with the number of the position.
+
+Answer: **3** (number)
+
+*Note: computed by simulation; 10 steps with five cups, swaps and row shifts*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### NEW-120 — tier 3 — draft, generated
+
+**Base**
+
+> Five identical cups stand upside down in a row on a table. The places on the table are numbered 1 to 5 from left to right. A coin lies under the cup at position 2; it always stays under its cup. The cups are now moved in these steps, one after another: the cups at positions 1 and 4 are swapped; the cups at positions 1 and 5 are swapped; the cups at positions 3 and 5 are swapped; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 3 and 5 are swapped; the cups at positions 1 and 2 are swapped; the cups at positions 1 and 3 are swapped; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 3 and 5 are swapped; the cups at positions 1 and 3 are swapped; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 2 and 4 are swapped; the cups at positions 3 and 4 are swapped. The position numbers always refer to the places on the table, not to particular cups. At which position is the cup with the coin at the end? Answer with the number of the position.
+
+Answer: **5** (number)
+
+*Note: computed by simulation; 14 steps with five cups, swaps and row shifts*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 5
+
+### NEW-121 — tier 3 — draft, generated
+
+**Base**
+
+> Five identical cups stand upside down in a row on a table. The places on the table are numbered 1 to 5 from left to right. A coin lies under the cup at position 2; it always stays under its cup. The cups are now moved in these steps, one after another: the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 1 and 3 are swapped; the cups at positions 4 and 5 are swapped; the cup at position 5 is moved to the left end of the row and the other four cups each move one position to the right; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 1 and 3 are swapped; the cups at positions 2 and 4 are swapped; the cup at position 5 is moved to the left end of the row and the other four cups each move one position to the right; the cups at positions 1 and 2 are swapped; the cups at positions 1 and 3 are swapped; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 1 and 3 are swapped; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cups at positions 1 and 2 are swapped; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left; the cup at position 1 is moved to the right end of the row and the other four cups each move one position to the left. The position numbers always refer to the places on the table, not to particular cups. At which position is the cup with the coin at the end? Answer with the number of the position.
+
+Answer: **1** (number)
+
+*Note: computed by simulation; 18 steps with five cups, swaps and row shifts*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 1
+
+### NEW-122 — tier 3 — draft, generated
+
+**Base**
+
+> You stand on an open field facing north. Follow these instructions in order: turn 90 degrees left, walk 1 m backwards without turning, turn around (180 degrees), walk 3 m forward, turn 90 degrees right, walk 1 m forward, walk 2 m forward, walk 3 m forward, turn 90 degrees right, walk 4 m backwards without turning. In which direction are you facing at the end?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+*Note: computed by simulation; end position x=8 (east), y=-6 (north), straight-line distance 10 m; walking backwards does not change the facing direction*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You stand on an open field facing north. Follow these instructions in order: turn 90 degrees left, walk 1 m backwards without turning, turn around (180 degrees), walk 3 m forward, turn 90 degrees right, walk 1 m forward, walk 2 m forward, walk 3 m forward, turn 90 degrees right, walk 4 m backwards without turning. In which direction are you facing at the end? Answer with north, east, south or west.
+  answer: west
+- `distance-free` — original, free answer (number):
+  > You stand on an open field facing north. Follow these instructions in order: turn 90 degrees left, walk 1 m backwards without turning, turn around (180 degrees), walk 3 m forward, turn 90 degrees right, walk 1 m forward, walk 2 m forward, walk 3 m forward, turn 90 degrees right, walk 4 m backwards without turning. How far are you from your starting point at the end, measured in a straight line, in metres?
+  answer: 10
+  *note: computed by simulation (Pythagorean triple)*
+
+### NEW-123 — tier 3 — draft, generated
+
+**Base**
+
+> You stand on an open field facing north. Follow these instructions in order: turn around (180 degrees), turn 90 degrees left, walk 6 m forward, walk 2 m forward, turn 90 degrees left, turn 90 degrees left, walk 2 m backwards without turning, walk 3 m backwards without turning, walk 5 m forward, walk 4 m forward, turn 90 degrees left, turn 90 degrees right, turn 90 degrees left, walk 3 m forward. In which direction are you facing at the end?
+
+Answer list: north · east · **south** ✔ · west (fixed order)
+
+*Note: computed by simulation; end position x=4 (east), y=-3 (north), straight-line distance 5 m; walking backwards does not change the facing direction*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You stand on an open field facing north. Follow these instructions in order: turn around (180 degrees), turn 90 degrees left, walk 6 m forward, walk 2 m forward, turn 90 degrees left, turn 90 degrees left, walk 2 m backwards without turning, walk 3 m backwards without turning, walk 5 m forward, walk 4 m forward, turn 90 degrees left, turn 90 degrees right, turn 90 degrees left, walk 3 m forward. In which direction are you facing at the end? Answer with north, east, south or west.
+  answer: south
+- `distance-free` — original, free answer (number):
+  > You stand on an open field facing north. Follow these instructions in order: turn around (180 degrees), turn 90 degrees left, walk 6 m forward, walk 2 m forward, turn 90 degrees left, turn 90 degrees left, walk 2 m backwards without turning, walk 3 m backwards without turning, walk 5 m forward, walk 4 m forward, turn 90 degrees left, turn 90 degrees right, turn 90 degrees left, walk 3 m forward. How far are you from your starting point at the end, measured in a straight line, in metres?
+  answer: 5
+  *note: computed by simulation (Pythagorean triple)*
+
+### NEW-124 — tier 3 — draft, generated
+
+**Base**
+
+> You stand on an open field facing north. Follow these instructions in order: walk 6 m forward, walk 2 m forward, walk 5 m forward, turn 90 degrees left, walk 3 m forward, turn around (180 degrees), walk 4 m forward, walk 4 m forward, turn 90 degrees right, walk 4 m forward, walk 2 m backwards without turning, walk 1 m backwards without turning, turn 90 degrees left, turn around (180 degrees). In which direction are you facing at the end?
+
+Answer list: north · east · south · **west** ✔ (fixed order)
+
+*Note: computed by simulation; end position x=5 (east), y=12 (north), straight-line distance 13 m; walking backwards does not change the facing direction*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 4 options
+- `free` — original, free answer (text):
+  > You stand on an open field facing north. Follow these instructions in order: walk 6 m forward, walk 2 m forward, walk 5 m forward, turn 90 degrees left, walk 3 m forward, turn around (180 degrees), walk 4 m forward, walk 4 m forward, turn 90 degrees right, walk 4 m forward, walk 2 m backwards without turning, walk 1 m backwards without turning, turn 90 degrees left, turn around (180 degrees). In which direction are you facing at the end? Answer with north, east, south or west.
+  answer: west
+- `distance-free` — original, free answer (number):
+  > You stand on an open field facing north. Follow these instructions in order: walk 6 m forward, walk 2 m forward, walk 5 m forward, turn 90 degrees left, walk 3 m forward, turn around (180 degrees), walk 4 m forward, walk 4 m forward, turn 90 degrees right, walk 4 m forward, walk 2 m backwards without turning, walk 1 m backwards without turning, turn 90 degrees left, turn around (180 degrees). How far are you from your starting point at the end, measured in a straight line, in metres?
+  answer: 13
+  *note: computed by simulation (Pythagorean triple)*
+
+### NEW-125 — tier 3 — draft, generated
+
+**Base**
+
+> Six books lie in a stack on a desk. From top to bottom their covers are: red, blue, green, yellow, white, black. The stack is now changed in these steps, one after another: the bottom book is pulled out and put on top of the stack; the whole stack is turned upside down; the top book is moved to the bottom of the stack; the top three books are lifted off together, this small pile is turned upside down and put back on top; the top book is moved to the bottom of the stack; the top book and the book directly below it change places. Which colour is the book that is now third from the top?
+
+Answer list: **red** ✔ · blue · green · yellow · white · black (fixed order)
+
+*Note: computed by simulation; final stack from top to bottom: yellow, green, red, black, white, blue*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > Six books lie in a stack on a desk. From top to bottom their covers are: red, blue, green, yellow, white, black. The stack is now changed in these steps, one after another: the bottom book is pulled out and put on top of the stack; the whole stack is turned upside down; the top book is moved to the bottom of the stack; the top three books are lifted off together, this small pile is turned upside down and put back on top; the top book is moved to the bottom of the stack; the top book and the book directly below it change places. Which colour is the book that is now third from the top? Answer with the colour.
+  answer: red | red book
+
+### NEW-126 — tier 3 — draft, generated
+
+**Base**
+
+> Six books lie in a stack on a desk. From top to bottom their covers are: red, blue, green, yellow, white, black. The stack is now changed in these steps, one after another: the top book is moved to the bottom of the stack; the top three books are lifted off together, this small pile is turned upside down and put back on top; the bottom book is pulled out and put on top of the stack; the fourth book from the top is pulled out and put on top of the stack; the top three books are lifted off together, this small pile is turned upside down and put back on top; the whole stack is turned upside down; the bottom book is pulled out and put on top of the stack; the whole stack is turned upside down; the top book is moved to the bottom of the stack. Which colour is the book that is now second from the top?
+
+Answer list: red · blue · **green** ✔ · yellow · white · black (fixed order)
+
+*Note: computed by simulation; final stack from top to bottom: blue, green, white, black, yellow, red*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > Six books lie in a stack on a desk. From top to bottom their covers are: red, blue, green, yellow, white, black. The stack is now changed in these steps, one after another: the top book is moved to the bottom of the stack; the top three books are lifted off together, this small pile is turned upside down and put back on top; the bottom book is pulled out and put on top of the stack; the fourth book from the top is pulled out and put on top of the stack; the top three books are lifted off together, this small pile is turned upside down and put back on top; the whole stack is turned upside down; the bottom book is pulled out and put on top of the stack; the whole stack is turned upside down; the top book is moved to the bottom of the stack. Which colour is the book that is now second from the top? Answer with the colour.
+  answer: green | green book
+
+### NEW-127 — tier 3 — draft, generated
+
+**Base**
+
+> Six books lie in a stack on a desk. From top to bottom their covers are: red, blue, green, yellow, white, black. The stack is now changed in these steps, one after another: the whole stack is turned upside down; the top book is moved to the bottom of the stack; the top book and the book directly below it change places; the top three books are lifted off together, this small pile is turned upside down and put back on top; the top book is moved to the bottom of the stack; the fourth book from the top is pulled out and put on top of the stack; the whole stack is turned upside down; the top book and the book directly below it change places; the fourth book from the top is pulled out and put on top of the stack. Which colour is the book that is now directly above the bottom book?
+
+Answer list: red · blue · green · yellow · **white** ✔ · black (fixed order)
+
+*Note: computed by simulation; final stack from top to bottom: yellow, black, green, blue, white, red*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > Six books lie in a stack on a desk. From top to bottom their covers are: red, blue, green, yellow, white, black. The stack is now changed in these steps, one after another: the whole stack is turned upside down; the top book is moved to the bottom of the stack; the top book and the book directly below it change places; the top three books are lifted off together, this small pile is turned upside down and put back on top; the top book is moved to the bottom of the stack; the fourth book from the top is pulled out and put on top of the stack; the whole stack is turned upside down; the top book and the book directly below it change places; the fourth book from the top is pulled out and put on top of the stack. Which colour is the book that is now directly above the bottom book? Answer with the colour.
+  answer: white | white book
+
+### NEW-128 — tier 3 — draft, generated
+
+**Base**
+
+> Three jugs without any markings stand on a table: jug A holds at most 8 litres, jug B at most 5 litres and jug C at most 3 litres. At the start A is full of water and B and C are empty. 'Pour from X into Y' always means: pour until X is empty or Y is full, whichever happens first; nothing is spilled. These steps are carried out in order: pour from A into C; pour from C into B; pour from A into C; pour from C into B; pour from C into A; pour from B into C. How many litres of water are in jug A at the end?
+
+Answer: **3** (number)
+
+*Note: computed by simulation; final contents A=3, B=2, C=3 litres*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### NEW-129 — tier 3 — draft, generated
+
+**Base**
+
+> Three jugs without any markings stand on a table: jug A holds at most 8 litres, jug B at most 5 litres and jug C at most 3 litres. At the start A is full of water and B and C are empty. 'Pour from X into Y' always means: pour until X is empty or Y is full, whichever happens first; nothing is spilled. These steps are carried out in order: pour from A into B; pour from B into C; pour from A into B; pour from C into A; fill C to the brim from the tap; pour from B into A; empty C completely into the sink; fill B to the brim from the tap; pour from B into C. How many litres of water are in jug B at the end?
+
+Answer: **2** (number)
+
+*Note: computed by simulation; final contents A=8, B=2, C=3 litres*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### NEW-130 — tier 3 — draft, generated
+
+**Base**
+
+> At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The key is picked up from the floor and put into the bag. The coin is picked up from the floor and put into the tin. The box is carried to the hallway. The tin is carried to the cellar. The chest is carried to the attic. The bag is put into the box. The bag is opened, looked into and closed again. The key is taken out of the bag and put into the chest. The tin is opened, looked into and closed again. The tin is carried to the kitchen. The tin is carried to the cellar. The key is taken out of the chest and put into the tin. The chest is opened, looked into and closed again. The tin is put into the chest. In which room is the coin at the end?
+
+Answer list: kitchen · hallway · garage · **attic** ✔ · cellar · bathroom (fixed order)
+
+*Note: computed by simulation; the coin ends up here: small tin > wooden chest > attic; rooms it passed through: kitchen, attic, cellar, kitchen, cellar, attic*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The key is picked up from the floor and put into the bag. The coin is picked up from the floor and put into the tin. The box is carried to the hallway. The tin is carried to the cellar. The chest is carried to the attic. The bag is put into the box. The bag is opened, looked into and closed again. The key is taken out of the bag and put into the chest. The tin is opened, looked into and closed again. The tin is carried to the kitchen. The tin is carried to the cellar. The key is taken out of the chest and put into the tin. The chest is opened, looked into and closed again. The tin is put into the chest. In which room is the coin at the end? Answer with the room.
+  answer: attic | in the attic
+
+### NEW-131 — tier 3 — draft, generated
+
+**Base**
+
+> At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The tin is carried to the cellar. The box is carried to the cellar. The box is carried to the kitchen. The bag is carried to the kitchen. The ring is picked up from the floor and put into the bag. The key is picked up from the floor and put into the bag. The tin is put into the bag. The bag is put into the box. The bag is taken out of the box and put into the chest. The box is carried to the cellar. The chest is carried to the bathroom. The key is taken out of the bag and put into the box. The bag is opened, looked into and closed again. The box is carried to the garage. In which room is the key at the end?
+
+Answer list: kitchen · hallway · **garage** ✔ · attic · cellar · bathroom (fixed order)
+
+*Note: computed by simulation; the key ends up here: cardboard box > garage; rooms it passed through: garage, kitchen, cellar, bathroom, cellar, garage*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The tin is carried to the cellar. The box is carried to the cellar. The box is carried to the kitchen. The bag is carried to the kitchen. The ring is picked up from the floor and put into the bag. The key is picked up from the floor and put into the bag. The tin is put into the bag. The bag is put into the box. The bag is taken out of the box and put into the chest. The box is carried to the cellar. The chest is carried to the bathroom. The key is taken out of the bag and put into the box. The bag is opened, looked into and closed again. The box is carried to the garage. In which room is the key at the end? Answer with the room.
+  answer: garage | in the garage
+
+### NEW-132 — tier 3 — draft, generated
+
+**Base**
+
+> At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The bag is carried to the garage. The bag is put into the box. The tin is put into the bag. The bag is taken out of the box and left on the floor next to it. The box is carried to the cellar. The bag is put into the chest. The key is picked up from the floor and put into the chest. The chest is carried to the kitchen. The box is opened, looked into and closed again. The coin is picked up from the floor and put into the tin. The coin is taken out of the tin and put into the box. The box is carried to the kitchen. The chest is carried to the cellar. The chest is carried to the hallway. In which room is the key at the end?
+
+Answer list: kitchen · **hallway** ✔ · garage · attic · cellar · bathroom (fixed order)
+
+*Note: computed by simulation; the key ends up here: wooden chest > hallway; rooms it passed through: garage, cellar, kitchen, cellar, hallway*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The bag is carried to the garage. The bag is put into the box. The tin is put into the bag. The bag is taken out of the box and left on the floor next to it. The box is carried to the cellar. The bag is put into the chest. The key is picked up from the floor and put into the chest. The chest is carried to the kitchen. The box is opened, looked into and closed again. The coin is picked up from the floor and put into the tin. The coin is taken out of the tin and put into the box. The box is carried to the kitchen. The chest is carried to the cellar. The chest is carried to the hallway. In which room is the key at the end? Answer with the room.
+  answer: hallway | in the hallway
+
+### NEW-133 — tier 3 — draft, generated
+
+**Base**
+
+> At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The coin is picked up from the floor and put into the box. The key is picked up from the floor and put into the chest. The ring is picked up from the floor and put into the box. The box is put into the chest. The tin is carried to the cellar. The tin is carried to the kitchen. The chest is carried to the garage. The tin is carried to the cellar. The bag is carried to the kitchen. The chest is opened, looked into and closed again. The tin is put into the chest. The bag is carried to the garage. The box is opened, looked into and closed again. The chest is carried to the cellar. The tin is opened, looked into and closed again. The bag is put into the box. The ring is taken out of the box and put into the chest. The tin is taken out of the chest and put into the bag. The bag is taken out of the box and put into the chest. The box is opened, looked into and closed again. In which room is the ring at the end?
+
+Answer list: kitchen · hallway · garage · attic · **cellar** ✔ · bathroom (fixed order)
+
+*Note: computed by simulation; the ring ends up here: wooden chest > cellar; rooms it passed through: bathroom, kitchen, cellar, garage, cellar*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > At the start, a wooden chest stands in the cellar, a cardboard box in the kitchen, a cloth bag in the hallway and a small tin in the attic; all four are empty. A key lies on the floor of the garage, a coin on the floor of the kitchen and a ring on the floor of the bathroom. A container is always closed before it is moved, so everything inside it moves along with it. Then the following happens, in this order: The coin is picked up from the floor and put into the box. The key is picked up from the floor and put into the chest. The ring is picked up from the floor and put into the box. The box is put into the chest. The tin is carried to the cellar. The tin is carried to the kitchen. The chest is carried to the garage. The tin is carried to the cellar. The bag is carried to the kitchen. The chest is opened, looked into and closed again. The tin is put into the chest. The bag is carried to the garage. The box is opened, looked into and closed again. The chest is carried to the cellar. The tin is opened, looked into and closed again. The bag is put into the box. The ring is taken out of the box and put into the chest. The tin is taken out of the chest and put into the bag. The bag is taken out of the box and put into the chest. The box is opened, looked into and closed again. In which room is the ring at the end? Answer with the room.
+  answer: cellar | in the cellar
+
+### T4-025 — tier 4 — draft, tier4, type-B, generated
+
+**Base**
+
+> In a house there are four containers: a laundry basket in the bedroom, a backpack in the hallway, a shoebox in the study and a pencil case in the kitchen; all four are empty at the start. Five small things lie on the floor: a key in the hallway, a coin in the kitchen, a ring in the bedroom, a ticket in the study and a watch in the garage. A container is always closed before it is moved, so everything inside it moves along with it, and whatever is tied to the outside of a container also moves with it but is not inside it. This is what happens during the day, in this order: Ben starts to carry the laundry basket away, changes his mind after one step and puts it back in the same place. Ben carries the shoebox to the hallway. Cleo takes the ticket up from the floor of the study and puts it into the laundry basket. Ada takes the ticket out of the laundry basket and leaves it on the floor of the same room. Ada takes the ticket up from the floor of the bedroom and puts it into the pencil case. Ada carries the pencil case to the study. Ada puts the shoebox into the laundry basket. Ben takes the watch up from the floor of the garage and ties it to the outside of the backpack with a piece of string. Cleo puts the pencil case into the shoebox. Cleo takes the coin up from the floor of the kitchen and ties it to the outside of the backpack with a piece of string. Cleo takes the shoebox out of the laundry basket and puts it into the backpack. Ada takes the ticket out of the pencil case and puts it into the laundry basket. Ben takes the ring up from the floor of the bedroom and puts it into the shoebox. Ada takes the key up from the floor of the hallway and puts it into the pencil case. Cleo takes the ticket out of the laundry basket and puts it into the backpack. Ben looks for the car keys in the garage and does not find them. Cleo opens the pencil case, looks inside and closes it again. Ben takes the ticket out of the backpack and puts it into the pencil case. Ada takes the ring out of the shoebox and puts it into the pencil case. Cleo takes the ticket out of the pencil case and puts it into the shoebox. Cleo carries the backpack to the study. Ada carries the laundry basket to the cellar. In which room is the ticket at the end of the day?
+
+Answer list: kitchen · hallway · bedroom · **study** ✔ · cellar · garage (fixed order)
+
+*Note: Solution (computed by simulation): the ticket is in the shoebox, in the backpack, in the study. Rooms it passed through: study, bedroom, kitchen, study, bedroom, hallway, bedroom, hallway, study. Unique because every step is deterministic. Tempting: the room of the last step that names the object or its first container. Why a strong model may fail: 22 steps with nested containers, things tied to the outside (not affected by swapping or emptying), swaps of contents and steps that change nothing.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > In a house there are four containers: a laundry basket in the bedroom, a backpack in the hallway, a shoebox in the study and a pencil case in the kitchen; all four are empty at the start. Five small things lie on the floor: a key in the hallway, a coin in the kitchen, a ring in the bedroom, a ticket in the study and a watch in the garage. A container is always closed before it is moved, so everything inside it moves along with it, and whatever is tied to the outside of a container also moves with it but is not inside it. This is what happens during the day, in this order: Ben starts to carry the laundry basket away, changes his mind after one step and puts it back in the same place. Ben carries the shoebox to the hallway. Cleo takes the ticket up from the floor of the study and puts it into the laundry basket. Ada takes the ticket out of the laundry basket and leaves it on the floor of the same room. Ada takes the ticket up from the floor of the bedroom and puts it into the pencil case. Ada carries the pencil case to the study. Ada puts the shoebox into the laundry basket. Ben takes the watch up from the floor of the garage and ties it to the outside of the backpack with a piece of string. Cleo puts the pencil case into the shoebox. Cleo takes the coin up from the floor of the kitchen and ties it to the outside of the backpack with a piece of string. Cleo takes the shoebox out of the laundry basket and puts it into the backpack. Ada takes the ticket out of the pencil case and puts it into the laundry basket. Ben takes the ring up from the floor of the bedroom and puts it into the shoebox. Ada takes the key up from the floor of the hallway and puts it into the pencil case. Cleo takes the ticket out of the laundry basket and puts it into the backpack. Ben looks for the car keys in the garage and does not find them. Cleo opens the pencil case, looks inside and closes it again. Ben takes the ticket out of the backpack and puts it into the pencil case. Ada takes the ring out of the shoebox and puts it into the pencil case. Cleo takes the ticket out of the pencil case and puts it into the shoebox. Cleo carries the backpack to the study. Ada carries the laundry basket to the cellar. In which room is the ticket at the end of the day? Answer with the room.
+  answer: study | in the study
+
+### T4-026 — tier 4 — draft, tier4, type-B, generated
+
+**Base**
+
+> In a house there are four containers: a laundry basket in the bedroom, a backpack in the hallway, a shoebox in the study and a pencil case in the kitchen; all four are empty at the start. Five small things lie on the floor: a key in the hallway, a coin in the kitchen, a ring in the bedroom, a ticket in the study and a watch in the garage. A container is always closed before it is moved, so everything inside it moves along with it, and whatever is tied to the outside of a container also moves with it but is not inside it. This is what happens during the day, in this order: Cleo takes the watch up from the floor of the garage and puts it into the laundry basket. Cleo takes the ring up from the floor of the bedroom and puts it into the shoebox. Cleo takes the ring out of the shoebox and puts it into the laundry basket. Ben carries the shoebox to the kitchen. Ben starts to carry the laundry basket away, changes his mind after one step and puts it back in the same place. Ada starts to carry the backpack away, changes her mind after one step and puts it back in the same place. Ben carries the laundry basket to the kitchen. Ben takes the watch out of the laundry basket and puts it into the pencil case. Ben carries the shoebox to the garage. Cleo tips everything that is inside the pencil case out onto the floor and leaves it lying there. Ada swaps the complete contents of the laundry basket and the pencil case: everything that was inside the one is now inside the other. Ben takes the coin up from the floor of the kitchen and puts it into the pencil case. Ada carries the pencil case to the hallway. Ben looks for the car keys in the cellar and does not find them. Cleo carries the pencil case to the garage. Ada opens the backpack, looks inside and closes it again. Ben carries the laundry basket to the study. Ada carries the pencil case to the study. Ben swaps the complete contents of the pencil case and the backpack: everything that was inside the one is now inside the other. Ben puts the pencil case into the laundry basket. Ben takes the watch up from the floor of the kitchen and puts it into the pencil case. Cleo lifts the backpack, wipes the dust from underneath and puts it back exactly where it was. In which room is the ring at the end of the day?
+
+Answer list: kitchen · **hallway** ✔ · bedroom · study · cellar · garage (fixed order)
+
+*Note: Solution (computed by simulation): the ring is in the backpack, in the hallway. Rooms it passed through: bedroom, study, bedroom, kitchen, hallway, garage, study, hallway. Unique because every step is deterministic. Tempting: the room of the last step that names the object or its first container. Why a strong model may fail: 22 steps with nested containers, things tied to the outside (not affected by swapping or emptying), swaps of contents and steps that change nothing.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 6 options
+- `free` — original, free answer (text):
+  > In a house there are four containers: a laundry basket in the bedroom, a backpack in the hallway, a shoebox in the study and a pencil case in the kitchen; all four are empty at the start. Five small things lie on the floor: a key in the hallway, a coin in the kitchen, a ring in the bedroom, a ticket in the study and a watch in the garage. A container is always closed before it is moved, so everything inside it moves along with it, and whatever is tied to the outside of a container also moves with it but is not inside it. This is what happens during the day, in this order: Cleo takes the watch up from the floor of the garage and puts it into the laundry basket. Cleo takes the ring up from the floor of the bedroom and puts it into the shoebox. Cleo takes the ring out of the shoebox and puts it into the laundry basket. Ben carries the shoebox to the kitchen. Ben starts to carry the laundry basket away, changes his mind after one step and puts it back in the same place. Ada starts to carry the backpack away, changes her mind after one step and puts it back in the same place. Ben carries the laundry basket to the kitchen. Ben takes the watch out of the laundry basket and puts it into the pencil case. Ben carries the shoebox to the garage. Cleo tips everything that is inside the pencil case out onto the floor and leaves it lying there. Ada swaps the complete contents of the laundry basket and the pencil case: everything that was inside the one is now inside the other. Ben takes the coin up from the floor of the kitchen and puts it into the pencil case. Ada carries the pencil case to the hallway. Ben looks for the car keys in the cellar and does not find them. Cleo carries the pencil case to the garage. Ada opens the backpack, looks inside and closes it again. Ben carries the laundry basket to the study. Ada carries the pencil case to the study. Ben swaps the complete contents of the pencil case and the backpack: everything that was inside the one is now inside the other. Ben puts the pencil case into the laundry basket. Ben takes the watch up from the floor of the kitchen and puts it into the pencil case. Cleo lifts the backpack, wipes the dust from underneath and puts it back exactly where it was. In which room is the ring at the end of the day? Answer with the room.
+  answer: hallway | in the hallway
+
+### T4-027 — tier 4 — draft, tier4, type-B, generated
+
+**Base**
+
+> Five chairs stand in a row in front of the blackboard. Seen from the teacher, who faces the row, they are numbered 1 to 5 from left to right, and 'to the right' always means towards the higher numbers. At the start Ali sits on chair 1, Bea on chair 2, Cem on chair 3, Dua on chair 4 and Eli on chair 5. Then the following happens, step by step: Cem and Ali swap places; Dua swaps places with the child sitting directly to the right of Dua; Ali and Eli swap places; the children on chairs 3 and 4 swap places; the children on chairs 2 and 3 swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; Ali and Cem swap places; Ali and Cem swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; Bea and Cem swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; every child moves one chair to the left, and the child from chair 1 walks round to chair 5. The chair numbers always refer to the chairs, not to the children. Who sits on chair 3 at the end?
+
+Answer list: Ali · **Bea** ✔ · Cem · Dua · Eli (fixed order)
+
+*Note: Solution (computed by simulation): final order on chairs 1 to 5: Eli, Dua, Bea, Ali, Cem. Unique because every step is deterministic. Tempting: the child of an intermediate state. Why a strong model may fail: 12 steps that refer alternately to chairs and to names, with shifts of the whole row and steps that change nothing.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Five chairs stand in a row in front of the blackboard. Seen from the teacher, who faces the row, they are numbered 1 to 5 from left to right, and 'to the right' always means towards the higher numbers. At the start Ali sits on chair 1, Bea on chair 2, Cem on chair 3, Dua on chair 4 and Eli on chair 5. Then the following happens, step by step: Cem and Ali swap places; Dua swaps places with the child sitting directly to the right of Dua; Ali and Eli swap places; the children on chairs 3 and 4 swap places; the children on chairs 2 and 3 swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; Ali and Cem swap places; Ali and Cem swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; Bea and Cem swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; every child moves one chair to the left, and the child from chair 1 walks round to chair 5. The chair numbers always refer to the chairs, not to the children. Who sits on chair 3 at the end? Answer with the name.
+  answer: Bea
+
+### T4-028 — tier 4 — draft, tier4, type-B, generated
+
+**Base**
+
+> Five chairs stand in a row in front of the blackboard. Seen from the teacher, who faces the row, they are numbered 1 to 5 from left to right, and 'to the right' always means towards the higher numbers. At the start Ali sits on chair 1, Bea on chair 2, Cem on chair 3, Dua on chair 4 and Eli on chair 5. Then the following happens, step by step: the children on chairs 3 and 4 swap places; the children on chairs 1 and 2 swap places; the child on chair 3 gets up and walks to chair 5, and the children who sat to the right of that chair each move one chair to the left to close the gap; every child moves one chair to the left, and the child from chair 1 walks round to chair 5; the children on chairs 3 and 4 swap places; Dua and Ali swap places; Eli and Cem swap places; the children on chairs 3 and 4 swap places; the children on chairs 3 and 4 swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; the child on chair 1 gets up and walks to chair 5, and the children who sat to the right of that chair each move one chair to the left to close the gap; Cem and Ali swap places; the children on chairs 2 and 5 swap places; every child moves one chair to the left, and the child from chair 1 walks round to chair 5; the child on chair 2 gets up and walks to chair 5, and the children who sat to the right of that chair each move one chair to the left to close the gap; Eli drops a pencil and picks it up again. The chair numbers always refer to the chairs, not to the children. Who sits on chair 2 at the end?
+
+Answer list: **Ali** ✔ · Bea · Cem · Dua · Eli (fixed order)
+
+*Note: Solution (computed by simulation): final order on chairs 1 to 5: Bea, Ali, Eli, Dua, Cem. Unique because every step is deterministic. Tempting: the child of an intermediate state. Why a strong model may fail: 16 steps that refer alternately to chairs and to names, with shifts of the whole row and steps that change nothing.*
+
+**Variants asked**
+
+- `mcq` — original, multiple choice, 5 options
+- `free` — original, free answer (text):
+  > Five chairs stand in a row in front of the blackboard. Seen from the teacher, who faces the row, they are numbered 1 to 5 from left to right, and 'to the right' always means towards the higher numbers. At the start Ali sits on chair 1, Bea on chair 2, Cem on chair 3, Dua on chair 4 and Eli on chair 5. Then the following happens, step by step: the children on chairs 3 and 4 swap places; the children on chairs 1 and 2 swap places; the child on chair 3 gets up and walks to chair 5, and the children who sat to the right of that chair each move one chair to the left to close the gap; every child moves one chair to the left, and the child from chair 1 walks round to chair 5; the children on chairs 3 and 4 swap places; Dua and Ali swap places; Eli and Cem swap places; the children on chairs 3 and 4 swap places; the children on chairs 3 and 4 swap places; every child moves one chair to the right, and the child from chair 5 walks round to chair 1; the child on chair 1 gets up and walks to chair 5, and the children who sat to the right of that chair each move one chair to the left to close the gap; Cem and Ali swap places; the children on chairs 2 and 5 swap places; every child moves one chair to the left, and the child from chair 1 walks round to chair 5; the child on chair 2 gets up and walks to chair 5, and the children who sat to the right of that chair each move one chair to the left to close the gap; Eli drops a pencil and picks it up again. The chair numbers always refer to the chairs, not to the children. Who sits on chair 2 at the end? Answer with the name.
+  answer: Ali
+
+### T4-029 — tier 4 — draft, tier4, type-B, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. Tipping the die towards the north means that it rolls over its northern bottom edge, so that the face that was on top then faces north. Turning it clockwise as seen from above means that the top face stays on top and the face that pointed north then points east. The following is done with the die, step by step: it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the south; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the west; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the south; it is lifted, looked at from all sides and put down again exactly as it was; it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the north; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the west; it is lifted, looked at from all sides and put down again exactly as it was; it is tipped over its bottom edge towards the north; it is turned a quarter turn clockwise as seen from above, without being tipped. Which number faces north at the end?
+
+Answer: **6** (number)
+
+*Note: Solution (computed by simulation): final position top 4, north 6, east 2, south 1, west 5, bottom 3. Unique because every step is deterministic. Tempting: results that ignore the quarter turns. Why a strong model may fail: gemma4-12b already lost track of plain die-tipping tasks (CS-901, CS-907, CS-908, NEW-115, NEW-117); here quarter turns and steps that change nothing are mixed in.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 6
+
+### T4-030 — tier 4 — draft, tier4, type-B, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. Tipping the die towards the north means that it rolls over its northern bottom edge, so that the face that was on top then faces north. Turning it clockwise as seen from above means that the top face stays on top and the face that pointed north then points east. The following is done with the die, step by step: it is tipped over its bottom edge towards the north; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the east; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the south; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the north; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the east. Which number is on top at the end?
+
+Answer: **3** (number)
+
+*Note: Solution (computed by simulation): final position top 3, north 6, east 5, south 1, west 2, bottom 4. Unique because every step is deterministic. Tempting: results that ignore the quarter turns. Why a strong model may fail: gemma4-12b already lost track of plain die-tipping tasks (CS-901, CS-907, CS-908, NEW-115, NEW-117); here quarter turns and steps that change nothing are mixed in.*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 3
+
+### T5-019 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. Tipping the die towards the north means that it rolls over its northern bottom edge, so that the face that was on top then faces north. Turning it clockwise as seen from above means that the top face stays on top and the face that pointed north then points east. The following is done with the die, step by step: it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the south; it is turned a quarter turn clockwise as seen from above, without being tipped; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the south; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the south; it is pushed 10 cm across the table without being turned or tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the north; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is pushed 10 cm across the table without being turned or tipped; it is tipped over its bottom edge towards the south; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the south; it is tipped over its bottom edge towards the east. Which number faces north at the end? Answer with the number.
+
+Answer: **4** (number)
+
+*Note: Solution (simulated): end state top 5, north 4, east 1, south 3, west 6, bottom 2. Unique: every step is deterministic. Tempting: results that drop a quarter turn or tip in the wrong sense. Why a strong model may fail: 20 steps mixing tips, quarter turns and steps that change nothing; both test models failed the 16-step version (T4-030).*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### T5-020 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. Tipping the die towards the north means that it rolls over its northern bottom edge, so that the face that was on top then faces north. Turning it clockwise as seen from above means that the top face stays on top and the face that pointed north then points east. The following is done with the die, step by step: it is tipped over its bottom edge towards the north; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the east; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the south; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the north; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the east; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the south; it is tipped over its bottom edge towards the east. Which number faces east at the end? Answer with the number.
+
+Answer: **4** (number)
+
+*Note: Solution (simulated): end state top 1, north 5, east 4, south 2, west 3, bottom 6. Unique: every step is deterministic. Tempting: results that drop a quarter turn or tip in the wrong sense. Why a strong model may fail: 20 steps mixing tips, quarter turns and steps that change nothing; both test models failed the 16-step version (T4-030).*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 4
+
+### T5-021 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 1 is on top, the 2 faces north and the 3 faces east. Tipping the die towards the north means that it rolls over its northern bottom edge, so that the face that was on top then faces north. Turning it clockwise as seen from above means that the top face stays on top and the face that pointed north then points east. The following is done with the die, step by step: it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the south; it is tipped over its bottom edge towards the west; it is turned a quarter turn clockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the west; it is lifted, looked at from all sides and put down again exactly as it was; it is turned a quarter turn clockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the south; it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the south; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the north; it is turned a quarter turn clockwise as seen from above, without being tipped. Which number faces west at the end? Answer with the number.
+
+Answer: **2** (number)
+
+*Note: Solution (simulated): end state top 1, north 3, east 5, south 4, west 2, bottom 6. Unique: every step is deterministic. Tempting: results that drop a quarter turn or tip in the wrong sense. Why a strong model may fail: 20 steps mixing tips, quarter turns and steps that change nothing; both test models failed the 16-step version (T4-030).*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### T5-022 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> A standard die lies on a table. Opposite faces add up to 7. The 6 is on top, the 3 faces north and the 2 faces east. Tipping the die towards the north means that it rolls over its northern bottom edge, so that the face that was on top then faces north. Turning it clockwise as seen from above means that the top face stays on top and the face that pointed north then points east. The following is done with the die, step by step: it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the south; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the east; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the south; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the east; it is turned a quarter turn clockwise as seen from above, without being tipped; it is turned a quarter turn clockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the west; it is tipped over its bottom edge towards the north; it is tipped over its bottom edge towards the west; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is tipped over its bottom edge towards the north; it is turned a quarter turn counterclockwise as seen from above, without being tipped; it is turned a quarter turn clockwise as seen from above, without being tipped. Which number is on top at the end? Answer with the number.
+
+Answer: **2** (number)
+
+*Note: Solution (simulated): end state top 2, north 1, east 4, south 6, west 3, bottom 5. Unique: every step is deterministic. Tempting: results that drop a quarter turn or tip in the wrong sense. Why a strong model may fail: 20 steps mixing tips, quarter turns and steps that change nothing; both test models failed the 16-step version (T4-030).*
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: 2
+
+### T5-023 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> In a house there are four containers: a laundry basket in the bedroom, a backpack in the hallway, a shoebox in the study and a pencil case in the kitchen; all four are empty at the start. Five small things lie on the floor: a key in the hallway, a coin in the kitchen, a ring in the bedroom, a ticket in the study and a watch in the garage. A container is always closed before it is moved, so everything inside it moves along with it, and whatever is tied to the outside of a container also moves with it but is not inside it. This is what happens during the day, in this order: Ben carries the backpack to the kitchen. Ben puts the shoebox into the laundry basket. Ben takes the ring up from the floor of the bedroom and puts it into the pencil case. Ada carries the pencil case to the hallway. Ada puts the pencil case into the backpack. Ada takes the coin up from the floor of the kitchen and puts it into the shoebox. Cleo takes the pencil case out of the backpack and puts it into the laundry basket. Ada carries the laundry basket to the cellar. Cleo carries the laundry basket to the garage. Ben takes the watch up from the floor of the garage and puts it into the pencil case. Ada starts to carry the pencil case away, changes her mind after one step and puts it back in the same place. Ada carries the laundry basket to the kitchen. Ada carries the laundry basket to the garage. Cleo carries the laundry basket to the study. Ada carries the backpack to the bedroom. Ada swaps the complete contents of the shoebox and the backpack: everything that was inside the one is now inside the other. Ben takes the ticket up from the floor of the study and puts it into the shoebox. Ben takes the key up from the floor of the hallway and puts it into the shoebox. Ben takes the ticket out of the shoebox and puts it into the backpack. Cleo tips everything that is inside the backpack out onto the floor and leaves it lying there. Ben opens the backpack, looks inside and closes it again. Ada takes the key out of the shoebox and puts it into the backpack. Ada puts the backpack into the laundry basket. Cleo takes the key out of the backpack and puts it into the laundry basket. Ben carries the laundry basket to the kitchen. Ben starts to carry the laundry basket away, changes his mind after one step and puts it back in the same place. In which room is the ring at the end of the day? Answer with the name of the room as one word.
+
+Answer: **kitchen** (text)
+Also accepted (free answer): in the kitchen | the kitchen
+
+*Note: Solution (simulated): the ring is in the pencil case, in the laundry basket, in the kitchen. Rooms it passed through: bedroom, kitchen, hallway, kitchen, bedroom, cellar, garage, kitchen, garage, study, kitchen. Unique: every step is deterministic. Tempting: the room of an earlier container or of the last step that mentions the object. Why a strong model may fail: 26 steps with nested containers, things tied to the outside, swaps and emptying of contents, and steps that change nothing; the 22-step versions were solved, this one is longer and the object changes rooms 10 times.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: kitchen | in the kitchen | the kitchen
+
+### T5-024 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> In a house there are four containers: a laundry basket in the bedroom, a backpack in the hallway, a shoebox in the study and a pencil case in the kitchen; all four are empty at the start. Five small things lie on the floor: a key in the hallway, a coin in the kitchen, a ring in the bedroom, a ticket in the study and a watch in the garage. A container is always closed before it is moved, so everything inside it moves along with it, and whatever is tied to the outside of a container also moves with it but is not inside it. This is what happens during the day, in this order: Ada takes the key up from the floor of the hallway and puts it into the laundry basket. Cleo swaps the complete contents of the laundry basket and the shoebox: everything that was inside the one is now inside the other. Ada looks for the car keys in the garage and does not find them. Ben starts to carry the backpack away, changes his mind after one step and puts it back in the same place. Ada takes the ticket up from the floor of the study and ties it to the outside of the pencil case with a piece of string. Ben takes the watch up from the floor of the garage and puts it into the pencil case. Ben puts the shoebox into the laundry basket. Ben takes the coin up from the floor of the kitchen and ties it to the outside of the backpack with a piece of string. Cleo carries the pencil case to the bedroom. Ben takes the shoebox out of the laundry basket and puts it into the backpack. Ben carries the pencil case to the study. Ben takes the shoebox out of the backpack and leaves it on the floor of the same room. Cleo carries the pencil case to the garage. Cleo puts the pencil case into the shoebox. Ben looks for the car keys in the bedroom and does not find them. Ada swaps the complete contents of the pencil case and the backpack: everything that was inside the one is now inside the other. Ada swaps the complete contents of the backpack and the pencil case: everything that was inside the one is now inside the other. Ada takes the pencil case out of the shoebox and puts it into the laundry basket. Ada puts the backpack into the laundry basket. Cleo takes the pencil case out of the laundry basket and puts it into the shoebox. The telephone rings in the garage; Ada answers it and talks for five minutes. Ada carries the shoebox to the bedroom. Cleo takes the key out of the shoebox and leaves it on the floor of the same room. Cleo carries the shoebox to the garage. Ben opens the laundry basket, looks inside and closes it again. Ada tips everything that is inside the shoebox out onto the floor and leaves it lying there. Cleo carries the pencil case to the cellar. Ada puts the pencil case into the backpack. In which room is the ticket at the end of the day? Answer with the name of the room as one word.
+
+Answer: **bedroom** (text)
+Also accepted (free answer): in the bedroom | the bedroom
+
+*Note: Solution (simulated): the ticket is tied to the pencil case, in the backpack, in the laundry basket, in the bedroom. Rooms it passed through: study, kitchen, bedroom, study, garage, hallway, bedroom, hallway, bedroom, garage, cellar, bedroom. Unique: every step is deterministic. Tempting: the room of an earlier container or of the last step that mentions the object. Why a strong model may fail: 28 steps with nested containers, things tied to the outside, swaps and emptying of contents, and steps that change nothing; the 22-step versions were solved, this one is longer and the object changes rooms 11 times.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: bedroom | in the bedroom | the bedroom
+
+### T5-025 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> Seven chairs stand in a row in front of the blackboard. Seen from the teacher, who faces the row, they are numbered 1 to 7 from left to right, and 'to the right' always means towards the higher numbers. At the start Ali sits on chair 1, Bea on chair 2, Cem on chair 3, Dua on chair 4, Eli on chair 5, Fay on chair 6 and Gus on chair 7. Then the following happens, step by step: Eli and Gus swap places; Cem and Eli swap places; Fay swaps places with the child sitting two chairs to the left of Fay; the whole row is reversed: the children on chairs 1 and 7 swap places, the children on chairs 2 and 6 swap places, and the children on chairs 3 and 5 swap places; the children on chairs 1 and 5 swap places; Cem swaps places with the child sitting two chairs to the left of Cem; the child on chair 2 gets up and walks to chair 7, and the children who sat to the right of that chair each move one chair to the left to close the gap; Fay and Dua swap places; the child on chair 5 gets up and walks to chair 7, and the children who sat to the right of that chair each move one chair to the left to close the gap; Dua swaps places with the child sitting two chairs to the left of Dua; Gus stands up, stretches and sits down again on the same chair; Fay and Bea swap places; the child on chair 4 gets up and walks to chair 7, and the children who sat to the right of that chair each move one chair to the left to close the gap; the children on chairs 1 and 6 swap places; Gus and Eli swap places; the children on chairs 1 and 3 swap places; every child moves one chair to the right, and the child from chair 7 walks round to chair 1; Fay swaps places with the child sitting directly to the right of Fay; the whole row is reversed: the children on chairs 1 and 7 swap places, the children on chairs 2 and 6 swap places, and the children on chairs 3 and 5 swap places; every child moves one chair to the left, and the child from chair 1 walks round to chair 7. The chair numbers always refer to the chairs, not to the children. Who sits on chair 4 at the end? Answer with the name.
+
+Answer: **Cem** (text)
+
+*Note: Solution (simulated): final order on chairs 1 to 7: Bea, Fay, Ali, Cem, Gus, Eli, Dua. Unique: every step is deterministic. Tempting: a child from an intermediate state. Why a strong model may fail: 20 steps on seven chairs that refer alternately to chair numbers, names and relative positions, with shifts and a reversal of the whole row.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Cem
+
+### T5-026 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> Seven chairs stand in a row in front of the blackboard. Seen from the teacher, who faces the row, they are numbered 1 to 7 from left to right, and 'to the right' always means towards the higher numbers. At the start Ali sits on chair 1, Bea on chair 2, Cem on chair 3, Dua on chair 4, Eli on chair 5, Fay on chair 6 and Gus on chair 7. Then the following happens, step by step: the whole row is reversed: the children on chairs 1 and 7 swap places, the children on chairs 2 and 6 swap places, and the children on chairs 3 and 5 swap places; every child moves one chair to the right, and the child from chair 7 walks round to chair 1; every child moves one chair to the left, and the child from chair 1 walks round to chair 7; Eli stands up, stretches and sits down again on the same chair; Fay and Ali swap places; Ali and Cem swap places; Dua and Eli swap places; the children on chairs 2 and 5 swap places; the children on chairs 2 and 6 swap places; Cem swaps places with the child sitting directly to the right of Cem; Gus and Dua swap places; Gus and Ali swap places; Eli and Gus swap places; Ali and Gus swap places; Gus and Bea swap places; Gus and Bea swap places; every child moves one chair to the right, and the child from chair 7 walks round to chair 1; every child moves one chair to the left, and the child from chair 1 walks round to chair 7; Eli and Fay swap places; Bea stands up, stretches and sits down again on the same chair. The chair numbers always refer to the chairs, not to the children. Who sits on chair 3 at the end? Answer with the name.
+
+Answer: **Gus** (text)
+
+*Note: Solution (simulated): final order on chairs 1 to 7: Dua, Bea, Gus, Ali, Fay, Cem, Eli. Unique: every step is deterministic. Tempting: a child from an intermediate state. Why a strong model may fail: 20 steps on seven chairs that refer alternately to chair numbers, names and relative positions, with shifts and a reversal of the whole row.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Gus
+
+### T5-027 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> Six friends sit around a round table. Seen from above, they sit in clockwise order: Ada, Bruno, Clara, Dev, Emma, Farid (Farid sits next to Ada). In the middle of the table is a turntable with six dishes, one directly in front of each person: the rice in front of Ada, the soup in front of Bruno, the salad in front of Clara, the fish in front of Dev, the bread in front of Emma and the cheese in front of Farid. Turning the turntable one place clockwise means that every dish moves on to the next person in clockwise order, for example from Ada to Bruno. During the meal the following happens, step by step: the turntable is turned two places clockwise; the fish and the soup change places on the turntable; the turntable is turned one place clockwise; Clara and Ada swap seats, while all the dishes stay where they are; the turntable is turned three places counterclockwise; the dishes in front of Bruno and Ada are exchanged; the dishes in front of Bruno and Ada are exchanged; Farid exchanges the dish in front of him for the salad; Clara exchanges the dish in front of her for the soup; the turntable is turned two places clockwise; Farid exchanges the dish in front of him for the salad; the turntable is turned three places clockwise; the bread and the soup change places on the turntable; the turntable is turned one place clockwise; the turntable is turned three places counterclockwise; the turntable is turned two places counterclockwise. Which dish is in front of Dev at the end? Answer with one word.
+
+Answer: **cheese** (text)
+
+*Note: Solution (simulated): at the end, clockwise by seat: Clara: rice, Bruno: bread, Ada: fish, Dev: cheese, Emma: salad, Farid: soup. Unique: every step is deterministic. Tempting: a dish from an intermediate state, or a turn applied in the wrong direction. Why a strong model may fail: 16 steps that refer to people, to dishes and to turns of the whole turntable, plus changes of seats.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: cheese
+
+### T5-028 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> A square sheet of clear plastic lies flat on a table, with its edges facing north, east, south and west. A black arrow is drawn in the middle of the sheet and points north, and a red dot is drawn in the north-east corner. Both can be seen equally well from either side of the sheet. The following is done with the sheet, step by step: it is turned a half turn as seen from above; it is turned a quarter turn counterclockwise as seen from above; it is turned over so that its north edge and its south edge change places; it is turned a quarter turn counterclockwise as seen from above; it is lifted, held against the light and put down again exactly as it was; it is turned over so that its north edge and its south edge change places; it is turned over like the page of a book, so that its east edge and its west edge change places; it is turned a quarter turn counterclockwise as seen from above; it is slid 20 cm towards the east without being turned; it is turned over so that its north edge and its south edge change places; it is turned over so that its north edge and its south edge change places; it is turned a quarter turn clockwise as seen from above; it is lifted, held against the light and put down again exactly as it was; it is turned over like the page of a book, so that its east edge and its west edge change places; it is turned a quarter turn counterclockwise as seen from above; it is turned over like the page of a book, so that its east edge and its west edge change places. In which compass direction does the arrow point at the end? Answer with one word: north, east, south or west.
+
+Answer: **west** (text)
+
+*Note: Solution (simulated): at the end the arrow points west and the red dot is in the south-west corner. Unique: every step is deterministic. Tempting: results that treat a turning-over like a rotation. Why a strong model may fail: 16 steps mixing rotations with two kinds of turning the sheet over (mirror operations), plus steps that change nothing.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: west
+
+### T5-029 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> A square sheet of clear plastic lies flat on a table, with its edges facing north, east, south and west. A black arrow is drawn in the middle of the sheet and points north, and a red dot is drawn in the north-east corner. Both can be seen equally well from either side of the sheet. The following is done with the sheet, step by step: it is turned a quarter turn clockwise as seen from above; it is turned a quarter turn counterclockwise as seen from above; it is turned a quarter turn counterclockwise as seen from above; it is turned over like the page of a book, so that its east edge and its west edge change places; it is turned a half turn as seen from above; it is turned over so that its north edge and its south edge change places; it is turned over so that its north edge and its south edge change places; it is turned over like the page of a book, so that its east edge and its west edge change places; it is turned a quarter turn clockwise as seen from above; it is turned a half turn as seen from above; it is turned over so that its north edge and its south edge change places; it is turned over so that its north edge and its south edge change places; it is turned over like the page of a book, so that its east edge and its west edge change places; a fly lands on it and takes off again; it is turned over so that its north edge and its south edge change places; it is turned a quarter turn clockwise as seen from above. In which corner of the sheet is the red dot at the end? Answer with one of these words: north-east, south-east, south-west or north-west.
+
+Answer: **north-west** (text)
+Also accepted (free answer): northwest | north west
+
+*Note: Solution (simulated): at the end the arrow points west and the red dot is in the north-west corner. Unique: every step is deterministic. Tempting: results that treat a turning-over like a rotation. Why a strong model may fail: 16 steps mixing rotations with two kinds of turning the sheet over (mirror operations), plus steps that change nothing.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: north-west | northwest | north west
+
+### T5-030 — tier 5 — draft, tier5, type-B, generated
+
+**Base**
+
+> Six customers stand in a queue at the bakery counter. From the front to the back they are: Olga, Pavel, Rosa, Sami, Tina and Udo. Then the following happens, in this order: Tina pushes in two places further forward; Olga, at the front, is served and leaves the shop; Pavel lets the person directly behind go ahead; Tina remembers something, steps out of the queue and joins it again at the very end; Udo and Rosa swap their places in the queue; Tina takes a phone call without moving from the spot; Vera comes in and joins the end of the queue; Pavel lets the person directly behind go ahead; Rosa lets the person directly behind go ahead; Tina pushes in two places further forward; Tina takes a phone call without moving from the spot; Willi comes in and joins the end of the queue; Rosa remembers something, steps out of the queue and joins it again at the very end; Pavel loses patience and leaves the shop without buying anything; Udo remembers something, steps out of the queue and joins it again at the very end; Tina, at the front, is served and leaves the shop; Vera lets the person directly behind go ahead; Willi remembers something, steps out of the queue and joins it again at the very end. Who is in third place in the queue, counted from the front, at the end? Answer with the name.
+
+Answer: **Rosa** (text)
+
+*Note: Solution (simulated): final queue from the front: Sami, Vera, Rosa, Udo, Willi. Unique: every step is deterministic. Tempting: a person from an intermediate state. Why a strong model may fail: 18 steps with people leaving, joining, pushing in and swapping, referred to by name and by position.*
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Rosa
+
+### T7-009 — tier 7 — draft, tier7, identity-versus-label
+
+**Base**
+
+> A red cupboard opens only with the tooth pattern of a key carrying a SUN tag; a blue cupboard opens only with the pattern of a key carrying a MOON tag. The patterns differ, and tags do not affect the locks. Pia has a duplicate cut from the SUN-tagged key and puts a STAR tag on that duplicate. She then swaps the SUN and MOON tags between the two original keys. A locksmith exchanges the complete lock mechanisms between the red and blue cupboards without changing either mechanism. Finally Pia has another duplicate cut from the key that NOW carries the SUN tag and puts a LEAF tag on the new duplicate. No keys or locks are changed otherwise. What colour cupboard does the LEAF-tagged key now open? Answer with one colour.
+
+Answer: **red** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: red
+- `altered` — altered, free answer (text):
+  > A red cupboard opens only with the tooth pattern of a key carrying a SUN tag; a blue cupboard opens only with the pattern of a key carrying a MOON tag. The patterns differ, and tags do not affect the locks. Pia has a duplicate cut from the SUN-tagged key and puts a STAR tag on that duplicate. She then swaps the SUN and MOON tags between the two original keys. A locksmith exchanges the complete lock mechanisms between the red and blue cupboards without changing either mechanism. Finally Pia has another duplicate cut from the STAR-tagged duplicate and puts a LEAF tag on the new duplicate. No keys or locks are changed otherwise. What colour cupboard does the LEAF-tagged key now open? Answer with one colour.
+  answer: blue
+  *note: Solution: STAR was copied from the original SUN key and retains patternR. The new LEAF key copies STAR, so LEAF=R. After the mechanism exchange the blue cupboard requires R. Final patterns: SUN B, MOON R, STAR R, LEAF R. Why unique: a different, explicitly identified physical key is copied. Tempting wrong answer:red, following the current SUN tag as in the base. Why a strong model may fail (untested): two copies made at different times preserve different identities despite the later label swaps.*
+
+### T7-010 — tier 7 — draft, tier7, copy-direction
+
+**Base**
+
+> Three initially blank sheets, named Hazel, Indigo and Juniper, are stacked in that order from top to bottom. Between each adjacent pair is carbon paper arranged to copy writing from the sheet above onto the sheet below. Writing can pass through both carbon layers. On Hazel, Bea writes the word EAST. She removes Hazel and the upper carbon paper, leaving Indigo over Juniper with the other carbon paper still between them. She crosses out EAST on Indigo and writes WEST beneath it; both actions copy onto Juniper. She removes the last carbon paper, takes Juniper away, crosses out WEST on Juniper and writes NORTH beneath it. Finally she puts Hazel on top of Juniper, with Indigo at the bottom, without any carbon paper, and writes SOUTH on Hazel. Which uncrossed-out direction is on the middle sheet of the final stack? Answer with one word.
+
+Answer: **north** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: north
+
+### T7-012 — tier 7 — draft, tier7, reusable-identifier
+
+**Base**
+
+> At a cloakroom, each checked coat gets a numbered ticket. When that ticket is presented, the attendant gives back the coat currently assigned to its number, then that number becomes available again. At 10:00 Ada checks a red coat and receives ticket 12. At 10:05 Ben checks a blue coat and receives ticket 13. Ada hands ticket 12 to Cleo. Cleo presents it, takes the red coat and leaves. Dana now checks a green coat and is issued a new ticket numbered 12. Ben and Dana exchange their tickets. Ben presents his current ticket and takes the coat it retrieves. He leaves that coat with Eli and gives his now-used ticket to Ada. Nobody else presents a ticket. What colour coat does Eli have? Answer with one colour.
+
+Answer: **green** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: green
+
+### T7-013 — tier 7 — draft, tier7, snapshot-and-routing
+
+**Base**
+
+> Three jars, each containing exactly one different key, stand in fixed left, middle and right positions. Initially the keys are brass, silver and black respectively, and the jars carry removable labels APPLE, BERRY and CHERRY respectively. Sol writes a paper record saying which key is in each labelled jar at that moment. Sol then swaps the APPLE and CHERRY labels, without moving the jars or keys. Next he exchanges the keys in the left and middle jars. He gives the unchanged paper record to Uma. Uma reads which key the record associates with APPLE, finds that actual key by its colour in the jars as they now stand, and hands its jar to Vic without moving its label. Vic does not consult the record; he reads the label currently on the jar he receives. What fruit word does Vic read? Answer with that one word.
+
+Answer: **berry** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: berry
+
+### T7-014 — tier 7 — draft, tier7, copied-feature-versus-owner
+
+**Base**
+
+> Four notebooks belong to Ada, Ben, Cleo and Dev. Their ownership never changes. Each has a removable cover showing its owner's name. Ada's pages are ruled, Ben's are squared, Cleo's are blank and Dev's are dotted. Ada and Cleo exchange only their covers. Ben then photocopies one interior page from the notebook currently wearing the ADA cover. He puts that loose copy inside his own notebook. Ben and Dev exchange only their covers. Finally Cleo takes the loose photocopy out of the notebook currently wearing the DEV cover and places it inside the notebook currently wearing the CLEO cover. Whose notebook now contains the loose photocopy? Answer with the owner's first name.
+
+Answer: **Ada** (text)
+
+**Variants asked**
+
+- `free` — original, free answer (text) — answer: Ada
+
+### T7-026 — tier 7 — draft, tier7, relative-motion
+
+**Base**
+
+> A long straight conveyor moves east at 1 metre per second. At the start, a suitcase resting on it is beside a painted floor mark. Lin stands beside that same mark on the stationary floor. For the first 4 seconds Lin walks east along the floor at 2 metres per second, while the suitcase stays on the conveyor. Lin then steps onto the conveyor at the position she has reached; stepping takes no time. For the next 3 seconds she walks west at 1 metre per second relative to the conveyor. The suitcase continues riding without slipping. Lin then stands still relative to the conveyor for 2 more seconds. At that moment, how many metres east of Lin is the suitcase? Answer with a number; use a negative number if it is west of her.
+
+Answer: **-1** (number)
+
+**Variants asked**
+
+- `free` — original, free answer (number) — answer: -1
+

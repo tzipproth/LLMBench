@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "name": "v5-phi-4-14b",
+  "description": "Merged from v4-phi-4-14b + t9b-phi-4-14b",
+  "createdAt": "2026-11-14T17:47:04.0657335+01:00",
+  "restartOf": null,
+  "serverUrl": "http://127.0.0.1:8081",
+  "model": "phi-4-14b",
+  "expectedContextSize": null,
+  "serverNotes": "",
+  "catalogFile": "catalogs/core-v5.json",
+  "variants": [
+    "all"
+  ],
+  "categories": [],
+  "tiers": [],
+  "questionIds": [],
+  "limit": 0,
+  "systemPromptFile": "prompts/neutral.txt",
+  "systemPromptPlacement": "system",
+  "answerInstruction": "none",
+  "repetitions": 1,
+  "shuffleOptions": true,
+  "shuffleSeed": 1,
+  "thinking": "default",
+  "thinkingOn": {
+    "chat_template_kwargs": {
+      "enable_thinking": true
+    }
+  },
+  "thinkingOff": {
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "temperature": 0,
+  "topP": 0.95,
+  "topK": null,
+  "minP": null,
+  "repeatPenalty": 1,
+  "presencePenalty": 0,
+  "seed": 42,
+  "maxTokens": 7000,
+  "timeoutSeconds": 600,
+  "extraRequest": {
+    "cache_prompt": false
+  },
+  "allVariants": true
+}
