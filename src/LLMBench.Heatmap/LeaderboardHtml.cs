@@ -14,7 +14,8 @@ public static class LeaderboardHtml
 {
     private static readonly CultureInfo Inv = CultureInfo.InvariantCulture;
 
-    public static string Render(LeaderboardGroup group, IList<LeaderboardEntry> shown, string heatmapFile, string gpu, int vramGb)
+    public static string Render(LeaderboardGroup group, IList<LeaderboardEntry> shown, string heatmapFile, string gpu, int vramGb, string system,
+                                IReadOnlyDictionary<string, ModelInfo> info)
     {
         var rows = Leaderboard.AssignRanks(shown.ToList());
         var first = rows[0];
@@ -39,8 +40,12 @@ public static class LeaderboardHtml
         var sb = new StringBuilder();
         sb.Append(Head);
         sb.Append($"<main>\n<header class=\"top\">\n<p class=\"eyebrow\">LLMBench</p>\n<h1>LLM general intelligence leaderboard for {vramGb} GB graphics cards</h1>\n");
-        sb.Append($"<p class=\"lede\">Which local LLM thinks best on a graphics card with {vramGb} GB? Every model here fits completely into {vramGb} GB of VRAM, " +
-                  $"and all {rows.Count} answer the same {group.QuestionCount} reasoning questions on the same {H(gpu)}. " +
+        bool anyRam = rows.Any(e => e.ExpertsInRam);
+        sb.Append($"<p class=\"lede\">Which local LLM thinks best on a graphics card with {vramGb} GB? " +
+                  (anyRam
+                      ? $"Every dense model here fits completely into {vramGb} GB of VRAM; MoE models that are too large can keep part of their experts in system RAM without losing too much speed (marked <span class=\"badge\">MoE · RAM</span>). "
+                      : $"Every model here fits completely into {vramGb} GB of VRAM. ") +
+                  $"All {rows.Count} answer the same {group.QuestionCount} reasoning questions on the same {H(gpu)}. " +
                   "Spatial and physical reasoning, keeping track of objects, altered classic puzzles, logic, math, time and social reasoning: " +
                   "tasks where a model has to think, not recall.</p>\n");
         sb.Append("<dl class=\"facts\">");
@@ -80,7 +85,8 @@ public static class LeaderboardHtml
             Td(sb, e.Position.ToString(Inv), e.Position, "num muted");
             Td(sb, $"<span class=\"rank\">{e.Rank?.ToString(Inv) ?? "-"}</span>", e.Rank ?? 999, "num");
             var file = Path.GetFileNameWithoutExtension(e.ModelFile);
-            Td(sb, $"<span class=\"name\">{H(e.Model)}{(flagged ? "<sup class=\"flag\" title=\"" + H(e.UsabilityNote) + "\">†</sup>" : "")}</span>" +
+            Td(sb, $"<span class=\"name\">{H(e.Model)}{(flagged ? "<sup class=\"flag\" title=\"" + H(e.UsabilityNote) + "\">†</sup>" : "")}" +
+                   $"{(e.ExpertsInRam ? $" <span class=\"badge\" title=\"MoE model: {(e.RamSharePercent is { } rp ? rp + " % of the weights" : "part of the experts")} in system RAM ({H(system)}), the rest in VRAM\">MoE · {(e.RamSharePercent is { } rs ? rs + " % " : "")}RAM</span>" : "")}</span>" +
                    $"<span class=\"sub\">{H(file)}</span>", e.Model, "model");
             if (hasStrength)
             {
@@ -105,6 +111,9 @@ public static class LeaderboardHtml
         if (rows.Any(e => e.UsabilityNote.Length > 0))
             sb.Append("<p class=\"note\"><span class=\"flag\">†</span> 5 % or more of the answers were cut off at the output limit or had no readable final answer. " +
                       "They count as wrong, so the model may do better with a larger limit.</p>\n");
+        if (anyRam)
+            sb.Append($"<p class=\"note\"><span class=\"badge\">MoE · xx % RAM</span> Mixture-of-experts model too large for {vramGb} GB: xx % of its weights " +
+                      $"(experts that do not fit) stay in system RAM ({H(system)}), everything else in VRAM. Why this is allowed: see “MoE · RAM” below.</p>\n");
         sb.Append("<p class=\"note\">Click a column header to sort. Rows with rank 1 are highlighted.</p>\n</section>\n");
 
         // ---- explanations ------------------------------------------------------------------------------
@@ -112,6 +121,12 @@ public static class LeaderboardHtml
         Col(sb, "Rank", "1 + the number of models that are <em>significantly</em> better. Two models share a rank when the difference between them " +
                         "could be chance: every pair of models is compared question by question (paired McNemar test, p &lt; 0.05).");
         Col(sb, "Model", "The model name and below it the exact model file (quantization), so the result can be reproduced.");
+        if (anyRam)
+            Col(sb, "MoE · RAM", $"A mixture-of-experts (MoE) model consists of many small expert networks, but uses only a few of them for each token " +
+                                 $"(e.g. 3 of 35 billion parameters). Dense models have to fit completely into the {vramGb} GB of VRAM. A MoE model that is too large " +
+                                 $"may keep the experts that do not fit in system RAM, where the CPU computes them: since only a few experts are needed per token, " +
+                                 $"it stays fast, and this is how many people with a {vramGb} GB card run these models. The percentage is the share of the weights " +
+                                 $"in RAM; the speed of these models also depends on RAM and CPU ({H(system)}). Quality per time shows the cost of it.");
         if (hasStrength)
         {
             double top1 = rows[0].Ability?.Strength ?? 1;
@@ -125,7 +140,8 @@ public static class LeaderboardHtml
         }
         Col(sb, "Quality per time", $"How much good answering a model delivers per minute: right minus wrong answers per minute of model time on the {H(gpu)}. " +
                                     "A model that is a little weaker but much faster can be the better choice in daily use; this column shows it. " +
-                                    "All models run completely in VRAM, so another graphics card mostly makes every model faster or slower by a similar factor.");
+                                    "Models in VRAM get faster or slower by a similar factor on another graphics card" +
+                                    (anyRam ? "; for the models marked MoE · RAM, system RAM and CPU matter too." : "."));
         Col(sb, "Accuracy", "The share of correct answers. Below: the 95 % range (Wilson interval). It puts the models in the same order as the strength, " +
                             "but squeezes the top: near 100 % every further percent is much harder to gain than in the middle, the strength shows that.");
         Col(sb, "Correct", "Correct answers out of all scored answers.");
@@ -134,6 +150,7 @@ public static class LeaderboardHtml
                            "A wrong multiple-choice answer with <em>k</em> options costs only 1/(<em>k</em>−1), so guessing gains nothing. " +
                            "A model that is often wrong drops further here than in accuracy. Quality per time is the same value per minute instead of per answer.");
         sb.Append("</dl>\n");
+        Makers(sb, rows, info);
 
         sb.Append($"<a class=\"callout\" href=\"{H(heatmapFile)}\"><span class=\"callout-title\">Every single answer of every model</span>" +
                   "<span class=\"callout-text\">Heatmap of all results: one square per question and model, with the question, the answer and the time on hover.</span>" +
@@ -142,15 +159,17 @@ public static class LeaderboardHtml
         sb.Append($"<p><strong>Questions.</strong> {first.Header.CatalogQuestions} questions, many of them in two forms (free answer and multiple choice), " +
                   $"{group.QuestionCount} variants in total. Some are well-known puzzles with a twist that changes the answer, so a memorized solution is wrong. " +
                   "The options of multiple-choice questions are shuffled the same way for every model.</p>\n");
-        sb.Append($"<p><strong>Same conditions for every model.</strong> Each model runs locally in llama-server on one {H(gpu)}, completely in its {vramGb} GB of VRAM, with temperature {N(def.Temperature)}, seed {N(def.Seed)} " +
+        sb.Append($"<p><strong>Same conditions for every model.</strong> Each model runs locally in llama-server on one {H(gpu)}, " +
+                  (anyRam ? $"completely in its {vramGb} GB of VRAM; MoE models too large for it keep part of their experts in system RAM ({H(system)}). It runs " : $"completely in its {vramGb} GB of VRAM, ") +
+                  $"with temperature {N(def.Temperature)}, seed {N(def.Seed)} " +
                   $"and at most {def.MaxTokens?.ToString("#,0", Inv) ?? "unlimited"} output tokens per answer. Models with a thinking switch run with thinking off, the others as they come. " +
                   "Every question is sent on its own, with this system prompt:</p>\n");
         if (first.Header.SystemPrompt is { } sp) sb.Append($"<blockquote>{H(sp)}</blockquote>\n");
         sb.Append("<p><strong>Scoring.</strong> Only the final answer counts: the line starting with “Final Answer:”, compared with the solution " +
                   "(numbers as numbers, options by letter or text). The reasoning before it is not graded. Answers cut off at the output limit count as wrong.</p>\n");
         if (cal != null)
-            sb.Append($"<p><strong>Strength scale.</strong> The difficulty of every question was estimated once from the answers of all {cal.Runs.Count} models (Rasch model with a guessing floor for " +
-                      $"multiple choice) on {cal.CreatedAt:yyyy-MM-dd} and is now fixed. Models added later are placed on the same scale without changing the values above, and {H(reference ?? "the reference model")} stays the reference (= 1×).</p>\n");
+            sb.Append($"<p><strong>Strength scale.</strong> The difficulty of every question was estimated once from the answers of the first {cal.Runs.Count} models (Rasch model with a guessing floor for " +
+                      $"multiple choice) on {cal.CreatedAt:yyyy-MM-dd} and is now fixed. Models added later are placed on the same scale without changing it, and {H(reference ?? "the reference model")} stays the reference (= 1×).</p>\n");
         sb.Append("</div>\n</section>\n");
 
         sb.Append($"<footer>Generated {DateTime.Now:yyyy-MM-dd} by LLMBench {H(BenchRunner.Version)} · {H(string.Join(", ", group.CatalogFiles))} · question set {H(group.QuestionSetHash[..8])}</footer>\n");
@@ -181,6 +200,43 @@ public static class LeaderboardHtml
             _ => "",
         };
         sb.Append($"<td class=\"{cls}\" data-v=\"{v}\">{html}</td>");
+    }
+
+    /// <summary>
+    /// Who made the models: one row per maker, grouped by country. The country with the strongest model comes first, within a
+    /// country the maker with the strongest model; the models of a maker are listed from strong to weak. Models without an
+    /// entry in model-info.json are left out.
+    /// </summary>
+    private static void Makers(StringBuilder sb, IList<LeaderboardEntry> rows, IReadOnlyDictionary<string, ModelInfo> info)
+    {
+        static double Key(LeaderboardEntry e) => e.Ability?.Strength ?? e.Summary.Accuracy ?? 0;
+        var known = rows.Where(e => info.ContainsKey(e.Model) && info[e.Model].Maker.Length > 0).ToList();
+        if (known.Count == 0) return;
+        var makers = known
+            .GroupBy(e => (info[e.Model].Maker, info[e.Model].Country))
+            .Select(g => (g.Key.Maker, g.Key.Country, Models: g.OrderByDescending(Key).ToList()))
+            .GroupBy(m => m.Country)
+            .OrderByDescending(c => c.Max(m => Key(m.Models[0])))
+            .SelectMany(c => c.OrderByDescending(m => Key(m.Models[0])))
+            .ToList();
+
+        sb.Append("<h2>Who made the models</h2>\n<div class=\"scroll\"><table class=\"makers\">\n<thead><tr><th>Company</th><th>Country</th>" +
+                  "<th>Models, strongest first <span class=\"muted\">(strength · GGUF from)</span></th></tr></thead>\n<tbody>\n");
+        string? lastCountry = null;
+        foreach (var (maker, country, models) in makers)
+        {
+            bool first = country != lastCountry;
+            lastCountry = country;
+            sb.Append($"<tr{(first ? " class=\"country-start\"" : "")}><td class=\"name\">{H(maker)}</td><td>{(first ? H(country) : "")}</td><td>");
+            foreach (var e in models)
+            {
+                var gguf = info[e.Model].Gguf;
+                var strength = e.Ability?.Strength is { } st ? $"{Rasch.FormatStrength(st)}×" : "";
+                sb.Append($"<span class=\"chip\">{H(e.Model)} <b>{strength}</b>{(gguf.Length > 0 ? $" <span class=\"muted\">· {H(gguf)}</span>" : "")}</span>");
+            }
+            sb.Append("</td></tr>\n");
+        }
+        sb.Append("</tbody></table></div>\n");
     }
 
     private static void Col(StringBuilder sb, string name, string html) =>
@@ -224,6 +280,13 @@ h2 { margin: 48px 0 16px; font-size: 21px; }
 .board { margin-top: 32px; }
 .scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
 table { border-collapse: collapse; width: 100%; min-width: 980px; font-variant-numeric: tabular-nums; }
+table.makers { min-width: 640px; }
+table.makers th { cursor: default; padding-bottom: 12px; }
+table.makers td { white-space: normal; vertical-align: top; }
+table.makers td:first-child { white-space: nowrap; }
+table.makers tr.country-start td { border-top: 2px solid var(--line-strong); }
+table.makers tbody tr:first-child td { border-top: 0; }
+.chip { display: inline-block; margin: 2px 6px 2px 0; padding: 2px 8px; border-radius: 6px; background: var(--track); font-size: 13px; white-space: nowrap; }
 th { position: relative; padding: 12px 10px 30px; font-size: 12px; font-weight: 600; color: var(--text-2); text-align: left;
   white-space: nowrap; border-bottom: 1px solid var(--line-strong); cursor: pointer; user-select: none; vertical-align: top; }
 th:hover, th:focus-visible { color: var(--text); outline: none; }
@@ -245,6 +308,8 @@ th.num { text-align: right; }
 .rank { display: inline-block; min-width: 26px; padding: 1px 7px; border-radius: 999px; text-align: center;
   font-size: 13px; font-weight: 600; background: var(--track); color: var(--text-2); }
 tr.top1 .rank { background: var(--accent); color: #fff; }
+.badge { display: inline-block; margin-left: 4px; padding: 0 6px; border-radius: 4px; font-size: 10px; font-weight: 700;
+  letter-spacing: .04em; line-height: 16px; vertical-align: 2px; color: var(--text-2); border: 1px solid var(--line-strong); cursor: help; }
 .flag { color: var(--flag); font-weight: 700; margin-left: 2px; cursor: help; }
 td.plot { padding-left: 14px; padding-right: 14px; }
 .axis { position: absolute; left: 14px; right: 14px; bottom: 9px; height: 14px; }
@@ -310,4 +375,19 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 </script>
 
 """;
+}
+
+/// <summary>Maker, country and GGUF source of a model (model-info.json in the workspace, key = model alias).</summary>
+public sealed record ModelInfo(string Maker, string Country, string Gguf)
+{
+    public static Dictionary<string, ModelInfo> Load(string path)
+    {
+        var map = new Dictionary<string, ModelInfo>(StringComparer.OrdinalIgnoreCase);
+        if (!File.Exists(path)) return map;
+        if (System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(path)) is not System.Text.Json.Nodes.JsonObject root) return map;
+        foreach (var (alias, node) in root)
+            if (node is System.Text.Json.Nodes.JsonObject o)
+                map[alias] = new ModelInfo(o["maker"]?.GetValue<string>() ?? "", o["country"]?.GetValue<string>() ?? "", o["gguf"]?.GetValue<string>() ?? "");
+        return map;
+    }
 }

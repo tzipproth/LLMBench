@@ -32,6 +32,18 @@ public sealed class LeaderboardEntry
     /// <summary>Output tokens per second of request time (speed of the model on this machine).</summary>
     public double? TokensPerSecond => RunTiming.TokensPerSecond(Summary);
 
+    /// <summary>Text in the server notes (run option --notes) that marks a MoE model whose experts partly stay in system RAM.</summary>
+    public const string ExpertsInRamNote = "experts in system RAM";
+
+    /// <summary>The model did not fit completely into VRAM: a MoE model with experts kept in system RAM (see <see cref="ExpertsInRamNote"/>).</summary>
+    public bool ExpertsInRam => Definition.ServerNotes.Contains(ExpertsInRamNote, StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>Share of the weights in system RAM in percent, from the server notes ("experts in system RAM (32 %)"), or null.</summary>
+    public int? RamSharePercent =>
+        ExpertsInRam && System.Text.RegularExpressions.Regex.Match(Definition.ServerNotes, @"(\d{1,3})\s*%") is { Success: true } m
+            ? int.Parse(m.Groups[1].Value, System.Globalization.CultureInfo.InvariantCulture)
+            : null;
+
     /// <summary>Concept 10.3: from 5 % invalid + truncated a run should not be used for model comparisons.</summary>
     public bool Usable => State == RunState.Completed && FormatFailureRate is < 0.05 && Header.ThinkingVerified != false;
 

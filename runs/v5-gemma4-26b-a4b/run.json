@@ -7,7 +7,7 @@
   "serverUrl": "http://127.0.0.1:8081",
   "model": "gemma4-26b-a4b",
   "expectedContextSize": null,
-  "serverNotes": "",
+  "serverNotes": "experts in system RAM (17 % of the weights: 2826 of 17032 MiB; llama-server --fit moved part of the MoE experts to the CPU; measured with llama-server -lv 4)",
   "catalogFile": "catalogs/core-v5.json",
   "variants": [
     "all"

@@ -10,6 +10,8 @@
     },
     {
       "alias": "gemma4-26b-a4b",
+      "note": "MoE slightly too large for 16 GB: --fit moves part of the experts to the CPU (server log: tensor overrides to CPU)",
+      "bench": "--notes \"experts in system RAM (17 %)\"",
       "args": "-m  /mnt/windows_d/AI/gemma-4-26B-A4B-it-UD-Q4_K_XL.gguf --host 0.0.0.0 --port 8081 --alias gemma4-26b-a4b --jinja --reasoning off -c 16384 -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 1.0 --top-p 0.95 --top-k 64 --min-p 0.0 --repeat-penalty 1.0 --presence-penalty 0.0 --fit on --fit-target 512"
     },
     {
@@ -53,6 +55,38 @@
     {
       "alias": "mistral-7b-v0.3",
       "args": "-m /home/thomas/models/Mistral-7B-Instruct-v0.3-Q8_0.gguf --host 0.0.0.0 --port 8081 --alias mistral-7b-v0.3 --jinja --reasoning off -c 16384 -ngl all -np 1 -fa on -ctk f16 -ctv f16 --temp 0.5 --top-p 0.9 --top-k 50 --min-p 0.0 --repeat-penalty 1.0 --presence-penalty 0.0 --fit on --fit-target 512"
+    },
+    {
+      "alias": "lfm2-24b-a2b",
+      "args": "-m /home/thomas/models/LiquidAI_LFM2-24B-A2B-Q4_K_L.gguf --host 0.0.0.0 --port 8081 --alias lfm2-24b-a2b --jinja --reasoning off -c 16384 -ngl all -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 0.3 --top-p 1.0 --top-k 0 --min-p 0.15 --repeat-penalty 1.05 --presence-penalty 0.0 --fit on --fit-target 512"
+    },
+    {
+      "alias": "lfm2.5-24b-a2b",
+      "args": "-m /home/thomas/models/LFM2.5-24B-A2B-UD-Q4_K_XL.gguf --host 0.0.0.0 --port 8081 --alias lfm2.5-24b-a2b --jinja -c 16384 -ngl all -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 0.3 --top-p 1.0 --top-k 0 --min-p 0.15 --repeat-penalty 1.05 --presence-penalty 0.0 --fit on --fit-target 512"
+    },
+    {
+      "alias": "qwen3.6-35b-a3b",
+      "note": "MoE too large for 16 GB: --fit keeps the experts that do not fit in system RAM; the leaderboard marks the run via the notes",
+      "bench": "--notes \"experts in system RAM (32 %)\"",
+      "args": "-m /home/thomas/models/Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf --host 0.0.0.0 --port 8081 --alias qwen3.6-35b-a3b --jinja --reasoning off --no-mmproj -c 16384 -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 0.7 --top-p 0.80 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --repeat-penalty 1.0 --frequency-penalty 0.0 --fit on --fit-target 512"
+    },
+    {
+      "alias": "lfm2-8b-a1b",
+      "args": "-m /home/thomas/models/LFM2-8B-A1B-UD-Q8_K_XL.gguf --host 0.0.0.0 --port 8081 --alias lfm2-8b-a1b --jinja --reasoning off -c 16384 -ngl all -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 0.3 --top-p 1.0 --top-k 0 --min-p 0.15 --repeat-penalty 1.05 --presence-penalty 0.0 --fit on --fit-target 512"
+    },
+    {
+      "alias": "lfm3-1.7b",
+      "args": "-m /home/thomas/models/LFM3-1.7B-Q8_0.gguf --host 0.0.0.0 --port 8081 --alias lfm3-1.7b --jinja --reasoning off -c 16384 -ngl all -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 0.3 --top-p 1.0 --top-k 0 --min-p 0.15 --repeat-penalty 1.05 --presence-penalty 0.0 --fit on --fit-target 512"
+    },
+    {
+      "alias": "ernie4.5-21b-a3b",
+      "note": "Baidu, MoE 21B / 3B active, reasoning model (always thinks); fits completely into VRAM. --no-jinja: with the jinja template llama-server rejects every reply (HTTP 500, output does not match the peg-native format)",
+      "args": "-m /home/thomas/models/ERNIE-4.5-21B-A3B-Thinking-UD-Q4_K_XL.gguf --host 0.0.0.0 --port 8081 --alias ernie4.5-21b-a3b --no-jinja -c 16384 -ngl all -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 0.6 --top-p 0.95 --top-k 0 --min-p 0.0 --repeat-penalty 1.0 --presence-penalty 0.0 --fit on --fit-target 512"
+    },
+    {
+      "alias": "deepseek-r1-qwen3-8b",
+      "note": "DeepSeek-R1-0528 distilled into Qwen3-8B, reasoning model (always thinks)",
+      "args": "-m /home/thomas/models/DeepSeek-R1-0528-Qwen3-8B-UD-Q8_K_XL.gguf --host 0.0.0.0 --port 8081 --alias deepseek-r1-qwen3-8b --jinja -c 16384 -ngl all -np 1 -fa on -ctk q8_0 -ctv q8_0 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0 --repeat-penalty 1.0 --presence-penalty 0.0 --fit on --fit-target 512"
     }
   ]
 }

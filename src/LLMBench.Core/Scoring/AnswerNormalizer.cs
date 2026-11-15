@@ -51,8 +51,12 @@ public static partial class AnswerNormalizer
         var t = CleanAnswer(s).ToLowerInvariant().Replace('’', '\'');
         t = Spaces().Replace(t, " ").Trim().TrimEnd('.', '!', ';').Trim();
         t = LeadingArticle().Replace(t, "");
+        t = SpaceBeforePercent().Replace(t, "$1%");   // "0 %" = "0%"
         return t;
     }
+
+    [GeneratedRegex(@"(\d)\s+%")]
+    private static partial Regex SpaceBeforePercent();
 
     [GeneratedRegex(@"\([^()]*\)")]
     private static partial Regex Parenthesized();

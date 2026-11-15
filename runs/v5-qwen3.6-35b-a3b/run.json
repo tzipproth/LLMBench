@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "name": "v5-qwen3.6-35b-a3b",
+  "description": null,
+  "createdAt": "2026-11-15T08:44:11.5633041+00:00",
+  "restartOf": null,
+  "serverUrl": "http://127.0.0.1:8081",
+  "model": "qwen3.6-35b-a3b",
+  "expectedContextSize": null,
+  "serverNotes": "experts in system RAM (32 % of the weights: 6826 of 21314 MiB; measured with llama-server -lv 4)",
+  "catalogFile": "catalogs/core-v5.json",
+  "variants": [
+    "all"
+  ],
+  "categories": [],
+  "tiers": [],
+  "questionIds": [],
+  "limit": 0,
+  "systemPromptFile": "prompts/neutral.txt",
+  "systemPromptPlacement": "system",
+  "answerInstruction": "none",
+  "repetitions": 1,
+  "shuffleOptions": true,
+  "shuffleSeed": 1,
+  "thinking": "off",
+  "thinkingOn": {
+    "chat_template_kwargs": {
+      "enable_thinking": true
+    }
+  },
+  "thinkingOff": {
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "temperature": 0,
+  "topP": 0.95,
+  "topK": null,
+  "minP": null,
+  "repeatPenalty": 1,
+  "presencePenalty": 0,
+  "seed": 42,
+  "maxTokens": 7000,
+  "timeoutSeconds": 600,
+  "extraRequest": {
+    "cache_prompt": false
+  },
+  "allVariants": true
+}

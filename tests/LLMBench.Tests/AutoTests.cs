@@ -40,7 +40,9 @@ public class AutoTests
     {
         var path = Path.Combine(FindRepo(), "auto", "models.json");
         var cfg = AutoConfig.Load(path);
-        Assert.Equal(12, cfg.Models.Count);
+        Assert.Equal(cfg.Models.Count, cfg.Models.Select(m => m.Alias).Distinct().Count());
+        foreach (var alias in new[] { "gemma4-26b-a4b", "qwen3.6-35b-a3b" })
+            Assert.Contains(LLMBench.Core.Stats.LeaderboardEntry.ExpertsInRamNote, cfg.Models.Single(m => m.Alias == alias).Bench);
         var muse = cfg.Models.Single(m => m.Alias == "muse-glimmer-30b");
         Assert.Contains("{\"reasoning_strength\":\"high\"}", CommandLine.Split(muse.Args));
         Assert.Equal("/home/thomas/llama/llama-server", cfg.Models.Single(m => m.Alias == "phi-4-14b").ServerExe);

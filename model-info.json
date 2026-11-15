@@ -1,0 +1,22 @@
+{
+  "_comment": "Maker, country and GGUF source (Hugging Face account) per model alias; used by llmbench-heatmap for the 'Who made the models' section of the leaderboard.",
+  "qwen3.8-27b":      { "maker": "Alibaba Cloud (Qwen team)", "country": "China",  "gguf": "unsloth" },
+  "qwen3.6-35b-a3b":  { "maker": "Alibaba Cloud (Qwen team)", "country": "China",  "gguf": "unsloth" },
+  "qwen3.5-9b":       { "maker": "Alibaba Cloud (Qwen team)", "country": "China",  "gguf": "unsloth" },
+  "gemma4-26b-a4b":   { "maker": "Google DeepMind",           "country": "USA",    "gguf": "unsloth" },
+  "gemma4-12b":       { "maker": "Google DeepMind",           "country": "USA",    "gguf": "unsloth" },
+  "gemma4-e4b":       { "maker": "Google DeepMind",           "country": "USA",    "gguf": "unsloth" },
+  "gpt-oss-20b":      { "maker": "OpenAI",                    "country": "USA",    "gguf": "unsloth" },
+  "phi-4-14b":        { "maker": "Microsoft",                 "country": "USA",    "gguf": "bartowski" },
+  "lfm2.5-24b-a2b":   { "maker": "Liquid AI",                 "country": "USA",    "gguf": "unsloth" },
+  "lfm3-1.7b":        { "maker": "Liquid AI",                 "country": "USA",    "gguf": "Liquid AI" },
+  "lfm2-24b-a2b":     { "maker": "Liquid AI",                 "country": "USA",    "gguf": "bartowski" },
+  "lfm2-8b-a1b":      { "maker": "Liquid AI",                 "country": "USA",    "gguf": "unsloth" },
+  "granite-4.2-8b":   { "maker": "IBM",                       "country": "USA",    "gguf": "IBM" },
+  "llama3.1-8b":      { "maker": "Meta",                      "country": "USA",    "gguf": "unsloth" },
+  "ministral3-14b":   { "maker": "Mistral AI",                "country": "France", "gguf": "unsloth" },
+  "mistral-7b-v0.3":  { "maker": "Mistral AI",                "country": "France", "gguf": "bartowski" },
+  "muse-glimmer-30b": { "maker": "Meta",                      "country": "USA",    "gguf": "bartowski" },
+  "ernie4.5-21b-a3b": { "maker": "Baidu",                     "country": "China",  "gguf": "unsloth" },
+  "deepseek-r1-qwen3-8b": { "maker": "DeepSeek",              "country": "China",  "gguf": "unsloth" }
+}

@@ -15,7 +15,9 @@ graphics card with 16 GB, the questions are different:
   often the worse choice in daily use.
 
 LLMBench answers both on real hardware. Every model runs locally in `llama-server` (llama.cpp) on the same
-**RTX 5070 Ti (16 GB)**, completely in VRAM, with the same settings, and answers the same 662 questions. Every
+**RTX 5070 Ti (16 GB)** with the same settings and answers the same 662 questions. Dense models have to fit
+completely into VRAM. MoE models that are too large may keep part of their experts in system RAM (64 GB DDR5,
+Ryzen 9); only a few experts are used per token, so they stay fast. The leaderboard marks them with **MoE · xx % RAM** (share of the weights in RAM). Every
 single answer is stored and published in this repository, so every number on the leaderboard can be checked.
 
 ## Current results
@@ -23,17 +25,23 @@ single answer is stored and published in this repository, so every number on the
 | # | Model | Strength | Quality per time | Accuracy | s / answer |
 |---:|---|---:|---:|---:|---:|
 | 1 | qwen3.8-27b | **64×** | 2.6 / min | 92.4 % | 19.8 |
-| 2 | gemma4-26b-a4b | **48×** | 9.1 / min | 90.6 % | 5.5 |
-| 3 | gemma4-12b | **33×** | 12.3 / min | 88.1 % | 3.8 |
-| 4 | qwen3.5-9b | **20×** | 3.3 / min | 83.7 % | 13.5 |
-| 5 | muse-glimmer-30b | **15×** | 1.2 / min | 81.3 % | 39.8 |
-| 6 | gpt-oss-20b | **14×** | 4.2 / min | 79.8 % | 9.9 |
-| 7 | gemma4-e4b | **10×** | 5.5 / min | 76.1 % | 6.2 |
-| 8 | ministral3-14b | **7.5×** | 1.9 / min | 72.7 % | 17.4 |
-| 9 | phi-4-14b | **7.4×** | 6.0 / min | 71.8 % | 5.0 |
-| 10 | granite-4.2-8b | **4.9×** | 1.0 / min | 66.6 % | 32.1 |
-| 11 | llama3.1-8b | **1.0×** | 0.2 / min | 41.1 % | 10.7 |
-| 12 | mistral-7b-v0.3 | **0.38×** | −8.4 / min | 27.5 % | 1.7 |
+| 2 | gemma4-26b-a4b (MoE, 17 % RAM) | **48×** | 9.1 / min | 90.6 % | 5.5 |
+| 3 | qwen3.6-35b-a3b (MoE, 32 % RAM) | **35×** | 3.8 / min | 88.5 % | 12.9 |
+| 4 | gemma4-12b | **33×** | 12.3 / min | 88.1 % | 3.8 |
+| 5 | qwen3.5-9b | **20×** | 3.3 / min | 83.7 % | 13.5 |
+| 6 | muse-glimmer-30b | **15×** | 1.2 / min | 81.3 % | 39.8 |
+| 7 | gpt-oss-20b | **14×** | 4.2 / min | 79.8 % | 9.9 |
+| 8 | gemma4-e4b | **10×** | 5.5 / min | 76.1 % | 6.2 |
+| 9 | ministral3-14b | **7.5×** | 1.9 / min | 72.7 % | 17.4 |
+| 10 | phi-4-14b | **7.4×** | 6.0 / min | 71.8 % | 5.0 |
+| 11 | lfm2.5-24b-a2b | **6.5×** | 2.8 / min | 70.7 % | 13.9 |
+| 12 | granite-4.2-8b | **5.0×** | 1.0 / min | 67.1 % | 32.1 |
+| 13 | lfm3-1.7b | **3.6×** | 2.6 / min | 62.5 % | 12.3 |
+| 14 | ernie4.5-21b-a3b | **3.0×** | 1.5 / min | 59.2 % | 19.6 |
+| 15 | lfm2-24b-a2b | **2.1×** | 7.5 / min | 53.5 % | 1.3 |
+| 16 | lfm2-8b-a1b | **1.3×** | 1.5 / min | 45.2 % | 3.1 |
+| 17 | llama3.1-8b | **1.0×** | 0.2 / min | 41.1 % | 10.7 |
+| 18 | mistral-7b-v0.3 | **0.38×** | −8.4 / min | 27.5 % | 1.7 |
 
 The [leaderboard](https://tzipproth.github.io/LLMBench/leaderboard.html) has the 95 % ranges, significance ranks, model files and an explanation of
 every column. In short:
@@ -85,7 +93,8 @@ catalog names the origin of every question.
   others with their default. The exact `llama-server` arguments of every model are in
   [auto/models.json](auto/models.json).
 - **Scoring** reads only the final answer, never the reasoning: the last line starting with `Final Answer:`
-  (fallbacks: `Final Answer:` within a line, a line starting with `Answer:`, a single short line). Numbers are
+  (fallbacks: `Final Answer:` within a line, a line starting with `Answer:`, a single short line, a last line that
+  is only `\boxed{…}`). Numbers are
   compared as numbers, options by letter or text. Answers cut off at the token limit count as wrong; models with
   5 % or more of them are marked on the leaderboard.
 
@@ -121,8 +130,9 @@ On Windows, `llmbench.cmd <command>` runs the CLI from the project folder; the G
 
 ### Test your own model
 
-1. Start `llama-server` with the model (it has to fit completely into VRAM) and check it:
-   `llmbench server --server http://127.0.0.1:8081`
+1. Start `llama-server` with the model (a dense model has to fit completely into VRAM) and check it:
+   `llmbench server --server http://127.0.0.1:8081`. For a MoE model with experts in system RAM add
+   `--notes "experts in system RAM"` to the run, so the leaderboard marks it.
 2. Run all 662 questions: `llmbench run v5-<model> --server http://127.0.0.1:8081`
    (add `--thinking default` if the model has no thinking switch). The run refuses to start if the server runs a
    different model than the run name says.

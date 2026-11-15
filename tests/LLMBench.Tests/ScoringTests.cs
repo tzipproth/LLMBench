@@ -18,6 +18,9 @@ public class ExtractionTests
     [InlineData("Final Answer: A\nmore text\nFinal Answer: C", "C")]
     [InlineData("Final Answer:\n\nE", "E")]
     [InlineData("Final Answer: \"his father\"", "his father")]
+    [InlineData("Final Answer: 3 cats are needed to catch 100 mice in 100 minutes. Final Answer: 3", "3")]
+    [InlineData("Some steps.\nSo the car moves to square 12.\n\n\\boxed{12}", "12")]
+    [InlineData("Some steps.\nThe one who did is Ben.\n$\\boxed{Ben}$", "Ben")]
     public void Extracts_last_final_answer(string content, string expected)
     {
         var ex = AnswerExtractor.Extract(content);
@@ -33,6 +36,7 @@ public class ExtractionTests
     [InlineData("   \n ", "empty")]
     [InlineData(null, "empty")]
     [InlineData("Final Answer:", "empty")]
+    [InlineData("Some steps.\nThe result is \\boxed{12}, I think.", "no-final-line")]
     public void Invalid_without_final_line(string? content, string reason)
     {
         var ex = AnswerExtractor.Extract(content);
@@ -123,6 +127,20 @@ public class ChoiceScoringTests
     };
 
     private static readonly List<DisplayedOption> D = PromptBuilder.ArrangeOptions("Q", V, false, 1, 0);
+
+    [Fact]
+    public void Percent_with_or_without_space_matches_option()
+    {
+        var v = new QuestionVariant
+        {
+            Id = "mcq", Type = "choice",
+            Options = [new() { Id = "p0", Text = "0 %" }, new() { Id = "p1", Text = "1 %" }, new() { Id = "p50", Text = "about 50 %" }],
+            CorrectOptionId = "p0",
+        };
+        var shown = PromptBuilder.ArrangeOptions("Q", v, false, 1, 0);
+        Assert.Equal(ItemStatus.Correct, Scorer.Score(v, shown, "Work.\nFinal Answer: $\\boxed{0\\%}$", "stop").Status);
+        Assert.Equal(ItemStatus.Incorrect, Scorer.Score(v, shown, "Work.\nFinal Answer: 1%", "stop").Status);
+    }
 
     [Theory]
     [InlineData("B", ItemStatus.Correct)]

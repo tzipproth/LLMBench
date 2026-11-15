@@ -16,7 +16,8 @@ Usage: llmbench-heatmap [options]
   --out FILE          PNG file (default: docs/heatmap.png); an HTML page with the same name is written too,
                       and leaderboard.html (the public leaderboard with explanations) in the same folder
   --gpu NAME          graphics card the runs were made on, shown on the leaderboard (default RTX 5070 Ti)
-  --vram GB           its memory; every model has to fit into it completely (default 16)
+  --vram GB           its memory; dense models have to fit into it completely (default 16)
+  --system TEXT       system RAM and CPU, shown for MoE runs with experts in RAM (default "64 GB DDR5, Ryzen 9")
   --no-html           only the PNG
   --speed seconds|tokens   what decides fast / slow (default seconds)
   --fast N --slow N   correct within N is "fast", above N "slow" (default 10 / 60 s, or 1000 / 4000 tokens)
@@ -74,7 +75,8 @@ try
         Console.WriteLine($"HTML with names and tooltips: {outHtml}");
         var outBoard = Path.Combine(Path.GetDirectoryName(outPng)!, "leaderboard.html");
         File.WriteAllText(outBoard, LeaderboardHtml.Render(grp, entries, Path.GetFileName(outHtml),
-            Opt("gpu") ?? "RTX 5070 Ti", int.Parse(Opt("vram") ?? "16", CultureInfo.InvariantCulture)));
+            Opt("gpu") ?? "RTX 5070 Ti", int.Parse(Opt("vram") ?? "16", CultureInfo.InvariantCulture), Opt("system") ?? "64 GB DDR5, Ryzen 9",
+            ModelInfo.Load(Path.Combine(ws.Root, "model-info.json"))));
         Console.WriteLine($"Leaderboard page: {outBoard}");
     }
     Console.WriteLine();

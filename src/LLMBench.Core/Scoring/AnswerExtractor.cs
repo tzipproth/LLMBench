@@ -26,6 +26,14 @@ public static partial class AnswerExtractor
     [GeneratedRegex(@"<think>.*?</think>", RegexOptions.Singleline | RegexOptions.IgnoreCase)]
     private static partial Regex ThinkBlock();
 
+    // "Final Answer:" once more inside the answer text ("Final Answer: 3 cats are needed ... Final Answer: 3")
+    [GeneratedRegex(@"(?i)final[ \t]+answer[ \t*_`]*[:\-–][ \t]*")]
+    private static partial Regex FinalMarker();
+
+    // last fallback: a last line that is only "\boxed{X}" (optionally inside $ ... $ or \[ ... \]), math style without a final line
+    [GeneratedRegex(@"^[ \t$\\\[\]()]*\\boxed\s*\{[^{}]*\}[ \t$\\\[\]().]*$")]
+    private static partial Regex BoxedOnlyLine();
+
     public static Extraction Extract(string? content)
     {
         var text = content ?? "";
@@ -82,6 +90,11 @@ public static partial class AnswerExtractor
                 var single = AnswerNormalizer.CleanAnswer(lines[0]);
                 if (single.Length > 0) return new Extraction(single, null, stripped, text);
             }
+            if (lines.Count > 0 && BoxedOnlyLine().IsMatch(lines[^1]))
+            {
+                var boxed = AnswerNormalizer.CleanAnswer(lines[^1]);
+                if (boxed.Length > 0) return new Extraction(boxed, null, stripped, text);
+            }
             return new Extraction(null, "no-final-line", stripped, text);
         }
 
@@ -92,6 +105,12 @@ public static partial class AnswerExtractor
             // "Final Answer:" followed by the answer on the next non-empty line
             var rest = text[(last.Index + last.Length)..].Split('\n').Select(l => l.Trim()).FirstOrDefault(l => l.Length > 0);
             raw = rest ?? "";
+        }
+        var again = FinalMarker().Matches(raw);
+        if (again.Count > 0)
+        {
+            var tail = raw[(again[^1].Index + again[^1].Length)..];
+            if (AnswerNormalizer.CleanAnswer(tail).Length > 0) raw = tail;
         }
 
         var cleaned = AnswerNormalizer.CleanAnswer(raw);
