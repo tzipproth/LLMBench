@@ -136,6 +136,11 @@ internal static partial class Commands
               --seed N  --max-tokens N    (use 'none' to not send a value; the server default applies)
               --repetitions N  --shuffle | --no-shuffle  --shuffle-seed N  --timeout SECONDS
               --extra JSON                 extra request fields, e.g. "{\"cache_prompt\": false}"
+
+            Other OpenAI compatible servers that are already running (e.g. TabbyAPI / ExLlamaV3): use 'run' with
+            --server URL and --model NAME (the name for the leaderboard). A server with an API key gets it from the
+            environment variable LLMBENCH_API_KEY (never stored in the run):
+              LLMBENCH_API_KEY=... llmbench run v5-mymodel-exl3 --from v5-mymodel --server http://host:5000 --model mymodel-exl3
             """);
     }
 

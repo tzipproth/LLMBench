@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "name": "v5-qwen3.8-27b-exl3",
+  "description": "Qwen3.8-27B EXL3 4.00 bpw (yeasah) on TabbyAPI",
+  "createdAt": "2026-11-19T13:47:25.6785532+00:00",
+  "restartOf": null,
+  "serverUrl": "http://127.0.0.1:8081",
+  "model": "qwen3.8-27b-exl3",
+  "expectedContextSize": null,
+  "serverNotes": "TabbyAPI, ExLlamaV3 1.6.7, EXL3 4.00 bpw",
+  "catalogFile": "catalogs/core-v5.json",
+  "variants": [
+    "all"
+  ],
+  "categories": [],
+  "tiers": [],
+  "questionIds": [],
+  "limit": 0,
+  "systemPromptFile": "prompts/neutral.txt",
+  "systemPromptPlacement": "system",
+  "answerInstruction": "none",
+  "repetitions": 1,
+  "shuffleOptions": true,
+  "shuffleSeed": 1,
+  "thinking": "off",
+  "thinkingOn": {
+    "chat_template_kwargs": {
+      "enable_thinking": true
+    }
+  },
+  "thinkingOff": {
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "temperature": 0,
+  "topP": 0.95,
+  "topK": null,
+  "minP": null,
+  "repeatPenalty": 1,
+  "presencePenalty": 0,
+  "seed": 42,
+  "maxTokens": 7000,
+  "timeoutSeconds": 600,
+  "extraRequest": {
+    "cache_prompt": false
+  },
+  "allVariants": true
+}

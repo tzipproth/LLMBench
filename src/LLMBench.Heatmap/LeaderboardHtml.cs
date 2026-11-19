@@ -84,7 +84,8 @@ public static class LeaderboardHtml
             sb.Append($"<tr{(e.Rank == 1 ? " class=\"top1\"" : "")}>");
             Td(sb, e.Position.ToString(Inv), e.Position, "num muted");
             Td(sb, $"<span class=\"rank\">{e.Rank?.ToString(Inv) ?? "-"}</span>", e.Rank ?? 999, "num");
-            var file = Path.GetFileNameWithoutExtension(e.ModelFile);
+            // only ".gguf" is cut: an EXL3 model is a folder whose name has dots ("Qwen3.8-27B-exl3-4bpw")
+            var file = e.ModelFile.EndsWith(".gguf", StringComparison.OrdinalIgnoreCase) ? e.ModelFile[..^5] : e.ModelFile;
             Td(sb, $"<span class=\"name\">{H(e.Model)}{(flagged ? "<sup class=\"flag\" title=\"" + H(e.UsabilityNote) + "\">†</sup>" : "")}" +
                    $"{(e.ExpertsInRam ? $" <span class=\"badge\" title=\"MoE model: {(e.RamSharePercent is { } rp ? rp + " % of the weights" : "part of the experts")} in system RAM ({H(system)}), the rest in VRAM\">MoE · {(e.RamSharePercent is { } rs ? rs + " % " : "")}RAM</span>" : "")}</span>" +
                    $"<span class=\"sub\">{H(file)}</span>", e.Model, "model");
@@ -159,7 +160,7 @@ public static class LeaderboardHtml
         sb.Append($"<p><strong>Questions.</strong> {first.Header.CatalogQuestions} questions, many of them in two forms (free answer and multiple choice), " +
                   $"{group.QuestionCount} variants in total. Some are well-known puzzles with a twist that changes the answer, so a memorized solution is wrong. " +
                   "The options of multiple-choice questions are shuffled the same way for every model.</p>\n");
-        sb.Append($"<p><strong>Same conditions for every model.</strong> Each model runs locally in llama-server on one {H(gpu)}, " +
+        sb.Append($"<p><strong>Same conditions for every model.</strong> Each model runs locally in llama-server (llama.cpp; EXL3 quantizations in TabbyAPI / ExLlamaV3) on one {H(gpu)}, " +
                   (anyRam ? $"completely in its {vramGb} GB of VRAM; MoE models too large for it keep part of their experts in system RAM ({H(system)}). It runs " : $"completely in its {vramGb} GB of VRAM, ") +
                   $"with temperature {N(def.Temperature)}, seed {N(def.Seed)} " +
                   $"and at most {def.MaxTokens?.ToString("#,0", Inv) ?? "unlimited"} output tokens per answer. Models with a thinking switch run with thinking off, the others as they come. " +
@@ -221,7 +222,7 @@ public static class LeaderboardHtml
             .ToList();
 
         sb.Append("<h2>Who made the models</h2>\n<div class=\"scroll\"><table class=\"makers\">\n<thead><tr><th>Company</th><th>Country</th>" +
-                  "<th>Models, strongest first <span class=\"muted\">(strength · GGUF from)</span></th></tr></thead>\n<tbody>\n");
+                  "<th>Models, strongest first <span class=\"muted\">(strength · quantized by)</span></th></tr></thead>\n<tbody>\n");
         string? lastCountry = null;
         foreach (var (maker, country, models) in makers)
         {

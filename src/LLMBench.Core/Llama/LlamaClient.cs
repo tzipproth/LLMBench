@@ -30,11 +30,18 @@ public sealed class HealthResult
     public string Message { get; set; } = "";
 }
 
-/// <summary>Minimal client for the llama-server HTTP API (OpenAI compatible endpoints plus /health and /props).</summary>
+/// <summary>
+/// Minimal client for the llama-server HTTP API (OpenAI compatible endpoints plus /health and /props).
+/// Also works with other OpenAI compatible servers that are already running (e.g. TabbyAPI); a server with an
+/// API key gets it from the environment variable <see cref="ApiKeyVariable"/> (never stored in a run).
+/// </summary>
 public sealed class LlamaClient : IDisposable
 {
     private readonly HttpClient _http;
     public string BaseUrl { get; }
+
+    /// <summary>Environment variable with the API key for servers that need one (sent as "Authorization: Bearer").</summary>
+    public const string ApiKeyVariable = "LLMBENCH_API_KEY";
 
     public LlamaClient(string serverUrl)
     {
@@ -42,6 +49,8 @@ public sealed class LlamaClient : IDisposable
         // Timeouts are handled per request with CancellationTokens (HttpClient default is 100 s).
         _http = new HttpClient { Timeout = Timeout.InfiniteTimeSpan };
         _http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        if (Environment.GetEnvironmentVariable(ApiKeyVariable) is { Length: > 0 } key)
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", key);
     }
 
     public void Dispose() => _http.Dispose();

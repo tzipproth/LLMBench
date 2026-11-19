@@ -36,6 +36,13 @@ tail -f v5-gemma4-12b.log                           # watch (Ctrl+C only stops w
 
 Note the `./` in front of `llmbench` (program in the current folder); `/llmbench` gives "command not found" (exit 127).
 
+A server that is already running and needs an API key (e.g. TabbyAPI / ExLlamaV3): pass the key in the
+environment variable `LLMBENCH_API_KEY` (it is not stored in the run) and give the model its own name:
+
+```bash
+LLMBENCH_API_KEY=<key> ./llmbench run v5-qwen3.8-27b-exl3 --model qwen3.8-27b-exl3
+```
+
 Other useful commands: `./llmbench list`, `./llmbench report <run>`, `./llmbench items <run> --status incorrect`.
 
 ## All models unattended (auto)
