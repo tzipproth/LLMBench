@@ -71,6 +71,7 @@ public static class HtmlRenderer
  &nbsp; one square per question variant, columns grouped by tier (easy → hard within each tier), rows = runs (best first);
  bottom row: solve rate over all runs (white = all solve, dark = none)</div>
 <div class="legend" id="legend"></div>
+<div class="bar">Gray run names mark a warning, for example when truncated and invalid answers together account for at least 5 %.</div>
 <div class="wrap"><canvas id="c"></canvas></div>
 <div id="tip"></div>
 <script>

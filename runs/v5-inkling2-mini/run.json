@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "name": "v5-inkling2-mini",
+  "description": "Inkling 2 Mini UD-Q4_K_XL (Unsloth) on llama.cpp",
+  "createdAt": "2026-11-22T16:02:08.1703744+00:00",
+  "restartOf": null,
+  "serverUrl": "http://127.0.0.1:8081",
+  "model": "inkling2-mini",
+  "expectedContextSize": null,
+  "serverNotes": "llama.cpp b12631, UD-Q4_K_XL, MoE, 6 expert layers in RAM",
+  "catalogFile": "catalogs/core-v5.json",
+  "variants": [
+    "all"
+  ],
+  "categories": [],
+  "tiers": [],
+  "questionIds": [],
+  "limit": 0,
+  "systemPromptFile": "prompts/neutral.txt",
+  "systemPromptPlacement": "system",
+  "answerInstruction": "none",
+  "repetitions": 1,
+  "shuffleOptions": true,
+  "shuffleSeed": 1,
+  "thinking": "default",
+  "thinkingOn": {
+    "chat_template_kwargs": {
+      "enable_thinking": true
+    }
+  },
+  "thinkingOff": {
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "temperature": 0,
+  "topP": 0.95,
+  "topK": null,
+  "minP": null,
+  "repeatPenalty": 1,
+  "presencePenalty": 0,
+  "seed": 42,
+  "maxTokens": 7000,
+  "timeoutSeconds": 600,
+  "extraRequest": {
+    "cache_prompt": false
+  },
+  "allVariants": true
+}

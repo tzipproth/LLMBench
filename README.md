@@ -25,24 +25,25 @@ single answer is stored and published in this repository, so every number on the
 | # | Model | Strength | Quality per time | Accuracy | s / answer |
 |---:|---|---:|---:|---:|---:|
 | 1 | qwen3.8-27b-exl3 (EXL3 4.00 bpw, TabbyAPI) | **72×** | 2.6 / min | 93.1 % | 20.3 |
-| 2 | qwen3.8-27b | **64×** | 2.6 / min | 92.4 % | 19.8 |
-| 3 | gemma4-26b-a4b (MoE, 17 % RAM) | **48×** | 9.1 / min | 90.6 % | 5.5 |
-| 4 | qwen3.6-35b-a3b (MoE, 32 % RAM) | **35×** | 3.8 / min | 88.5 % | 12.9 |
-| 5 | gemma4-12b | **33×** | 12.3 / min | 88.1 % | 3.8 |
-| 6 | qwen3.5-9b | **20×** | 3.3 / min | 83.7 % | 13.5 |
-| 7 | muse-glimmer-30b | **15×** | 1.2 / min | 81.3 % | 39.8 |
-| 8 | gpt-oss-20b | **14×** | 4.2 / min | 79.8 % | 9.9 |
-| 9 | gemma4-e4b | **10×** | 5.5 / min | 76.1 % | 6.2 |
-| 10 | ministral3-14b | **7.5×** | 1.9 / min | 72.7 % | 17.4 |
-| 11 | phi-4-14b | **7.4×** | 6.0 / min | 71.8 % | 5.0 |
-| 12 | lfm2.5-24b-a2b | **6.5×** | 2.8 / min | 70.7 % | 13.9 |
-| 13 | granite-4.2-8b | **5.0×** | 1.0 / min | 67.1 % | 32.1 |
-| 14 | lfm3-1.7b | **3.6×** | 2.6 / min | 62.5 % | 12.3 |
-| 15 | ernie4.5-21b-a3b | **3.0×** | 1.5 / min | 59.2 % | 19.6 |
-| 16 | lfm2-24b-a2b | **2.1×** | 7.5 / min | 53.5 % | 1.3 |
-| 17 | lfm2-8b-a1b | **1.3×** | 1.5 / min | 45.2 % | 3.1 |
-| 18 | llama3.1-8b | **1.0×** | 0.2 / min | 41.1 % | 10.7 |
-| 19 | mistral-7b-v0.3 | **0.38×** | −8.4 / min | 27.5 % | 1.7 |
+| 2 | inkling2-mini (MoE, six expert layers in RAM) | **64×** | 1.6 / min | 92.6 % | 34.1 |
+| 3 | qwen3.8-27b | **64×** | 2.6 / min | 92.4 % | 19.8 |
+| 4 | gemma4-26b-a4b (MoE, 17 % RAM) | **48×** | 9.1 / min | 90.6 % | 5.5 |
+| 5 | qwen3.6-35b-a3b (MoE, 32 % RAM) | **35×** | 3.8 / min | 88.5 % | 12.9 |
+| 6 | gemma4-12b | **33×** | 12.3 / min | 88.1 % | 3.8 |
+| 7 | qwen3.5-9b | **20×** | 3.3 / min | 83.7 % | 13.5 |
+| 8 | muse-glimmer-30b | **15×** | 1.2 / min | 81.3 % | 39.8 |
+| 9 | gpt-oss-20b | **14×** | 4.2 / min | 79.8 % | 9.9 |
+| 10 | gemma4-e4b | **10×** | 5.5 / min | 76.1 % | 6.2 |
+| 11 | ministral3-14b | **7.5×** | 1.9 / min | 72.7 % | 17.4 |
+| 12 | phi-4-14b | **7.4×** | 6.0 / min | 71.8 % | 5.0 |
+| 13 | lfm2.5-24b-a2b | **6.5×** | 2.8 / min | 70.7 % | 13.9 |
+| 14 | granite-4.2-8b | **5.0×** | 1.0 / min | 67.1 % | 32.1 |
+| 15 | lfm3-1.7b | **3.6×** | 2.6 / min | 62.5 % | 12.3 |
+| 16 | ernie4.5-21b-a3b | **3.0×** | 1.5 / min | 59.2 % | 19.6 |
+| 17 | lfm2-24b-a2b | **2.1×** | 7.5 / min | 53.5 % | 1.3 |
+| 18 | lfm2-8b-a1b | **1.3×** | 1.5 / min | 45.2 % | 3.1 |
+| 19 | llama3.1-8b | **1.0×** | 0.2 / min | 41.1 % | 10.7 |
+| 20 | mistral-7b-v0.3 | **0.38×** | −8.4 / min | 27.5 % | 1.7 |
 
 The [leaderboard](https://tzipproth.github.io/LLMBench/leaderboard.html) has the 95 % ranges, significance ranks, model files and an explanation of
 every column. In short:
@@ -54,6 +55,14 @@ every column. In short:
   guessing does not pay (see Mistral 7B).
 - **Accuracy**: share of correct answers. Same order as the strength, but it squeezes the top, where every further
   percent is much harder to get.
+
+Inkling 2 Mini delivered 613 correct answers, between the two Qwen3.8-27B runs at 612 and 616. It ran at its
+default high reasoning effort, with six expert layers in system RAM. All 37 truncated replies used the full
+7,000 tokens and took 152–158 seconds each. These replies (5.6 %) trigger the leaderboard's † flag.
+Within 60 seconds, Inkling delivered 541 correct answers, compared
+with 584 and 585 for the two Qwen runs. [Model card](https://huggingface.co/thinkingmachines/Inkling-2-Mini) ·
+[Reasoning effort settings](https://huggingface.co/blog/inkling2mini#reasoning-effort) ·
+[Tested GGUF quantization](https://huggingface.co/unsloth/Inkling-2-Mini-GGUF)
 
 ## The questions
 
@@ -90,8 +99,12 @@ catalog names the origin of every question.
   `You are a helpful assistant. Answer the question accurately. You may reason first. End your reply with a last
   line "Final Answer:" followed by your answer.`
 - Multiple-choice options are added as `A. … B. …`, shuffled with a fixed seed, so every model sees the same order.
-- Temperature 0, seed 42, at most 7,000 output tokens. Models with a thinking switch run with thinking off, the
-  others with their default. The exact `llama-server` arguments of every model are in
+- Temperature 0, seed 42, at most 7,000 output tokens including reasoning and the final answer. This shared cap
+  fits both Qwen3.8-27B runs' 8,192-token context with room for the longest observed prompt (822 tokens).
+  Accuracy and strength reflect performance with this generation budget. Quality per time accounts for the
+  actual time spent on each reply, including replies that hit the cap.
+- Models with a thinking switch run with thinking off, the others with their default. The `llama-server` arguments
+  for the unattended runs are in
   [auto/models.json](auto/models.json); an EXL3 run gets exactly the same requests from TabbyAPI.
 - **Scoring** reads only the final answer, never the reasoning: the last line starting with `Final Answer:`
   (fallbacks: `Final Answer:` within a line, a line starting with `Answer:`, a single short line, a last line that

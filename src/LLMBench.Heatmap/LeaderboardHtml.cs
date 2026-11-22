@@ -56,7 +56,8 @@ public static class LeaderboardHtml
         sb.Append("</dl>\n</header>\n");
 
         // ---- table -------------------------------------------------------------------------------------
-        sb.Append("<section class=\"board\">\n<div class=\"scroll\"><table id=\"lb\">\n<thead><tr>");
+        sb.Append("<section class=\"board\">\n<p class=\"note scroll-hint\" id=\"lb-overflow\" hidden>Scroll right to see the remaining columns.</p>\n" +
+                  "<div class=\"scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Model results\"><table id=\"lb\">\n<thead><tr>");
         Th(sb, "#", "num", "pos", "Position in the list");
         Th(sb, "Rank", "num", "rank", "Shared rank = not distinguishable (see below)");
         Th(sb, "Model", "", "model", null);
@@ -73,6 +74,8 @@ public static class LeaderboardHtml
         Th(sb, "Correct", "num", "correct", "Correct answers / scored answers");
         Th(sb, "s / answer", "num", "spa", $"Mean seconds per answer on the {gpu}");
         Th(sb, "Quality", "num", "net", "Right minus wrong answers, per 100 answers");
+        Th(sb, "Invalid answers", "num", "invalid", "Share of scored answers with no usable final answer");
+        Th(sb, "Token limit reached", "num", "truncated", "Share of scored answers cut off at the output token limit");
         sb.Append("</tr></thead>\n<tbody>\n");
 
         foreach (var e in rows)
@@ -106,12 +109,14 @@ public static class LeaderboardHtml
             Td(sb, $"{s.Correct}<span class=\"muted\"> / {s.Scored}</span>", s.Correct, "num");
             Td(sb, e.SecondsPerAnswer is { } spa ? spa.ToString("0.0", Inv) : "-", e.SecondsPerAnswer ?? 1e9, "num");
             Td(sb, b != null ? Pct(b.NetScore) : "-", b?.NetScore ?? -9, "num");
+            TdAnswerShare(sb, s.Invalid, s.Scored);
+            TdAnswerShare(sb, s.Truncated, s.Scored);
             sb.Append("</tr>\n");
         }
         sb.Append("</tbody></table></div>\n");
         if (rows.Any(e => e.UsabilityNote.Length > 0))
-            sb.Append("<p class=\"note\"><span class=\"flag\">†</span> 5 % or more of the answers were cut off at the output limit or had no readable final answer. " +
-                      "They count as wrong, so the model may do better with a larger limit.</p>\n");
+            sb.Append("<p class=\"note\"><span class=\"flag\">†</span> Run warning. A combined share of 5 % or more truncated or invalid answers triggers this flag. " +
+                      "Hover over the symbol for the reason.</p>\n");
         if (anyRam)
             sb.Append($"<p class=\"note\"><span class=\"badge\">MoE · xx % RAM</span> Mixture-of-experts model too large for {vramGb} GB: xx % of its weights " +
                       $"(experts that do not fit) stay in system RAM ({H(system)}), everything else in VRAM. Why this is allowed: see “MoE · RAM” below.</p>\n");
@@ -150,6 +155,8 @@ public static class LeaderboardHtml
         Col(sb, "Quality", "Right minus wrong answers per 100 answers: what the answers are worth if you trust them. No usable answer counts 0. " +
                            "A wrong multiple-choice answer with <em>k</em> options costs only 1/(<em>k</em>−1), so guessing gains nothing. " +
                            "A model that is often wrong drops further here than in accuracy. Quality per time is the same value per minute instead of per answer.");
+        Col(sb, "Invalid answers", "Share of scored answers with no usable final answer. These count as wrong in accuracy.");
+        Col(sb, "Token limit reached", "Share of scored answers cut off at the output token limit. These count as wrong in accuracy.");
         sb.Append("</dl>\n");
         Makers(sb, rows, info);
 
@@ -201,6 +208,18 @@ public static class LeaderboardHtml
             _ => "",
         };
         sb.Append($"<td class=\"{cls}\" data-v=\"{v}\">{html}</td>");
+    }
+
+    private static void TdAnswerShare(StringBuilder sb, int count, int scored)
+    {
+        if (scored == 0)
+        {
+            Td(sb, "-", -1, "num");
+            return;
+        }
+
+        var share = (double)count / scored;
+        Td(sb, $"{Pct(share)}<span class=\"sub\">{count} / {scored}</span>", share, "num");
     }
 
     /// <summary>
@@ -293,7 +312,7 @@ th { position: relative; padding: 12px 10px 30px; font-size: 12px; font-weight: 
 th:hover, th:focus-visible { color: var(--text); outline: none; }
 th[aria-sort="ascending"]::after { content: " ▲"; font-size: 9px; }
 th[aria-sort="descending"]::after { content: " ▼"; font-size: 9px; }
-th.plot { cursor: default; min-width: 300px; padding-left: 14px; padding-right: 14px; }
+th.plot { cursor: default; min-width: 250px; }
 td { padding: 11px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; white-space: nowrap; }
 tbody tr:last-child td { border-bottom: 0; }
 tbody tr:hover td { background: var(--accent-soft); }
@@ -306,15 +325,19 @@ th.num { text-align: right; }
 .sub { display: block; font-size: 12px; color: var(--text-3); font-weight: 400; }
 .name { font-weight: 600; }
 .model .sub { max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+#lb th, #lb td { padding-inline: 8px; }
+#lb th, #lb .model { white-space: normal; }
+#lb th[data-key="invalid"], #lb th[data-key="truncated"] { width: 86px; }
+#lb .model .sub { white-space: nowrap; }
 .rank { display: inline-block; min-width: 26px; padding: 1px 7px; border-radius: 999px; text-align: center;
   font-size: 13px; font-weight: 600; background: var(--track); color: var(--text-2); }
 tr.top1 .rank { background: var(--accent); color: #fff; }
 .badge { display: inline-block; margin-left: 4px; padding: 0 6px; border-radius: 4px; font-size: 10px; font-weight: 700;
   letter-spacing: .04em; line-height: 16px; vertical-align: 2px; color: var(--text-2); border: 1px solid var(--line-strong); cursor: help; }
 .flag { color: var(--flag); font-weight: 700; margin-left: 2px; cursor: help; }
-td.plot { padding-left: 14px; padding-right: 14px; }
+#lb .plot { padding-inline: 14px; }
 .axis { position: absolute; left: 14px; right: 14px; bottom: 9px; height: 14px; }
-.axis span { position: absolute; transform: translateX(-50%); font-size: 11px; font-weight: 400; color: var(--text-3); }
+.axis span { position: absolute; transform: translateX(-50%); font-size: 10px; font-weight: 400; color: var(--text-3); }
 .track { position: relative; height: 22px; background:
   linear-gradient(var(--track), var(--track)) center / 100% 2px no-repeat; border-radius: 4px; }
 .track .ci { position: absolute; top: 5px; height: 12px; border-left: 2px solid var(--accent); border-right: 2px solid var(--accent);
@@ -323,6 +346,7 @@ td.plot { padding-left: 14px; padding-right: 14px; }
 .track .dot { position: absolute; top: 5px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%;
   background: var(--accent); box-shadow: 0 0 0 2px var(--surface); }
 .note { margin: 10px 2px 0; font-size: 13px; color: var(--text-3); }
+.scroll-hint { margin: 0 2px 8px; }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin: 0; }
 .cols div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
 .cols dt { font-weight: 650; margin-bottom: 4px; }
@@ -350,6 +374,13 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
 <script>
 (() => {
   const table = document.getElementById('lb');
+  const scroller = table.parentElement;
+  const overflowHint = document.getElementById('lb-overflow');
+  const observer = new ResizeObserver(() => {
+    overflowHint.hidden = scroller.scrollWidth <= scroller.clientWidth;
+  });
+  observer.observe(scroller);
+  observer.observe(table);
   const body = table.tBodies[0];
   const heads = [...table.tHead.rows[0].cells];
   const sortBy = th => {

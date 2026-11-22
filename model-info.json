@@ -8,6 +8,7 @@
   "gemma4-12b":       { "maker": "Google DeepMind",           "country": "USA",    "gguf": "unsloth" },
   "gemma4-e4b":       { "maker": "Google DeepMind",           "country": "USA",    "gguf": "unsloth" },
   "gpt-oss-20b":      { "maker": "OpenAI",                    "country": "USA",    "gguf": "unsloth" },
+  "inkling2-mini":     { "maker": "Thinking Machines Lab",     "country": "USA",    "gguf": "unsloth" },
   "phi-4-14b":        { "maker": "Microsoft",                 "country": "USA",    "gguf": "bartowski" },
   "lfm2.5-24b-a2b":   { "maker": "Liquid AI",                 "country": "USA",    "gguf": "unsloth" },
   "lfm3-1.7b":        { "maker": "Liquid AI",                 "country": "USA",    "gguf": "Liquid AI" },

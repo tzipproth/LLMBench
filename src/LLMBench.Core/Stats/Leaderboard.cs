@@ -36,7 +36,9 @@ public sealed class LeaderboardEntry
     public const string ExpertsInRamNote = "experts in system RAM";
 
     /// <summary>The model did not fit completely into VRAM: a MoE model with experts kept in system RAM (see <see cref="ExpertsInRamNote"/>).</summary>
-    public bool ExpertsInRam => Definition.ServerNotes.Contains(ExpertsInRamNote, StringComparison.OrdinalIgnoreCase);
+    public bool ExpertsInRam =>
+        Definition.ServerNotes.Contains(ExpertsInRamNote, StringComparison.OrdinalIgnoreCase) ||
+        Definition.ServerNotes.Contains("expert layers in RAM", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>Share of the weights in system RAM in percent, from the server notes ("experts in system RAM (32 %)"), or null.</summary>
     public int? RamSharePercent =>
