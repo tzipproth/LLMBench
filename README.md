@@ -47,8 +47,8 @@ single answer is stored and published in this repository, so every number on the
 | 20 | llama3.1-8b | **1.0×** | 0.2 / min | 41.1 % | 10.7 |
 | 21 | mistral-7b-v0.3 | **0.38×** | −8.4 / min | 27.5 % | 1.7 |
 
-The [leaderboard](https://tzipproth.github.io/LLMBench/leaderboard.html) has the 95 % ranges, significance ranks, model files and an explanation of
-every column. In short:
+The [leaderboard](https://tzipproth.github.io/LLMBench/leaderboard.html) has the 95 % ranges, model files and an explanation of
+every column. Position follows the measured accuracy. Use `llmbench compare <runA> <runB>` for a paired statistical comparison.
 
 - **Strength**: how many times higher the odds (right : wrong) of solving a question are than those of
   Llama 3.1 8B (= 1×). On a question that Llama 3.1 8B solves half of the time, a model with 64× is right 98 % of

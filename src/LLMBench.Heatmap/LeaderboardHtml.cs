@@ -58,9 +58,9 @@ public static class LeaderboardHtml
 
         // ---- table -------------------------------------------------------------------------------------
         sb.Append("<section class=\"board\">\n<p class=\"note scroll-hint\" id=\"lb-overflow\" hidden>Scroll right to see the remaining columns.</p>\n" +
+                  "<p class=\"note table-note\">Position follows measured accuracy. Small differences can be statistically inconclusive.</p>\n" +
                   "<div class=\"scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Model results\"><table id=\"lb\">\n<thead><tr>");
-        Th(sb, "#", "num", "pos", "Position in the list");
-        Th(sb, "Rank", "num", "rank", "Shared rank = not distinguishable (see below)");
+        Th(sb, "Position", "num", "pos", "Position by measured accuracy");
         Th(sb, "Model", "", "model", null);
         if (hasStrength)
         {
@@ -85,9 +85,8 @@ public static class LeaderboardHtml
             var b = s.Budget;
             var a = e.Ability;
             bool flagged = e.UsabilityNote.Length > 0;
-            sb.Append($"<tr{(e.Rank == 1 ? " class=\"top1\"" : "")}>");
+            sb.Append($"<tr{(e.Position == 1 ? " class=\"top1\"" : "")}>");
             Td(sb, e.Position.ToString(Inv), e.Position, "num muted");
-            Td(sb, $"<span class=\"rank\">{e.Rank?.ToString(Inv) ?? "-"}</span>", e.Rank ?? 999, "num");
             // only ".gguf" is cut: an EXL3 model is a folder whose name has dots ("Qwen3.8-27B-exl3-4bpw")
             var file = e.ModelFile.EndsWith(".gguf", StringComparison.OrdinalIgnoreCase) ? e.ModelFile[..^5] : e.ModelFile;
             var thinkingBadge = e.UsesNativeThinking
@@ -124,12 +123,12 @@ public static class LeaderboardHtml
         if (anyRam)
             sb.Append($"<p class=\"note\"><span class=\"badge\">MoE · xx % RAM</span> Mixture-of-experts model too large for {vramGb} GB: xx % of its weights " +
                       $"(experts that do not fit) stay in system RAM ({H(system)}), everything else in VRAM. Why this is allowed: see “MoE · RAM” below.</p>\n");
-        sb.Append("<p class=\"note\">Click a column header to sort. Rows with rank 1 are highlighted.</p>\n</section>\n");
+        sb.Append("<p class=\"note\">Click a column header to sort.</p>\n</section>\n");
 
         // ---- explanations ------------------------------------------------------------------------------
         sb.Append("<section class=\"explain\">\n<h2>How to read the columns</h2>\n<dl class=\"cols\">\n");
-        Col(sb, "Rank", "1 + the number of models that are <em>significantly</em> better. Two models share a rank when the difference between them " +
-                        "could be chance: every pair of models is compared question by question (paired McNemar test, p &lt; 0.05).");
+        Col(sb, "Position", "Order by the observed share of correct answers. For a direct comparison, <code>llmbench compare</code> " +
+                            "uses the answers to the same questions in a paired McNemar test.");
         Col(sb, "Model", "The model name and below it the exact model file (quantization), so the result can be reproduced.");
         if (anyNativeThinking)
             Col(sb, "Native thinking", "The system prompt asks for an accurate final answer. The model's chat template handles the " +
@@ -346,9 +345,6 @@ th.num { text-align: right; }
 #lb th, #lb .model { white-space: normal; }
 #lb th[data-key="invalid"], #lb th[data-key="truncated"] { width: 86px; }
 #lb .model .sub { white-space: nowrap; }
-.rank { display: inline-block; min-width: 26px; padding: 1px 7px; border-radius: 999px; text-align: center;
-  font-size: 13px; font-weight: 600; background: var(--track); color: var(--text-2); }
-tr.top1 .rank { background: var(--accent); color: #fff; }
 .badge { display: inline-block; margin-left: 4px; padding: 0 6px; border-radius: 4px; font-size: 10px; font-weight: 700;
   letter-spacing: .04em; line-height: 16px; vertical-align: 2px; color: var(--text-2); border: 1px solid var(--line-strong); cursor: help; }
 .flag { color: var(--flag); font-weight: 700; margin-left: 2px; cursor: help; }
@@ -363,7 +359,7 @@ tr.top1 .rank { background: var(--accent); color: #fff; }
 .track .dot { position: absolute; top: 5px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%;
   background: var(--accent); box-shadow: 0 0 0 2px var(--surface); }
 .note { margin: 10px 2px 0; font-size: 13px; color: var(--text-3); }
-.scroll-hint { margin: 0 2px 8px; }
+.scroll-hint, .table-note { margin: 0 2px 8px; }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin: 0; }
 .cols div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
 .cols dt { font-weight: 650; margin-bottom: 4px; }
@@ -403,7 +399,7 @@ footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line);
   const sortBy = th => {
     const i = heads.indexOf(th);
     const text = th.dataset.key === 'model';
-    const lowerIsBetter = ['pos', 'rank', 'spa'].includes(th.dataset.key);
+    const lowerIsBetter = ['pos', 'spa'].includes(th.dataset.key);
     const cur = th.getAttribute('aria-sort');
     const dir = cur === 'none' ? ((text || lowerIsBetter) ? 1 : -1) : (cur === 'ascending' ? -1 : 1);
     heads.forEach(h => h.dataset.key && h.setAttribute('aria-sort', 'none'));
