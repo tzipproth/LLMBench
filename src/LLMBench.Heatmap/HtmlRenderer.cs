@@ -33,6 +33,7 @@ public static class HtmlRenderer
                 score = e.Ability != null ? e.Ability.Score.ToString("0", System.Globalization.CultureInfo.InvariantCulture) +
                         (e.Ability.Strength != null ? $"  {Rasch.FormatStrength(e.Ability.Strength)}×" : "") : "",
                 note = e.UsabilityNote,
+                nativeThinking = e.UsesNativeThinking,
             }).ToArray(),
             cols = d.Columns.Select(c => new
             {
@@ -98,7 +99,7 @@ function draw(){
   D.rows.forEach((r, ri) => {
     const y = TOP + ri * p;
     ctx.fillStyle = r.note ? '#888' : '#ddd';
-    ctx.fillText(`${r.name}  ${r.acc}${r.score ? '  ' + r.score : ''}`, 4, y + p / 2, LABEL - 8);
+    ctx.fillText(`${r.name}${r.nativeThinking ? ' · Native thinking' : ''}  ${r.acc}${r.score ? '  ' + r.score : ''}`, 4, y + p / 2, LABEL - 8);
     D.cells[ri].forEach((cell, ci) => {
       ctx.fillStyle = cell ? D.colors[cell[0]] : D.colors[0];
       ctx.fillRect(LABEL + (D.xs[ci] + 1) * z, y + z, D.square * z, D.square * z);
@@ -120,7 +121,7 @@ cv.addEventListener('mousemove', ev => {
   const c = D.cols[ci]; let t = `${c.id}  (tier ${c.tier}, solved by ${Math.round(c.rate * 100)} % of the runs)\n\n${c.q}`;
   if (ri >= 0 && ri < D.rows.length) {
     const cell = D.cells[ri][ci], r = D.rows[ri];
-    t = `${r.name}\n` + (cell ? `${D.legend[cell[0]]}\nanswer: ${cell[3]}\nexpected: ${cell[4]}\n${cell[1]} tokens, ${cell[2]} s\n\n` : 'not answered\n\n') + t;
+    t = `${r.name}${r.nativeThinking ? ' · Native thinking' : ''}\n` + (cell ? `${D.legend[cell[0]]}\nanswer: ${cell[3]}\nexpected: ${cell[4]}\n${cell[1]} tokens, ${cell[2]} s\n\n` : 'not answered\n\n') + t;
   } else if (!(y >= cy && y < cy + p)) { tip.style.display = 'none'; return; }
   tip.textContent = t; tip.style.display = 'block';
   tip.style.left = Math.min(ev.clientX + 14, innerWidth - 540) + 'px'; tip.style.top = (ev.clientY + 14) + 'px';

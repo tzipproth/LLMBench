@@ -41,6 +41,7 @@ public static class LeaderboardHtml
         sb.Append(Head);
         sb.Append($"<main>\n<header class=\"top\">\n<p class=\"eyebrow\">LLMBench</p>\n<h1>LLM general intelligence leaderboard for {vramGb} GB graphics cards</h1>\n");
         bool anyRam = rows.Any(e => e.ExpertsInRam);
+        bool anyNativeThinking = rows.Any(e => e.UsesNativeThinking);
         sb.Append($"<p class=\"lede\">Which local LLM thinks best on a graphics card with {vramGb} GB? " +
                   (anyRam
                       ? $"Every dense model here fits completely into {vramGb} GB of VRAM; MoE models that are too large can keep part of their experts in system RAM without losing too much speed (marked <span class=\"badge\">MoE · RAM</span>). "
@@ -89,8 +90,11 @@ public static class LeaderboardHtml
             Td(sb, $"<span class=\"rank\">{e.Rank?.ToString(Inv) ?? "-"}</span>", e.Rank ?? 999, "num");
             // only ".gguf" is cut: an EXL3 model is a folder whose name has dots ("Qwen3.8-27B-exl3-4bpw")
             var file = e.ModelFile.EndsWith(".gguf", StringComparison.OrdinalIgnoreCase) ? e.ModelFile[..^5] : e.ModelFile;
+            var thinkingBadge = e.UsesNativeThinking
+                ? " <span class=\"badge\" title=\"Uses native-thinking.txt with thinking enabled or left to the server\">Native thinking</span>"
+                : "";
             Td(sb, $"<span class=\"name\">{H(e.Model)}{(flagged ? "<sup class=\"flag\" title=\"" + H(e.UsabilityNote) + "\">†</sup>" : "")}" +
-                   $"{(e.ExpertsInRam ? $" <span class=\"badge\" title=\"MoE model: {(e.RamSharePercent is { } rp ? rp + " % of the weights" : "part of the experts")} in system RAM ({H(system)}), the rest in VRAM\">MoE · {(e.RamSharePercent is { } rs ? rs + " % " : "")}RAM</span>" : "")}</span>" +
+                   $"{(e.ExpertsInRam ? $" <span class=\"badge\" title=\"MoE model: {(e.RamSharePercent is { } rp ? rp + " % of the weights" : "part of the experts")} in system RAM ({H(system)}), the rest in VRAM\">MoE · {(e.RamSharePercent is { } rs ? rs + " % " : "")}RAM</span>" : "")}{thinkingBadge}</span>" +
                    $"<span class=\"sub\">{H(file)}</span>", e.Model, "model");
             if (hasStrength)
             {
@@ -127,6 +131,9 @@ public static class LeaderboardHtml
         Col(sb, "Rank", "1 + the number of models that are <em>significantly</em> better. Two models share a rank when the difference between them " +
                         "could be chance: every pair of models is compared question by question (paired McNemar test, p &lt; 0.05).");
         Col(sb, "Model", "The model name and below it the exact model file (quantization), so the result can be reproduced.");
+        if (anyNativeThinking)
+            Col(sb, "Native thinking", "The system prompt asks for an accurate final answer. The model's chat template handles the " +
+                                       "thinking instructions and any effort setting. The badge identifies the run configuration.");
         if (anyRam)
             Col(sb, "MoE · RAM", $"A mixture-of-experts (MoE) model consists of many small expert networks, but uses only a few of them for each token " +
                                  $"(e.g. 3 of 35 billion parameters). Dense models have to fit completely into the {vramGb} GB of VRAM. A MoE model that is too large " +
@@ -167,12 +174,22 @@ public static class LeaderboardHtml
         sb.Append($"<p><strong>Questions.</strong> {first.Header.CatalogQuestions} questions, many of them in two forms (free answer and multiple choice), " +
                   $"{group.QuestionCount} variants in total. Some are well-known puzzles with a twist that changes the answer, so a memorized solution is wrong. " +
                   "The options of multiple-choice questions are shuffled the same way for every model.</p>\n");
-        sb.Append($"<p><strong>Same conditions for every model.</strong> Each model runs locally in llama-server (llama.cpp; EXL3 quantizations in TabbyAPI / ExLlamaV3) on one {H(gpu)}, " +
-                  (anyRam ? $"completely in its {vramGb} GB of VRAM; MoE models too large for it keep part of their experts in system RAM ({H(system)}). It runs " : $"completely in its {vramGb} GB of VRAM, ") +
-                  $"with temperature {N(def.Temperature)}, seed {N(def.Seed)} " +
-                  $"and at most {def.MaxTokens?.ToString("#,0", Inv) ?? "unlimited"} output tokens per answer. Models with a thinking switch run with thinking off, the others as they come. " +
-                  "Every question is sent on its own, with this system prompt:</p>\n");
-        if (first.Header.SystemPrompt is { } sp) sb.Append($"<blockquote>{H(sp)}</blockquote>\n");
+        sb.Append($"<p><strong>Hardware and settings.</strong> Each model runs locally on one {H(gpu)} with {vramGb} GB of VRAM using " +
+                  "llama-server (llama.cpp) or TabbyAPI / ExLlamaV3 for EXL3 quantizations. " +
+                  (anyRam ? $"MoE models can keep part of their experts in system RAM ({H(system)}). " : "") +
+                  "Every question is sent on its own. ");
+        if (rows.All(e => e.Definition.Temperature == def.Temperature && e.Definition.Seed == def.Seed && e.Definition.MaxTokens == def.MaxTokens))
+        {
+            string limit = def.MaxTokens is { } max ? $"an output limit of {max.ToString("#,0", Inv)} tokens" : "unlimited output";
+            sb.Append($"These runs share temperature {N(def.Temperature)}, seed {N(def.Seed)} and {limit}.");
+        }
+        else sb.Append("Sampling settings and output limits are recorded for each run in the repository.");
+        sb.Append("</p>\n");
+        if (anyNativeThinking)
+            sb.Append("<p><strong>Thinking.</strong> Runs marked Native thinking use the model's chat template for reasoning with the " +
+                      "native-thinking system prompt. The original v5 setup uses neutral with thinking off where supported or left to the server.</p>\n");
+        foreach (var prompt in rows.Where(e => e.Header.SystemPrompt is not null).GroupBy(e => e.Header.SystemPrompt!).OrderByDescending(g => g.Count()))
+            sb.Append($"<p><strong>System prompt</strong> <code>{H(prompt.First().SystemPrompt)}</code></p>\n<blockquote>{H(prompt.Key)}</blockquote>\n");
         sb.Append("<p><strong>Scoring.</strong> Only the final answer counts: the line starting with “Final Answer:”, compared with the solution " +
                   "(numbers as numbers, options by letter or text). The reasoning before it is not graded. Answers cut off at the output limit count as wrong.</p>\n");
         if (cal != null)

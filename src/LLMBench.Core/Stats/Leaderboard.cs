@@ -17,6 +17,10 @@ public sealed class LeaderboardEntry
     public string SystemPrompt => string.IsNullOrWhiteSpace(Definition.SystemPromptFile) ? "(none)" : Path.GetFileNameWithoutExtension(Definition.SystemPromptFile);
     public string Thinking => Definition.Thinking + (Header.ThinkingVerified switch { true => " ✔", false => " ✘", _ => "" });
 
+    /// <summary>The run uses the native-thinking prompt with thinking enabled or left to the server.</summary>
+    public bool UsesNativeThinking => Definition.Thinking is "on" or "default" &&
+        SystemPrompt.Equals("native-thinking", StringComparison.OrdinalIgnoreCase);
+
     /// <summary>invalid + truncated share of the scored items.</summary>
     public double? FormatFailureRate => Summary.Scored > 0 ? (double)(Summary.Invalid + Summary.Truncated) / Summary.Scored : null;
 

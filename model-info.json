@@ -2,6 +2,7 @@
   "_comment": "Maker, country and quantization source (Hugging Face account) per model alias; used by llmbench-heatmap for the 'Who made the models' section of the leaderboard.",
   "qwen3.8-27b":      { "maker": "Alibaba Cloud (Qwen team)", "country": "China",  "gguf": "unsloth" },
   "qwen3.8-27b-exl3": { "maker": "Alibaba Cloud (Qwen team)", "country": "China",  "gguf": "yeasah" },
+  "daisyrose-27b":    { "maker": "RadixArk",                   "country": "USA",    "gguf": "bartowski" },
   "qwen3.6-35b-a3b":  { "maker": "Alibaba Cloud (Qwen team)", "country": "China",  "gguf": "unsloth" },
   "qwen3.5-9b":       { "maker": "Alibaba Cloud (Qwen team)", "country": "China",  "gguf": "unsloth" },
   "gemma4-26b-a4b":   { "maker": "Google DeepMind",           "country": "USA",    "gguf": "unsloth" },
